@@ -1,18 +1,14 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
-import Navigator from './src/routes/MainNavigator.js';
 
-export default class App extends React.Component {
+export default class NotificationScreen extends React.Component {
+
   render() {
     return (
-
-      < Navigator / >
-
+      <View style={styles.container}>
+        <Text>Notifications screen</Text>
+      </View>
     );
   }
 }
