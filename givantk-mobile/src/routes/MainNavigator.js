@@ -33,7 +33,7 @@ const MainNavigator = createStackNavigator({
         index
       } = navigation.state;
       let tabScreen = routes[index].routeName;
-      // Navigation options for each tab screen with respect to stack navigation 
+      // Navigation options for each tab screen with respect to stack navigation
       switch (tabScreen) {
         case 'Featured':
           headerTitle = "Featured page";
@@ -66,7 +66,7 @@ const MainNavigator = createStackNavigator({
           };
           break;
 
-      } // end of first switch
+      } // end of switch
     } //end of tab screens if condition
 
     //another non tab screens

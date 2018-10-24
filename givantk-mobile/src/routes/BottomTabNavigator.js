@@ -2,6 +2,8 @@ import {
   createBottomTabNavigator
 } from 'react-navigation';
 
+//icons to be viewed in the navigator
+
 import Icon from "react-native-vector-icons/Ionicons";
 
 import React from 'react';
