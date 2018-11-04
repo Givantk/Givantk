@@ -1,22 +1,16 @@
 import { createBottomTabNavigator } from "react-navigation";
 
-//icons to be viewed in the navigator
-
+//icons
 import Icon from "react-native-vector-icons/Ionicons";
-
 import React from "react";
 
-//Importing screens to be included in the BottomTabNavigator
-
-import AccountScreen from "../screens/TabScreens/AccountScreen/AccountScreen.js";
-
-import FeaturedScreen from "../screens/TabScreens/FeaturedScreen/FeaturedScreen.js";
-
-import MyServicesScreen from "../screens/TabScreens/MyServicesScreen/MyServicesScreen.js";
-
-import NewServiceScreen from "../screens/TabScreens/NewServiceScreen/NewServiceScreen.js";
-
-import NotificationsScreen from "../screens/TabScreens/NotificationsScreen/NotificationsScreen.js";
+//screens
+import AccountScreen from "../screens/0-TabScreens/AccountScreen/AccountScreen.js";
+import FeaturedScreen from "../screens/0-TabScreens/FeaturedScreen/FeaturedScreen.js";
+import MyServicesScreen from "../screens/0-TabScreens/MyServicesScreen/MyServicesScreen.js";
+import NewServiceScreen from "../screens/0-TabScreens/NewServiceScreen/NewServiceScreen.js";
+import NotificationsScreen from "../screens/0-TabScreens/NotificationsScreen/NotificationsScreen.js";
+import { colors } from "../../assets/styles/base";
 
 const BottomTabNavigator = createBottomTabNavigator(
   {
@@ -25,7 +19,7 @@ const BottomTabNavigator = createBottomTabNavigator(
       navigationOptions: {
         tabBarLabel: "Featured",
         tabBarIcon: ({ tintColor }) => (
-          <Icon name="ios-star" size={25} color={tintColor} />
+          <Icon name="ios-star" size={30} color={tintColor} />
         )
       }
     },
@@ -34,7 +28,7 @@ const BottomTabNavigator = createBottomTabNavigator(
       navigationOptions: {
         tabBarLabel: "My services",
         tabBarIcon: ({ tintColor }) => (
-          <Icon name="ios-basket" size={25} color={tintColor} />
+          <Icon name="ios-basket" size={30} color={tintColor} />
         )
       }
     },
@@ -43,7 +37,7 @@ const BottomTabNavigator = createBottomTabNavigator(
       navigationOptions: {
         tabBarLabel: "New service",
         tabBarIcon: ({ tintColor }) => (
-          <Icon name="ios-add-circle" size={25} color={tintColor} />
+          <Icon name="ios-add-circle" size={30} color={tintColor} />
         )
       }
     },
@@ -52,7 +46,7 @@ const BottomTabNavigator = createBottomTabNavigator(
       navigationOptions: {
         tabBarLabel: "Notifications",
         tabBarIcon: ({ tintColor }) => (
-          <Icon name="ios-notifications-outline" size={25} color={tintColor} />
+          <Icon name="ios-notifications-outline" size={30} color={tintColor} />
         )
       }
     },
@@ -61,7 +55,7 @@ const BottomTabNavigator = createBottomTabNavigator(
       navigationOptions: {
         tabBarLabel: "Account",
         tabBarIcon: ({ tintColor }) => (
-          <Icon name="ios-person" size={25} color={tintColor} />
+          <Icon name="ios-person" size={30} color={tintColor} />
         )
       }
     }
@@ -70,8 +64,8 @@ const BottomTabNavigator = createBottomTabNavigator(
     initialRouteName: "Featured",
     order: ["Featured", "MyServices", "NewService", "Notifications", "Account"],
     tabBarOptions: {
-      activeTintColor: "red",
-      inactiveTintColor: "grey"
+      activeTintColor: colors.primary,
+      inactiveTintColor: colors.black
     }
   }
 );
