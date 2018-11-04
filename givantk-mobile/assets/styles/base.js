@@ -13,11 +13,12 @@ export const colors = {
   white: "#EAEEFF"
 };
 
-export const padding = {
+export const gaps = {
   sm: 10,
   md: 20,
   lg: 30,
-  xl: 40
+  xl: 40,
+  xxl: 50
 };
 
 export const fontSizes = {
@@ -26,4 +27,8 @@ export const fontSizes = {
   lg: 28
 };
 
-//main colors:https://coolors.co/c94b28-2b6ba0-9e711f-232323-eaeeff
+export const fontTypes = {
+  main: "montserratMedium",
+  mainBold: "montserratBold",
+  mainLight: "montserratLight"
+};
