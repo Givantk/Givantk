@@ -19,7 +19,7 @@ const BottomTabNavigator = createBottomTabNavigator(
       navigationOptions: {
         tabBarLabel: "Featured",
         tabBarIcon: ({ tintColor }) => (
-          <Icon name="ios-star" size={30} color={tintColor} />
+          <Icon name="ios-star" size={30} style={{ color: tintColor }} />
         )
       }
     },
@@ -28,7 +28,7 @@ const BottomTabNavigator = createBottomTabNavigator(
       navigationOptions: {
         tabBarLabel: "My services",
         tabBarIcon: ({ tintColor }) => (
-          <Icon name="ios-basket" size={30} color={tintColor} />
+          <Icon name="ios-basket" size={30} style={{ color: tintColor }} />
         )
       }
     },
@@ -37,7 +37,7 @@ const BottomTabNavigator = createBottomTabNavigator(
       navigationOptions: {
         tabBarLabel: "New service",
         tabBarIcon: ({ tintColor }) => (
-          <Icon name="ios-add-circle" size={30} color={tintColor} />
+          <Icon name="ios-add-circle" size={30} style={{ color: tintColor }} />
         )
       }
     },
@@ -46,7 +46,11 @@ const BottomTabNavigator = createBottomTabNavigator(
       navigationOptions: {
         tabBarLabel: "Notifications",
         tabBarIcon: ({ tintColor }) => (
-          <Icon name="ios-notifications-outline" size={30} color={tintColor} />
+          <Icon
+            name="ios-notifications-outline"
+            size={30}
+            style={{ color: tintColor }}
+          />
         )
       }
     },
@@ -55,7 +59,7 @@ const BottomTabNavigator = createBottomTabNavigator(
       navigationOptions: {
         tabBarLabel: "Account",
         tabBarIcon: ({ tintColor }) => (
-          <Icon name="ios-person" size={30} color={tintColor} />
+          <Icon name="ios-person" size={30} style={{ color: tintColor }} />
         )
       }
     }
