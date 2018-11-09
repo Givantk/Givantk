@@ -16,7 +16,8 @@ export const gaps = {
   lg: 30,
   xl: 40,
   xxl: 50,
-  filler: 100
+  xxxl: 80,
+  filler: 120
 };
 
 //FONT SIZES
