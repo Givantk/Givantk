@@ -9,7 +9,7 @@ import FeaturedScreen from "../screens/0-MainScreens/1-FeaturedScreen/FeaturedSc
 import AddServiceScreen from "../screens/0-MainScreens/2-AddServiceScreen/AddServiceScreen";
 import MyServicesScreen from "../screens/0-MainScreens/3-MyServicesScreen/MyServicesScreen";
 
-import { colors } from "../../assets/styles/base";
+import { colors } from "../assets/styles/base";
 
 const BottomTabNavigator = createBottomTabNavigator(
   {

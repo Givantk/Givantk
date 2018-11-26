@@ -2,12 +2,12 @@ import { AppLoading } from "expo";
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-import { loadFonts } from "../assets/styles/fonts/loadFonts";
+import { loadFonts } from "./assets/styles/fonts/loadFonts";
 import LoadingScreen from "./screens/commons/LoadingScreen/LoadingScreen";
 import Navigator from "./routes/MainNavigator";
 
 //This is the main app, with these configured:
-//customized fonts loaded
+//1-customized fonts loaded
 
 export default class AppConfigured extends React.Component {
   state = {

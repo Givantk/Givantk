@@ -2,6 +2,8 @@ import { StyleSheet, Text, View } from "react-native";
 import IonIcon from "@expo/vector-icons/Ionicons";
 import React from "react";
 
+import { colors } from "../../../assets/styles/base";
+
 export default class FeaturedScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     tabBarLabel: "FEATURED",
@@ -13,7 +15,7 @@ export default class FeaturedScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>featured screen</Text>
+        <Text>Featured Screen</Text>
       </View>
     );
   }

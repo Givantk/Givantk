@@ -1,6 +1,6 @@
 import { createStackNavigator } from "react-navigation";
 
-import { colors } from "../../assets/styles/base";
+import { colors } from "../assets/styles/base";
 import AccountScreen from "../screens/0-MainScreens/5-AccountScreen/AccountScreen";
 import BottomTabNavigator from "./BottomTabNavigator";
 import LoginScreen from "../screens/RegistrationScreens/LoginScreen/LoginScreen";
@@ -20,6 +20,7 @@ const MainNavigator = createStackNavigator(
   {
     initialRouteName: "Login",
 
+    //We need to configure the header options for the 'tab' screens only here
     navigationOptions: ({ navigation }) => {
       let screen = navigation.state.routeName;
 
@@ -36,50 +37,31 @@ const MainNavigator = createStackNavigator(
       if (screen === "Tab") {
         const { routes, index } = navigation.state;
         let tabScreen = routes[index].routeName;
+
         // Navigation options for each tab screen with respect to stack navigation
         switch (tabScreen) {
           case "Featured":
             headerTitle = "Featured page";
+            headerTransparent = true;
+            break;
+
+          case "AddService":
+            headerTitle = "Add service";
             break;
 
           case "MyServices":
             headerTitle = "My services";
             break;
-
-          case "AddService":
-            headerTitle = "New service";
-            break;
-
-          case "Notifications":
-            headerTitle = "Notifications";
-            break;
-
-          case "Account":
-            headerTitle = "Account";
-            break;
         }
-      } //end of tab screens conditions
 
-      //other non tab screens
-      if (screen === "Login") {
-        headerTitle = "Login";
+        return {
+          headerStyle,
+          headerTitle,
+          headerTitleStyle,
+          headerRight,
+          headerLeft
+        };
       }
-
-      if (screen === "Signup") {
-        headerTitle = "Signup";
-      }
-
-      if (screen === "Profile") {
-        headerTitle = "Profile";
-      }
-
-      return {
-        headerStyle,
-        headerTitle,
-        headerTitleStyle,
-        headerRight,
-        headerLeft
-      };
     } //end of navigationOptions
   }
 );
