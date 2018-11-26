@@ -22,7 +22,7 @@ export default class SignupScreen extends React.Component {
         <Image source={logo} style={styles.logoStyle} />
 
         <View style={styles.signupButtonContainer}>
-          <Button title="Log In" onPress={this.handleSignup} />
+          <Button title="Sign Up" onPress={this.handleSignup} />
         </View>
 
         <Button title="I have an account" onPress={this.handleHaveAccount} />

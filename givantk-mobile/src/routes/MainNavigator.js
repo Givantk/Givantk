@@ -1,14 +1,18 @@
 import { createStackNavigator } from "react-navigation";
 
 import { colors } from "../../assets/styles/base";
+import AccountScreen from "../screens/0-MainScreens/5-AccountScreen/AccountScreen";
 import BottomTabNavigator from "./BottomTabNavigator";
 import LoginScreen from "../screens/RegistrationScreens/LoginScreen/LoginScreen";
-import ProfileScreen from "../screens/5-AccountTabInnerScreens/ProfileScreen/ProfileScreen";
+import NotificationsScreen from "../screens/0-MainScreens/4-NotificationsScreen/NotificationsScreen";
+import ProfileScreen from "../screens/5-AccountInnerScreens/ProfileScreen/ProfileScreen";
 import SignupScreen from "../screens/RegistrationScreens/SignupScreen/SignupScreen";
 
 const MainNavigator = createStackNavigator(
   {
     Tab: BottomTabNavigator,
+    Notifications: NotificationsScreen,
+    Account: AccountScreen,
     Login: LoginScreen,
     Signup: SignupScreen,
     Profile: ProfileScreen
@@ -42,7 +46,7 @@ const MainNavigator = createStackNavigator(
             headerTitle = "My services";
             break;
 
-          case "NewService":
+          case "AddService":
             headerTitle = "New service";
             break;
 

@@ -1,15 +1,14 @@
 import { createBottomTabNavigator } from "react-navigation";
+import React from "react";
 
 //icons
 import Icon from "react-native-vector-icons/Ionicons";
-import React from "react";
 
 //screens
-import AccountScreen from "../screens/0-TabScreens/AccountScreen/AccountScreen.js";
-import FeaturedScreen from "../screens/0-TabScreens/FeaturedScreen/FeaturedScreen.js";
-import MyServicesScreen from "../screens/0-TabScreens/MyServicesScreen/MyServicesScreen.js";
-import NewServiceScreen from "../screens/0-TabScreens/NewServiceScreen/NewServiceScreen.js";
-import NotificationsScreen from "../screens/0-TabScreens/NotificationsScreen/NotificationsScreen.js";
+import FeaturedScreen from "../screens/0-MainScreens/1-FeaturedScreen/FeaturedScreen";
+import AddServiceScreen from "../screens/0-MainScreens/2-AddServiceScreen/AddServiceScreen";
+import MyServicesScreen from "../screens/0-MainScreens/3-MyServicesScreen/MyServicesScreen";
+
 import { colors } from "../../assets/styles/base";
 
 const BottomTabNavigator = createBottomTabNavigator(
@@ -23,8 +22,8 @@ const BottomTabNavigator = createBottomTabNavigator(
         )
       }
     },
-    MyServices: {
-      screen: MyServicesScreen,
+    AddService: {
+      screen: AddServiceScreen,
       navigationOptions: {
         tabBarLabel: "My services",
         tabBarIcon: ({ tintColor }) => (
@@ -32,41 +31,41 @@ const BottomTabNavigator = createBottomTabNavigator(
         )
       }
     },
-    NewService: {
-      screen: NewServiceScreen,
+    MyServices: {
+      screen: MyServicesScreen,
       navigationOptions: {
         tabBarLabel: "New service",
         tabBarIcon: ({ tintColor }) => (
           <Icon name="ios-add-circle" size={30} style={{ color: tintColor }} />
         )
       }
-    },
-    Notifications: {
-      screen: NotificationsScreen,
-      navigationOptions: {
-        tabBarLabel: "Notifications",
-        tabBarIcon: ({ tintColor }) => (
-          <Icon
-            name="ios-notifications-outline"
-            size={30}
-            style={{ color: tintColor }}
-          />
-        )
-      }
-    },
-    Account: {
-      screen: AccountScreen,
-      navigationOptions: {
-        tabBarLabel: "Account",
-        tabBarIcon: ({ tintColor }) => (
-          <Icon name="ios-person" size={30} style={{ color: tintColor }} />
-        )
-      }
     }
+    // Notifications: {
+    //   screen: NotificationsScreen,
+    //   navigationOptions: {
+    //     tabBarLabel: "Notifications",
+    //     tabBarIcon: ({ tintColor }) => (
+    //       <Icon
+    //         name="ios-notifications-outline"
+    //         size={30}
+    //         style={{ color: tintColor }}
+    //       />
+    //     )
+    //   }
+    // },
+    // Account: {
+    //   screen: AccountScreen,
+    //   navigationOptions: {
+    //     tabBarLabel: "Account",
+    //     tabBarIcon: ({ tintColor }) => (
+    //       <Icon name="ios-person" size={30} style={{ color: tintColor }} />
+    //     )
+    //   }
+    // }
   },
   {
     initialRouteName: "Featured",
-    order: ["Featured", "MyServices", "NewService", "Notifications", "Account"],
+    order: ["Featured", "AddService", "MyServices"],
     tabBarOptions: {
       activeTintColor: colors.primary,
       inactiveTintColor: colors.black
