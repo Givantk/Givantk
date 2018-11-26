@@ -1,8 +1,14 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import IonIcon from "react-native-vector-icons/Ionicons";
 
 export default class MyServicesScreen extends React.Component {
+  static navigationOptions = ({ navigation }) => ({
+    tabBarLabel: "MY SERVICES",
+    tabBarIcon: ({ tintColor }) => (
+      <IonIcon name="ios-basket" size={30} style={{ color: tintColor }} />
+    )
+  });
 
   render() {
     return (
@@ -16,8 +22,8 @@ export default class MyServicesScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center"
+  }
 });

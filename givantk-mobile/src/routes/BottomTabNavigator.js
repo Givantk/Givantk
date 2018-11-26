@@ -13,55 +13,9 @@ import { colors } from "../../assets/styles/base";
 
 const BottomTabNavigator = createBottomTabNavigator(
   {
-    Featured: {
-      screen: FeaturedScreen,
-      navigationOptions: {
-        tabBarLabel: "Featured",
-        tabBarIcon: ({ tintColor }) => (
-          <Icon name="ios-star" size={30} style={{ color: tintColor }} />
-        )
-      }
-    },
-    AddService: {
-      screen: AddServiceScreen,
-      navigationOptions: {
-        tabBarLabel: "My services",
-        tabBarIcon: ({ tintColor }) => (
-          <Icon name="ios-basket" size={30} style={{ color: tintColor }} />
-        )
-      }
-    },
-    MyServices: {
-      screen: MyServicesScreen,
-      navigationOptions: {
-        tabBarLabel: "New service",
-        tabBarIcon: ({ tintColor }) => (
-          <Icon name="ios-add-circle" size={30} style={{ color: tintColor }} />
-        )
-      }
-    }
-    // Notifications: {
-    //   screen: NotificationsScreen,
-    //   navigationOptions: {
-    //     tabBarLabel: "Notifications",
-    //     tabBarIcon: ({ tintColor }) => (
-    //       <Icon
-    //         name="ios-notifications-outline"
-    //         size={30}
-    //         style={{ color: tintColor }}
-    //       />
-    //     )
-    //   }
-    // },
-    // Account: {
-    //   screen: AccountScreen,
-    //   navigationOptions: {
-    //     tabBarLabel: "Account",
-    //     tabBarIcon: ({ tintColor }) => (
-    //       <Icon name="ios-person" size={30} style={{ color: tintColor }} />
-    //     )
-    //   }
-    // }
+    Featured: FeaturedScreen,
+    AddService: AddServiceScreen,
+    MyServices: MyServicesScreen
   },
   {
     initialRouteName: "Featured",
