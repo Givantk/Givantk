@@ -4,7 +4,7 @@ import React from "react";
 import { colors } from "../../../assets/styles/base";
 import { styles } from "./LoginScreenStyles";
 
-import logo from "../../../assets/icon.png";
+import logo from "../../../../assets/icons/icon.png";
 
 export default class LoginScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
