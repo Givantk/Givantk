@@ -1,8 +1,6 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Button } from "react-native";
 import IonIcon from "@expo/vector-icons/Ionicons";
 import React from "react";
-
-import { colors } from "../../../assets/styles/base";
 
 export default class FeaturedScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -16,6 +14,10 @@ export default class FeaturedScreen extends React.Component {
     return (
       <View style={styles.container}>
         <Text>Featured Screen</Text>
+        <Button
+          title="Service"
+          onPress={() => this.props.navigation.navigate("Service")}
+        />
       </View>
     );
   }

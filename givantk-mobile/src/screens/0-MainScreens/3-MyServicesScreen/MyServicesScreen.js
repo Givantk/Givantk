@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Button } from "react-native";
 import IonIcon from "react-native-vector-icons/Ionicons";
 
 export default class MyServicesScreen extends React.Component {
@@ -14,6 +14,10 @@ export default class MyServicesScreen extends React.Component {
     return (
       <View style={styles.container}>
         <Text>My services screen</Text>
+        <Button
+          title="Service"
+          onPress={() => this.props.navigation.navigate("Service")}
+        />
       </View>
     );
   }
