@@ -10,16 +10,18 @@ import AddServiceScreen from "../screens/0-MainScreens/2-AddServiceScreen/AddSer
 import MyServicesScreen from "../screens/0-MainScreens/3-MyServicesScreen/MyServicesScreen";
 
 import { colors } from "../assets/styles/base";
+import AccountScreen from "../screens/0-MainScreens/5-AccountScreen/AccountScreen";
 
 const BottomTabNavigator = createBottomTabNavigator(
   {
     Featured: FeaturedScreen,
     AddService: AddServiceScreen,
-    MyServices: MyServicesScreen
+    MyServices: MyServicesScreen,
+    Account: AccountScreen
   },
   {
     initialRouteName: "Featured",
-    order: ["Featured", "AddService", "MyServices"],
+    order: ["Featured", "AddService", "MyServices", "Account"],
     tabBarOptions: {
       activeTintColor: colors.primary,
       inactiveTintColor: colors.black

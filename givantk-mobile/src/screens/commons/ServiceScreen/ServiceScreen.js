@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Button } from "react-native";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
@@ -20,6 +20,15 @@ export default class ServiceScreen extends Component {
     return (
       <View style={styles.wrapper}>
         <Text>Service Screen</Text>
+        <Button
+          title="Add Proposal"
+          onPress={() => this.props.navigation.navigate("AddProposal")}
+        />
+
+        <Button
+          title="Profile"
+          onPress={() => this.props.navigation.navigate("Profile")}
+        />
       </View>
     );
   }

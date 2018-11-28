@@ -18,6 +18,10 @@ export default class ProfileScreen extends React.Component {
     return (
       <View style={styles.container}>
         <Text>Profile screen</Text>
+        <Button
+          title="Chat"
+          onPress={() => this.props.navigation.navigate("Chat")}
+        />
       </View>
     );
   }

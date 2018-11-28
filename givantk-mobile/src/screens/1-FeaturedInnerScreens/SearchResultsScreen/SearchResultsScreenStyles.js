@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "space-around"
   }
 });
 

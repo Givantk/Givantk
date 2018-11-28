@@ -1,17 +1,15 @@
 import { StyleSheet, Text, View, Button } from "react-native";
+import IonIcon from "react-native-vector-icons/Ionicons";
 import React from "react";
 
 import { colors } from "../../../assets/styles/base";
 
 export default class AccountScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    headerTitle: "Account Screen",
-    headerStyle: {
-      backgroundColor: colors.primary
-    },
-    headerTitleStyle: {
-      color: colors.white
-    }
+    tabBarLabel: "ACCOUNT",
+    tabBarIcon: ({ tintColor }) => (
+      <IonIcon name="ios-person" size={30} style={{ color: tintColor }} />
+    )
   });
 
   render() {

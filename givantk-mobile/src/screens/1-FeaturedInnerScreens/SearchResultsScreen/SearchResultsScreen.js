@@ -21,12 +21,12 @@ export default class SearchResultsScreen extends Component {
       <View style={styles.wrapper}>
         <Text>Search Results Screen</Text>
         <Button
-          title="Services"
+          title="Service"
           onPress={() => this.props.navigation.navigate("Service")}
         />
 
         <Button
-          title="People"
+          title="Person"
           onPress={() => this.props.navigation.navigate("Profile")}
         />
       </View>

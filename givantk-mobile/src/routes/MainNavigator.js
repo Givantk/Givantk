@@ -3,7 +3,6 @@ import { Text, TouchableHighlight } from "react-native";
 import React from "react";
 
 import { colors } from "../assets/styles/base";
-import AccountScreen from "../screens/0-MainScreens/5-AccountScreen/AccountScreen";
 import AddProposalScreen from "../screens/commons/ServiceScreen/AddProposalScreen/AddProposalScreen";
 import BottomTabNavigator from "./BottomTabNavigator";
 import ChatScreen from "../screens/commons/ChatScreen/ChatScreen";
@@ -23,7 +22,6 @@ const MainNavigator = createStackNavigator(
   {
     Tab: BottomTabNavigator,
     Notifications: NotificationsScreen,
-    Account: AccountScreen,
     Login: LoginScreen,
     Signup: SignupScreen,
     Profile: ProfileScreen,
@@ -40,7 +38,7 @@ const MainNavigator = createStackNavigator(
   {
     initialRouteName: "Login",
 
-    //We need to configure the header options for the 'tab' screens only here
+    //We need to configure the header options only for the 'tab' screens only here
     navigationOptions: ({ navigation }) => {
       let screen = navigation.state.routeName;
 
@@ -53,11 +51,7 @@ const MainNavigator = createStackNavigator(
         </TouchableHighlight>
       );
 
-      let headerLeft = (
-        <TouchableHighlight onPress={() => navigation.navigate("Account")}>
-          <Text>Account</Text>
-        </TouchableHighlight>
-      );
+      let headerLeft = "";
 
       let headerStyle = {
         backgroundColor: colors.primary

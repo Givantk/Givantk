@@ -18,6 +18,11 @@ export default class FeaturedScreen extends React.Component {
           title="Service"
           onPress={() => this.props.navigation.navigate("Service")}
         />
+
+        <Button
+          title="Search"
+          onPress={() => this.props.navigation.navigate("SearchResults")}
+        />
       </View>
     );
   }
@@ -28,6 +33,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "space-around"
   }
 });

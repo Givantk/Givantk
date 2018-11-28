@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Button } from "react-native";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
@@ -20,6 +20,10 @@ export default class MessagesListScreen extends Component {
     return (
       <View style={styles.wrapper}>
         <Text>Messages List Screen</Text>
+        <Button
+          title="Chat"
+          onPress={() => this.props.navigation.navigate("Chat")}
+        />
       </View>
     );
   }
