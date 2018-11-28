@@ -3,37 +3,25 @@ import { Text, TouchableHighlight } from "react-native";
 import React from "react";
 
 import { colors } from "../assets/styles/base";
-import AddProposalScreen from "../screens/commons/ServiceScreen/AddProposalScreen/AddProposalScreen";
 import BottomTabNavigator from "./BottomTabNavigator";
-import ChatScreen from "../screens/commons/ChatScreen/ChatScreen";
-import InviteFriendsScreen from "../screens/5-AccountInnerScreens/InviteFriendsScreen/InviteFriendsScreen";
-import LoginScreen from "../screens/RegistrationScreens/LoginScreen/LoginScreen";
-import MessagesListScreen from "../screens/5-AccountInnerScreens/MessagesListScreen/MessagesListScreen";
-import NotificationsScreen from "../screens/0-MainScreens/4-NotificationsScreen/NotificationsScreen";
-import PaymentInfoScreen from "../screens/5-AccountInnerScreens/PaymentInfoScreen/PaymentInfoScreen";
-import PersonalInfoScreen from "../screens/5-AccountInnerScreens/PersonalInfoScreen/PersonalInfoScreen";
-import ProfileScreen from "../screens/5-AccountInnerScreens/ProfileScreen/ProfileScreen";
-import SearchResultsScreen from "../screens/1-FeaturedInnerScreens/SearchResultsScreen/SearchResultsScreen";
-import ServiceScreen from "../screens/commons/ServiceScreen/ServiceScreen";
-import SignupScreen from "../screens/RegistrationScreens/SignupScreen/SignupScreen";
-import VerifyIdentityScreen from "../screens/5-AccountInnerScreens/VerifyIdentityScreen/VerifyIdentityScreen";
+import screens from "../screens";
 
 const MainNavigator = createStackNavigator(
   {
     Tab: BottomTabNavigator,
-    Notifications: NotificationsScreen,
-    Login: LoginScreen,
-    Signup: SignupScreen,
-    Profile: ProfileScreen,
-    Service: ServiceScreen,
-    PersonalInfo: PersonalInfoScreen,
-    PaymentInfo: PaymentInfoScreen,
-    InviteFriends: InviteFriendsScreen,
-    Chat: ChatScreen,
-    SearchResults: SearchResultsScreen,
-    AddProposal: AddProposalScreen,
-    VerifyIdentity: VerifyIdentityScreen,
-    MessagesList: MessagesListScreen
+    Notifications: screens.NotificationsScreen,
+    Login: screens.LoginScreen,
+    Signup: screens.SignupScreen,
+    Profile: screens.ProfileScreen,
+    Service: screens.ServiceScreen,
+    PersonalInfo: screens.PersonalInfoScreen,
+    PaymentInfo: screens.PaymentInfoScreen,
+    InviteFriends: screens.InviteFriendsScreen,
+    Chat: screens.ChatScreen,
+    SearchResults: screens.SearchResultsScreen,
+    AddProposal: screens.AddProposalScreen,
+    VerifyIdentity: screens.VerifyIdentityScreen,
+    MessagesList: screens.MessagesListScreen
   },
   {
     initialRouteName: "Login",
@@ -67,15 +55,19 @@ const MainNavigator = createStackNavigator(
         // Navigation options for each tab screen with respect to stack navigation
         switch (tabScreen) {
           case "Featured":
-            headerTitle = "";
+            headerTitle = "Featured";
             break;
 
           case "AddService":
-            headerTitle = "";
+            headerTitle = "Add Service";
             break;
 
           case "MyServices":
-            headerTitle = "";
+            headerTitle = "My Services";
+            break;
+
+          case "Account":
+            headerTitle = "Account";
             break;
         }
 
