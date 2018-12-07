@@ -11,6 +11,7 @@ export const dimensions = {
 //GAPS
 
 export const gaps = {
+  xsm: 5,
   sm: 10,
   md: 20,
   lg: 30,
@@ -25,7 +26,9 @@ export const gaps = {
 export const fontSizes = {
   sm: 12,
   md: 18,
-  lg: 28
+  lg: 28,
+  xlg: 40,
+  huge: 50
 };
 
 //FONT TYPES
@@ -33,7 +36,7 @@ export const fontSizes = {
 export const fontTypes = {
   main: "montserratMedium",
   mainBold: "montserratBold",
-  mainLight: "montserratLight"
+  logoFont: "montserratLight"
 };
 
 //COLORS

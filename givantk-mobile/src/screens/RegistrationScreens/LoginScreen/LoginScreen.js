@@ -1,20 +1,13 @@
-import { StyleSheet, Text, View, Button, Image } from "react-native";
+import { Text, View, TouchableWithoutFeedback } from "react-native";
 import React from "react";
 
-import { colors } from "../../../assets/styles/base";
 import { styles } from "./LoginScreenStyles";
-
-import logo from "../../../../assets/icons/icon.png";
+import DefaultTextInput from "../../../components/commons/UI/DefaultTextInput/DefaultTextInput";
+import DefaultButton from "../../../components/commons/UI/DefaultButton/DefaultButton";
 
 export default class LoginScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    headerTitle: "Login Screen",
-    headerStyle: {
-      backgroundColor: colors.primary
-    },
-    headerTitleStyle: {
-      color: colors.white
-    }
+    headerTransparent: true
   });
 
   handleLogin = () => {
@@ -27,19 +20,39 @@ export default class LoginScreen extends React.Component {
     this.props.navigation.replace("Signup");
   };
 
+  handleSignWithFacebook = () => {
+    //
+  };
+
   render() {
     return (
       <View style={styles.container}>
-        <Image source={logo} style={styles.logoStyle} />
-
-        <View style={styles.loginButtonContainer}>
-          <Button title="Log In" onPress={this.handleLogin} />
+        <View style={styles.headerContainer}>
+          <Text style={styles.header}>GIVANTK</Text>
+          <Text style={styles.subHeader}>Give and take</Text>
         </View>
 
-        <Button
-          title="I don't have an account"
-          onPress={this.handleHaveNoAccount}
-        />
+        <View style={styles.inputContainer}>
+          <DefaultTextInput
+            placeholder="Email Address"
+            style={styles.textInput}
+          />
+          <DefaultTextInput placeholder="Password" style={styles.textInput} />
+          <DefaultButton onPress={this.handleLogin}>Sign In</DefaultButton>
+          <DefaultButton onPress={this.handleSignWithFacebook}>
+            Sign In With Facebook
+          </DefaultButton>
+        </View>
+
+        <View style={styles.signupRedirect}>
+          <Text style={styles.signupRedirectText}>Don't have an account? </Text>
+
+          <TouchableWithoutFeedback onPress={this.handleHaveNoAccount}>
+            <View>
+              <Text style={styles.signupRedirectButtonText}>Join Now</Text>
+            </View>
+          </TouchableWithoutFeedback>
+        </View>
       </View>
     );
   }

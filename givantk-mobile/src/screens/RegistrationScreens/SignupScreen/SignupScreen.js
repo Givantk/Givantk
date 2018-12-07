@@ -8,13 +8,7 @@ import logo from "../../../../assets/icons/icon.png";
 
 export default class SignupScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    headerTitle: "Sign up Screen",
-    headerStyle: {
-      backgroundColor: colors.primary
-    },
-    headerTitleStyle: {
-      color: colors.white
-    }
+    headerTransparent: true
   });
 
   handleSignup = () => {
