@@ -4,6 +4,7 @@ import React from "react";
 import { styles } from "./LoginScreenStyles";
 import DefaultTextInput from "../../../components/commons/UI/DefaultTextInput/DefaultTextInput";
 import DefaultButton from "../../../components/commons/UI/DefaultButton/DefaultButton";
+import Header from "../../../components/RegistrationsScreensComponents/SignupScreenComponents/Header/Header";
 
 export default class LoginScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -20,17 +21,14 @@ export default class LoginScreen extends React.Component {
     this.props.navigation.replace("Signup");
   };
 
-  handleSignWithFacebook = () => {
+  handleSignInWithFacebook = () => {
     //
   };
 
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.headerContainer}>
-          <Text style={styles.header}>GIVANTK</Text>
-          <Text style={styles.subHeader}>Give and take</Text>
-        </View>
+        <Header />
 
         <View style={styles.inputContainer}>
           <DefaultTextInput
@@ -39,7 +37,7 @@ export default class LoginScreen extends React.Component {
           />
           <DefaultTextInput placeholder="Password" style={styles.textInput} />
           <DefaultButton onPress={this.handleLogin}>Sign In</DefaultButton>
-          <DefaultButton onPress={this.handleSignWithFacebook}>
+          <DefaultButton onPress={this.handleSignInWithFacebook}>
             Sign In With Facebook
           </DefaultButton>
         </View>

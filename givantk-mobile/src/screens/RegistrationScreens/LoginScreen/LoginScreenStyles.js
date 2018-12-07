@@ -17,24 +17,6 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingTop: dimensions.fullWidth / 3.5
   },
-  headerContainer: {
-    width: "100%",
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  header: {
-    color: colors.secondary,
-    fontSize: fontSizes.huge,
-    fontWeight: "bold"
-    //fontFamily: fontTypes.logoFont
-  },
-  subHeader: {
-    color: colors.white,
-    fontSize: fontSizes.md,
-    fontWeight: "bold",
-    //fontFamily: fontTypes.logoFont,
-    marginTop: -10
-  },
   inputContainer: {
     width: "100%"
   },

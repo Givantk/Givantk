@@ -1,20 +1,26 @@
 import { StyleSheet } from "react-native";
 
-import { colors, gaps } from "../../../assets/styles/base";
+import { colors, gaps, dimensions } from "../../../assets/styles/base";
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.white,
+    width: "100%",
+    backgroundColor: colors.primary,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "space-between",
+    paddingTop: dimensions.fullWidth / 5
   },
-  signupButtonContainer: {
+  signinRedirect: {
+    flexDirection: "row",
     marginBottom: gaps.md
   },
-  logoStyle: {
-    margin: 10,
-    height: 100,
-    width: 100
+  signinRedirectText: {
+    color: colors.black
+  },
+  signinRedirectButtonText: {
+    color: colors.secondary,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.secondary
   }
 });
