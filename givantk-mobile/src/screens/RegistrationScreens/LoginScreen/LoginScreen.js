@@ -18,7 +18,7 @@ export default class LoginScreen extends React.Component {
   };
 
   handleHaveNoAccount = () => {
-    this.props.navigation.replace("Signup");
+    this.props.navigation.navigate("Signup");
   };
 
   handleSignInWithFacebook = () => {

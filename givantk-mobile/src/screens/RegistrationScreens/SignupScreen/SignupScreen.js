@@ -21,10 +21,6 @@ export default class SignupScreen extends React.Component {
     this.props.navigation.replace("Tab");
   };
 
-  handleHaveAccount = () => {
-    this.props.navigation.replace("Login");
-  };
-
   handleSignupWithFacebook = () => {
     //
   };
@@ -36,19 +32,16 @@ export default class SignupScreen extends React.Component {
 
         <SignupInputs />
 
-        <DefaultButton onPress={this.handleSignup}>Sign Up</DefaultButton>
-        <DefaultButton onPress={this.handleSignupWithFacebook}>
-          Sign Up With Facebook
-        </DefaultButton>
-
-        <View style={styles.signinRedirect}>
-          <Text style={styles.signinRedirectText}>Have an account? </Text>
-
-          <TouchableWithoutFeedback onPress={this.handleHaveAccount}>
-            <View>
-              <Text style={styles.signinRedirectButtonText}>Sign In</Text>
-            </View>
-          </TouchableWithoutFeedback>
+        <View style={styles.buttonsContainer}>
+          <DefaultButton onPress={this.handleSignup} style={styles.button}>
+            Sign Up
+          </DefaultButton>
+          <DefaultButton
+            onPress={this.handleSignupWithFacebook}
+            style={styles.button}
+          >
+            Sign Up With Facebook
+          </DefaultButton>
         </View>
       </View>
     );

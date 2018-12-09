@@ -11,16 +11,6 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingTop: dimensions.fullWidth / 5
   },
-  signinRedirect: {
-    flexDirection: "row",
-    marginBottom: gaps.md
-  },
-  signinRedirectText: {
-    color: colors.black
-  },
-  signinRedirectButtonText: {
-    color: colors.secondary,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.secondary
-  }
+  buttonsContainer: { width: "100%", marginBottom: "15%" },
+  button: { margin: 7 }
 });

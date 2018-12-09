@@ -11,14 +11,14 @@ const styles = StyleSheet.create({
   header: {
     color: colors.secondary,
     fontSize: fontSizes.huge,
-    fontWeight: "bold"
-    //fontFamily: fontTypes.logoFont
+    //fontWeight: "bold"
+    fontFamily: fontTypes.logoFont
   },
   subHeader: {
     color: colors.white,
     fontSize: fontSizes.md,
-    fontWeight: "bold",
-    //fontFamily: fontTypes.logoFont,
+    //fontWeight: "bold",
+    fontFamily: fontTypes.logoFont,
     marginTop: -10
   }
 });
