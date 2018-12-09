@@ -1,12 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
-import IonIcon from "react-native-vector-icons/Ionicons";
+import EvilIcon from "react-native-vector-icons/EvilIcons";
 import React from "react";
+
+import styles from "./AddServiceScreenStyles";
 
 export default class AddServiceScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     tabBarLabel: "ADD SERVICE",
     tabBarIcon: ({ tintColor }) => (
-      <IonIcon name="ios-add-circle" size={30} style={{ color: tintColor }} />
+      <EvilIcon name="plus" size={40} style={{ color: tintColor }} />
     )
   });
   render() {
@@ -17,12 +19,3 @@ export default class AddServiceScreen extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});

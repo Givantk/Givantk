@@ -29,6 +29,7 @@ export const gaps = {
 //FONT SIZES
 
 export const fontSizes = {
+  xs: 10,
   sm: 12,
   md: 18,
   lg: 28,
@@ -51,6 +52,7 @@ const secondaryColor = Color("#FFA963");
 const tertiaryColor = Color("#F5F5DC");
 const black = Color("#232323");
 const white = Color("#EAEEFF");
+const gray01 = Color("#B3B3B3");
 
 export const colors = {
   primary: primaryColor,
@@ -58,5 +60,6 @@ export const colors = {
   secondary: secondaryColor,
   tertiary: tertiaryColor,
   black: black,
-  white: white
+  white: white,
+  gray01: gray01
 };

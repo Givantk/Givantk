@@ -1,12 +1,14 @@
 import { StyleSheet, Text, View, Button } from "react-native";
-import IonIcon from "@expo/vector-icons/Ionicons";
+import FontAwesomeIcon from "@expo/vector-icons/FontAwesome";
 import React from "react";
+
+import styles from "./FeaturedScreenStyles";
 
 export default class FeaturedScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     tabBarLabel: "FEATURED",
     tabBarIcon: ({ tintColor }) => (
-      <IonIcon name="ios-star" size={30} style={{ color: tintColor }} />
+      <FontAwesomeIcon name="star-o" size={30} style={{ color: tintColor }} />
     )
   });
 
@@ -27,12 +29,3 @@ export default class FeaturedScreen extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "space-around"
-  }
-});

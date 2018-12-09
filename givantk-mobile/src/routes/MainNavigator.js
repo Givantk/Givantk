@@ -1,5 +1,6 @@
 import { createStackNavigator } from "react-navigation";
-import { Text, TouchableHighlight } from "react-native";
+import { View, TouchableWithoutFeedback } from "react-native";
+import IonIcon from "@expo/vector-icons/Ionicons";
 import React from "react";
 
 import { colors } from "../assets/styles/base";
@@ -24,7 +25,7 @@ const MainNavigator = createStackNavigator(
     MessagesList: screens.MessagesListScreen
   },
   {
-    initialRouteName: "Login",
+    initialRouteName: "Tab",
 
     //We need to configure the header options only for the 'tab' screens only here
     navigationOptions: ({ navigation }) => {
@@ -32,11 +33,17 @@ const MainNavigator = createStackNavigator(
 
       let headerTitle = "";
       let headerRight = (
-        <TouchableHighlight
+        <TouchableWithoutFeedback
           onPress={() => navigation.navigate("Notifications")}
         >
-          <Text>Notifications</Text>
-        </TouchableHighlight>
+          <View style={{ width: 39 }}>
+            <IonIcon
+              name="md-notifications"
+              color={colors.white.toString()}
+              size={33}
+            />
+          </View>
+        </TouchableWithoutFeedback>
       );
 
       let headerLeft = "";

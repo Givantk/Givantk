@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from "react-navigation";
 
-import { colors } from "../assets/styles/base";
+import { colors, fontSizes, fontTypes } from "../assets/styles/base";
 import screens from "../screens";
 
 const BottomTabNavigator = createBottomTabNavigator(
@@ -14,8 +14,17 @@ const BottomTabNavigator = createBottomTabNavigator(
     initialRouteName: "Featured",
     order: ["Featured", "AddService", "MyServices", "Account"],
     tabBarOptions: {
-      activeTintColor: colors.primary,
-      inactiveTintColor: colors.black
+      activeTintColor: colors.secondary,
+      inactiveTintColor: colors.white,
+      activeBackgroundColor: colors.primary.darken(0.3),
+      style: {
+        backgroundColor: colors.primary,
+        height: 65
+      },
+      labelStyle: {
+        fontSize: fontSizes.xs,
+        fontFamily: fontTypes.mainBold
+      }
     }
   }
 );

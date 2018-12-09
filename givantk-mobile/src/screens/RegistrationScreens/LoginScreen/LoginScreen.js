@@ -1,23 +1,16 @@
 import { Text, View, TouchableWithoutFeedback } from "react-native";
 import React from "react";
 
-import { styles } from "./LoginScreenStyles";
-import DefaultTextInput from "../../../components/commons/UI/DefaultTextInput/DefaultTextInput";
-import DefaultButton from "../../../components/commons/UI/DefaultButton/DefaultButton";
-import Header from "../../../components/RegistrationsScreensComponents/SignupScreenComponents/Header/Header";
 import { dimensions } from "../../../assets/styles/base";
+import { styles } from "./LoginScreenStyles";
+import DefaultButton from "../../../components/commons/UI/DefaultButton/DefaultButton";
+import DefaultTextInput from "../../../components/commons/UI/DefaultTextInput/DefaultTextInput";
+import Header from "../../../components/RegistrationsScreensComponents/SignupScreenComponents/Header/Header";
 
 export default class LoginScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     headerTransparent: true
   });
-
-  componentDidMount() {
-    setInterval(() => {
-      console.log(dimensions.fullHeight);
-      console.log(dimensions.fullWidth);
-    }, 1000);
-  }
 
   handleLogin = () => {
     console.log("Log in");

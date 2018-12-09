@@ -1,14 +1,19 @@
 import { StyleSheet, Text, View, Button } from "react-native";
-import IonIcon from "react-native-vector-icons/Ionicons";
+import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import React from "react";
 
-import { colors } from "../../../assets/styles/base";
+import { colors, fontSizes } from "../../../assets/styles/base";
+import styles from "./AccountScreenStyles";
 
 export default class AccountScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     tabBarLabel: "ACCOUNT",
     tabBarIcon: ({ tintColor }) => (
-      <IonIcon name="ios-person" size={30} style={{ color: tintColor }} />
+      <MaterialIcon
+        name="person-outline"
+        size={40}
+        style={{ color: tintColor }}
+      />
     )
   });
 
@@ -49,12 +54,3 @@ export default class AccountScreen extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "space-around"
-  }
-});
