@@ -8,6 +8,11 @@ export const dimensions = {
   fullWidth: Dimensions.get("window").width
 };
 
+Dimensions.addEventListener("change", dims => {
+  dimensions.fullHeight = dims.window.height;
+  dimensions.fullWidth = dims.window.width;
+});
+
 //GAPS
 
 export const gaps = {

@@ -5,11 +5,19 @@ import { styles } from "./LoginScreenStyles";
 import DefaultTextInput from "../../../components/commons/UI/DefaultTextInput/DefaultTextInput";
 import DefaultButton from "../../../components/commons/UI/DefaultButton/DefaultButton";
 import Header from "../../../components/RegistrationsScreensComponents/SignupScreenComponents/Header/Header";
+import { dimensions } from "../../../assets/styles/base";
 
 export default class LoginScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     headerTransparent: true
   });
+
+  componentDidMount() {
+    setInterval(() => {
+      console.log(dimensions.fullHeight);
+      console.log(dimensions.fullWidth);
+    }, 1000);
+  }
 
   handleLogin = () => {
     console.log("Log in");
