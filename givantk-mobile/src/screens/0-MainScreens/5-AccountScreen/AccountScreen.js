@@ -1,5 +1,5 @@
+import { Icon } from "native-base";
 import { StyleSheet, Text, View, Button } from "react-native";
-import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import React from "react";
 
 import { colors, fontSizes } from "../../../assets/styles/base";
@@ -9,10 +9,10 @@ export default class AccountScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     tabBarLabel: "ACCOUNT",
     tabBarIcon: ({ tintColor }) => (
-      <MaterialIcon
+      <Icon
+        type="MaterialIcons"
         name="person-outline"
-        size={40}
-        style={{ color: tintColor }}
+        style={{ color: tintColor, fontSize: 40 }}
       />
     )
   });

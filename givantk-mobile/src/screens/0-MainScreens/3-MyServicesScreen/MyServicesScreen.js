@@ -1,14 +1,18 @@
-import { StyleSheet, Text, View, Button } from "react-native";
-import SimpleLineIcon from "react-native-vector-icons/SimpleLineIcons";
+import { Text, View, Button } from "react-native";
 import React from "react";
 
 import styles from "./MyServicesScreenStyles";
+import { Icon } from "native-base";
 
 export default class MyServicesScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     tabBarLabel: "MY SERVICES",
     tabBarIcon: ({ tintColor }) => (
-      <SimpleLineIcon name="handbag" size={30} style={{ color: tintColor }} />
+      <Icon
+        type="SimpleLineIcons"
+        name="handbag"
+        style={{ color: tintColor, fontSize: 30 }}
+      />
     )
   });
 

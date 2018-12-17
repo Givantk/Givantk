@@ -1,6 +1,6 @@
 import { createStackNavigator } from "react-navigation";
+import { Icon } from "native-base";
 import { View, TouchableWithoutFeedback } from "react-native";
-import IonIcon from "@expo/vector-icons/Ionicons";
 import React from "react";
 
 import { colors } from "../assets/styles/base";
@@ -37,10 +37,10 @@ const MainNavigator = createStackNavigator(
           onPress={() => navigation.navigate("Notifications")}
         >
           <View style={{ width: 39 }}>
-            <IonIcon
+            <Icon
+              type="Ionicons"
               name="md-notifications"
-              color={colors.white.toString()}
-              size={33}
+              style={{ color: colors.white, fontSize: 33 }}
             />
           </View>
         </TouchableWithoutFeedback>

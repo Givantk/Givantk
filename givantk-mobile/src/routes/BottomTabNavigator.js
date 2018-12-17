@@ -14,9 +14,9 @@ const BottomTabNavigator = createBottomTabNavigator(
     initialRouteName: "Featured",
     order: ["Featured", "AddService", "MyServices", "Account"],
     tabBarOptions: {
-      activeTintColor: colors.secondary,
+      activeTintColor: colors.gray01,
       inactiveTintColor: colors.white,
-      activeBackgroundColor: colors.primary.darken(0.3),
+      activeBackgroundColor: colors.primary.darken(0.2),
       style: {
         backgroundColor: colors.primary,
         height: 65
