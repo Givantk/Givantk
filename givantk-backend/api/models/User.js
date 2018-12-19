@@ -13,7 +13,15 @@ const UserSchema = new Schema({
     user_name: String,
     joined: Date,
     phone_number: Number,
-    email: String,
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    password: {
+        type: String,
+        required: true,
+    },
     verified: Boolean,
     givantk_points: Number,
     money_points: Number,
