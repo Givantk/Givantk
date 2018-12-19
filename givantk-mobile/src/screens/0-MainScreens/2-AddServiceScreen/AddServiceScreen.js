@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View } from "react-native";
-import EvilIcon from "react-native-vector-icons/EvilIcons";
+import { Icon } from "native-base";
+import { Text, View } from "react-native";
 import React from "react";
 
 import styles from "./AddServiceScreenStyles";
@@ -8,7 +8,11 @@ export default class AddServiceScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     tabBarLabel: "ADD SERVICE",
     tabBarIcon: ({ tintColor }) => (
-      <EvilIcon name="plus" size={40} style={{ color: tintColor }} />
+      <Icon
+        type="EvilIcons"
+        name="plus"
+        style={{ color: tintColor, fontSize: 40 }}
+      />
     )
   });
   render() {
