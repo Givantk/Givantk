@@ -12,8 +12,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.secondary,
     margin: gaps.sm,
-    padding: gaps.xsm,
-    color: colors.white
+    padding: gaps.xsm
   }
 });
 

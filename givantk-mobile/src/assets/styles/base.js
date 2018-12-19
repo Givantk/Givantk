@@ -53,6 +53,7 @@ const tertiaryColor = Color("#F5F5DC");
 const black = Color("#232323");
 const white = Color("#EAEEFF");
 const gray01 = Color("#B3B3B3");
+const gray02 = Color("#959595");
 
 export const colors = {
   primary: primaryColor,
@@ -61,5 +62,6 @@ export const colors = {
   tertiary: tertiaryColor,
   black: black,
   white: white,
-  gray01: gray01
+  gray01: gray01,
+  gray02: gray02
 };

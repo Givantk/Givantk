@@ -11,7 +11,6 @@ const DefaultTextInput = props => {
         {...props}
         underlineColorAndroid="#00000000"
         style={[styles.textInput, props.style]}
-        placeholderTextColor={colors.white.fade(0.5)}
       />
     </View>
   );

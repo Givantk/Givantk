@@ -1,12 +1,6 @@
 import { StyleSheet } from "react-native";
 
-import {
-  colors,
-  gaps,
-  fontTypes,
-  fontSizes,
-  dimensions
-} from "../../../assets/styles/base";
+import { colors, gaps, dimensions } from "../../../assets/styles/base";
 
 export const styles = StyleSheet.create({
   container: {
@@ -24,7 +18,9 @@ export const styles = StyleSheet.create({
     borderWidth: 0,
     borderBottomWidth: 1,
     borderBottomColor: "#627273",
-    width: "70%"
+    width: "70%",
+    color: colors.white,
+    fontWeight: "bold"
   },
   signupRedirect: {
     flexDirection: "row",

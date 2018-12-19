@@ -1,16 +1,22 @@
 import { Icon } from "native-base";
-import { View, Button, FlatList } from "react-native";
+import { View, Button, FlatList, TouchableWithoutFeedback } from "react-native";
 import React from "react";
 
 import ServiceCard from "../../../components/commons/Service-Related-Components/ServiceCard/ServiceCard";
 import services from "../../../assets/data/fakeServices";
 import styles from "./FeaturedScreenStyles";
+import DefaultTextInput from "../../../components/commons/UI/DefaultTextInput/DefaultTextInput";
+import { colors } from "../../../assets/styles/base";
 
 export default class FeaturedScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     tabBarLabel: "FEATURED",
     tabBarIcon: ({ tintColor }) => (
-      <Icon type="FontAwesome" name="star-o" style={{ color: tintColor }} />
+      <Icon
+        type="Ionicons"
+        name="ios-home"
+        style={{ color: tintColor, fontSize: 35 }}
+      />
     )
   });
 
@@ -18,13 +24,23 @@ export default class FeaturedScreen extends React.Component {
     this.props.navigation.navigate("Service");
   };
 
+  navigateToSearchScreen = () => {
+    this.props.navigation.navigate("SearchResults");
+  };
+
   render() {
     return (
       <View style={styles.container}>
-        <Button
-          title="Search"
-          onPress={() => this.props.navigation.navigate("SearchResults")}
-        />
+        <View style={styles.searchContainer}>
+          <DefaultTextInput
+            placeholder="Find a service"
+            placeholderTextColor={colors.gray02}
+            style={styles.searchInput}
+          />
+          <TouchableWithoutFeedback onPress={this.navigateToSearchScreen}>
+            <Icon type="Feather" name="search" style={styles.searchIcon} />
+          </TouchableWithoutFeedback>
+        </View>
 
         <FlatList
           style={styles.servicesListContainer}

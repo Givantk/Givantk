@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../../../assets/styles/base";
 
 const styles = StyleSheet.create({
   inputContainer: {
@@ -8,7 +9,9 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     borderBottomWidth: 1,
     borderBottomColor: "#627273",
-    width: "70%"
+    width: "70%",
+    color: colors.white,
+    fontWeight: "bold"
   }
 });
 
