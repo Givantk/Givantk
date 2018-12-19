@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 mongoose
   .connect(
     "mongodb://givantk:givantk123@ds149481.mlab.com:49481/givantk",
-    { useNewUrlParser: true }
+    { useCreateIndex: true, useNewUrlParser: true }
   )
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log(err));
