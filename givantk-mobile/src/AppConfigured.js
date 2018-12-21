@@ -1,17 +1,15 @@
-import { AppLoading } from "expo";
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React from 'react';
 
-import { loadFonts } from "./assets/styles/fonts/loadFonts";
-import LoadingScreen from "./screens/commons/LoadingScreen/LoadingScreen";
-import Navigator from "./routes/MainNavigator";
+import { loadFonts } from './assets/styles/fonts/loadFonts';
+import LoadingScreen from './screens/commons/LoadingScreen/LoadingScreen';
+import Navigator from './routes/MainNavigator';
 
-//This is the main app, with these configured:
-//1-customized fonts loaded
+// This is the main app, with these configured:
+// 1-customized fonts loaded
 
 export default class AppConfigured extends React.Component {
   state = {
-    fontLoaded: false
+    fontLoaded: false,
   };
 
   componentDidMount() {
@@ -25,7 +23,9 @@ export default class AppConfigured extends React.Component {
   }
 
   render() {
-    if (!this.state.fontLoaded) {
+    const { fontLoaded } = this.state;
+
+    if (!fontLoaded) {
       return <LoadingScreen />;
     }
 

@@ -1,19 +1,19 @@
-import { Dimensions } from "react-native";
-import Color from "color";
+import { Dimensions } from 'react-native';
+import Color from 'color';
 
-//DIMENTIONS
+// DIMENTIONS
 
 export const dimensions = {
-  fullHeight: Dimensions.get("window").height,
-  fullWidth: Dimensions.get("window").width
+  fullHeight: Dimensions.get('window').height,
+  fullWidth: Dimensions.get('window').width,
 };
 
-Dimensions.addEventListener("change", dims => {
+Dimensions.addEventListener('change', (dims) => {
   dimensions.fullHeight = dims.window.height;
   dimensions.fullWidth = dims.window.width;
 });
 
-//GAPS
+// GAPS
 
 export const gaps = {
   xsm: 5,
@@ -23,10 +23,10 @@ export const gaps = {
   xl: 40,
   xxl: 50,
   xxxl: 80,
-  filler: 120
+  filler: 120,
 };
 
-//FONT SIZES
+// FONT SIZES
 
 export const fontSizes = {
   xs: 10,
@@ -34,34 +34,38 @@ export const fontSizes = {
   md: 18,
   lg: 28,
   xlg: 40,
-  huge: 50
+  huge: 50,
 };
 
-//FONT TYPES
+// FONT TYPES
 
 export const fontTypes = {
-  main: "montserratMedium",
-  mainBold: "montserratBold",
-  logoFont: "montserratLight"
+  main: 'montserratMedium',
+  mainBold: 'montserratBold',
+  logoFont: 'montserratLight',
 };
 
-//COLORS
+// COLORS
 
-const primaryColor = Color("#008388");
-const secondaryColor = Color("#FFA963");
-const tertiaryColor = Color("#F5F5DC");
-const black = Color("#232323");
-const white = Color("#EAEEFF");
-const gray01 = Color("#B3B3B3");
-const gray02 = Color("#959595");
+const primaryColor = Color('#008388');
+const secondaryColor = Color('#FFA963');
+const tertiaryColor = Color('#F5F5DC');
+const black = Color('#232323');
+const white = Color('#EAEEFF');
+const trueWhite = Color('#FFFFFF');
+const gray01 = Color('#B3B3B3');
+const gray02 = Color('#959595');
+const gray03 = Color('#627273');
 
 export const colors = {
   primary: primaryColor,
   primaryLight: primaryColor.lighten(0.4),
   secondary: secondaryColor,
   tertiary: tertiaryColor,
-  black: black,
-  white: white,
-  gray01: gray01,
-  gray02: gray02
+  black,
+  white,
+  trueWhite,
+  gray01,
+  gray02,
+  gray03,
 };

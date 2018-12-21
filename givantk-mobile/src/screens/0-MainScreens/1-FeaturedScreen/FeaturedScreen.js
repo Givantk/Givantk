@@ -1,31 +1,34 @@
-import { Icon } from "native-base";
-import { View, Button, FlatList, TouchableWithoutFeedback } from "react-native";
-import React from "react";
+import { Icon } from 'native-base';
+import { View, FlatList, TouchableWithoutFeedback } from 'react-native';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-import ServiceCard from "../../../components/commons/Service-Related-Components/ServiceCard/ServiceCard";
-import services from "../../../assets/data/fakeServices";
-import styles from "./FeaturedScreenStyles";
-import DefaultTextInput from "../../../components/commons/UI/DefaultTextInput/DefaultTextInput";
-import { colors } from "../../../assets/styles/base";
+import { colors } from '../../../assets/styles/base';
+import DefaultTextInput from '../../../components/commons/UI/DefaultTextInput/DefaultTextInput';
+import ServiceCard from '../../../components/commons/Service-Related-Components/ServiceCard/ServiceCard';
+import services from '../../../assets/data/fakeServices';
+import styles from './FeaturedScreenStyles';
 
 export default class FeaturedScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => ({
-    tabBarLabel: "FEATURED",
+  static navigationOptions = () => ({
+    tabBarLabel: 'FEATURED',
     tabBarIcon: ({ tintColor }) => (
       <Icon
         type="Ionicons"
         name="ios-home"
-        style={{ color: tintColor, fontSize: 35 }}
+        style={[styles.tabIcon, { color: tintColor }]}
       />
-    )
+    ),
   });
 
   navigateToServiceScreen = () => {
-    this.props.navigation.navigate("Service");
+    const { navigation } = this.props;
+    navigation.navigate('Service');
   };
 
   navigateToSearchScreen = () => {
-    this.props.navigation.navigate("SearchResults");
+    const { navigation } = this.props;
+    navigation.navigate('SearchResults');
   };
 
   render() {
@@ -45,8 +48,8 @@ export default class FeaturedScreen extends React.Component {
         <FlatList
           style={styles.servicesListContainer}
           data={services}
-          keyExtractor={item => item._id}
-          renderItem={service => (
+          keyExtractor={(item) => item._id}
+          renderItem={(service) => (
             <ServiceCard
               service={service.item}
               navigateToServiceScreen={this.navigateToServiceScreen}
@@ -57,3 +60,7 @@ export default class FeaturedScreen extends React.Component {
     );
   }
 }
+
+FeaturedScreen.propTypes = {
+  navigation: PropTypes.shape({}),
+};

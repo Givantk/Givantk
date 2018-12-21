@@ -1,24 +1,21 @@
-import { Text, View, TouchableWithoutFeedback } from "react-native";
-import React from "react";
+import { View } from 'react-native';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-import { colors } from "../../../assets/styles/base";
-import { styles } from "./SignupScreenStyles";
-import countries from "../../../assets/data/countries";
-import DefaultButton from "../../../components/commons/UI/DefaultButton/DefaultButton";
-import DefaultDatePicker from "../../../components/commons/UI/DefaultDatePicker/DefaultDatePicker";
-import DefaultTextInput from "../../../components/commons/UI/DefaultTextInput/DefaultTextInput";
-import SignupInputs from "../../../components/RegistrationsScreensComponents/SignupScreenComponents/SignupInputs/SignupInputs";
-import Header from "../../../components/RegistrationsScreensComponents/SignupScreenComponents/Header/Header";
+import { styles } from './SignupScreenStyles';
+import DefaultButton from '../../../components/commons/UI/DefaultButton/DefaultButton';
+import Header from '../../../components/RegistrationsScreensComponents/SignupScreenComponents/Header/Header';
+import SignupInputs from '../../../components/RegistrationsScreensComponents/SignupScreenComponents/SignupInputs/SignupInputs';
 
 export default class SignupScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => ({
-    headerTransparent: true
+  static navigationOptions = () => ({
+    headerTransparent: true,
   });
 
   handleSignup = () => {
-    console.log("Signup");
-    //..
-    this.props.navigation.replace("Tab");
+    const { navigation } = this.props;
+    // ..
+    navigation.replace('Tab');
   };
 
   handleSignupWithFacebook = () => {
@@ -47,3 +44,7 @@ export default class SignupScreen extends React.Component {
     );
   }
 }
+
+SignupScreen.propTypes = {
+  navigation: PropTypes.shape({}),
+};

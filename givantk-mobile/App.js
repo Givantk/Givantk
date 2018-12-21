@@ -1,9 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import AppConfigured from "./src/AppConfigured";
+import AppConfigured from './src/AppConfigured';
 
-export default class App extends React.Component {
-  render() {
-    return <AppConfigured />;
-  }
-}
+const App = () => <AppConfigured />;
+
+export default App;

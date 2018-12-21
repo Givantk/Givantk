@@ -1,29 +1,29 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
-import { colors, gaps, dimensions } from "../../../assets/styles/base";
+import { colors, gaps, dimensions } from '../../../assets/styles/base';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: "100%",
+    width: '100%',
     backgroundColor: colors.primary,
-    alignItems: "center",
-    justifyContent: "space-between",
+    alignItems: 'center',
+    justifyContent: 'space-between',
     paddingTop: dimensions.fullWidth / 3.5
   },
   inputContainer: {
-    width: "100%"
+    width: '100%'
   },
   textInput: {
     borderWidth: 0,
     borderBottomWidth: 1,
-    borderBottomColor: "#627273",
-    width: "70%",
+    borderBottomColor: colors.gray03,
+    width: '70%',
     color: colors.white,
-    fontWeight: "bold"
+    fontWeight: 'bold'
   },
   signupRedirect: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginBottom: gaps.md
   },
   signupRedirectText: {

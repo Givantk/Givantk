@@ -1,25 +1,27 @@
-import { Text, View, TouchableWithoutFeedback } from "react-native";
-import React from "react";
+import { Text, View, TouchableWithoutFeedback } from 'react-native';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-import { dimensions } from "../../../assets/styles/base";
-import { styles } from "./LoginScreenStyles";
-import DefaultButton from "../../../components/commons/UI/DefaultButton/DefaultButton";
-import DefaultTextInput from "../../../components/commons/UI/DefaultTextInput/DefaultTextInput";
-import Header from "../../../components/RegistrationsScreensComponents/SignupScreenComponents/Header/Header";
+import { styles } from './LoginScreenStyles';
+import DefaultButton from '../../../components/commons/UI/DefaultButton/DefaultButton';
+import DefaultTextInput from '../../../components/commons/UI/DefaultTextInput/DefaultTextInput';
+import Header from '../../../components/RegistrationsScreensComponents/SignupScreenComponents/Header/Header';
 
 export default class LoginScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => ({
+  static navigationOptions = () => ({
     headerTransparent: true
   });
 
   handleLogin = () => {
-    console.log("Log in");
-    //..
-    this.props.navigation.replace("Tab");
+    const { navigation } = this.props;
+    // ..
+    navigation.replace('Tab');
   };
 
   handleHaveNoAccount = () => {
-    this.props.navigation.navigate("Signup");
+    const { navigation } = this.props;
+
+    navigation.navigate('Signup');
   };
 
   handleSignInWithFacebook = () => {
@@ -56,3 +58,7 @@ export default class LoginScreen extends React.Component {
     );
   }
 }
+
+LoginScreen.propTypes = {
+  navigation: PropTypes.shape({})
+};
