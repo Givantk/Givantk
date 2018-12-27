@@ -49,6 +49,7 @@ export default class FeaturedScreen extends React.Component {
           style={styles.servicesListContainer}
           data={services}
           keyExtractor={(item) => item._id}
+          showsVerticalScrollIndicator={false}
           renderItem={(service) => (
             <ServiceCard
               service={service.item}

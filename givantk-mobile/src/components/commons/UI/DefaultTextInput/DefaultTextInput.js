@@ -1,11 +1,10 @@
-import { View, TextInput } from "react-native";
-import React from "react";
+import { View, TextInput } from 'react-native';
+import React from 'react';
 
-import styles from "./DefaultTextInputStyles";
-import { colors } from "../../../../assets/styles/base";
+import styles from './DefaultTextInputStyles';
+import { colors } from '../../../../assets/styles/base';
 
-const DefaultTextInput = props => {
-  return (
+const DefaultTextInput = (props) => (
     <View style={styles.container}>
       <TextInput
         {...props}
@@ -14,10 +13,9 @@ const DefaultTextInput = props => {
       />
     </View>
   );
-};
 
-//expected props
-//style (object)
-//normal TextInput props
+// expected props
+// style (object)
+// normal TextInput props
 
 export default DefaultTextInput;

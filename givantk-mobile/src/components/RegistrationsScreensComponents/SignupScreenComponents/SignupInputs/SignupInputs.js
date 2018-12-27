@@ -1,45 +1,46 @@
-import { Picker } from "native-base";
-import { View, Text, StyleSheet } from "react-native";
-import PropTypes from "prop-types";
-import React, { Component } from "react";
+import { Picker } from 'native-base';
+import { View, Text, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 
-import { colors } from "../../../../assets/styles/base";
-import countries from "../../../../assets/data/countries";
-import DefaultDatePicker from "../../../commons/UI/DefaultDatePicker/DefaultDatePicker";
-import DefaultTextInput from "../../../commons/UI/DefaultTextInput/DefaultTextInput";
-import styles from "./SignupInputsStyles";
+import { colors } from '../../../../assets/styles/base';
+import countries from '../../../../assets/data/countries';
+import DefaultDatePicker from '../../../commons/UI/DefaultDatePicker/DefaultDatePicker';
+import DefaultTextInput from '../../../commons/UI/DefaultTextInput/DefaultTextInput';
+import styles from './SignupInputsStyles';
 
 export default class SignupInputs extends Component {
   state = {
-    selectedCountry: ""
+    selectedCountry: '',
   };
 
-  onSelectCountry = selectedCountry => {
+  onSelectCountry = (selectedCountry) => {
     this.setState(() => ({
-      selectedCountry
+      selectedCountry,
     }));
   };
+
   render() {
     return (
       <View
         style={{
-          width: "100%",
-          alignItems: "center"
+          width: '100%',
+          alignItems: 'center',
         }}
       >
         <View
           style={{
-            width: "80%",
-            flexDirection: "row"
+            width: '80%',
+            flexDirection: 'row',
           }}
         >
-          <View style={{ width: "50%" }}>
+          <View style={{ width: '50%' }}>
             <DefaultTextInput
               placeholder="First Name"
               style={styles.textInput}
             />
           </View>
-          <View style={{ width: "50%", alignItems: "center" }}>
+          <View style={{ width: '50%', alignItems: 'center' }}>
             <DefaultTextInput
               placeholder="Last Name"
               style={styles.textInput}
@@ -57,25 +58,25 @@ export default class SignupInputs extends Component {
         />
         <View
           style={{
-            width: "80%",
-            flexDirection: "row"
+            width: '80%',
+            flexDirection: 'row',
           }}
         >
           <DefaultDatePicker
             label="Birth Date"
-            onDateChange={newDate => {}}
-            style={{ width: "50%", alignItems: "center" }}
+            onDateChange={(newDate) => {}}
+            style={{ width: '50%', alignItems: 'center' }}
           />
 
           <Picker
             style={{
-              color: colors.white.fade(0.5)
+              color: colors.white.fade(0.5),
             }}
             selectedValue={this.state.selectedCountry}
             onValueChange={this.onSelectCountry}
           >
             <Picker.Item label="Country" value="" />
-            {countries.map(country => (
+            {countries.map((country) => (
               <Picker.Item label={country} value={country} key={country} />
             ))}
           </Picker>
@@ -86,5 +87,5 @@ export default class SignupInputs extends Component {
 }
 
 SignupInputs.propTypes = {
-  placeholderColor: PropTypes.string
+  placeholderColor: PropTypes.string,
 };

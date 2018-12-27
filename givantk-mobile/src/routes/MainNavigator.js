@@ -1,11 +1,11 @@
-import { createStackNavigator } from "react-navigation";
-import { Icon } from "native-base";
-import { View, TouchableWithoutFeedback } from "react-native";
-import React from "react";
+import { createStackNavigator } from 'react-navigation';
+import { Icon } from 'native-base';
+import { View, TouchableWithoutFeedback } from 'react-native';
+import React from 'react';
 
-import { colors } from "../assets/styles/base";
-import BottomTabNavigator from "./BottomTabNavigator";
-import screens from "../screens";
+import { colors } from '../assets/styles/base';
+import BottomTabNavigator from './BottomTabNavigator';
+import screens from '../screens';
 
 const MainNavigator = createStackNavigator(
   {
@@ -22,19 +22,19 @@ const MainNavigator = createStackNavigator(
     SearchResults: screens.SearchResultsScreen,
     AddProposal: screens.AddProposalScreen,
     VerifyIdentity: screens.VerifyIdentityScreen,
-    MessagesList: screens.MessagesListScreen
+    MessagesList: screens.MessagesListScreen,
   },
   {
-    initialRouteName: "Tab",
+    initialRouteName: 'Tab',
 
-    //We need to configure the header options only for the 'tab' screens only here
+    // We need to configure the header options only for the 'tab' screens only here
     navigationOptions: ({ navigation }) => {
-      let screen = navigation.state.routeName;
+      const screen = navigation.state.routeName;
 
-      let headerTitle = "";
-      let headerRight = (
+      let headerTitle = '';
+      const headerRight = (
         <TouchableWithoutFeedback
-          onPress={() => navigation.navigate("Notifications")}
+          onPress={() => navigation.navigate('Notifications')}
         >
           <View style={{ width: 39 }}>
             <Icon
@@ -46,35 +46,35 @@ const MainNavigator = createStackNavigator(
         </TouchableWithoutFeedback>
       );
 
-      let headerLeft = "";
+      const headerLeft = '';
 
-      let headerStyle = {
-        backgroundColor: colors.primary
+      const headerStyle = {
+        backgroundColor: colors.primary,
       };
-      let headerTitleStyle = {
-        color: colors.white
+      const headerTitleStyle = {
+        color: colors.white,
       };
 
-      if (screen === "Tab") {
+      if (screen === 'Tab') {
         const { routes, index } = navigation.state;
-        let tabScreen = routes[index].routeName;
+        const tabScreen = routes[index].routeName;
 
         // Navigation options for each tab screen with respect to stack navigation
         switch (tabScreen) {
-          case "Featured":
-            headerTitle = "Featured";
+          case 'Featured':
+            headerTitle = 'Featured';
             break;
 
-          case "AddService":
-            headerTitle = "Add Service";
+          case 'AddService':
+            headerTitle = 'Add Service';
             break;
 
-          case "MyServices":
-            headerTitle = "My Services";
+          case 'MyServices':
+            headerTitle = 'My Services';
             break;
 
-          case "Account":
-            headerTitle = "Account";
+          case 'Account':
+            headerTitle = 'Account';
             break;
         }
 
@@ -83,11 +83,11 @@ const MainNavigator = createStackNavigator(
           headerTitle,
           headerTitleStyle,
           headerRight,
-          headerLeft
+          headerLeft,
         };
       }
-    } //end of navigationOptions
-  }
+    }, // end of navigationOptions
+  },
 );
 
 export default MainNavigator;
