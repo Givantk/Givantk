@@ -76,6 +76,8 @@ const MainNavigator = createStackNavigator(
           case 'Account':
             headerTitle = 'Account';
             break;
+
+          default:
         }
 
         return {
@@ -86,6 +88,7 @@ const MainNavigator = createStackNavigator(
           headerLeft,
         };
       }
+      return {};
     }, // end of navigationOptions
   },
 );
