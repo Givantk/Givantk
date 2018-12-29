@@ -1,6 +1,11 @@
 import { createBottomTabNavigator } from 'react-navigation';
 
-import { colors, fontSizes, fontTypes } from '../assets/styles/base';
+import {
+  colors,
+  fontSizes,
+  fontTypes,
+  bottomTabHeight,
+} from '../assets/styles/base';
 import screens from '../screens';
 
 const BottomTabNavigator = createBottomTabNavigator(
@@ -19,7 +24,7 @@ const BottomTabNavigator = createBottomTabNavigator(
       activeBackgroundColor: colors.primary.darken(0.2),
       style: {
         backgroundColor: colors.primary,
-        height: 65,
+        height: bottomTabHeight,
       },
       labelStyle: {
         fontSize: fontSizes.xs,

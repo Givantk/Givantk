@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../../../assets/styles/base';
 
 const styles = StyleSheet.create({
-  container: { width: '90%', alignItems: 'center' },
+  container: { width: '90%', height: '100%', alignItems: 'center' },
   snake: {
     width: '80%',
     height: 45,

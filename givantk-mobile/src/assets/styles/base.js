@@ -13,6 +13,8 @@ Dimensions.addEventListener('change', (dims) => {
   dimensions.fullWidth = dims.window.width;
 });
 
+export const bottomTabHeight = 65;
+
 // GAPS
 
 export const gaps = {

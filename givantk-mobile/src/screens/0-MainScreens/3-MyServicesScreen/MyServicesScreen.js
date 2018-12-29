@@ -1,5 +1,6 @@
 import { Icon } from 'native-base';
 import { View } from 'react-native';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import ServicesIAppliedFor from '../../../components/0-MainScreensComponents/3-MyServicesScreenComponents/ServicesIAppliedFor/ServicesIAppliedFor';
@@ -25,10 +26,18 @@ export default class MyServicesScreen extends React.Component {
   ];
 
   render() {
+    const { navigation } = this.props;
     return (
       <View style={styles.container}>
-        <SnakeNavigator content={this.SnakeNavigatorContent} />
+        <SnakeNavigator
+          content={this.SnakeNavigatorContent}
+          navigation={navigation}
+        />
       </View>
     );
   }
 }
+
+MyServicesScreen.propTypes = {
+  navigation: PropTypes.shape({}),
+};

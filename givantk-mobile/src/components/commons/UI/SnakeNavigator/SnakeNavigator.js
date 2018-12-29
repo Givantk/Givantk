@@ -25,9 +25,8 @@ export default class SnakeNavigator extends Component {
   };
 
   render() {
-    const { content } = this.props;
+    const { content, fontSize, navigation } = this.props;
     const { selectedItem } = this.state;
-
     return (
       <View style={styles.container}>
         <View style={styles.snake}>
@@ -48,6 +47,7 @@ export default class SnakeNavigator extends Component {
                     borderBottomLeftRadius: i === 0 ? 20 : 0,
                     borderTopRightRadius: i === content.length - 1 ? 20 : 0,
                     borderBottomRightRadius: i === content.length - 1 ? 20 : 0,
+                    borderLeftWidth: i === 0 ? 1 : 0,
                   },
                 ]}
               >
@@ -59,6 +59,7 @@ export default class SnakeNavigator extends Component {
                         selectedItem === item.name
                           ? colors.white
                           : colors.black,
+                      fontSize: fontSize || 12,
                     },
                   ]}
                 >
@@ -72,7 +73,7 @@ export default class SnakeNavigator extends Component {
           if (selectedItem === item.name) {
             return (
               <View key={item.name}>
-                <item.component />
+                <item.component navigation={navigation} />
               </View>
             );
           }
@@ -86,4 +87,6 @@ export default class SnakeNavigator extends Component {
 SnakeNavigator.propTypes = {
   content: PropTypes.instanceOf(Array).isRequired,
   initialRoute: PropTypes.shape({}),
+  fontSize: PropTypes.number,
+  navigation: PropTypes.shape({}),
 };

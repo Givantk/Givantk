@@ -31,6 +31,13 @@ export default class FeaturedScreen extends React.Component {
     navigation.navigate('SearchResults');
   };
 
+  renderItem = (service) => (
+    <ServiceCard
+      service={service.item}
+      navigateToServiceScreen={this.navigateToServiceScreen}
+    />
+  );
+
   render() {
     return (
       <View style={styles.container}>
@@ -46,16 +53,10 @@ export default class FeaturedScreen extends React.Component {
         </View>
 
         <FlatList
-          style={styles.servicesListContainer}
           data={services}
           keyExtractor={(item) => item._id}
           showsVerticalScrollIndicator={false}
-          renderItem={(service) => (
-            <ServiceCard
-              service={service.item}
-              navigateToServiceScreen={this.navigateToServiceScreen}
-            />
-          )}
+          renderItem={this.renderItem}
         />
       </View>
     );
