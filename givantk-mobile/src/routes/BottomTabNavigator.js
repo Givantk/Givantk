@@ -11,7 +11,7 @@ const BottomTabNavigator = createBottomTabNavigator(
     Account: screens.AccountScreen,
   },
   {
-    initialRouteName: 'AddService',
+    initialRouteName: 'MyServices',
     order: ['Featured', 'AddService', 'MyServices', 'Account'],
     tabBarOptions: {
       activeTintColor: colors.gray01,

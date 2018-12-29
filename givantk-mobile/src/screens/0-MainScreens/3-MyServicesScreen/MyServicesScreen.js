@@ -1,29 +1,33 @@
-import { Text, View, Button } from "react-native";
-import React from "react";
+import { Icon } from 'native-base';
+import { View } from 'react-native';
+import React from 'react';
 
-import styles from "./MyServicesScreenStyles";
-import { Icon } from "native-base";
+import ServicesIAppliedFor from '../../../components/0-MainScreensComponents/3-MyServicesScreenComponents/ServicesIAppliedFor/ServicesIAppliedFor';
+import ServicesIAskedFor from '../../../components/0-MainScreensComponents/3-MyServicesScreenComponents/ServicesIAskedFor/ServicesIAskedFor';
+import SnakeNavigator from '../../../components/commons/UI/SnakeNavigator/SnakeNavigator';
+import styles from './MyServicesScreenStyles';
 
 export default class MyServicesScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => ({
-    tabBarLabel: "MY SERVICES",
+  static navigationOptions = () => ({
+    tabBarLabel: 'MY SERVICES',
     tabBarIcon: ({ tintColor }) => (
       <Icon
         type="SimpleLineIcons"
         name="handbag"
         style={{ color: tintColor, fontSize: 30 }}
       />
-    )
+    ),
   });
+
+  SnakeNavigatorContent = [
+    { name: 'Your Services', component: ServicesIAskedFor },
+    { name: 'Accepted Services', component: ServicesIAppliedFor },
+  ];
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>My services screen</Text>
-        <Button
-          title="Service"
-          onPress={() => this.props.navigation.navigate("Service")}
-        />
+        <SnakeNavigator content={this.SnakeNavigatorContent} />
       </View>
     );
   }
