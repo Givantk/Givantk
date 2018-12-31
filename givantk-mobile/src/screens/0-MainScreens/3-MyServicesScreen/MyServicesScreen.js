@@ -13,9 +13,9 @@ export default class MyServicesScreen extends React.Component {
     tabBarLabel: 'MY SERVICES',
     tabBarIcon: ({ tintColor }) => (
       <Icon
-        type="SimpleLineIcons"
-        name="handbag"
-        style={{ color: tintColor, fontSize: 30 }}
+        type="Entypo"
+        name="shopping-bag"
+        style={{ color: tintColor, fontSize: 35 }}
       />
     ),
   });

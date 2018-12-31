@@ -13,8 +13,8 @@ export default class AddServiceScreen extends React.Component {
     tabBarLabel: 'ADD SERVICE',
     tabBarIcon: ({ tintColor }) => (
       <Icon
-        type="EvilIcons"
-        name="plus"
+        type="Ionicons"
+        name="md-add-circle"
         style={[styles.tabBarIcon, { color: tintColor }]}
       />
     ),

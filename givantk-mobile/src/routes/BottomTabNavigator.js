@@ -1,4 +1,4 @@
-import { createBottomTabNavigator } from 'react-navigation';
+import { createMaterialTopTabNavigator } from 'react-navigation';
 
 import {
   colors,
@@ -8,7 +8,7 @@ import {
 } from '../assets/styles/base';
 import screens from '../screens';
 
-const BottomTabNavigator = createBottomTabNavigator(
+const BottomTabNavigator = createMaterialTopTabNavigator(
   {
     Featured: screens.FeaturedScreen,
     AddService: screens.AddServiceScreen,
@@ -16,19 +16,33 @@ const BottomTabNavigator = createBottomTabNavigator(
     Account: screens.AccountScreen,
   },
   {
-    initialRouteName: 'MyServices',
+    initialRouteName: 'Featured',
     order: ['Featured', 'AddService', 'MyServices', 'Account'],
+    tabBarPosition: 'bottom',
+    swipeEnabled: true,
+    animationEnabled: false,
     tabBarOptions: {
-      activeTintColor: colors.gray01,
+      showIcon: true,
+      activeTintColor: colors.white,
       inactiveTintColor: colors.white,
       activeBackgroundColor: colors.primary.darken(0.2),
       style: {
         backgroundColor: colors.primary,
         height: bottomTabHeight,
+        borderTopWidth: 0.5,
+        borderTopColor: colors.gray01,
       },
       labelStyle: {
         fontSize: fontSizes.xs,
         fontFamily: fontTypes.mainBold,
+        width: '100%',
+      },
+      iconStyle: {
+        width: 35,
+        height: 30,
+      },
+      indicatorStyle: {
+        backgroundColor: colors.secondary,
       },
     },
   },

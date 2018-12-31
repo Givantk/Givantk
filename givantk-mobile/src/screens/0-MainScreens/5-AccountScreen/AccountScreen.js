@@ -1,17 +1,16 @@
 import { Icon } from 'native-base';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { Text, View, Button } from 'react-native';
 import React from 'react';
 
-import { colors, fontSizes } from '../../../assets/styles/base';
 import styles from './AccountScreenStyles';
 
 export default class AccountScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => ({
+  static navigationOptions = () => ({
     tabBarLabel: 'ACCOUNT',
     tabBarIcon: ({ tintColor }) => (
       <Icon
-        type="MaterialIcons"
-        name="person-outline"
+        type="Ionicons"
+        name="md-person"
         style={{ color: tintColor, fontSize: 40 }}
       />
     ),

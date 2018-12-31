@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     marginLeft: '2%',
   },
-  tabBarIcon: { fontSize: 40 },
+  tabBarIcon: { fontSize: 35 },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
