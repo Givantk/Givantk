@@ -23,6 +23,8 @@ const BottomTabNavigator = createMaterialTopTabNavigator(
     animationEnabled: false,
     tabBarOptions: {
       showIcon: true,
+      upperCaseLabel: true,
+      pressColor: colors.secondary.toString(),
       activeTintColor: colors.white,
       inactiveTintColor: colors.white,
       activeBackgroundColor: colors.primary.darken(0.2),
@@ -30,7 +32,7 @@ const BottomTabNavigator = createMaterialTopTabNavigator(
         backgroundColor: colors.primary,
         height: bottomTabHeight,
         borderTopWidth: 0.5,
-        borderTopColor: colors.gray01,
+        borderTopColor: colors.secondary,
       },
       labelStyle: {
         fontSize: fontSizes.xs,

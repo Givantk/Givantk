@@ -10,7 +10,7 @@ import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKey
 
 export default class AddServiceScreen extends React.Component {
   static navigationOptions = () => ({
-    tabBarLabel: 'ADD SERVICE',
+    tabBarLabel: 'Add Service',
     tabBarIcon: ({ tintColor }) => (
       <Icon
         type="Ionicons"
@@ -37,8 +37,8 @@ export default class AddServiceScreen extends React.Component {
   render() {
     const { selectedCategory } = this.state;
     return (
-      <View style={styles.container}>
-        <AvoidKeyboard>
+      <AvoidKeyboard bottomPadding={80}>
+        <View style={styles.container}>
           <View style={styles.row}>
             <Text style={styles.text}>Service Name </Text>
             <View style={styles.inputContainer}>
@@ -90,8 +90,8 @@ export default class AddServiceScreen extends React.Component {
               <Text style={styles.addButtonText}>ADD</Text>
             </Button>
           </View>
-        </AvoidKeyboard>
-      </View>
+        </View>
+      </AvoidKeyboard>
     );
   }
 }

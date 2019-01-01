@@ -6,7 +6,7 @@ import styles from './AccountScreenStyles';
 
 export default class AccountScreen extends React.Component {
   static navigationOptions = () => ({
-    tabBarLabel: 'ACCOUNT',
+    tabBarLabel: 'Account',
     tabBarIcon: ({ tintColor }) => (
       <Icon
         type="Ionicons"

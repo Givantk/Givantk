@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     padding: 20,
+    height: '100%',
   },
   text: {
     fontWeight: 'bold',

@@ -10,7 +10,7 @@ import styles from './MyServicesScreenStyles';
 
 export default class MyServicesScreen extends React.Component {
   static navigationOptions = () => ({
-    tabBarLabel: 'MY SERVICES',
+    tabBarLabel: 'My Services',
     tabBarIcon: ({ tintColor }) => (
       <Icon
         type="Entypo"

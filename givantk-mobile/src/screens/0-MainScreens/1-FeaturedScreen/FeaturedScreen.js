@@ -11,7 +11,7 @@ import styles from './FeaturedScreenStyles';
 
 export default class FeaturedScreen extends React.Component {
   static navigationOptions = () => ({
-    tabBarLabel: 'FEATURED',
+    tabBarLabel: 'Featured',
     tabBarIcon: ({ tintColor }) => (
       <Icon
         type="Ionicons"
