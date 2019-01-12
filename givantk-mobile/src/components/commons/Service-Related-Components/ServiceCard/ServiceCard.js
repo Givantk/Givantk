@@ -15,12 +15,12 @@ class ServiceCard extends React.PureComponent {
           <View style={styles.header}>
             <Image
               source={{
-                uri: service.poster.imageURL,
+                uri: service.asker.imageURL,
               }}
               style={styles.userImage}
             />
             <View style={styles.headerRight}>
-              <Text style={styles.userName}>{service.poster.name}</Text>
+              <Text style={styles.userName}>{service.asker.name}</Text>
               <Text style={styles.serviceTitle}>{service.title}</Text>
             </View>
           </View>
@@ -49,9 +49,6 @@ ServiceCard.propTypes = {
   service: PropTypes.shape({
     title: PropTypes.string,
     description: PropTypes.string,
-    poster: PropTypes.shape({
-      name: PropTypes.string,
-      imageURL: PropTypes.string,
-    }),
+    asker: PropTypes.shape({}),
   }),
 };

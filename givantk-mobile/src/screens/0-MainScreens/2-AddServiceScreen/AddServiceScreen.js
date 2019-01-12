@@ -37,8 +37,8 @@ export default class AddServiceScreen extends React.Component {
   render() {
     const { selectedCategory } = this.state;
     return (
-      <AvoidKeyboard bottomPadding={80}>
-        <View style={styles.container}>
+      <View style={styles.container}>
+        <AvoidKeyboard bottomPadding={120}>
           <View style={styles.row}>
             <Text style={styles.text}>Service Name </Text>
             <View style={styles.inputContainer}>
@@ -90,8 +90,8 @@ export default class AddServiceScreen extends React.Component {
               <Text style={styles.addButtonText}>ADD</Text>
             </Button>
           </View>
-        </View>
-      </AvoidKeyboard>
+        </AvoidKeyboard>
+      </View>
     );
   }
 }

@@ -3,7 +3,7 @@ import { Icon } from 'native-base';
 import { View, TouchableWithoutFeedback } from 'react-native';
 import React from 'react';
 
-import { colors } from '../assets/styles/base';
+import { colors, headerHeight } from '../assets/styles/base';
 import BottomTabNavigator from './BottomTabNavigator';
 import screens from '../screens';
 
@@ -32,6 +32,20 @@ const MainNavigator = createStackNavigator(
       const screen = navigation.state.routeName;
 
       let headerTitle = '';
+
+      const headerLeft = '';
+
+      const headerTintColor = 'white';
+
+      const headerStyle = {
+        backgroundColor: colors.primary,
+        height: headerHeight,
+      };
+
+      const headerTitleStyle = {
+        color: colors.white,
+      };
+
       const headerRight = (
         <TouchableWithoutFeedback
           onPress={() => navigation.navigate('Notifications')}
@@ -45,15 +59,6 @@ const MainNavigator = createStackNavigator(
           </View>
         </TouchableWithoutFeedback>
       );
-
-      const headerLeft = '';
-
-      const headerStyle = {
-        backgroundColor: colors.primary,
-      };
-      const headerTitleStyle = {
-        color: colors.white,
-      };
 
       if (screen === 'Tab') {
         const { routes, index } = navigation.state;
@@ -80,15 +85,18 @@ const MainNavigator = createStackNavigator(
           default:
         }
 
+        // return this if tab screen
         return {
           headerStyle,
           headerTitle,
           headerTitleStyle,
           headerRight,
           headerLeft,
+          headerTintColor,
         };
       }
-      return {};
+      // return this if not tab screen
+      return { headerStyle, headerTitleStyle, headerTintColor };
     }, // end of navigationOptions
   },
 );

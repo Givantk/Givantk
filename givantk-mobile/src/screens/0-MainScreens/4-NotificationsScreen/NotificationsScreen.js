@@ -1,42 +1,31 @@
-import { StyleSheet, Text, View, Button } from "react-native";
-import React from "react";
+import { Text, View, Button } from 'react-native';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-import { colors } from "../../../assets/styles/base";
+import styles from './NotificationsScreenStyles';
 
 export default class NotificationsScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => ({
-    headerTitle: "Notifications Screen",
-    headerStyle: {
-      backgroundColor: colors.primary
-    },
-    headerTitleStyle: {
-      color: colors.white
-    }
+  static navigationOptions = () => ({
+    headerTitle: 'Notifications Screen',
   });
 
   render() {
+    const { navigation } = this.props;
+
     return (
       <View style={styles.container}>
         <Text>Notifications screen</Text>
         <Button
           title="Service"
-          onPress={() => this.props.navigation.navigate("Service")}
+          onPress={() => navigation.navigate('Service')}
         />
 
-        <Button
-          title="Person"
-          onPress={() => this.props.navigation.navigate("Profile")}
-        />
+        <Button title="Person" onPress={() => navigation.navigate('Profile')} />
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "space-around"
-  }
-});
+NotificationsScreen.propTypes = {
+  navigation: PropTypes.shape({}),
+};

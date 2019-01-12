@@ -24,7 +24,6 @@ const BottomTabNavigator = createMaterialTopTabNavigator(
     tabBarOptions: {
       showIcon: true,
       upperCaseLabel: true,
-      pressColor: colors.secondary.toString(),
       activeTintColor: colors.white,
       inactiveTintColor: colors.white,
       activeBackgroundColor: colors.primary.darken(0.2),

@@ -4,10 +4,9 @@ const services = [
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor repellat voluptatem laboriosam. Hic quod, enim.',
     cost: '40 EGP',
-    poster: {
+    asker: {
       name: 'Doaa Abu',
-      imageURL:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnBYJdSA8k44Owzpfv4-ofSADqI_kr_9UT8WKOoakVT5HsAsRw',
+      imageURL: 'https://avatars3.githubusercontent.com/u/2464966?s=88&v=4',
     },
     _id: 'ger3',
   },
@@ -16,10 +15,9 @@ const services = [
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor repellat voluptatem laboriosam. Hic quod, enim.',
     cost: '30 EGP',
-    poster: {
+    asker: {
       name: 'Mamdouh Zaky',
-      imageURL:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBEfXx54Xbv1tRdOkBcZboqdkGaHHnR4kwSFGxWvCZeHKJsdeM_Q',
+      imageURL: 'https://avatars2.githubusercontent.com/u/16104054?s=88&v=4',
     },
     _id: '$3g',
   },
@@ -28,12 +26,33 @@ const services = [
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor repellat voluptatem laboriosam. Hic quod, enim.',
     cost: '35 EGP',
-    poster: {
+    asker: {
       name: 'Hamu Bika',
-      imageURL:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaMMObP4DnK_Zjgk0ugoj8v6_vAb0DMEmWlUDz-51gchTVzGxC',
+      imageURL: 'https://avatars0.githubusercontent.com/u/13727674?s=88&v=4',
     },
     _id: 'eg3r',
+  },
+  {
+    title: 'Buy something for me',
+    description:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor repellat voluptatem laboriosam. Hic quod, enim.',
+    cost: '120 EGP',
+    asker: {
+      name: 'Hamu Mosh Bika',
+      imageURL: 'https://avatars1.githubusercontent.com/u/7880624?s=88&v=4',
+    },
+    _id: 'eg333r',
+  },
+  {
+    title: 'Play football with me',
+    description:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor repellat voluptatem laboriosam. Hic quod, enim.',
+    cost: '8 USD',
+    asker: {
+      name: 'Alaa Mostafa',
+      imageURL: 'https://avatars3.githubusercontent.com/u/17552441?s=88&v=4',
+    },
+    _id: 'eg3833r',
   },
 ];
 
