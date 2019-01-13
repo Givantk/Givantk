@@ -6,19 +6,11 @@ import ServiceCard from '../../../commons/Service-Related-Components/ServiceCard
 import services from '../../../../assets/data/fakeServices';
 
 const ServicesIAskedFor = (props) => {
-  const navigateToServiceScreen = () => {
-    const { navigation } = props;
-    navigation.navigate('Service');
-  };
+  const { navigation } = props;
 
   const renderItem = (service) => {
     if (Math.random() < 0.5) {
-      return (
-        <ServiceCard
-          service={service.item}
-          navigateToServiceScreen={navigateToServiceScreen}
-        />
-      );
+      return <ServiceCard service={service.item} navigation={navigation} />;
     }
     return null;
   };

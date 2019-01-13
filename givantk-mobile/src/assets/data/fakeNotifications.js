@@ -1,26 +1,25 @@
 const notifications = [
   {
     title: 'Ali applied for your service',
-    type: '',
-    clickDestination: {
-      type: 'service',
+    type: '', // ?
+    navigateTo: {
+      type: 'service', // service or profile
       _id: '',
     },
     isUserAssociated: true,
     userAssociated: {
       _id: '',
-      imageURL: 'https://avatars0.githubusercontent.com/u/1105429?s=88&v=4',
+      imageURL: 'https://avatars3.githubusercontent.com/u/5365516?s=88&v=4',
     },
     toUser: {
       _id: '',
-      imageURL: 'https://avatars2.githubusercontent.com/u/66614?s=88&v=4',
     },
     _id: 'g2er3',
   },
   {
     title: 'Mahmoud accepted your request',
     type: '',
-    clickDestination: {
+    navigateTo: {
       type: 'service',
       _id: '',
     },
@@ -37,14 +36,14 @@ const notifications = [
   {
     title: 'Balaha applied for your service',
     type: '',
-    clickDestination: {
+    navigateTo: {
       type: 'service',
       _id: '',
     },
     isUserAssociated: true,
     userAssociated: {
       _id: '',
-      imageURL: 'https://avatars0.githubusercontent.com/u/1105429?s=88&v=4',
+      imageURL: 'https://avatars3.githubusercontent.com/u/11481355?s=88&v=4',
     },
     toUser: {
       _id: '',

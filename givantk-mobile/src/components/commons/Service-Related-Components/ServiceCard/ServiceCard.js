@@ -6,11 +6,16 @@ import React from 'react';
 import styles from './ServiceCardStyles';
 
 class ServiceCard extends React.PureComponent {
+  navigateToServiceScreen = () => {
+    const { navigation } = this.props;
+    navigation.navigate('Service');
+  };
+
   render() {
-    const { service, navigateToServiceScreen } = this.props;
+    const { service } = this.props;
 
     return (
-      <TouchableWithoutFeedback onPress={navigateToServiceScreen}>
+      <TouchableWithoutFeedback onPress={this.navigateToServiceScreen}>
         <View style={styles.serviceCard}>
           <View style={styles.header}>
             <Image
@@ -45,7 +50,7 @@ class ServiceCard extends React.PureComponent {
 export default ServiceCard;
 
 ServiceCard.propTypes = {
-  navigateToServiceScreen: PropTypes.func,
+  navigation: PropTypes.shape({}),
   service: PropTypes.shape({
     title: PropTypes.string,
     description: PropTypes.string,

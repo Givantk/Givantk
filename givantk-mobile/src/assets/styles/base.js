@@ -59,6 +59,7 @@ const trueWhite = Color('#FFFFFF');
 const gray01 = Color('#B3B3B3');
 const gray02 = Color('#959595');
 const gray03 = Color('#627273');
+const gray04 = Color('#ddd');
 
 export const colors = {
   primary: primaryColor,
@@ -71,4 +72,5 @@ export const colors = {
   gray01,
   gray02,
   gray03,
+  gray04,
 };

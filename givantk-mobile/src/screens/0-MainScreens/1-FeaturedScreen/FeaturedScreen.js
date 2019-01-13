@@ -21,22 +21,16 @@ export default class FeaturedScreen extends React.Component {
     ),
   });
 
-  navigateToServiceScreen = () => {
-    const { navigation } = this.props;
-    navigation.navigate('Service');
-  };
-
   navigateToSearchScreen = () => {
     const { navigation } = this.props;
     navigation.navigate('SearchResults');
   };
 
-  renderItem = (service) => (
-    <ServiceCard
-      service={service.item}
-      navigateToServiceScreen={this.navigateToServiceScreen}
-    />
-  );
+  renderItem = (service) => {
+    const { navigation } = this.props;
+
+    return <ServiceCard service={service.item} navigation={navigation} />;
+  };
 
   render() {
     return (
