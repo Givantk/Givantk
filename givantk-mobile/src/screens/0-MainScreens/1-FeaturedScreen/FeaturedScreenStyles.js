@@ -10,9 +10,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignContent: 'center',
   },
-  tabIcon: {
-    fontSize: 35,
-  },
   searchContainer: {
     width: '100%',
     flexDirection: 'row',

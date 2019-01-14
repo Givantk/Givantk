@@ -16,14 +16,14 @@ const BottomTabNavigator = createMaterialTopTabNavigator(
     Account: screens.AccountScreen,
   },
   {
-    initialRouteName: 'Featured',
+    initialRouteName: 'Account',
     order: ['Featured', 'AddService', 'MyServices', 'Account'],
     tabBarPosition: 'bottom',
     swipeEnabled: true,
     animationEnabled: false,
     tabBarOptions: {
       showIcon: true,
-      upperCaseLabel: true,
+      upperCaseLabel: false,
       activeTintColor: colors.white,
       inactiveTintColor: colors.white,
       activeBackgroundColor: colors.primary.darken(0.2),

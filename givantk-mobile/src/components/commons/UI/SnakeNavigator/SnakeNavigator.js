@@ -25,11 +25,11 @@ export default class SnakeNavigator extends Component {
   };
 
   render() {
-    const { content, fontSize, navigation } = this.props;
+    const { content, fontSize, navigation, width, snakeWidth } = this.props;
     const { selectedItem } = this.state;
     return (
-      <View style={styles.container}>
-        <View style={styles.snake}>
+      <View style={[styles.container, { width: width || '100%' }]}>
+        <View style={[styles.snake, { width: snakeWidth || '80%' }]}>
           {content.map((item, i) => (
             <TouchableWithoutFeedback
               key={item.name}
@@ -89,4 +89,6 @@ SnakeNavigator.propTypes = {
   initialRoute: PropTypes.shape({}),
   fontSize: PropTypes.number,
   navigation: PropTypes.shape({}),
+  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  snakeWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };

@@ -1,7 +1,10 @@
 import { Icon } from 'native-base';
-import { Text, View, Button } from 'react-native';
+import { Text, View, Image, TouchableWithoutFeedback } from 'react-native';
+import PropTypes from 'prop-types';
 import React from 'react';
 
+import CardList from '../../../components/commons/UI/CardList/CardList';
+import profile from '../../../assets/data/fakeProfile';
 import styles from './AccountScreenStyles';
 
 export default class AccountScreen extends React.Component {
@@ -16,40 +19,78 @@ export default class AccountScreen extends React.Component {
     ),
   });
 
+  listItems = () => {
+    const { navigation } = this.props;
+    return [
+      {
+        title: 'View Profile',
+        iconName: 'ios-happy',
+        iconType: 'Ionicons',
+        onPress: () => navigation.navigate('Profile'),
+      },
+      {
+        title: 'Payment Info',
+        iconName: 'money',
+        iconType: 'FontAwesome',
+        onPress: () => navigation.navigate('PaymentInfo'),
+      },
+      {
+        title: 'Personal Info',
+        iconName: 'magnifying-glass',
+        iconType: 'Foundation',
+        onPress: () => navigation.navigate('PersonalInfo'),
+      },
+      {
+        title: 'Invite Friends',
+        iconName: 'ios-people',
+        iconType: 'Ionicons',
+        onPress: () => navigation.navigate('InviteFriends'),
+      },
+      {
+        title: 'Verify Identity',
+        iconName: 'verified-user',
+        iconType: 'MaterialIcons',
+        onPress: () => navigation.navigate('VerifyIdentity'),
+      },
+    ];
+  };
+
   render() {
+    const { navigation } = this.props;
+
     return (
       <View style={styles.container}>
-        <Text>Account Screen</Text>
-        <Button
-          title="Profile"
-          onPress={() => this.props.navigation.navigate('Profile')}
-        />
+        <View style={styles.upperRow}>
+          <View>
+            <Text style={styles.upperRowLeftText}>Sign out</Text>
+          </View>
+          <TouchableWithoutFeedback
+            onPress={() => navigation.navigate('MessagesList')}
+          >
+            <Icon
+              type="FontAwesome"
+              name="envelope"
+              style={styles.upperRowRightIcon}
+            />
+          </TouchableWithoutFeedback>
+        </View>
+        <TouchableWithoutFeedback
+          onPress={() => navigation.navigate('Profile')}
+        >
+          <View style={styles.imageContainer}>
+            <Image source={{ uri: profile.avatar }} style={styles.image} />
+            <Text style={styles.userName}>
+              {profile.firstName} {profile.lastName}
+            </Text>
+          </View>
+        </TouchableWithoutFeedback>
 
-        <Button
-          title="Verify Identity"
-          onPress={() => this.props.navigation.navigate('VerifyIdentity')}
-        />
-
-        <Button
-          title="Invite Friends"
-          onPress={() => this.props.navigation.navigate('InviteFriends')}
-        />
-
-        <Button
-          title="Personal Info"
-          onPress={() => this.props.navigation.navigate('PersonalInfo')}
-        />
-
-        <Button
-          title="Payment Info"
-          onPress={() => this.props.navigation.navigate('PaymentInfo')}
-        />
-
-        <Button
-          title="Messages List"
-          onPress={() => this.props.navigation.navigate('MessagesList')}
-        />
+        <CardList items={this.listItems()} />
       </View>
     );
   }
 }
+
+AccountScreen.propTypes = {
+  navigation: PropTypes.shape({}),
+};

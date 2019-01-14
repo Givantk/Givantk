@@ -16,7 +16,7 @@ export default class FeaturedScreen extends React.Component {
       <Icon
         type="Ionicons"
         name="ios-home"
-        style={[styles.tabIcon, { color: tintColor }]}
+        style={{ color: tintColor, fontSize: 35 }}
       />
     ),
   });

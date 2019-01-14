@@ -32,6 +32,7 @@ export default class MyServicesScreen extends React.Component {
         <SnakeNavigator
           content={this.SnakeNavigatorContent}
           navigation={navigation}
+          snakeWidth="65%"
         />
       </View>
     );
