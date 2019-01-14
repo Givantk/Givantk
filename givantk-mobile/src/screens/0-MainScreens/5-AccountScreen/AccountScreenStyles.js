@@ -5,7 +5,7 @@ import { colors, fontTypes } from '../../../assets/styles/base';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.tertiary,
+    backgroundColor: colors.white,
     alignItems: 'center',
     paddingTop: 10,
   },

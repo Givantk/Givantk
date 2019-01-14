@@ -3,6 +3,7 @@ import { Text, View, Image, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import accountListItems from '../../../components/0-MainScreensComponents/5-AccountScreenComponents/data/AccountListItems';
 import CardList from '../../../components/commons/UI/CardList/CardList';
 import profile from '../../../assets/data/fakeProfile';
 import styles from './AccountScreenStyles';
@@ -19,40 +20,8 @@ export default class AccountScreen extends React.Component {
     ),
   });
 
-  listItems = () => {
-    const { navigation } = this.props;
-    return [
-      {
-        title: 'View Profile',
-        iconName: 'ios-happy',
-        iconType: 'Ionicons',
-        onPress: () => navigation.navigate('Profile'),
-      },
-      {
-        title: 'Payment Info',
-        iconName: 'money',
-        iconType: 'FontAwesome',
-        onPress: () => navigation.navigate('PaymentInfo'),
-      },
-      {
-        title: 'Personal Info',
-        iconName: 'magnifying-glass',
-        iconType: 'Foundation',
-        onPress: () => navigation.navigate('PersonalInfo'),
-      },
-      {
-        title: 'Invite Friends',
-        iconName: 'ios-people',
-        iconType: 'Ionicons',
-        onPress: () => navigation.navigate('InviteFriends'),
-      },
-      {
-        title: 'Verify Identity',
-        iconName: 'verified-user',
-        iconType: 'MaterialIcons',
-        onPress: () => navigation.navigate('VerifyIdentity'),
-      },
-    ];
+  onPressSignOut = () => {
+    alert('Sign out pressed');
   };
 
   render() {
@@ -60,10 +29,14 @@ export default class AccountScreen extends React.Component {
 
     return (
       <View style={styles.container}>
+        {/* Upper Row */}
+
         <View style={styles.upperRow}>
-          <View>
-            <Text style={styles.upperRowLeftText}>Sign out</Text>
-          </View>
+          <TouchableWithoutFeedback onPress={this.onPressSignOut}>
+            <View>
+              <Text style={styles.upperRowLeftText}>Sign out</Text>
+            </View>
+          </TouchableWithoutFeedback>
           <TouchableWithoutFeedback
             onPress={() => navigation.navigate('MessagesList')}
           >
@@ -74,6 +47,9 @@ export default class AccountScreen extends React.Component {
             />
           </TouchableWithoutFeedback>
         </View>
+
+        {/* Imagne and name */}
+
         <TouchableWithoutFeedback
           onPress={() => navigation.navigate('Profile')}
         >
@@ -85,7 +61,9 @@ export default class AccountScreen extends React.Component {
           </View>
         </TouchableWithoutFeedback>
 
-        <CardList items={this.listItems()} />
+        {/* List */}
+
+        <CardList items={accountListItems(navigation)} />
       </View>
     );
   }
