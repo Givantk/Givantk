@@ -21,8 +21,8 @@ export default class MyServicesScreen extends React.Component {
   });
 
   SnakeNavigatorContent = [
-    { name: 'Your Services', component: ServicesIAskedFor },
-    { name: 'Accepted Services', component: ServicesIAppliedFor },
+    { name: 'I Asked for', component: ServicesIAskedFor },
+    { name: 'I Helped in', component: ServicesIAppliedFor },
   ];
 
   render() {

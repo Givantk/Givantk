@@ -9,20 +9,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 10,
   },
-  upperRow: {
+  sendMessageContainer: {
     flexDirection: 'row',
-    width: '100%',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
+    justifyContent: 'center',
   },
-  upperRowText: {
+  sendMessageText: {
     color: colors.primary,
     fontSize: 20,
     fontFamily: fontTypes.mainBold,
   },
-  upperRowRightIcon: {
+  sendMessageIcon: {
     color: colors.primary,
     fontSize: 35,
+    marginLeft: 10,
   },
   imageContainer: {
     alignItems: 'center',
@@ -41,6 +40,18 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: colors.black,
     marginTop: 5,
+  },
+  userDescriptionContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginHorizontal: 25,
+    marginBottom: 25,
+  },
+  userDescription: {
+    fontFamily: fontTypes.main,
+    fontSize: 14,
+    color: colors.black,
+    textAlign: 'left',
   },
 });
 

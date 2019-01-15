@@ -34,7 +34,7 @@ export default class AccountScreen extends React.Component {
         <View style={styles.upperRow}>
           <TouchableWithoutFeedback onPress={this.onPressSignOut}>
             <View>
-              <Text style={styles.upperRowLeftText}>Sign out</Text>
+              <Text style={styles.upperRowText}>Sign out</Text>
             </View>
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback
