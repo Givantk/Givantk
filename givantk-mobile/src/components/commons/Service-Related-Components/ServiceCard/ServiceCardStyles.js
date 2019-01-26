@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   userImage: {
     width: 40,
     height: 40,
-    borderRadius: 40,
+    borderRadius: 20,
     borderWidth: 2,
     borderColor: colors.secondary,
   },

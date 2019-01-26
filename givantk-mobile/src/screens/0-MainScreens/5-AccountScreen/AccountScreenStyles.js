@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   image: {
     width: 120,
     height: 120,
-    borderRadius: 120,
+    borderRadius: 60,
     borderWidth: 2,
     borderColor: colors.secondary,
     marginRight: 10,

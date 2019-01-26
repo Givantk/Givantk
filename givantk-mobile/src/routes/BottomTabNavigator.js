@@ -16,7 +16,7 @@ const BottomTabNavigator = createMaterialTopTabNavigator(
     Account: screens.AccountScreen,
   },
   {
-    initialRouteName: 'Account',
+    initialRouteName: 'Featured',
     order: ['Featured', 'AddService', 'MyServices', 'Account'],
     tabBarPosition: 'bottom',
     swipeEnabled: true,

@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: 'bold',
     fontSize: 15,
+    marginLeft: 10,
   },
   left: {
     alignSelf: 'flex-start',

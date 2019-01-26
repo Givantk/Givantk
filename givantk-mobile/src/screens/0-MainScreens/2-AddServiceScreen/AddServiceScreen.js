@@ -47,7 +47,9 @@ export default class AddServiceScreen extends React.Component {
           </View>
 
           <View style={styles.row}>
-            <Text style={styles.text}>Category Selection </Text>
+            <Text style={[styles.text, { fontSize: 13 }]}>
+              Category Selection{' '}
+            </Text>
             <View style={styles.categorySelectionInputContainer}>
               <Picker
                 style={styles.categoryInput}

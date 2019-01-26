@@ -21,7 +21,8 @@ export default class AccountScreen extends React.Component {
   });
 
   onPressSignOut = () => {
-    alert('Sign out pressed');
+    const { navigation } = this.props;
+    navigation.navigate('Login');
   };
 
   render() {
@@ -62,7 +63,6 @@ export default class AccountScreen extends React.Component {
         </TouchableWithoutFeedback>
 
         {/* List */}
-
         <CardList items={accountListItems(navigation)} />
       </View>
     );

@@ -2,15 +2,19 @@ import { Text, View, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { colors } from '../../../assets/styles/base';
 import { styles } from './LoginScreenStyles';
+import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
 import DefaultButton from '../../../components/commons/UI/DefaultButton/DefaultButton';
 import DefaultTextInput from '../../../components/commons/UI/DefaultTextInput/DefaultTextInput';
 import Header from '../../../components/RegistrationsScreensComponents/SignupScreenComponents/Header/Header';
-import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
 
 export default class LoginScreen extends React.Component {
   static navigationOptions = () => ({
     headerTransparent: true,
+    headerStyle: {
+      backgroundColor: '#00FFFF00',
+    },
   });
 
   handleLogin = () => {
@@ -31,7 +35,10 @@ export default class LoginScreen extends React.Component {
 
   render() {
     return (
-      <AvoidKeyboard bottomPadding={0}>
+      <AvoidKeyboard
+        bottomPadding={0}
+        backgroundColor={colors.primary.toString()}
+      >
         <View style={styles.container}>
           <Header />
 

@@ -7,10 +7,14 @@ import DefaultButton from '../../../components/commons/UI/DefaultButton/DefaultB
 import Header from '../../../components/RegistrationsScreensComponents/SignupScreenComponents/Header/Header';
 import SignupInputs from '../../../components/RegistrationsScreensComponents/SignupScreenComponents/SignupInputs/SignupInputs';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
+import { colors } from '../../../assets/styles/base';
 
 export default class SignupScreen extends React.Component {
   static navigationOptions = () => ({
     headerTransparent: true,
+    headerStyle: {
+      backgroundColor: '#00FFFF00',
+    },
   });
 
   handleSignup = () => {
@@ -25,7 +29,10 @@ export default class SignupScreen extends React.Component {
 
   render() {
     return (
-      <AvoidKeyboard bottomPadding={-30}>
+      <AvoidKeyboard
+        bottomPadding={-30}
+        backgroundColor={colors.primary.toString()}
+      >
         <View style={styles.container}>
           <Header />
 
