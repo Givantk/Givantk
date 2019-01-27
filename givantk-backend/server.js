@@ -1,32 +1,24 @@
-const bodyParser = require("body-parser");
-const express = require("express");
-const mongoose = require("mongoose");
-
-//including users routes
-const users_routes = require("./api/routes/users");
-//including services routes
-const services_routes = require("./api/routes/services");
+const bodyParser = require('body-parser');
+const express = require('express');
+const mongoose = require('mongoose');
 
 const app = express();
 
+// Models
+require('./models/loadModels');
+
 // BodyParser Middleware
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-/* START CONNECTION TO MONGODB */
-mongoose
-  .connect(
-    "mongodb://givantk:givantk123@ds149481.mlab.com:49481/givantk",
-    { useCreateIndex: true, useNewUrlParser: true }
-  )
-  .then(() => console.log("MongoDB Connected"))
-  .catch(err => console.log(err));
-/* END CONNECTION TO MONGODB */
+// DB Connect
+require('./config/dbconnect');
 
-// use users routes
-app.use("/api/users", users_routes);
-// use services routes
-app.use("/api/services", services_routes);
+// Routes
+app.use('/api/user', require('./routes/user'));
+app.use('/api/profile', require('./routes/profile'));
+app.use('/api/service', require('./routes/service'));
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
-app.listen(port, () => console.log(`server started on port ${port}.`));
+app.listen(port, () => console.log(`Server started on port ${port}`));

@@ -1,0 +1,29 @@
+User:
+Login (POST) (Login page)
+Signup (POST) (Signup page)
+Signout (GET) (click on signout)
+Get all users (GET)
+Delete account (DELETE)
+
+Service:
+Create a service for the logged in user (POST)
+Get all services (GET) (Featured page)
+Get a specific service by id (GET) (when click on service card)
+Bookmark service by id for logged in user (GET) (when click on service card star)
+Unbookmark service by id for logged in user (GET) (when click on service card star)
+Propose to a service by service id (POST) (when click on 'propose' button)
+Get services owned by a specific user (GET)
+Get services done by a specific user (GET)
+Delete a service by id (DELETE)
+
+
+Profile:
+Create a profile for the logged in user (POST)
+Get a specific profile by id (GET) (when go to a user profile)
+Get all profiles (GET)
+Get all notifications for a specific user by id (GET) (when click on notifications icon)
+Send notification to a specific user (POST) (when proposal..etc)
+
+//////Note:
+We add 'bookmarked services' and 'proposed for services' in the
+list on the account page
