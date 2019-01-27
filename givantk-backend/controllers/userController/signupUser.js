@@ -5,11 +5,11 @@ const mongoose = require('mongoose');
 const User = mongoose.model('user');
 
 // Validations
-const validateSignupUser = require('../../validations/signupUser');
+const validateUser = require('../../validations/user');
 
 module.exports = signupUser = (req, res) => {
   // Validate
-  const { errors, isValid } = validateSignupUser(req.body);
+  const { errors, isValid } = validateUser(req.body);
   if (!isValid) {
     return res.status(400).json(errors);
   }

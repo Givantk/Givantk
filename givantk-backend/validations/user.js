@@ -57,7 +57,7 @@ module.exports = validateSignupUser = (data) => {
 
   // location
   if (Validator.isEmpty(data.location)) {
-    errors.location = 'Locarion field is required';
+    errors.location = 'Location field is required';
   }
 
   return {

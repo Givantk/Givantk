@@ -1,7 +1,6 @@
 User:
 Login (POST) (Login page)
 Signup (POST) (Signup page)
-Signout (GET) (click on signout)
 Get all users (GET)
 Delete account (DELETE)
 

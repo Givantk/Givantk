@@ -15,7 +15,7 @@ const ProfileSchema = new Schema({
   gender: String,
   avatar: String,
   description: String,
-  joined: {
+  date: {
     type: Date,
     default: Date.now
   },
