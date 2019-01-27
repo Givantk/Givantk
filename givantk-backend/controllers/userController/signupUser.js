@@ -1,3 +1,4 @@
+const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 
 // Models
@@ -28,13 +29,21 @@ module.exports = signupUser = (req, res) => {
         email: req.body.email,
         password: req.body.password,
         location: req.body.location
-      })
-        .save()
-        .then((user) => res.json(user))
-        .catch((err) => {
-          errors.error = 'Error saving user to database';
-          res.status(500).json({ ...errors, ...err });
+      });
+
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
+          if (err) throw err;
+          newUser.password = hash;
+          newUser
+            .save()
+            .then((user) => res.json(user))
+            .catch((err) => {
+              errors.error = 'Error saving user to database';
+              res.status(500).json({ ...errors, ...err });
+            });
         });
+      });
     })
     .catch((err) => {
       errors.error = 'Error checking for the user in the database';

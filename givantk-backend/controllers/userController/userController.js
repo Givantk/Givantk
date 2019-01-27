@@ -5,43 +5,6 @@ const mongoose = require('mongoose');
 // Models
 const User = mongoose.model('user');
 
-// login
-exports.login = (req, res) => {
-  User.find({ email: req.body.email })
-    .exec()
-    .then((user) => {
-      if (user.length < 1) {
-        // if no email matched the emails in our database
-        return res.status(401).json({ message: 'Auth Failed' });
-      }
-
-      bcrypt.compare(req.body.password, user[0].password, (err, result) => {
-        if (err) {
-          return res.status(401).json({ message: 'Auth Failed' });
-        }
-        if (result) {
-          const token = jwt.sign(
-            {
-              email: user[0].email,
-              id: user[0]._id
-            },
-            'secret',
-            { expiresIn: '1h' }
-          );
-
-          return res
-            .status(200)
-            .json({ message: 'Auth Successful', token: token });
-        } else {
-          return res.status(401).json({ message: 'Auth Failed' });
-        }
-      });
-    })
-    .catch((err) => {
-      res.status(500).json({ error: err });
-    });
-};
-
 // get one user using GET request
 exports.getUser = (req, res) => {
   const id = req.params.id;
