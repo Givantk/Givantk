@@ -1,6 +1,6 @@
 const bodyParser = require('body-parser');
 const express = require('express');
-const mongoose = require('mongoose');
+const passport = require('passport');
 
 const app = express();
 
@@ -13,6 +13,10 @@ app.use(bodyParser.json());
 
 // DB Connect
 require('./config/dbconnect');
+
+// Passport Config
+app.use(passport.initialize());
+require('./config/passport')(passport);
 
 // Routes
 app.use('/api/user', require('./routes/user'));

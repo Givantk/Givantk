@@ -1,14 +1,14 @@
 const express = require('express');
 const router = express.Router();
 
+const userController = require('../controllers/userController/index.js');
+
 //Error types:
 // 200 :good request
 // 400: bad request
 // 401: unauthorized
 // 404: not found
 // 500: server error
-
-const userController = require('../controllers/userController/index.js');
 
 // @route  GET api/user/all
 // @desc   Get all users
