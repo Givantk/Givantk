@@ -5,13 +5,6 @@ const router = express.Router();
 
 const userController = require('../controllers/userController/index.js');
 
-//Error types:
-// 200 :good request
-// 400: bad request
-// 401: unauthorized
-// 404: not found
-// 500: server error
-
 // @route  GET api/user/all
 // @desc   Get all users
 // @access Public
@@ -43,14 +36,27 @@ router.patch(
 // @route  DELETE api/user
 // @desc   Delete logged in user
 // @access Private
-// @errors
+// @errors error
 router.delete(
   '/',
   passport.authenticate('jwt', { session: false }),
   userController.deleteUser
 );
 
-// // get one user using GET request
-// router.get('/:id', userController.getUser);
+// @route  GET api/user
+// @desc   Get logged in user
+// @access Private
+// @errors error
+router.get(
+  '/',
+  passport.authenticate('jwt', { session: false }),
+  userController.getUser
+);
+
+// @route  GET api/user/:id
+// @desc   Get user by ID
+// @access Private
+// @errors
+router.get('/:id', userController.getUserById);
 
 module.exports = router;
