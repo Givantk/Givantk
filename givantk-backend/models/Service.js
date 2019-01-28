@@ -32,7 +32,12 @@ const ServiceSchema = new Schema({
   end_time: Date,
   reveal_asker: Boolean,
   state: String, // 'new' or 'pending' or 'done'
-  applicants: [{ type: mongoose.Schema.Types.ObjectId, ref: 'user' }],
+  applicants: [
+    {
+      user: { type: mongoose.Schema.Types.ObjectId, ref: 'user' },
+      proposal: String
+    }
+  ],
   asker: { type: mongoose.Schema.Types.ObjectId, ref: 'user', required: true },
   helper: { type: mongoose.Schema.Types.ObjectId, ref: 'user' },
   date: {

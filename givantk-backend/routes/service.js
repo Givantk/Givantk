@@ -79,11 +79,11 @@ router.get(
   serviceController.unbookmarkService
 );
 
-// @route  GET api/service/propose/:id
+// @route  POST api/service/propose/:id
 // @desc   Propose to a service, by service id
 // @access Private
-// @errors unauthorized noprofile error
-router.get(
+// @errors unauthorized alreadyproposed noprofile error
+router.post(
   '/propose/:id',
   passport.authenticate('jwt', { session: false }),
   serviceController.proposeToService
@@ -92,7 +92,7 @@ router.get(
 // @route  GET api/service/unpropose/:id
 // @desc   Unpropose to a service, by service id
 // @access Private
-// @errors unauthorized noprofile error
+// @errors unauthorized notproposed noprofile error
 router.get(
   '/unpropose/:id',
   passport.authenticate('jwt', { session: false }),
