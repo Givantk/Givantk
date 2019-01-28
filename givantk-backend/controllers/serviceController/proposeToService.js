@@ -30,8 +30,8 @@ module.exports = proposeToService = (req, res) => {
         return res.status(400).json(errors);
       }
 
-      Profile.findOne({ user: req.user._id }).then((profile) => {
-        if (!profile) {
+      Profile.findOne({ user: req.user._id }).then((applicantProfile) => {
+        if (!applicantProfile) {
           errors.noprofile = 'No profile yet';
           return res.status(400).json(errors);
         }
@@ -43,12 +43,27 @@ module.exports = proposeToService = (req, res) => {
         });
 
         // Updating profile
-        profile.services_proposed_for.unshift(service._id);
+        applicantProfile.services_proposed_for.unshift(service._id);
 
         service.save().then((service) => {
-          profile.save();
-          return res.json({ service, success: true });
+          applicantProfile.save().then(() => {
+            Profile.findOne({ user: service.asker }).then((askerProfile) => {
+              askerProfile.notifications.unshift({
+                title: `${
+                  applicantProfile.first_name
+                } proposed to your service ${service.name}`,
+                navigateTo: {
+                  kind: 'service',
+                  service: service._id
+                },
+                is_user_associated: true,
+                user_associated: applicantProfile._id
+              });
+              askerProfile.save();
+            });
+          });
         });
+        return res.json({ service, success: true });
       });
     })
     .catch((err) => {

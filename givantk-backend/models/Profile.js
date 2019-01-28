@@ -12,6 +12,8 @@ const ProfileSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user'
   },
+  first_name: String,
+  last_name: String,
   gender: String,
   avatar: String,
   description: String,
@@ -30,7 +32,7 @@ const ProfileSchema = new Schema({
       {
         title: String,
         navigateTo: {
-          kind: String, // Service or Profile
+          kind: String, // service or profile
           service: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'service'
