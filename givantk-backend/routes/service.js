@@ -37,4 +37,16 @@ router.patch(
   serviceController.updateService
 );
 
+// @route  GET api/service/asked-for/:user_id
+// @desc   Get services that a specific user asked for, by user id
+// @access Public
+// @errors noprofile error
+router.get('/asked-for/:user_id', serviceController.getAskedForServices);
+
+// @route  GET api/service/helped-in/:user_id
+// @desc   Get services that a specific user helped in, by user id
+// @access Public
+// @errors noprofile error
+router.get('/helped-in/:user_id', serviceController.getHelpedInServices);
+
 module.exports = router;
