@@ -5,7 +5,7 @@ const Profile = mongoose.model('profile');
 
 module.exports = getHelpedInServices = (req, res) => {
   const errors = {};
-  Profile.findOne({ user: req.params.user_id.toString() })
+  Profile.findOne({ user: req.params.user_id })
     .then((profile) => {
       if (!profile) {
         errors.noprofile = 'No profile yet';

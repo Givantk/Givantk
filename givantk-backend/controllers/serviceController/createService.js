@@ -47,7 +47,7 @@ module.exports = createService = (req, res) => {
   new Service(newService)
     .save()
     .then((service) => {
-      Profile.findOne({ user: req.user._id.toString() }).then((profile) => {
+      Profile.findOne({ user: req.user._id }).then((profile) => {
         if (!profile) {
           service.remove();
           errors.noprofile = "You haven't added enough details to your profile";

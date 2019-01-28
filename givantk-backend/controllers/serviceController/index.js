@@ -7,6 +7,8 @@ const getHelpedInServices = require('./getHelpedInServices');
 const bookmarkService = require('./bookmarkService');
 const unbookmarkService = require('./bookmarkService');
 const deleteService = require('./deleteService');
+const proposeToService = require('./proposeToService');
+const unproposeToService = require('./unproposeToService');
 
 module.exports = {
   getAllServices,
@@ -17,5 +19,7 @@ module.exports = {
   getHelpedInServices,
   bookmarkService,
   unbookmarkService,
-  deleteService
+  deleteService,
+  proposeToService,
+  unproposeToService
 };

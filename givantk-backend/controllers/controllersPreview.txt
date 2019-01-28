@@ -17,7 +17,8 @@ Get services asked by by a specific user by user id (GET)
 Get services helped by a specific user by user id (GET)
 Bookmark service by id for logged in user (GET) (when click on service card star)
 Unbookmark service by id for logged in user (GET) (when click on service card star)
-Propose to a service by service id (POST) (when click on 'propose' button)
+Propose to a service by service id (GET) (when click on 'propose' button)
+Unpropose to a service by service id (GET)
 Delete a service by id (DELETE)
 
 

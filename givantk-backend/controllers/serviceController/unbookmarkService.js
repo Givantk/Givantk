@@ -9,14 +9,14 @@ module.exports = unbookmarkService = (req, res) => {
 
   Service.findById(req.params.id.toString())
     .then((service) => {
-      Profile.findOne({ user: req.user._id.toString() }).then((profile) => {
+      Profile.findOne({ user: req.user._id }).then((profile) => {
         if (!profile) {
           errors.noprofile = 'No profile yet';
           return res.status(400).json(errors);
         }
 
         const newBookmarks = profile.services_bookmarked.filter(
-          (item) => item != service._id
+          (item) => item.toString() !== service._id.toString()
         );
         profile.services_bookmarked = newBookmarks;
 

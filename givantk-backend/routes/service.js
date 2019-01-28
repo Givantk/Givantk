@@ -79,4 +79,24 @@ router.get(
   serviceController.unbookmarkService
 );
 
+// @route  GET api/service/propose/:id
+// @desc   Propose to a service, by service id
+// @access Private
+// @errors unauthorized noprofile error
+router.get(
+  '/propose/:id',
+  passport.authenticate('jwt', { session: false }),
+  serviceController.proposeToService
+);
+
+// @route  GET api/service/unpropose/:id
+// @desc   Unpropose to a service, by service id
+// @access Private
+// @errors unauthorized noprofile error
+router.get(
+  '/unpropose/:id',
+  passport.authenticate('jwt', { session: false }),
+  serviceController.unproposeToService
+);
+
 module.exports = router;

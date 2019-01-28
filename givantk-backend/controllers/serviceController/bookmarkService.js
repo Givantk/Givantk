@@ -9,7 +9,7 @@ module.exports = bookmarkService = (req, res) => {
 
   Service.findById(req.params.id.toString())
     .then((service) => {
-      Profile.findOne({ user: req.user._id.toString() }).then((profile) => {
+      Profile.findOne({ user: req.user._id }).then((profile) => {
         if (!profile) {
           errors.noprofile = 'No profile yet';
           return res.status(400).json(errors);
