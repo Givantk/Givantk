@@ -56,7 +56,7 @@ const ProfileSchema = new Schema({
   services_helped_in: [
     { type: mongoose.Schema.Types.ObjectId, ref: 'service' }
   ],
-  serviced_bookmarked: [
+  services_bookmarked: [
     { type: mongoose.Schema.Types.ObjectId, ref: 'service' }
   ],
   services_proposed_for: [

@@ -12,7 +12,7 @@ module.exports = getHelpedInServices = (req, res) => {
         return res.status(400).json(errors);
       }
 
-      return res.json(profile.services_helped_in);
+      return res.json({ services: profile.services_helped_in, success: true });
     })
     .catch((err) => {
       errors.error = 'Error getting services';

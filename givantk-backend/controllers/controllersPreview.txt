@@ -31,9 +31,3 @@ Send notification to a specific user (POST) (when proposal..etc)
 //////Note:
 We add 'bookmarked services' and 'proposed for services' in the
 list on the account page
-
-
-
-
-
-

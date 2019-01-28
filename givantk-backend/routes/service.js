@@ -49,4 +49,24 @@ router.get('/asked-for/:user_id', serviceController.getAskedForServices);
 // @errors noprofile error
 router.get('/helped-in/:user_id', serviceController.getHelpedInServices);
 
+// @route  GET api/service/bookmark/:id
+// @desc   Bookmark a service for the logged in user, by service id
+// @access Private
+// @errors noprofile error
+router.get(
+  '/bookmark/:id',
+  passport.authenticate('jwt', { session: false }),
+  serviceController.bookmarkService
+);
+
+// @route  GET api/service/unbookmark/:id
+// @desc   Unbookmark a service for the logged in user, by service id
+// @access Private
+// @errors noprofile error
+router.get(
+  '/unbookmark/:id',
+  passport.authenticate('jwt', { session: false }),
+  serviceController.unbookmarkService
+);
+
 module.exports = router;

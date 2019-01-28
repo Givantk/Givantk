@@ -12,7 +12,7 @@ module.exports = getAskedForServices = (req, res) => {
         return res.status(400).json(errors);
       }
 
-      return res.json(profile.services_asked_for);
+      return res.json({ services: profile.services_asked_for, success: true });
     })
     .catch((err) => {
       errors.error = 'Error getting services';
