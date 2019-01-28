@@ -37,6 +37,16 @@ router.patch(
   serviceController.updateService
 );
 
+// @route  DELETE api/service/:id
+// @desc   Delete a service made by a logged in user
+// @access Private
+// @errors unauthorized error
+router.delete(
+  '/:id',
+  passport.authenticate('jwt', { session: false }),
+  serviceController.deleteService
+);
+
 // @route  GET api/service/asked-for/:user_id
 // @desc   Get services that a specific user asked for, by user id
 // @access Public

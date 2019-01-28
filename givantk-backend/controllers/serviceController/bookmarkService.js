@@ -22,7 +22,7 @@ module.exports = bookmarkService = (req, res) => {
       });
     })
     .catch((err) => {
-      errors.error = 'Service not found';
-      res.status(404).json({ ...errors, ...err });
+      errors.error = 'Error checking for the service in database';
+      res.status(500).json({ ...errors, ...err });
     });
 };
