@@ -1,18 +1,22 @@
 User:
 Login (POST) (Login page)
-Signup (POST) (Signup page)
+Signup - create user (POST) (Signup page)
 Get all users (GET)
-Delete account (DELETE)
+get logged in user (GET)
+get user by id (GET)
+Delete logged in user (DELETE)
+update logged in user (PATCH)
 
 Service:
 Create a service for the logged in user (POST)
 Get all services (GET) (Featured page)
 Get a specific service by id (GET) (when click on service card)
+Update a specific service by id (PATCH)
 Bookmark service by id for logged in user (GET) (when click on service card star)
 Unbookmark service by id for logged in user (GET) (when click on service card star)
 Propose to a service by service id (POST) (when click on 'propose' button)
-Get services owned by a specific user (GET)
-Get services done by a specific user (GET)
+Get services asked by by a specific user (GET)
+Get services helped by a specific user (GET)
 Delete a service by id (DELETE)
 
 

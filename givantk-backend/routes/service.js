@@ -1,19 +1,40 @@
 const express = require('express');
+
 const router = express.Router();
+const passport = require('passport');
 
-//including ServicesController
-const serviceController = require('../controllers/serviceController');
+const serviceController = require('../controllers/serviceController/index.js');
 
-// get all services using GET request
-router.get('/', serviceController.getAllServices);
+// @route  GET api/service/all
+// @desc   Get all services
+// @access Public
+// @errors noservices error
+router.get('/all', serviceController.getAllServices);
 
-// create service using POST request
-router.post('/', serviceController.setService);
+// @route  POST api/service
+// @desc   Create new service for logged in user
+// @access Private
+// @errors noprofile name description nature state asker start_time end_time error
+router.post(
+  '/',
+  passport.authenticate('jwt', { session: false }),
+  serviceController.createService
+);
 
-// get one service using GET request
-router.get('/:id', serviceController.getService);
+// @route  GET api/service/:id
+// @desc   Get service by ID
+// @access Public
+// @errors
+router.get('/:id', serviceController.getServiceById);
 
-// update service using PATCH request
-router.patch('/:id', serviceController.UpdateService);
+// @route  PATCH api/service/:id
+// @desc   Update a service made by a logged in user
+// @access Private
+// @errors unauthorized name description nature state asker start_time end_time error
+router.patch(
+  '/:id',
+  passport.authenticate('jwt', { session: false }),
+  serviceController.updateService
+);
 
 module.exports = router;

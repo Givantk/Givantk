@@ -15,22 +15,25 @@ const ServiceSchema = new Schema({
     type: String,
     required: true
   },
-  service_location: String,
+  location: String,
   brief_description: String,
-  service_nature: String, // Free or paid
+  nature: {
+    type: String,
+    required: true
+  }, // 'free' or 'paid'
   givantk_points: Number, // Free points
   money_points: Number,
   applicant_requirment: {
     location: Boolean,
-    givandtk: Boolean
+    helped_before: Boolean
   },
-  service_type: String,
+  type: String, // 'ke' or 'es' or 'rc' or 'o' (knowledge exchange, everyday services, reach community, others)
   start_time: Date,
   end_time: Date,
   reveal_asker: Boolean,
-  service_state: Boolean,
+  state: String, // 'new' or 'pending' or 'done'
   applicants: [{ type: mongoose.Schema.Types.ObjectId, ref: 'user' }],
-  asker: { type: mongoose.Schema.Types.ObjectId, ref: 'user' },
+  asker: { type: mongoose.Schema.Types.ObjectId, ref: 'user', required: true },
   helper: { type: mongoose.Schema.Types.ObjectId, ref: 'user' },
   date: {
     type: Date,

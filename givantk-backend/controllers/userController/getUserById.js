@@ -8,11 +8,13 @@ module.exports = getUserById = (req, res) => {
   User.findById(req.params.id)
     .then((user) => {
       res.json({
-        _id: user._id,
-        first_name: user.first_name,
-        last_name: user.last_name,
-        email: user.email,
-        location: user.location,
+        user: {
+          _id: user._id,
+          first_name: user.first_name,
+          last_name: user.last_name,
+          email: user.email,
+          location: user.location
+        },
         success: true
       });
     })

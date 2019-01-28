@@ -55,7 +55,7 @@ router.get(
 
 // @route  GET api/user/:id
 // @desc   Get user by ID
-// @access Private
+// @access Public
 // @errors
 router.get('/:id', userController.getUserById);
 
