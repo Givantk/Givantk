@@ -15,6 +15,15 @@ module.exports = unbookmarkService = (req, res) => {
           return res.status(400).json(errors);
         }
 
+        if (
+          profile.services_bookmarked.filter(
+            (item) => item.toString() === service._id.toString()
+          ).length === 0
+        ) {
+          errors.notbookmarked = "You haven't yet bookmarked this service";
+          return res.status(400).json(errors);
+        }
+
         const newBookmarks = profile.services_bookmarked.filter(
           (item) => item.toString() !== service._id.toString()
         );

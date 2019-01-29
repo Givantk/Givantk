@@ -15,6 +15,15 @@ module.exports = bookmarkService = (req, res) => {
           return res.status(400).json(errors);
         }
 
+        if (
+          profile.services_bookmarked.filter(
+            (item) => item.toString() === service._id.toString()
+          ).length > 0
+        ) {
+          errors.alreadybookmarked = 'You have already bookmarked this service';
+          return res.status(400).json(errors);
+        }
+
         profile.services_bookmarked.unshift(service._id);
         profile.save().then((profile) => {
           return res.json({ profile, success: true });

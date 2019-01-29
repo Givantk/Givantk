@@ -5,14 +5,25 @@ module.exports = function validateProfile(data) {
   let errors = {};
 
   // skills
-  if (data.skills.length === 0) {
+  if (!data.skills || data.skills.length === 0) {
     errors.skills = 'Skills are required';
   }
 
   // description
-  if (!Validator.isLength(data.description, { min: 20, max: 600 })) {
-    errors.description = 'Description must be between 20 and 600 characters';
-  }
+  if (!isEmpty(data.description))
+    if (!Validator.isLength(data.description, { min: 20, max: 600 })) {
+      errors.description = 'Description must be between 20 and 600 characters';
+    }
+
+  //date_of_birth
+  if (data.date_of_birth)
+    if (
+      !(data.date_of_birth instanceof Date) &&
+      (typeof data.date_of_birth == 'string' &&
+        !(Validator.toDate(data.date_of_birth) instanceof Date))
+    ) {
+      errors.date_of_birth = 'Birth of date must be a date';
+    }
 
   return {
     errors,

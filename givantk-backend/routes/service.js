@@ -62,7 +62,7 @@ router.get('/helped-in/:user_id', serviceController.getHelpedInServices);
 // @route  GET api/service/bookmark/:id
 // @desc   Bookmark a service for the logged in user, by service id
 // @access Private
-// @errors noprofile error
+// @errors noprofile alreadybookmarked error
 router.get(
   '/bookmark/:id',
   passport.authenticate('jwt', { session: false }),
@@ -72,7 +72,7 @@ router.get(
 // @route  GET api/service/unbookmark/:id
 // @desc   Unbookmark a service for the logged in user, by service id
 // @access Private
-// @errors noprofile error
+// @errors noprofile notbookmarked error
 router.get(
   '/unbookmark/:id',
   passport.authenticate('jwt', { session: false }),

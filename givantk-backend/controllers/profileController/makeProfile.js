@@ -38,6 +38,10 @@ module.exports = makeProfile = (req, res) => {
         services_proposed_for: []
       };
 
+      if (typeof req.body.date_of_birth === 'string') {
+        newProfile.date_of_birth = validator.toDate(req.body.date_of_birth);
+      }
+
       new Profile(newProfile)
         .save()
         .then((profile) => {

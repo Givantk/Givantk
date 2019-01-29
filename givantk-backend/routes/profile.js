@@ -13,7 +13,7 @@ router.get('/all', profileController.getAllProfiles);
 // @route  POST api/profile
 // @desc   Create profile or update for logged in user
 // @access Private
-// @errors skills description error
+// @errors skills description date_of_birth error
 router.post(
   '/',
   passport.authenticate('jwt', { session: false }),

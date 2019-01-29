@@ -53,7 +53,7 @@ module.exports = createService = (req, res) => {
           errors.noprofile = "You haven't added enough details to your profile";
           return res.status(400).json(errors);
         }
-        profile.services_asked_for.unshift(req.user._id);
+        profile.services_asked_for.unshift(service._id);
         profile
           .save()
           .then(() => res.json({ service, success: true }))
