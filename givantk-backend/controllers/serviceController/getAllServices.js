@@ -6,7 +6,7 @@ const Service = mongoose.model('service');
 module.exports = getAllServices = (req, res) => {
   const errors = {};
   Service.find()
-    .populate('asker')
+    // .populate('asker')
     .then((services) => {
       if (services.length === 0) {
         errors.noservices = 'No services found';

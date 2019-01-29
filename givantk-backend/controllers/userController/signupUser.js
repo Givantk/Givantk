@@ -37,18 +37,13 @@ module.exports = signupUser = (req, res) => {
           newUser.password = hash;
           newUser
             .save()
-            .then((user) =>
+            .then((user) => {
+              user.password = null;
               res.json({
-                user: {
-                  _id: user._id,
-                  first_name: user.first_name,
-                  last_name: user.last_name,
-                  email: user.email,
-                  location: user.location
-                },
+                user,
                 success: true
-              })
-            )
+              });
+            })
             .catch((err) => {
               errors.error = 'Error saving user to database';
               res.status(500).json({ ...errors, ...err });

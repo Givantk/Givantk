@@ -24,10 +24,10 @@ Unpropose to a service by service id (POST)
 
 Profile:
 Create a profile for the logged in user (POST)
-Get a specific profile by id (GET) (when go to a user profile)
+Update the profile of the logged in user (PATCH)
+Get the profile of the logged in user (GET)
+Get a specific profile by user id (GET) (when go to a user profile)
 Get all profiles (GET)
-Get all notifications for a specific user by id (GET) (when click on notifications icon)
-Send notification to a specific user (POST) (when proposal..etc)
 
 //////Note:
 We add 'bookmarked services' and 'proposed for services' in the

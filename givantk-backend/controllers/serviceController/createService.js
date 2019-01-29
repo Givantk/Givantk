@@ -16,7 +16,7 @@ module.exports = createService = (req, res) => {
   }
 
   const newService = {
-    asker: req.user._id.toString(),
+    asker: req.user._id,
     name: req.body.name,
     description: req.body.description,
     location: req.body.location,

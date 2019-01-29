@@ -41,6 +41,7 @@ module.exports = proposeToService = (req, res) => {
           user: req.user._id,
           proposal: req.body.proposal
         });
+        service.state = 'pending';
 
         // Updating profile
         applicantProfile.services_proposed_for.unshift(service._id);
