@@ -23,8 +23,7 @@ Unpropose to a service by service id (POST)
 
 
 Profile:
-Create a profile for the logged in user (POST)
-Update the profile of the logged in user (PATCH)
+Create and update profile for the logged in user (POST)
 Get the profile of the logged in user (GET)
 Get a specific profile by user id (GET) (when go to a user profile)
 Get all profiles (GET)

@@ -1,7 +1,7 @@
 const isEmpty = require('./assets/is-empty');
 const Validator = require('validator');
 
-module.exports = function validateLoginInput(data) {
+module.exports = function validateServiceProposal(data) {
   let errors = {};
 
   // For required fields

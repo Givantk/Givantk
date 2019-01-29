@@ -11,29 +11,29 @@ const profileController = require('../controllers/profileController/index.js');
 router.get('/all', profileController.getAllProfiles);
 
 // @route  POST api/profile
-// @desc   Create profile for logged in user
+// @desc   Create profile or update for logged in user
 // @access Private
-// @errors
+// @errors skills description error
 router.post(
   '/',
   passport.authenticate('jwt', { session: false }),
-  profileController.createProfile
+  profileController.makeProfile
 );
 
-// // @route  PATCH api/profile
-// // @desc   Update profile of the logged in user
-// // @access Private
-// // @errors
-// router.patch(
-//   '/',
-//   passport.authenticate('jwt', { session: false }),
-//   profileController.updateProfile
-// );
+// @route  GET api/profile
+// @desc   Get profile of logged in user
+// @access Private
+// @errors noprofile error
+router.get(
+  '/',
+  passport.authenticate('jwt', { session: false }),
+  profileController.getProfile
+);
 
-// // @route  GET api/profile/:user_id
-// // @desc   Get profile by user ID
-// // @access Public
-// // @errors
-// router.get('/:user_id', profileController.getProfileByUserId);
+// @route  GET api/profile/:user_id
+// @desc   Get profile by user ID
+// @access Public
+// @errors
+router.get('/:user_id', profileController.getProfileByUserId);
 
 module.exports = router;

@@ -1,7 +1,11 @@
 const getAllProfiles = require('./getAllProfiles');
-const createProfile = require('./createProfile');
+const makeProfile = require('./makeProfile');
+const getProfile = require('./getProfile');
+const getProfileByUserId = require('./getProfileByUserId');
 
 module.exports = {
   getAllProfiles,
-  createProfile
+  makeProfile,
+  getProfile,
+  getProfileByUserId
 };

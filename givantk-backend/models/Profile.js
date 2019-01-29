@@ -17,15 +17,12 @@ const ProfileSchema = new Schema({
   gender: String,
   avatar: String,
   description: String,
-  date: {
-    type: Date,
-    default: Date.now
-  },
   phone_number: Number,
   date_of_birth: Date,
   verified: Boolean,
   skills: {
-    type: [String]
+    type: [String],
+    required: true
   },
   notifications: {
     type: [
@@ -63,7 +60,11 @@ const ProfileSchema = new Schema({
   ],
   services_proposed_for: [
     { type: mongoose.Schema.Types.ObjectId, ref: 'service' }
-  ]
+  ],
+  date: {
+    type: Date,
+    default: Date.now
+  }
 });
 
 module.exports = Profile = mongoose.model('profile', ProfileSchema);
