@@ -25,7 +25,7 @@ const MainNavigator = createStackNavigator(
     MessagesList: screens.MessagesListScreen,
   },
   {
-    initialRouteName: 'Service',
+    initialRouteName: 'Signup',
 
     // We need to configure the header options only for the 'tab' screens only here
     navigationOptions: ({ navigation }) => {

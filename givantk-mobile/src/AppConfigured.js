@@ -1,11 +1,14 @@
+import { Provider } from 'react-redux';
 import React from 'react';
 
 import { loadFonts } from './assets/styles/fonts/loadFonts';
+import App from './routes/MainNavigator';
 import LoadingScreen from './screens/commons/LoadingScreen/LoadingScreen';
-import Navigator from './routes/MainNavigator';
+import store from './store/createStore';
 
 // This is the main app, with these configured:
-// 1-customized fonts loaded
+// 1-Customized fonts loaded
+// 2-Redux
 
 export default class AppConfigured extends React.Component {
   state = {
@@ -29,6 +32,10 @@ export default class AppConfigured extends React.Component {
       return <LoadingScreen />;
     }
 
-    return <Navigator />;
+    return (
+      <Provider store={store}>
+        <App />
+      </Provider>
+    );
   }
 }

@@ -20,7 +20,7 @@ module.exports = {
     'max-len': 'off',
     'no-alert': 'off',
     'no-underscore-dangle': [
-      'error',
+      'off',
       {
         allow: ['_id'],
         allowAfterThis: false,
