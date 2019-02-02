@@ -18,6 +18,7 @@ module.exports = {
     'react/require-default-props': 'off',
     'linebreak-style': 'off',
     'max-len': 'off',
+    'no-alert': 'off',
     'no-underscore-dangle': [
       'error',
       {

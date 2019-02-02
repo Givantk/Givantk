@@ -1,14 +1,33 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
-import { colors } from "../../../../assets/styles/base";
+import { colors } from '../../../../assets/styles/base';
 
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     backgroundColor: colors.white,
-    alignItems: "center",
-    justifyContent: "center"
-  }
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  serviceName: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    color: colors.primary,
+  },
+  header: {
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
+  textarea: {
+    backgroundColor: colors.trueWhite,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: colors.primary,
+    height: 200,
+    marginTop: 10,
+    marginBottom: 20,
+    padding: 10,
+  },
 });
 
 export default styles;
