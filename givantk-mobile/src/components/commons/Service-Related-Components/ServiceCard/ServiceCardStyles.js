@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
   serviceCard: {
     borderWidth: 3,
     borderRadius: 10,
+    alignSelf: 'center',
     borderColor: colors.primary,
     width: dimensions.fullWidth * 0.88,
     height: 220,

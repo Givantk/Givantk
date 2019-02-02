@@ -11,6 +11,11 @@ class ServiceCard extends React.PureComponent {
     navigation.navigate('Service');
   };
 
+  navigateToAskerProfile = () => {
+    const { navigation } = this.props;
+    navigation.navigate('Profile');
+  };
+
   render() {
     const { service } = this.props;
 
@@ -18,20 +23,28 @@ class ServiceCard extends React.PureComponent {
       <TouchableWithoutFeedback onPress={this.navigateToServiceScreen}>
         <View style={styles.serviceCard}>
           <View style={styles.header}>
-            <Image
-              source={{
-                uri: service.asker.imageURL,
-              }}
-              style={styles.userImage}
-            />
+            <TouchableWithoutFeedback onPress={this.navigateToAskerProfile}>
+              <Image
+                source={{
+                  uri: service.asker.imageURL,
+                }}
+                style={styles.userImage}
+              />
+            </TouchableWithoutFeedback>
             <View style={styles.headerRight}>
-              <Text style={styles.userName}>{service.asker.name}</Text>
+              <TouchableWithoutFeedback onPress={this.navigateToAskerProfile}>
+                <View>
+                  <Text style={styles.userName}>{service.asker.name}</Text>
+                </View>
+              </TouchableWithoutFeedback>
               <Text style={styles.serviceTitle}>{service.title}</Text>
             </View>
           </View>
 
           <View style={styles.content}>
-            <Text style={styles.descriptionText}>{service.description}</Text>
+            <Text style={styles.descriptionText}>
+              {service.briefDescription}
+            </Text>
           </View>
 
           <View style={styles.footer}>

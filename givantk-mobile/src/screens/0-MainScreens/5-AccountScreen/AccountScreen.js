@@ -22,7 +22,7 @@ export default class AccountScreen extends React.Component {
 
   onPressSignOut = () => {
     const { navigation } = this.props;
-    navigation.navigate('Login');
+    navigation.replace('Login');
   };
 
   render() {

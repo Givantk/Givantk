@@ -7,7 +7,7 @@ const accountListItems = (navigation) => [
   },
   {
     title: 'Bookmarked Services',
-    iconName: 'md-star-outline',
+    iconName: 'md-star',
     iconType: 'Ionicons',
     onPress: () => {},
   },

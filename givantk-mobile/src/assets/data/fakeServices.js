@@ -1,8 +1,10 @@
 const services = [
   {
     title: 'Cheese from other people',
-    description:
+    briefDescription:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor repellat voluptatem laboriosam. Hic quod, enim.',
+    description:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor repellat voluptatem laboriosam. Hic quod, enim.\n\n Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor repellat voluptatem laboriosam. Hic quod, enim.',
     cost: '40 EGP',
     asker: {
       name: 'Doaa Abu',
@@ -12,7 +14,7 @@ const services = [
   },
   {
     title: 'Cheese from other people',
-    description:
+    briefDescription:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor repellat voluptatem laboriosam. Hic quod, enim.',
     cost: '30 EGP',
     asker: {
@@ -23,7 +25,7 @@ const services = [
   },
   {
     title: 'Cheese from other people',
-    description:
+    briefDescription:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor repellat voluptatem laboriosam. Hic quod, enim.',
     cost: '35 EGP',
     asker: {
@@ -34,7 +36,7 @@ const services = [
   },
   {
     title: 'Buy something for me',
-    description:
+    briefDescription:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor repellat voluptatem laboriosam. Hic quod, enim.',
     cost: '120 EGP',
     asker: {
@@ -45,7 +47,7 @@ const services = [
   },
   {
     title: 'Play football with me',
-    description:
+    briefDescription:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor repellat voluptatem laboriosam. Hic quod, enim.',
     cost: '8 USD',
     asker: {
