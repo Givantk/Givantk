@@ -19,6 +19,7 @@ module.exports = {
     'linebreak-style': 'off',
     'max-len': 'off',
     'no-alert': 'off',
+    'global-require': 'off',
     'no-underscore-dangle': [
       'off',
       {

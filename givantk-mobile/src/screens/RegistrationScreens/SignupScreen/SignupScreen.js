@@ -10,6 +10,7 @@ import DefaultButton from '../../../components/commons/UI/DefaultButton/DefaultB
 import Header from '../../../components/RegistrationsScreensComponents/SignupScreenComponents/Header/Header';
 import SignupInputs from '../../../components/RegistrationsScreensComponents/SignupScreenComponents/SignupInputs/SignupInputs';
 import { signupUser } from '../../../store/actions/authActions';
+import quickNotification from '../../../assets/utils/quickNotification';
 
 class SignupScreen extends React.Component {
   static navigationOptions = () => ({
@@ -46,7 +47,7 @@ class SignupScreen extends React.Component {
               Sign Up
             </DefaultButton>
             <DefaultButton
-              onPress={this.handleSignupWithFacebook}
+              onPress={() => quickNotification('hi')}
               style={styles.button}
             >
               Sign Up With Facebook
