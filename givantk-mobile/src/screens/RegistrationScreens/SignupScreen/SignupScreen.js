@@ -6,11 +6,9 @@ import React from 'react';
 import { colors } from '../../../assets/styles/base';
 import { styles } from './SignupScreenStyles';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
-import DefaultButton from '../../../components/commons/UI/DefaultButton/DefaultButton';
 import Header from '../../../components/RegistrationsScreensComponents/SignupScreenComponents/Header/Header';
 import SignupInputs from '../../../components/RegistrationsScreensComponents/SignupScreenComponents/SignupInputs/SignupInputs';
 import { signupUser } from '../../../store/actions/authActions';
-import quickNotification from '../../../assets/utils/quickNotification';
 
 class SignupScreen extends React.Component {
   static navigationOptions = () => ({
@@ -22,13 +20,14 @@ class SignupScreen extends React.Component {
 
   handleSignup = () => {
     const { navigation } = this.props;
-    this.props.signupUser({}, navigation);
+    // this.props.signupUser({}, navigation);
     // ..
-    // navigation.replace('Tab');
+    navigation.replace('Tab');
   };
 
   handleSignupWithFacebook = () => {
     //
+    alert('Facebook sign up clicked');
   };
 
   render() {
@@ -40,19 +39,10 @@ class SignupScreen extends React.Component {
         <View style={styles.container}>
           <Header />
 
-          <SignupInputs />
-
-          <View style={styles.buttonsContainer}>
-            <DefaultButton onPress={this.handleSignup} style={styles.button}>
-              Sign Up
-            </DefaultButton>
-            <DefaultButton
-              onPress={() => quickNotification('hi')}
-              style={styles.button}
-            >
-              Sign Up With Facebook
-            </DefaultButton>
-          </View>
+          <SignupInputs
+            onSignup={this.handleSignup}
+            onSignupWithFacebook={this.handleSignupWithFacebook}
+          />
         </View>
       </AvoidKeyboard>
     );

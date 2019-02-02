@@ -47,7 +47,11 @@ export default class LoginScreen extends React.Component {
               placeholder="Email Address"
               style={styles.textInput}
             />
-            <DefaultTextInput placeholder="Password" style={styles.textInput} />
+            <DefaultTextInput
+              password
+              placeholder="Password"
+              style={styles.textInput}
+            />
             <DefaultButton onPress={this.handleLogin}>Sign In</DefaultButton>
             <DefaultButton onPress={this.handleSignInWithFacebook}>
               Sign In With Facebook

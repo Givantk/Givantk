@@ -20,6 +20,8 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.gray03,
     width: '70%',
   },
+  buttonsContainer: { width: '100%', marginVertical: '10%' },
+  button: { margin: 7 },
 });
 
 export default styles;

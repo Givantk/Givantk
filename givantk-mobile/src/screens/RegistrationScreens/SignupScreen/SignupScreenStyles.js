@@ -12,6 +12,4 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingTop: dimensions.fullWidth / 5,
   },
-  buttonsContainer: { width: '100%', marginBottom: '15%' },
-  button: { margin: 7 },
 });
