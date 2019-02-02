@@ -56,10 +56,12 @@ const tertiaryColor = Color('#F5F5DC');
 const black = Color('#232323');
 const white = Color('#EAEEFF');
 const trueWhite = Color('#FFFFFF');
+const red = Color('#FF0000');
 const gray01 = Color('#B3B3B3');
 const gray02 = Color('#959595');
 const gray03 = Color('#627273');
 const gray04 = Color('#ddd');
+const transparent = '#00FFFF00';
 
 export const colors = {
   primary: primaryColor,
@@ -69,8 +71,10 @@ export const colors = {
   black,
   white,
   trueWhite,
+  red,
   gray01,
   gray02,
   gray03,
   gray04,
+  transparent,
 };

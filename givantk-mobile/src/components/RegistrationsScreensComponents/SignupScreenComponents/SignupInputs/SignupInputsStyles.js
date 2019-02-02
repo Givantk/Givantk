@@ -20,6 +20,15 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.gray03,
     width: '70%',
   },
+  warningText: {
+    fontSize: 8.5,
+    margin: 0,
+    padding: 0,
+    marginLeft: 10,
+    color: colors.red,
+    fontWeight: '100',
+    borderBottomWidth: 0,
+  },
   buttonsContainer: { width: '100%', marginVertical: '10%' },
   button: { margin: 7 },
 });

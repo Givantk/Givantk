@@ -14,15 +14,15 @@ class SignupScreen extends React.Component {
   static navigationOptions = () => ({
     headerTransparent: true,
     headerStyle: {
-      backgroundColor: '#00FFFF00',
+      backgroundColor: colors.transparent,
     },
   });
 
-  handleSignup = () => {
-    const { navigation } = this.props;
-    // this.props.signupUser({}, navigation);
+  handleSignup = (user) => {
+    const { navigation, onSignupUser } = this.props;
+    onSignupUser(user, navigation);
     // ..
-    navigation.replace('Tab');
+    // navigation.replace('Tab');
   };
 
   handleSignupWithFacebook = () => {
@@ -31,6 +31,7 @@ class SignupScreen extends React.Component {
   };
 
   render() {
+    const { errors } = this.props;
     return (
       <AvoidKeyboard
         bottomPadding={-30}
@@ -42,6 +43,7 @@ class SignupScreen extends React.Component {
           <SignupInputs
             onSignup={this.handleSignup}
             onSignupWithFacebook={this.handleSignupWithFacebook}
+            errors={errors}
           />
         </View>
       </AvoidKeyboard>
@@ -51,6 +53,8 @@ class SignupScreen extends React.Component {
 
 SignupScreen.propTypes = {
   navigation: PropTypes.shape({}),
+  onSignupUser: PropTypes.func,
+  errors: PropTypes.shape({}),
 };
 
 const mapStateToProps = (state) => ({
@@ -58,7 +62,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  signupUser,
+  onSignupUser: signupUser,
 };
 
 export default connect(

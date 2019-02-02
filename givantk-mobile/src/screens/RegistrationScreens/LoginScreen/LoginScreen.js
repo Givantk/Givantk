@@ -13,7 +13,7 @@ export default class LoginScreen extends React.Component {
   static navigationOptions = () => ({
     headerTransparent: true,
     headerStyle: {
-      backgroundColor: '#00FFFF00',
+      backgroundColor: colors.transparent,
     },
   });
 
