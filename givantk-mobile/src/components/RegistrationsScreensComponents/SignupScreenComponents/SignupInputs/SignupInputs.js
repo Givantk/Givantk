@@ -1,26 +1,29 @@
 import { Picker } from 'native-base';
-import { View, Text, StyleSheet } from 'react-native';
-import PropTypes from 'prop-types';
+import { View } from 'react-native';
 import React, { Component } from 'react';
 
 import { colors } from '../../../../assets/styles/base';
-import countries from '../../../../assets/data/countries';
-import DefaultDatePicker from '../../../commons/UI/DefaultDatePicker/DefaultDatePicker';
 import DefaultTextInput from '../../../commons/UI/DefaultTextInput/DefaultTextInput';
 import styles from './SignupInputsStyles';
+import cairoDistricts from '../../../../assets/data/cairoDistricts';
 
 export default class SignupInputs extends Component {
   state = {
-    selectedCountry: '',
+    selectedLocation: '',
   };
 
-  onSelectCountry = (selectedCountry) => {
+  onSelectLocation = (selectedLocation) => {
+    if (!selectedLocation) {
+      alert('Please select your location');
+      return;
+    }
     this.setState(() => ({
-      selectedCountry,
+      selectedLocation,
     }));
   };
 
   render() {
+    const { selectedLocation } = this.state;
     return (
       <View
         style={{
@@ -56,28 +59,23 @@ export default class SignupInputs extends Component {
           placeholder="Confirm Password"
           style={styles.textInput}
         />
-        <View
-          style={{
-            width: '80%',
-            flexDirection: 'row',
-          }}
-        >
-          <DefaultDatePicker
-            label="Birth Date"
-            onDateChange={(newDate) => {}}
-            style={{ width: '50%', alignItems: 'center' }}
-          />
-
+        <View style={styles.viewInput}>
           <Picker
             style={{
               color: colors.white.fade(0.5),
             }}
-            selectedValue={this.state.selectedCountry}
-            onValueChange={this.onSelectCountry}
+            selectedValue={selectedLocation}
+            onValueChange={this.onSelectLocation}
           >
-            <Picker.Item label="Country" value="" />
-            {countries.map((country) => (
-              <Picker.Item label={country} value={country} key={country} />
+            <Picker.Item
+              label="Select Location"
+              value=""
+              onPress={() => {
+                console.log('PPPPPPPP');
+              }}
+            />
+            {cairoDistricts.map((district) => (
+              <Picker.Item label={district} value={district} key={district} />
             ))}
           </Picker>
         </View>
@@ -85,7 +83,3 @@ export default class SignupInputs extends Component {
     );
   }
 }
-
-SignupInputs.propTypes = {
-  placeholderColor: PropTypes.string,
-};

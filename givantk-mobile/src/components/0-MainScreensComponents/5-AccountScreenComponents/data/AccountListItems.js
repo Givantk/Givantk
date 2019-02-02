@@ -6,6 +6,18 @@ const accountListItems = (navigation) => [
     onPress: () => navigation.navigate('Profile'),
   },
   {
+    title: 'Bookmarked Services',
+    iconName: 'md-star-outline',
+    iconType: 'Ionicons',
+    onPress: () => {},
+  },
+  {
+    title: 'Proposed for services',
+    iconName: 'account-card-details',
+    iconType: 'MaterialCommunityIcons',
+    onPress: () => {},
+  },
+  {
     title: 'Payment Info',
     iconName: 'money',
     iconType: 'FontAwesome',

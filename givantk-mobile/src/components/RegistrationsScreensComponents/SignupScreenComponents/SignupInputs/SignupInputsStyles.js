@@ -1,18 +1,25 @@
-import { StyleSheet } from "react-native";
-import { colors } from "../../../../assets/styles/base";
+import { StyleSheet } from 'react-native';
+
+import { colors } from '../../../../assets/styles/base';
 
 const styles = StyleSheet.create({
   inputContainer: {
-    width: "100%"
+    width: '100%',
   },
   textInput: {
     borderWidth: 0,
     borderBottomWidth: 1,
-    borderBottomColor: "#627273",
-    width: "70%",
+    borderBottomColor: colors.gray03,
+    width: '70%',
     color: colors.white,
-    fontWeight: "bold"
-  }
+    fontWeight: 'bold',
+  },
+  viewInput: {
+    borderWidth: 0,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.gray03,
+    width: '70%',
+  },
 });
 
 export default styles;
