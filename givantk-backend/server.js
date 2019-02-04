@@ -18,6 +18,16 @@ require('./config/dbconnect');
 app.use(passport.initialize());
 require('./config/passport')(passport);
 
+// Cross Origin Problem
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  next();
+});
+
 // Routes
 app.use('/api/user', require('./routes/user'));
 app.use('/api/profile', require('./routes/profile'));

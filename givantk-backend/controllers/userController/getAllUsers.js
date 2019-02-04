@@ -6,6 +6,7 @@ const User = mongoose.model('user');
 module.exports = getAllUsers = (req, res) => {
   const errors = {};
   User.find()
+    .sort({ date: -1 })
     .then((users) => {
       if (users.length === 0) {
         errors.nousers = 'No users found';

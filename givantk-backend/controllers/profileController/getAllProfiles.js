@@ -6,6 +6,7 @@ const Profile = mongoose.model('profile');
 module.exports = getAllProfiles = (req, res) => {
   const errors = {};
   Profile.find()
+    .sort({ date: -1 })
     .then((profiles) => {
       if (profiles.length === 0) {
         errors.noprofiles = 'No profiles found';

@@ -7,6 +7,7 @@ module.exports = getAllServices = (req, res) => {
   const errors = {};
   Service.find()
     // .populate('asker')
+    .sort({ date: -1 })
     .then((services) => {
       if (services.length === 0) {
         errors.noservices = 'No services found';

@@ -21,12 +21,9 @@ class SignupScreen extends React.Component {
   handleSignup = (user) => {
     const { navigation, onSignupUser } = this.props;
     onSignupUser(user, navigation);
-    // ..
-    // navigation.replace('Tab');
   };
 
   handleSignupWithFacebook = () => {
-    //
     alert('Facebook sign up clicked');
   };
 
