@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import { colors } from '../../../assets/styles/base';
-import { signupUser } from '../../../store/actions/authActions';
 import { styles } from './SignupScreenStyles';
+import * as AuthActions from '../../../store/actions/authActions';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
 import Header from '../../../components/RegistrationsScreensComponents/SignupScreenComponents/Header/Header';
 import quickNotification from '../../../assets/utils/quickNotification';
@@ -20,14 +20,14 @@ class SignupScreen extends React.Component {
   });
 
   handleSignup = (user) => {
-    const { navigation, onSignupUser } = this.props;
+    const { navigation, signupUser } = this.props;
 
     const callback = () => {
       quickNotification('Successfully Signed Up, Please Login');
       navigation.navigate('Login');
     };
 
-    onSignupUser(user, callback);
+    signupUser(user, callback);
   };
 
   handleSignupWithFacebook = () => {
@@ -57,7 +57,7 @@ class SignupScreen extends React.Component {
 
 SignupScreen.propTypes = {
   navigation: PropTypes.shape({}),
-  onSignupUser: PropTypes.func,
+  signupUser: PropTypes.func,
   errors: PropTypes.shape({}),
 };
 
@@ -66,7 +66,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  onSignupUser: signupUser,
+  signupUser: AuthActions.signupUser,
 };
 
 export default connect(

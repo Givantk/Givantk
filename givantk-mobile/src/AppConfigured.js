@@ -2,7 +2,6 @@ import { Provider } from 'react-redux';
 import { Root } from 'native-base';
 import React from 'react';
 
-import { checkSavedUserThenLogin } from './store/actions/authActions';
 import { loadFonts } from './assets/styles/fonts/loadFonts';
 import App from './routes/MainNavigator';
 import LoadingScreen from './screens/commons/LoadingScreen/LoadingScreen';
@@ -21,7 +20,6 @@ export default class AppConfigured extends React.Component {
 
   componentDidMount() {
     this.loadAssetsAsync();
-    // check if user has signed in before
   }
 
   async loadAssetsAsync() {

@@ -1,7 +1,7 @@
 const services = [
   {
-    title: 'Cheese from other people',
-    briefDescription:
+    name: 'Cheese from other people',
+    brief_description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor repellat voluptatem laboriosam. Hic quod, enim.',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor repellat voluptatem laboriosam. Hic quod, enim.\n\n Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor repellat voluptatem laboriosam. Hic quod, enim.',
@@ -13,8 +13,8 @@ const services = [
     _id: 'ger3',
   },
   {
-    title: 'Cheese from other people',
-    briefDescription:
+    name: 'Cheese from other people',
+    brief_description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor repellat voluptatem laboriosam. Hic quod, enim.',
     cost: '30 EGP',
     asker: {
@@ -24,8 +24,8 @@ const services = [
     _id: '$3g',
   },
   {
-    title: 'Cheese from other people',
-    briefDescription:
+    name: 'Cheese from other people',
+    brief_description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor repellat voluptatem laboriosam. Hic quod, enim.',
     cost: '35 EGP',
     asker: {
@@ -35,8 +35,8 @@ const services = [
     _id: 'eg3r',
   },
   {
-    title: 'Buy something for me',
-    briefDescription:
+    name: 'Buy something for me',
+    brief_description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor repellat voluptatem laboriosam. Hic quod, enim.',
     cost: '120 EGP',
     asker: {
@@ -46,8 +46,8 @@ const services = [
     _id: 'eg333r',
   },
   {
-    title: 'Play football with me',
-    briefDescription:
+    name: 'Play football with me',
+    brief_description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor repellat voluptatem laboriosam. Hic quod, enim.',
     cost: '8 USD',
     asker: {

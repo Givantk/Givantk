@@ -6,7 +6,7 @@ const Service = mongoose.model('service');
 module.exports = getAllServices = (req, res) => {
   const errors = {};
   Service.find()
-    // .populate('asker')
+    .populate('asker')
     .sort({ date: -1 })
     .then((services) => {
       if (services.length === 0) {

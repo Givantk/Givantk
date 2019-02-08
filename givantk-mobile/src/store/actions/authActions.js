@@ -70,7 +70,7 @@ export const logoutUser = () => (dispatch) => {
 
   // Remove user from auth reducer
   dispatch({
-    type: actionTypes.REMOVE_CURRENT_USER,
+    type: actionTypes.UNSET_CURRENT_USER,
   });
 };
 

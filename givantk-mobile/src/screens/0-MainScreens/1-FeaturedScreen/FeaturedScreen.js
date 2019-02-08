@@ -1,15 +1,18 @@
+import { connect } from 'react-redux';
 import { Icon } from 'native-base';
 import { View, FlatList, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import { colors } from '../../../assets/styles/base';
+import * as ServiceActions from '../../../store/actions/serviceActions';
 import DefaultTextInput from '../../../components/commons/UI/DefaultTextInput/DefaultTextInput';
 import ServiceCard from '../../../components/commons/Service-Related-Components/ServiceCard/ServiceCard';
-import services from '../../../assets/data/fakeServices';
+
+// import services from '../../../assets/data/fakeServices';
 import styles from './FeaturedScreenStyles';
 
-export default class FeaturedScreen extends React.Component {
+class FeaturedScreen extends React.Component {
   static navigationOptions = () => ({
     tabBarLabel: 'Featured',
     tabBarIcon: ({ tintColor }) => (
@@ -20,6 +23,11 @@ export default class FeaturedScreen extends React.Component {
       />
     ),
   });
+
+  componentDidMount() {
+    const { getAllServices } = this.props;
+    getAllServices();
+  }
 
   navigateToSearchScreen = () => {
     const { navigation } = this.props;
@@ -33,6 +41,8 @@ export default class FeaturedScreen extends React.Component {
   };
 
   render() {
+    const { allServices } = this.props;
+
     return (
       <View style={styles.container}>
         <View style={styles.searchContainer}>
@@ -46,12 +56,14 @@ export default class FeaturedScreen extends React.Component {
           </TouchableWithoutFeedback>
         </View>
 
-        <FlatList
-          data={services}
-          keyExtractor={(item) => item._id}
-          showsVerticalScrollIndicator={false}
-          renderItem={this.renderItem}
-        />
+        {allServices && (
+          <FlatList
+            data={allServices}
+            keyExtractor={(item) => item._id}
+            showsVerticalScrollIndicator={false}
+            renderItem={this.renderItem}
+          />
+        )}
       </View>
     );
   }
@@ -59,4 +71,19 @@ export default class FeaturedScreen extends React.Component {
 
 FeaturedScreen.propTypes = {
   navigation: PropTypes.shape({}),
+  allServices: PropTypes.arrayOf(PropTypes.shape({})),
+  getAllServices: PropTypes.func,
 };
+const mapStateToProps = (state) => ({
+  errors: state.errors,
+  allServices: state.service.allServices,
+});
+
+const mapDispatchToProps = {
+  getAllServices: ServiceActions.getAllServices,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(FeaturedScreen);

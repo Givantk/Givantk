@@ -14,7 +14,7 @@ export default (state = INITIAL_STATE, action) => {
         isAuthenticated: true,
       };
 
-    case actionTypes.REMOVE_CURRENT_USER:
+    case actionTypes.UNSET_CURRENT_USER:
       return {
         ...state,
         user: null,

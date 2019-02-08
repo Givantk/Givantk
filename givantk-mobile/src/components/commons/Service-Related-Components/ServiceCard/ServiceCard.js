@@ -1,5 +1,5 @@
 import { Icon } from 'native-base';
-import { View, Text, Image, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -18,32 +18,33 @@ class ServiceCard extends React.PureComponent {
 
   render() {
     const { service } = this.props;
-
     return (
       <TouchableWithoutFeedback onPress={this.navigateToServiceScreen}>
         <View style={styles.serviceCard}>
           <View style={styles.header}>
-            <TouchableWithoutFeedback onPress={this.navigateToAskerProfile}>
+            {/* <TouchableWithoutFeedback onPress={this.navigateToAskerProfile}>
               <Image
                 source={{
                   uri: service.asker.imageURL,
                 }}
                 style={styles.userImage}
               />
-            </TouchableWithoutFeedback>
+            </TouchableWithoutFeedback> */}
             <View style={styles.headerRight}>
               <TouchableWithoutFeedback onPress={this.navigateToAskerProfile}>
                 <View>
-                  <Text style={styles.userName}>{service.asker.name}</Text>
+                  <Text style={styles.userName}>
+                    {`${service.asker.first_name} ${service.asker.last_name}`}
+                  </Text>
                 </View>
               </TouchableWithoutFeedback>
-              <Text style={styles.serviceTitle}>{service.title}</Text>
+              <Text style={styles.serviceTitle}>{service.name}</Text>
             </View>
           </View>
 
           <View style={styles.content}>
             <Text style={styles.descriptionText}>
-              {service.briefDescription}
+              {service.brief_description || service.description}
             </Text>
           </View>
 
