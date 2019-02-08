@@ -1,14 +1,19 @@
+import { connect } from 'react-redux';
 import { Icon, Label, Picker, Textarea, Button } from 'native-base';
 import { View, Text } from 'react-native';
+import PropTypes from 'prop-types';
 import React from 'react';
 
-import { dimensions } from '../../../assets/styles/base';
-import DefaultTextInput from '../../../components/commons/UI/DefaultTextInput/DefaultTextInput';
-import servicesCategories from '../../../assets/data/servicesCategories';
-import styles from './AddServiceScreenStyles';
+import { dimensions, colors } from '../../../assets/styles/base';
+import * as ServiceActions from '../../../store/actions/serviceActions';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
+import DefaultTextInput from '../../../components/commons/UI/DefaultTextInput/DefaultTextInput';
+import quickNotification from '../../../assets/utils/quickNotification';
+import servicesNatures from '../../../assets/data/servicesNatures';
+import servicesTypes from '../../../assets/data/servicesTypes';
+import styles from './AddServiceScreenStyles';
 
-export default class AddServiceScreen extends React.Component {
+class AddServiceScreen extends React.Component {
   static navigationOptions = () => ({
     tabBarLabel: 'Add Service',
     tabBarIcon: ({ tintColor }) => (
@@ -21,48 +26,90 @@ export default class AddServiceScreen extends React.Component {
   });
 
   state = {
-    selectedCategory: '',
+    name: '',
+    description: '',
+    type: '',
+    nature: '',
   };
 
-  onSelectCategory = (selectedCategory) => {
-    this.setState(() => ({
-      selectedCategory,
-    }));
+  onChangeValue = (name, value) => {
+    this.setState({
+      [name]: value,
+    });
   };
 
   onAddService = () => {
-    alert('Add service pressed');
+    const { createService } = this.props;
+    const { name, type, nature, description } = this.state;
+    const service = {
+      name,
+      description,
+      type,
+      nature,
+    };
+    const callback = () => {
+      quickNotification('Service posted successfully');
+    };
+    createService(service, callback);
   };
 
   render() {
-    const { selectedCategory } = this.state;
+    const { type, nature } = this.state;
+    const { errors } = this.props;
+
     return (
       <View style={styles.container}>
         <AvoidKeyboard bottomPadding={120}>
           <View style={styles.row}>
             <Text style={styles.text}>Service Name </Text>
             <View style={styles.inputContainer}>
-              <DefaultTextInput placeholder="Title" style={styles.input} />
+              <DefaultTextInput
+                name="name"
+                onChangeText={this.onChangeValue}
+                placeholder="Name"
+                style={styles.input}
+                error={errors.name}
+              />
             </View>
           </View>
 
           <View style={styles.row}>
-            <Text style={[styles.text, { fontSize: 13 }]}>
-              Category Selection{' '}
-            </Text>
-            <View style={styles.categorySelectionInputContainer}>
+            <Text style={[styles.text, { fontSize: 13 }]}>Service Type </Text>
+            <View
+              style={[
+                styles.pickerContainer,
+                errors.type ? { borderColor: colors.red } : {},
+              ]}
+            >
               <Picker
-                style={styles.categoryInput}
-                selectedValue={selectedCategory}
-                onValueChange={this.onSelectCategory}
+                style={styles.picker}
+                selectedValue={type}
+                onValueChange={(v) => this.onChangeValue('type', v)}
               >
-                <Picker.Item label="Category" value="" />
-                {servicesCategories.map((category) => (
-                  <Picker.Item
-                    label={category}
-                    value={category}
-                    key={category}
-                  />
+                <Picker.Item label="Type" value="" />
+                {servicesTypes.map((t) => (
+                  <Picker.Item label={t} value={t} key={t} />
+                ))}
+              </Picker>
+            </View>
+          </View>
+
+          <View style={styles.row}>
+            <Text style={[styles.text, { fontSize: 13 }]}>Service Nature </Text>
+            <View
+              style={[
+                styles.pickerContainer,
+                errors.nature ? { borderColor: colors.red } : {},
+              ]}
+            >
+              <Picker
+                style={styles.picker}
+                selectedValue={nature}
+                onValueChange={(v) => this.onChangeValue('nature', v)}
+              >
+                <Picker.Item label="Nature" value="" />
+                {servicesNatures.map((n) => (
+                  <Picker.Item label={n} value={n} key={n} />
                 ))}
               </Picker>
             </View>
@@ -72,10 +119,16 @@ export default class AddServiceScreen extends React.Component {
             <Label style={styles.text}>Description </Label>
           </View>
           <View style={{ width: dimensions.fullWidth * 0.88 }}>
-            <Textarea style={styles.textarea} />
+            <Textarea
+              style={[
+                styles.textarea,
+                errors.description ? { borderColor: colors.red } : {},
+              ]}
+              onChangeText={(v) => this.onChangeValue('description', v)}
+            />
           </View>
 
-          <View style={styles.row}>
+          {/* <View style={styles.row}>
             <Text style={styles.text}>Do you have a specific budget? </Text>
             <View style={[styles.inputContainer, styles.budgetInputContainer]}>
               <DefaultTextInput
@@ -85,7 +138,7 @@ export default class AddServiceScreen extends React.Component {
                 style={styles.input}
               />
             </View>
-          </View>
+          </View> */}
 
           <View style={styles.row}>
             <Button style={styles.addButton} onPress={this.onAddService}>
@@ -97,3 +150,22 @@ export default class AddServiceScreen extends React.Component {
     );
   }
 }
+
+AddServiceScreen.propTypes = {
+  navigation: PropTypes.shape({}),
+  createService: PropTypes.func,
+  errors: PropTypes.shape({}),
+};
+
+const mapStateToProps = (state) => ({
+  errors: state.errors,
+});
+
+const mapDispatchToProps = {
+  createService: ServiceActions.createService,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(AddServiceScreen);

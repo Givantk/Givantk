@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     borderColor: colors.primary,
     backgroundColor: colors.trueWhite,
   },
-  categorySelectionInputContainer: {
+  pickerContainer: {
     backgroundColor: colors.trueWhite,
     borderRadius: 5,
     borderColor: colors.primary,
@@ -44,8 +44,9 @@ const styles = StyleSheet.create({
     margin: 10,
     height: 30,
     justifyContent: 'center',
+    flexDirection: 'column',
   },
-  categoryInput: {
+  picker: {
     color: colors.gray01,
   },
   textarea: {
@@ -57,6 +58,16 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 20,
     padding: 10,
+  },
+  warningText: {
+    fontSize: 8.5,
+    margin: 0,
+    padding: 0,
+    marginLeft: 10,
+    color: colors.red,
+    fontWeight: '100',
+    borderBottomWidth: 0,
+    width: '70%',
   },
   budgetInputContainer: {
     width: '20%',

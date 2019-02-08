@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     color: colors.red,
     fontWeight: '100',
     borderBottomWidth: 0,
+    width: '70%',
   },
   buttonsContainer: { width: '100%', marginVertical: '10%' },
   button: { margin: 7 },

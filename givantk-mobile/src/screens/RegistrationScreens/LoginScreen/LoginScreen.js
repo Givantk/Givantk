@@ -73,7 +73,7 @@ class LoginScreen extends React.Component {
               style={styles.textInput}
               onChangeText={this.onChangeTextValue}
               name="email"
-              error={errors.email}
+              errorText={errors.email}
             />
             <DefaultTextInput
               password
@@ -81,7 +81,7 @@ class LoginScreen extends React.Component {
               style={styles.textInput}
               onChangeText={this.onChangeTextValue}
               name="password"
-              error={errors.password}
+              errorText={errors.password}
             />
             <DefaultButton onPress={this.handleLogin}>Sign In</DefaultButton>
             <DefaultButton onPress={this.handleSignInWithFacebook}>

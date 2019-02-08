@@ -23,3 +23,26 @@ export const getAllServices = () => (dispatch) => {
       });
     });
 };
+
+export const createService = (service, callback) => (dispatch) => {
+  dispatch({
+    type: actionTypes.CREATE_SERVICE_START,
+  });
+  http
+    .post(serviceAPI, service)
+    .then(() => {
+      dispatch({
+        type: actionTypes.CREATE_SERVICE_FINISH,
+      });
+      callback();
+    })
+    .catch((err) => {
+      dispatch({
+        type: actionTypes.SET_ERRORS,
+        payload: err.response.data,
+      });
+      dispatch({
+        type: actionTypes.CREATE_SERVICE_FINISH,
+      });
+    });
+};

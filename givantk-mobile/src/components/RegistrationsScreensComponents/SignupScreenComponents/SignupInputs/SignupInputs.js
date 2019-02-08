@@ -62,7 +62,7 @@ export default class SignupInputs extends Component {
               style={styles.textInput}
               onChangeText={this.onChangeTextValue}
               name="first_name"
-              error={errors.first_name}
+              errorText={errors.first_name}
             />
           </View>
           <View style={{ width: '50%', alignItems: 'center' }}>
@@ -71,7 +71,7 @@ export default class SignupInputs extends Component {
               style={styles.textInput}
               onChangeText={this.onChangeTextValue}
               name="last_name"
-              error={errors.last_name}
+              errorText={errors.last_name}
             />
           </View>
         </View>
@@ -80,7 +80,7 @@ export default class SignupInputs extends Component {
           style={styles.textInput}
           onChangeText={this.onChangeTextValue}
           name="email"
-          error={errors.email}
+          errorText={errors.email}
         />
         <DefaultTextInput
           password
@@ -88,7 +88,7 @@ export default class SignupInputs extends Component {
           style={styles.textInput}
           onChangeText={this.onChangeTextValue}
           name="password"
-          error={errors.password}
+          errorText={errors.password}
         />
         <DefaultTextInput
           password
@@ -96,7 +96,7 @@ export default class SignupInputs extends Component {
           style={styles.textInput}
           onChangeText={this.onChangeTextValue}
           name="password2"
-          error={errors.password2}
+          errorText={errors.password2}
         />
         <View style={styles.viewInput}>
           <Picker

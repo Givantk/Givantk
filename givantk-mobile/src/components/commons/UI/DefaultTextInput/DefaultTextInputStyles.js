@@ -1,10 +1,5 @@
 import { StyleSheet } from 'react-native';
-import {
-  colors,
-  gaps,
-  fontSizes,
-  fontTypes,
-} from '../../../../assets/styles/base';
+import { colors, gaps } from '../../../../assets/styles/base';
 
 const styles = StyleSheet.create({
   container: {
@@ -28,6 +23,8 @@ const styles = StyleSheet.create({
     color: colors.red,
     fontWeight: '100',
     borderBottomWidth: 0,
+    backgroundColor: colors.transparent,
+    width: '70%',
   },
 });
 
