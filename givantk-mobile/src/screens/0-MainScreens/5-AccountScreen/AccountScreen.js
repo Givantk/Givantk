@@ -1,14 +1,16 @@
+import { connect } from 'react-redux';
 import { Icon } from 'native-base';
 import { Text, View, Image, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { logoutUser } from '../../../store/actions/authActions';
 import accountListItems from '../../../components/0-MainScreensComponents/5-AccountScreenComponents/data/AccountListItems';
 import CardList from '../../../components/commons/UI/CardList/CardList';
 import profile from '../../../assets/data/fakeProfile';
 import styles from './AccountScreenStyles';
 
-export default class AccountScreen extends React.Component {
+class AccountScreen extends React.Component {
   static navigationOptions = () => ({
     tabBarLabel: 'Account',
     tabBarIcon: ({ tintColor }) => (
@@ -21,8 +23,9 @@ export default class AccountScreen extends React.Component {
   });
 
   onPressSignOut = () => {
-    const { navigation } = this.props;
+    const { navigation, onLogoutUser } = this.props;
     navigation.replace('Login');
+    onLogoutUser();
   };
 
   render() {
@@ -71,4 +74,14 @@ export default class AccountScreen extends React.Component {
 
 AccountScreen.propTypes = {
   navigation: PropTypes.shape({}),
+  onLogoutUser: PropTypes.func,
 };
+
+const mapDispatchToProps = {
+  onLogoutUser: logoutUser,
+};
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(AccountScreen);

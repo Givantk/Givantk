@@ -1,16 +1,19 @@
 import { Provider } from 'react-redux';
+import { Root } from 'native-base';
 import React from 'react';
 
-import { Root } from 'native-base';
+import { checkSavedUserThenLogin } from './store/actions/authActions';
 import { loadFonts } from './assets/styles/fonts/loadFonts';
 import App from './routes/MainNavigator';
 import LoadingScreen from './screens/commons/LoadingScreen/LoadingScreen';
 import store from './store/createStore';
 
 // This is the main app, with these configured:
-// 1-Customized fonts loaded
-// 2-Redux
+// 1- Customized fonts loaded
+// 2- Redux
 // 3- Native Base Root
+// 4- checking if is user has signed in before
+
 export default class AppConfigured extends React.Component {
   state = {
     fontLoaded: false,
@@ -18,6 +21,7 @@ export default class AppConfigured extends React.Component {
 
   componentDidMount() {
     this.loadAssetsAsync();
+    // check if user has signed in before
   }
 
   async loadAssetsAsync() {

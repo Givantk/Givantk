@@ -12,6 +12,7 @@
     "axios": "^0.18.0",
     "color": "^3.1.0",
     "expo": "^30.0.1",
+    "jwt-decode": "^2.2.0",
     "native-base": "^2.8.1",
     "prop-types": "^15.6.2",
     "react": "16.3.1",

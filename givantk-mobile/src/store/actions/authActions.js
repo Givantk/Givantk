@@ -1,13 +1,21 @@
-import * as actionTypes from './actionTypes';
-import http, { userAPI, setAuthToken } from '../../assets/utils/httpService';
-import quickNotification from '../../assets/utils/quickNotification';
+import { AsyncStorage } from 'react-native';
+import jwtDecode from 'jwt-decode';
 
-export const signupUser = (userData, navigation) => (dispatch) => {
+import * as actionTypes from './actionTypes';
+
+import http, {
+  userAPI,
+  setAuthToken,
+  removeAuthToken,
+} from '../../assets/utils/httpService';
+import quickNotification from '../../assets/utils/quickNotification';
+import storedJWTname from '../../assets/constants/storedJWTname';
+
+export const signupUser = (userData, callback) => (dispatch) => {
   http
     .post(userAPI, userData)
     .then(() => {
-      quickNotification('Successfully Signed Up, Please Login');
-      navigation.navigate('Login');
+      callback();
     })
     .catch((err) => {
       dispatch({
@@ -17,22 +25,31 @@ export const signupUser = (userData, navigation) => (dispatch) => {
     });
 };
 
-export const loginUser = (userData, navigation) => (dispatch) => {
+export const loginUser = (userData, callback) => (dispatch) => {
   http
     .post(`${userAPI}/login`, userData)
     .then((res) => {
+      const { token } = res.data;
       quickNotification('Login Successful');
 
-      // Save token to localStorage
+      // Save token to storage
+      AsyncStorage.setItem(storedJWTname, token).catch(() => {
+        quickNotification('Could not save your credentials');
+      });
 
       // Set Authorization header
-      setAuthToken(res.data.token);
+      setAuthToken(token);
 
       // Decode token to get user data
+      const decodedToken = jwtDecode(token);
 
       // Set user in auth reducer
+      dispatch({
+        type: actionTypes.SET_CURRENT_USER,
+        payload: decodedToken,
+      });
 
-      navigation.replace('Tab');
+      callback();
     })
     .catch((err) => {
       dispatch({
@@ -40,4 +57,44 @@ export const loginUser = (userData, navigation) => (dispatch) => {
         payload: err.response.data,
       });
     });
+};
+
+export const logoutUser = () => (dispatch) => {
+  // Remove token from storage
+  AsyncStorage.removeItem(storedJWTname).catch(() => {
+    quickNotification('Could not remove your saved credentials');
+  });
+
+  // Remove Authorization header
+  removeAuthToken();
+
+  // Remove user from auth reducer
+  dispatch({
+    type: actionTypes.REMOVE_CURRENT_USER,
+  });
+};
+
+export const checkSavedUserThenLogin = (callback) => (dispatch) => {
+  AsyncStorage.getItem(storedJWTname).then((token) => {
+    if (token) {
+      // Set Authorization header
+      setAuthToken(token);
+
+      // Decode token to get user data
+      const decodedToken = jwtDecode(token);
+
+      // Check for expired token
+      const currentTime = Date.now() / 1000;
+      if (decodedToken.exp && decodedToken.exp < currentTime) {
+        dispatch(logoutUser());
+      } else {
+        // Set user
+        dispatch({
+          type: actionTypes.SET_CURRENT_USER,
+          payload: decodedToken,
+        });
+        callback();
+      }
+    }
+  });
 };

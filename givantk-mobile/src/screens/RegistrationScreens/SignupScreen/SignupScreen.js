@@ -1,14 +1,15 @@
-import { View } from 'react-native';
 import { connect } from 'react-redux';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import { colors } from '../../../assets/styles/base';
+import { signupUser } from '../../../store/actions/authActions';
 import { styles } from './SignupScreenStyles';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
 import Header from '../../../components/RegistrationsScreensComponents/SignupScreenComponents/Header/Header';
+import quickNotification from '../../../assets/utils/quickNotification';
 import SignupInputs from '../../../components/RegistrationsScreensComponents/SignupScreenComponents/SignupInputs/SignupInputs';
-import { signupUser } from '../../../store/actions/authActions';
 
 class SignupScreen extends React.Component {
   static navigationOptions = () => ({
@@ -20,7 +21,13 @@ class SignupScreen extends React.Component {
 
   handleSignup = (user) => {
     const { navigation, onSignupUser } = this.props;
-    onSignupUser(user, navigation);
+
+    const callback = () => {
+      quickNotification('Successfully Signed Up, Please Login');
+      navigation.navigate('Login');
+    };
+
+    onSignupUser(user, callback);
   };
 
   handleSignupWithFacebook = () => {

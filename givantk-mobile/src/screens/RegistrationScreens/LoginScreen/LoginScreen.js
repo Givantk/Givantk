@@ -4,12 +4,17 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import { colors } from '../../../assets/styles/base';
-import { loginUser } from '../../../store/actions/authActions';
+
+import {
+  loginUser,
+  checkSavedUserThenLogin,
+} from '../../../store/actions/authActions';
 import { styles } from './LoginScreenStyles';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
 import DefaultButton from '../../../components/commons/UI/DefaultButton/DefaultButton';
 import DefaultTextInput from '../../../components/commons/UI/DefaultTextInput/DefaultTextInput';
 import Header from '../../../components/RegistrationsScreensComponents/SignupScreenComponents/Header/Header';
+import store from '../../../store/createStore';
 
 class LoginScreen extends React.Component {
   static navigationOptions = () => ({
@@ -24,11 +29,26 @@ class LoginScreen extends React.Component {
     password: '',
   };
 
+  componentDidMount() {
+    const { navigation } = this.props;
+
+    const callback = () => {
+      navigation.replace('Tab');
+    };
+    // Check if user has previously signed in
+    store.dispatch(checkSavedUserThenLogin(callback));
+  }
+
   handleLogin = () => {
     const { navigation, onLoginUser } = this.props;
 
     const { email, password } = this.state;
-    onLoginUser({ email, password }, navigation);
+
+    const callback = () => {
+      navigation.replace('Tab');
+    };
+
+    onLoginUser({ email, password }, callback);
   };
 
   onChangeTextValue = (name, value) => {
