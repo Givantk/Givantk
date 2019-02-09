@@ -31,10 +31,6 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
   },
-  input: {
-    borderColor: colors.primary,
-    backgroundColor: colors.trueWhite,
-  },
   pickerContainer: {
     backgroundColor: colors.trueWhite,
     borderRadius: 5,

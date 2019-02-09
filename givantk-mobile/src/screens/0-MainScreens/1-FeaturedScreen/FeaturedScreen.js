@@ -50,7 +50,6 @@ class FeaturedScreen extends React.Component {
             placeholder="Find a service"
             placeholderTextColor={colors.gray02}
             style={styles.searchInput}
-            neverError
           />
           <TouchableWithoutFeedback onPress={this.navigateToSearchScreen}>
             <Icon type="Feather" name="search" style={styles.searchIcon} />

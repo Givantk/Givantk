@@ -1,17 +1,19 @@
 import { connect } from 'react-redux';
-import { Icon, Label, Picker, Textarea, Button } from 'native-base';
+import { Icon, Label, Textarea, Button } from 'native-base';
+import { TextArea } from 'react-native-ui-lib';
 import { View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { dimensions, colors } from '../../../assets/styles/base';
+import { dimensions } from '../../../assets/styles/base';
 import * as ServiceActions from '../../../store/actions/serviceActions';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
-import DefaultTextInput from '../../../components/commons/UI/DefaultTextInput/DefaultTextInput';
+import Picker from '../../../components/commons/UI/Picker/Picker';
 import quickNotification from '../../../assets/utils/quickNotification';
 import servicesNatures from '../../../assets/data/servicesNatures';
 import servicesTypes from '../../../assets/data/servicesTypes';
 import styles from './AddServiceScreenStyles';
+import TextInput from '../../../components/commons/UI/TextInput/TextInput';
 
 class AddServiceScreen extends React.Component {
   static navigationOptions = () => ({
@@ -44,8 +46,8 @@ class AddServiceScreen extends React.Component {
     const service = {
       name,
       description,
-      type,
-      nature,
+      type: type.value,
+      nature: nature.value,
     };
     const callback = () => {
       quickNotification('Service posted successfully');
@@ -57,64 +59,58 @@ class AddServiceScreen extends React.Component {
   render() {
     const { type, nature } = this.state;
     const { errors } = this.props;
-
     return (
       <View style={styles.container}>
         <AvoidKeyboard bottomPadding={120}>
-          <View style={styles.row}>
-            <Text style={styles.text}>Service Name </Text>
-            <View style={styles.inputContainer}>
-              <DefaultTextInput
-                name="name"
-                onChangeText={this.onChangeValue}
-                placeholder="Name"
-                style={styles.input}
-                error={errors.name}
-              />
-            </View>
-          </View>
+          <TextInput
+            title="Service Name"
+            placeholder="Type the service name"
+            error={errors.name}
+            name="name"
+            onChange={this.onChangeValue}
+          />
 
-          <View style={styles.row}>
+          {/* <View style={styles.row}>
             <Text style={[styles.text, { fontSize: 13 }]}>Service Type </Text>
             <View
               style={[
                 styles.pickerContainer,
                 errors.type ? styles.warningInput : {},
               ]}
-            >
-              <Picker
-                style={styles.picker}
-                selectedValue={type}
-                onValueChange={(v) => this.onChangeValue('type', v)}
-              >
-                <Picker.Item label="Type" value="" />
-                {servicesTypes.map((t) => (
-                  <Picker.Item label={t} value={t} key={t} />
-                ))}
-              </Picker>
-            </View>
-          </View>
+            > */}
+          <Picker
+            title="Service Type"
+            placeholder="Pick a type"
+            style={styles.picker}
+            name="type"
+            onChange={this.onChangeValue}
+            options={servicesTypes}
+            value={type}
+            error={errors.type}
+          />
+          {/* </View>
+          </View> */}
 
-          <View style={styles.row}>
-            <Text style={[styles.text, { fontSize: 13 }]}>Service Nature </Text>
+          {/* <View style={styles.row}> */}
+          {/* <Text style={[styles.text, { fontSize: 13 }]}>Service Nature </Text>
             <View
               style={[
                 styles.pickerContainer,
                 errors.nature ? styles.warningInput : {},
               ]}
-            >
-              <Picker
-                style={styles.picker}
-                selectedValue={nature}
-                onValueChange={(v) => this.onChangeValue('nature', v)}
-              >
-                <Picker.Item label="Nature" value="" />
-                {servicesNatures.map((n) => (
-                  <Picker.Item label={n} value={n} key={n} />
-                ))}
-              </Picker>
-            </View>
-          </View>
+            > */}
+          <Picker
+            title="Service Nature"
+            placeholder="Pick a nature"
+            style={styles.picker}
+            name="nature"
+            onChange={this.onChangeValue}
+            options={servicesNatures}
+            value={nature}
+            error={errors.nature}
+          />
+          {/* </View>
+          </View> */}
 
           <View style={styles.left}>
             <Label style={styles.text}>Description </Label>
@@ -128,6 +124,7 @@ class AddServiceScreen extends React.Component {
               onChangeText={(v) => this.onChangeValue('description', v)}
             />
           </View>
+          <TextArea title="DS" placeholder="hihi" />
 
           {/* <View style={styles.row}>
             <Text style={styles.text}>Do you have a specific budget? </Text>
