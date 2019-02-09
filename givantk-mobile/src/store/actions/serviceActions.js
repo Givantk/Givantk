@@ -34,7 +34,7 @@ export const createService = (service, callback) => (dispatch) => {
       dispatch({
         type: actionTypes.CREATE_SERVICE_FINISH,
       });
-      callback();
+      if (callback) callback();
     })
     .catch((err) => {
       dispatch({

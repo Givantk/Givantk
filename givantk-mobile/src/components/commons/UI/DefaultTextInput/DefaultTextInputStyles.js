@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
     margin: gaps.sm,
     marginBottom: 0,
     padding: gaps.xsm,
+    paddingLeft: 10,
   },
   warningText: {
     fontSize: 8.5,
@@ -25,6 +26,10 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0,
     backgroundColor: colors.transparent,
     width: '70%',
+  },
+  warningInput: {
+    borderColor: colors.red,
+    borderWidth: 2,
   },
 });
 

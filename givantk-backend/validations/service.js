@@ -32,6 +32,10 @@ module.exports = validateService = (data) => {
     errors.nature = 'Nature is required';
   }
 
+  if (Validator.isEmpty(data.type)) {
+    errors.type = 'Type is required';
+  }
+
   // start_time
   if (data.start_time)
     if (

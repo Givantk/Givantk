@@ -12,11 +12,7 @@ const DefaultTextInput = (props) => {
         {...props}
         secureTextEntry={password}
         underlineColorAndroid="#00000000"
-        style={[
-          styles.textInput,
-          style,
-          error ? { borderColor: colors.red } : {},
-        ]}
+        style={[styles.textInput, style, error ? styles.warningInput : {}]}
         onChangeText={(value) => onChangeText(name, value)}
       />
 

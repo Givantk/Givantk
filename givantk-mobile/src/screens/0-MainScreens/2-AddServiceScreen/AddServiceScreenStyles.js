@@ -83,6 +83,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 20,
   },
+  warningInput: {
+    borderColor: colors.red,
+    borderWidth: 2,
+  },
 });
 
 export default styles;

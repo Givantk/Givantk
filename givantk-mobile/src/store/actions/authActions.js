@@ -15,7 +15,7 @@ export const signupUser = (userData, callback) => (dispatch) => {
   http
     .post(userAPI, userData)
     .then(() => {
-      callback();
+      if (callback) callback();
     })
     .catch((err) => {
       dispatch({
@@ -49,7 +49,7 @@ export const loginUser = (userData, callback) => (dispatch) => {
         payload: decodedToken,
       });
 
-      callback();
+      if (callback) callback();
     })
     .catch((err) => {
       dispatch({
@@ -93,7 +93,7 @@ export const checkSavedUserThenLogin = (callback) => (dispatch) => {
           type: actionTypes.SET_CURRENT_USER,
           payload: decodedToken,
         });
-        callback();
+        if (callback) callback();
       }
     }
   });

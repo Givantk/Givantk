@@ -39,7 +39,7 @@ class AddServiceScreen extends React.Component {
   };
 
   onAddService = () => {
-    const { createService } = this.props;
+    const { createService, getAllServices } = this.props;
     const { name, type, nature, description } = this.state;
     const service = {
       name,
@@ -49,6 +49,7 @@ class AddServiceScreen extends React.Component {
     };
     const callback = () => {
       quickNotification('Service posted successfully');
+      getAllServices();
     };
     createService(service, callback);
   };
@@ -78,7 +79,7 @@ class AddServiceScreen extends React.Component {
             <View
               style={[
                 styles.pickerContainer,
-                errors.type ? { borderColor: colors.red } : {},
+                errors.type ? styles.warningInput : {},
               ]}
             >
               <Picker
@@ -99,7 +100,7 @@ class AddServiceScreen extends React.Component {
             <View
               style={[
                 styles.pickerContainer,
-                errors.nature ? { borderColor: colors.red } : {},
+                errors.nature ? styles.warningInput : {},
               ]}
             >
               <Picker
@@ -122,7 +123,7 @@ class AddServiceScreen extends React.Component {
             <Textarea
               style={[
                 styles.textarea,
-                errors.description ? { borderColor: colors.red } : {},
+                errors.description ? styles.warningInput : {},
               ]}
               onChangeText={(v) => this.onChangeValue('description', v)}
             />
@@ -154,6 +155,7 @@ class AddServiceScreen extends React.Component {
 AddServiceScreen.propTypes = {
   navigation: PropTypes.shape({}),
   createService: PropTypes.func,
+  getAllServices: PropTypes.func,
   errors: PropTypes.shape({}),
 };
 
@@ -163,6 +165,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   createService: ServiceActions.createService,
+  getAllServices: ServiceActions.getAllServices,
 };
 
 export default connect(

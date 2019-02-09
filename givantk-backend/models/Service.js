@@ -27,7 +27,10 @@ const ServiceSchema = new Schema({
     location: Boolean,
     helped_before: Boolean
   },
-  type: String, // 'ke' or 'es' or 'rc' or 'o' (knowledge exchange, everyday services, reach community, others)
+  type: {
+    type: String,
+    required: true
+  }, // 'ke' or 'es' or 'rc' or 'o' (knowledge exchange, everyday services, reach community, others)
   start_time: Date,
   end_time: Date,
   reveal_asker: Boolean,
