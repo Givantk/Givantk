@@ -4,8 +4,10 @@ import { View, TouchableWithoutFeedback } from 'react-native';
 import React from 'react';
 
 import { colors, headerHeight } from '../assets/styles/base';
+import * as actionTypes from '../store/actions/actionTypes';
 import BottomTabNavigator from './BottomTabNavigator';
 import screens from '../screens';
+import store from '../store/createStore';
 
 const MainNavigator = createStackNavigator(
   {
@@ -29,6 +31,9 @@ const MainNavigator = createStackNavigator(
 
     // We need to configure the header options only for the 'tab' screens only here
     navigationOptions: ({ navigation }) => {
+      // To clear the errors reducer every time the user navigates
+      store.dispatch({ type: actionTypes.SET_ERRORS, payload: {} });
+
       const screen = navigation.state.routeName;
 
       let headerTitle = '';

@@ -8,6 +8,7 @@ module.exports = validateService = (data) => {
   data.name = !isEmpty(data.name) ? data.name : '';
   data.description = !isEmpty(data.description) ? data.description : '';
   data.nature = !isEmpty(data.nature) ? data.nature : '';
+  data.type = !isEmpty(data.type) ? data.type : '';
 
   // name
   if (!Validator.isLength(data.name, { min: 2, max: 40 })) {
