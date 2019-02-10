@@ -65,11 +65,18 @@ const styles = StyleSheet.create({
     padding: 10,
     fontFamily: fontTypes.main,
   },
+  disclaimer: {
+    textAlign: 'center',
+    fontFamily: fontTypes.main,
+    color: colors.disclaimer,
+    fontWeight: 'bold',
+  },
   footer: {
     flexDirection: 'row',
     paddingHorizontal: 20,
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginTop: 40,
   },
   cost: { color: colors.primary },
   footerLeft: {

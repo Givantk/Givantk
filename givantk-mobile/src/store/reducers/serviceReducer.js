@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   allServices: [],
   getAllServicesLoading: false,
   createServiceLoading: false,
+  proposeToServiceLoading: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -31,6 +32,18 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         createServiceLoading: false,
+      };
+
+    case actionTypes.PROPOSE_TO_SERVICE_START:
+      return {
+        ...state,
+        proposeToServiceLoading: true,
+      };
+
+    case actionTypes.PROPOSE_TO_SERVICE_FINISH:
+      return {
+        ...state,
+        proposeToServiceLoading: false,
       };
 
     default:

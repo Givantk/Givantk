@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { colors } from '../../../../assets/styles/base';
+import { colors, fontTypes } from '../../../../assets/styles/base';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -27,6 +27,15 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 20,
     padding: 10,
+  },
+  error: {
+    color: colors.red,
+    marginTop: -10,
+    fontWeight: 'bold',
+    fontFamily: fontTypes.main,
+  },
+  submitButtonContainer: {
+    marginTop: 30,
   },
 });
 

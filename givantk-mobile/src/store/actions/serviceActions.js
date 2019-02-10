@@ -46,3 +46,29 @@ export const createService = (service, callback) => (dispatch) => {
       });
     });
 };
+
+export const proposeToService = (serviceId, proposal, callback) => (
+  dispatch,
+) => {
+  dispatch({
+    type: actionTypes.PROPOSE_TO_SERVICE_START,
+  });
+
+  http
+    .post(`${serviceAPI}/propose/${serviceId}`, proposal)
+    .then(() => {
+      dispatch({
+        type: actionTypes.PROPOSE_TO_SERVICE_FINISH,
+      });
+      if (callback) callback();
+    })
+    .catch((err) => {
+      dispatch({
+        type: actionTypes.SET_ERRORS,
+        payload: err.response.data,
+      });
+      dispatch({
+        type: actionTypes.PROPOSE_TO_SERVICE_FINISH,
+      });
+    });
+};

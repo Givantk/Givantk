@@ -1,4 +1,6 @@
+import { connect } from 'react-redux';
 import { Icon } from 'native-base';
+import PropTypes from 'prop-types';
 
 import {
   View,
@@ -7,16 +9,41 @@ import {
   ScrollView,
   TouchableWithoutFeedback,
 } from 'react-native';
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-import { colors } from '../../../assets/styles/base';
 import styles from './ServiceScreenStyles';
 
-export default class ServiceScreen extends Component {
+class ServiceScreen extends Component {
   static navigationOptions = () => ({
     headerTitle: 'Service',
   });
+
+  state = {
+    loggedInUser: {
+      ownService: false,
+      appliedBefore: false,
+    },
+  };
+
+  componentDidMount() {
+    const { currentUser, navigation } = this.props;
+    const service = navigation.getParam('service', null);
+
+    if (currentUser._id === service.asker._id) {
+      this.setState((prevState) => ({
+        loggedInUser: { ...prevState.loggedInUser, ownService: true },
+      }));
+    }
+    if (
+      service.applicants.filter(
+        (applicant) => applicant.user !== currentUser._id,
+      ).length < service.applicants.length
+    ) {
+      this.setState((prevState) => ({
+        loggedInUser: { ...prevState.loggedInUser, appliedBefore: true },
+      }));
+    }
+  }
 
   navigateToAskerProfile = () => {
     const { navigation } = this.props;
@@ -38,6 +65,9 @@ export default class ServiceScreen extends Component {
   render() {
     const { navigation } = this.props;
     const service = navigation.getParam('service', null);
+
+    const { loggedInUser } = this.state;
+
     return (
       <ScrollView>
         <View style={styles.wrapper}>
@@ -59,15 +89,23 @@ export default class ServiceScreen extends Component {
 
           <Text style={styles.serviceTitle}>{service.name}</Text>
 
-          <View style={styles.addProposalButton}>
-            <Button title="Offer help" onPress={this.onPressOfferHelp} />
-          </View>
+          {loggedInUser.ownService || loggedInUser.appliedBefore || (
+            <View style={styles.addProposalButton}>
+              <Button title="Offer help" onPress={this.onPressOfferHelp} />
+            </View>
+          )}
 
           <View style={styles.content}>
             <Text style={styles.descriptionText}>
               {service.brief_description || service.description}
             </Text>
           </View>
+
+          {loggedInUser.appliedBefore && (
+            <Text style={styles.disclaimer}>
+              {'You successfully applied for this service 💪🏻'}
+            </Text>
+          )}
 
           <View style={styles.footer}>
             <Text style={styles.cost}>{service.cost}</Text>
@@ -84,4 +122,14 @@ export default class ServiceScreen extends Component {
 
 ServiceScreen.propTypes = {
   navigation: PropTypes.shape({}),
+  currentUser: PropTypes.shape({}),
 };
+
+const mapStateToProps = (state) => ({
+  currentUser: state.auth.user,
+});
+
+export default connect(
+  mapStateToProps,
+  null,
+)(ServiceScreen);

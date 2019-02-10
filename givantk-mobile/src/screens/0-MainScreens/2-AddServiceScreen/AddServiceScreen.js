@@ -41,7 +41,7 @@ class AddServiceScreen extends React.Component {
   };
 
   onAddService = () => {
-    const { createService, getAllServices } = this.props;
+    const { createService, getAllServices, navigation } = this.props;
     const { name, type, nature, description } = this.state;
     const service = {
       name,
@@ -52,6 +52,7 @@ class AddServiceScreen extends React.Component {
     const callback = () => {
       quickNotification('Service posted successfully');
       getAllServices();
+      navigation.replace('Tab');
     };
     createService(service, callback);
   };

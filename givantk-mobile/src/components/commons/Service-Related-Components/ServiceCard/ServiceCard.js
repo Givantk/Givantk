@@ -6,7 +6,7 @@ import React from 'react';
 import styles from './ServiceCardStyles';
 
 class ServiceCard extends React.PureComponent {
-  navigateToServiceScreen = () => {
+  onPressCard = () => {
     const { service } = this.props;
 
     const { navigation } = this.props;
@@ -15,7 +15,7 @@ class ServiceCard extends React.PureComponent {
     });
   };
 
-  navigateToAskerProfile = () => {
+  onPressAskerAvatar = () => {
     const { navigation } = this.props;
     navigation.navigate('Profile');
   };
@@ -23,7 +23,7 @@ class ServiceCard extends React.PureComponent {
   render() {
     const { service } = this.props;
     return (
-      <TouchableWithoutFeedback onPress={this.navigateToServiceScreen}>
+      <TouchableWithoutFeedback onPress={this.onPressCard}>
         <View style={styles.serviceCard}>
           <View style={styles.header}>
             {/* <TouchableWithoutFeedback onPress={this.navigateToAskerProfile}>
@@ -35,7 +35,7 @@ class ServiceCard extends React.PureComponent {
               />
             </TouchableWithoutFeedback> */}
             <View style={styles.headerRight}>
-              <TouchableWithoutFeedback onPress={this.navigateToAskerProfile}>
+              <TouchableWithoutFeedback onPress={this.onPressAskerAvatar}>
                 <View>
                   <Text style={styles.userName}>
                     {`${service.asker.first_name} ${service.asker.last_name}`}
