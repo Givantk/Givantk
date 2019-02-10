@@ -4,7 +4,6 @@ import {
   View,
   Text,
   Button,
-  Image,
   ScrollView,
   TouchableWithoutFeedback,
 } from 'react-native';
@@ -12,18 +11,11 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 import { colors } from '../../../assets/styles/base';
-import services from '../../../assets/data/fakeServices';
 import styles from './ServiceScreenStyles';
 
 export default class ServiceScreen extends Component {
   static navigationOptions = () => ({
     headerTitle: 'Service',
-    headerStyle: {
-      backgroundColor: colors.primary,
-    },
-    headerTitleStyle: {
-      color: colors.white,
-    },
   });
 
   navigateToAskerProfile = () => {
@@ -31,42 +23,49 @@ export default class ServiceScreen extends Component {
     navigation.navigate('Profile');
   };
 
-  render() {
-    const service = services[0];
+  onPressOfferHelp = () => {
     const { navigation } = this.props;
-    // const serviceId = navigation.getParam('_id', null);
-    // Then request for this service
+
+    // Get service from passed params
+    const service = navigation.getParam('service', null);
+
+    // Pass service to AddProposal Screen
+    navigation.navigate('AddProposal', {
+      service,
+    });
+  };
+
+  render() {
+    const { navigation } = this.props;
+    const service = navigation.getParam('service', null);
     return (
       <ScrollView>
         <View style={styles.wrapper}>
           <TouchableWithoutFeedback onPress={this.navigateToAskerProfile}>
             <View style={styles.header}>
-              <Image
+              {/* <Image
                 source={{
                   uri: service.asker.imageURL,
                 }}
                 style={styles.userImage}
-              />
+              /> */}
               <View style={styles.headerRight}>
-                <Text style={styles.userName}>{service.asker.name}</Text>
+                <Text style={styles.userName}>
+                  {`${service.asker.first_name} ${service.asker.last_name}`}
+                </Text>
               </View>
             </View>
           </TouchableWithoutFeedback>
 
-          <Text style={styles.serviceTitle}>{service.title}</Text>
+          <Text style={styles.serviceTitle}>{service.name}</Text>
 
           <View style={styles.addProposalButton}>
-            <Button
-              title="Offer help"
-              onPress={() => navigation.navigate('AddProposal')}
-            />
+            <Button title="Offer help" onPress={this.onPressOfferHelp} />
           </View>
 
           <View style={styles.content}>
             <Text style={styles.descriptionText}>
-              {service.description
-                ? service.description
-                : service.briefDescription}
+              {service.brief_description || service.description}
             </Text>
           </View>
 

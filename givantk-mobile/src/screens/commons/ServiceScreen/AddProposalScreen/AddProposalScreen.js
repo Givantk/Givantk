@@ -3,18 +3,12 @@ import { View, Text, Button } from 'react-native';
 import React, { Component } from 'react';
 
 import { colors, dimensions } from '../../../../assets/styles/base';
-import styles from './AddProposalScreenStyles';
 import services from '../../../../assets/data/fakeServices';
+import styles from './AddProposalScreenStyles';
 
 export default class AddProposalScreen extends Component {
   static navigationOptions = () => ({
     headerTitle: 'Add Proposal',
-    headerStyle: {
-      backgroundColor: colors.primary,
-    },
-    headerTitleStyle: {
-      color: colors.white,
-    },
   });
 
   onSubmitProposal = () => {
@@ -22,10 +16,13 @@ export default class AddProposalScreen extends Component {
   };
 
   render() {
-    const service = services[0];
+    const { navigation } = this.props;
+    const service = navigation.getParam('service', null);
+    console.log(service);
+
     return (
       <View style={styles.wrapper}>
-        <Text style={styles.serviceName}>{service.title}</Text>
+        <Text style={styles.serviceName}>{service.name}</Text>
         <Text style={styles.header}>My Proposal:</Text>
         <View style={{ width: dimensions.fullWidth * 0.88 }}>
           <Textarea style={styles.textarea} />

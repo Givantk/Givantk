@@ -7,8 +7,12 @@ import styles from './ServiceCardStyles';
 
 class ServiceCard extends React.PureComponent {
   navigateToServiceScreen = () => {
+    const { service } = this.props;
+
     const { navigation } = this.props;
-    navigation.navigate('Service');
+    navigation.navigate('Service', {
+      service,
+    });
   };
 
   navigateToAskerProfile = () => {
