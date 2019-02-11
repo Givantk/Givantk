@@ -86,13 +86,13 @@ function Settings() {
                                         </Form.Group>
 
                                         <Form.Group as={Row}>
-                                            <Form.Label column sm={4} className='text-white increase-font '>Limit published services per hour
+                                            <Form.Label column sm={4} className='text-white increase-font '>Limit published services / hour :
                                             </Form.Label>
                                             <Col sm={1}>
                                                 <Form.Control
                                                     inline
                                                     className='limit-width'
-                                                    placeholder="limit"
+                                                    placeholder="No"
                                                     name="limit-services"
                                                     id="limit-services"/>
                                             </Col>
@@ -105,7 +105,7 @@ function Settings() {
                                                 <Form.Control
                                                     inline
                                                     className='limit-width'
-                                                    placeholder="limit"
+                                                    placeholder="No"
                                                     name="limit-ads"
                                                     id="limit-ads"/>
                                             </Col>
@@ -114,7 +114,7 @@ function Settings() {
                                     </Form>
                                     <div className='text-center'>
                                         <Button variant="primary" className='mt-2' type="submit">
-                                            Log in
+                                            Submit
                                         </Button>
                                     </div>
 
