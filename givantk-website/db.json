@@ -7,7 +7,6 @@
             "email": "abdo@gmail.com",
             "location": "cairo",
             "date": "16/6/2018"
-
         }, {
             "id": 2,
             "first_name": "Hossam",
@@ -64,22 +63,70 @@
     "Messages": [
         {
             "sender": "mohamed2m2018@gmail.com",
-            "body": "Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear"
+            "body": "Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear",
+            "Replies": []
         }, {
             "sender": "Ahmed018@gmail.com",
-            "body": "Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear"
+            "body": "Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear",
+            "Replies": []
         }, {
             "sender": "gamals2019@gmail.com",
-            "body": "Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear"
+            "body": "Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear",
+            "Replies": []
         }, {
             "sender": "mohamed2m2018@gmail.com",
-            "body": "Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear"
+            "body": "Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear",
+            "Replies": []
         }, {
             "sender": "Ahmed018@gmail.com",
-            "body": "Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear"
+            "body": "Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear",
+            "Replies": []
         }, {
             "sender": "gamals2019@gmail.com",
-            "body": "Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear"
+            "body": "Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear",
+            "Replies": []
+        }
+    ],
+    "Announcements": [
+        {
+            "announcementBody": "hi bye",
+            "id": 1
+        }, {
+            "announcementBody": "hi bye",
+            "id": 2
+        }, {
+            "announcementBody": "hi bye",
+            "id": 3
+        }, {
+            "announcementBody": "haha",
+            "id": 4
+        }, {
+            "announcementBody": "fkfkf",
+            "id": 5
+        }, {
+            "announcementBody": "hahah",
+            "id": 6
+        }, {
+            "announcementBody": "ya 7biby",
+            "id": 7
+        }, {
+            "announcementBody": "gggl",
+            "id": 8
+        }, {
+            "announcementBody": "اهواك بلا امل",
+            "id": 9
+        }, {
+            "announcementBody": "kdkd",
+            "id": 10
+        }, {
+            "announcementBody": "dd",
+            "id": 11
+        }, {
+            "announcementBody": "dd",
+            "id": 12
+        }, {
+            "announcementBody": "اهواك واتمنى لو انساك وانسى روحى وياك",
+            "id": 13
         }
     ]
 }

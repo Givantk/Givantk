@@ -11,12 +11,26 @@ import {
 class Announcements extends Component {
 
     state = {
-        textareaVal: ""
+        textareaVal: "",
     }
 
     postAnnouncements = () => {
         console.log(this.state.textareaVal)
+        fetch('http://localhost:3001/Announcements', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({announcementBody: this.state.textareaVal})
+
+           
+        })
+        this.setState({
+            textareaVal:"",
+        })
     }
+
 
     render() {
 
@@ -59,6 +73,7 @@ class Announcements extends Component {
                                             <Form.Group>
                                                 <Form.Control
                                                     as='textarea'
+                                                    value={this.state.textareaVal}
                                                     onChange={(event) => {
                                                     this.setState({textareaVal: event.target.value});
                                                 }}

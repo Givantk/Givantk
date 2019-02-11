@@ -11,19 +11,27 @@ import {
 
 export default class Login extends Component {
 
+    state = {
+        email: "",
+        password: ""
+
+    }
+   
+
     LogMeIn = () => {
 
         /*when user clicks on login button login function from authentication class
-        is called, it flips the value of auth.isAuthenticated from true to false  
-        and then redirects the user into main index */  
+        is called, it flips the value of auth.isAuthenticated from true to false
+        and then redirects the user into main index */
 
         console.log(auth.isAuthenticated);
         auth.login(() => {
+
             this
                 .props
                 .history
                 .push('/')
-        })
+        },this.state.email,this.state.password)
 
         console.log(auth.isAuthenticated);
     }
@@ -43,7 +51,12 @@ export default class Login extends Component {
                                     <Form >
                                         <Form.Group controlId="formBasicEmail">
                                             <Form.Label className='text-white '>Email address</Form.Label>
-                                            <Form.Control type="email" placeholder="Enter email"/>
+                                            <Form.Control
+                                                type="email"
+                                                placeholder="Enter email"
+                                                onChange={(event) => {
+                                                this.setState({email: event.target.value});
+                                            }}/>
                                             <Form.Text className="text-white">
                                                 We'll never share your email with anyone else.
                                             </Form.Text>
@@ -51,7 +64,12 @@ export default class Login extends Component {
 
                                         <Form.Group controlId="formBasicPassword">
                                             <Form.Label className='text-white'>Password</Form.Label>
-                                            <Form.Control type="password" placeholder="Password"/>
+                                            <Form.Control
+                                                type="password"
+                                                placeholder="Password"
+                                                onChange={(event) => {
+                                                this.setState({password: event.target.value});
+                                            }}/>
                                         </Form.Group>
                                         <Form.Group controlId="formBasicChecbox">
                                             <Form.Check className='text-white ' type="checkbox" label="Check me out"/>
