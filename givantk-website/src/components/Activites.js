@@ -65,12 +65,22 @@ class Activites extends Component {
             body: JSON.stringify({MessageId: this.state.Activities[i].id, announcementBody: value})
 
         })
-   
+
     }
 
     deleteButtonClicked = (i) => {
-        console.log(i);
-        
+
+        /*A connection to the backend should be me made to delete component from the
+        database
+        */
+
+        const {Activities} = this.state;
+        //starting from index i delete one element only
+        Activities.splice(i, 1)
+
+        //update state to render the component
+        this.setState({Activities: Activities})
+
     }
 
     componentDidMount() {
