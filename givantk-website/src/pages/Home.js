@@ -26,7 +26,7 @@ function Home() {
 
                 <CustomCard
                     name='Cust. Messages'
-                    value='135,000$'
+                    value='135,000'
                     footer='Updated Now'
                     color='text-danger'
                     icon='fa-envelope '/>

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useEffect} from 'react';
 import {Container, Row, Col} from 'react-bootstrap';
 import CustomActivityCard from './CustomActivityCard';
 import CustomMessageCard from './CustomMessageCard';
@@ -12,8 +12,6 @@ class Activites extends Component {
         open: []
 
     }
-
- 
 
     /* cardStateValues is an array which holds the state whether it's true or false for every
     activity card
@@ -56,14 +54,23 @@ class Activites extends Component {
         this.setState({open: this.cardStateValues});
     }
 
-    replyButtonClicked=(i,val)=>{
+    replyButtonClicked = (value, i) => {
 
-        console.log(i);
-        console.log(val);
+        fetch('http://localhost:3001/message-replies/', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({MessageId: this.state.Activities[i].id, announcementBody: value})
+
+        })
+   
     }
 
-    deleteButtonClicked=(i)=>{
+    deleteButtonClicked = (i) => {
         console.log(i);
+        
     }
 
     componentDidMount() {
@@ -104,16 +111,14 @@ class Activites extends Component {
                                                         activity={ActivityObj}
                                                         changeCardStateValues={this.changeCardStateValues}
                                                         cardStateValues={this.cardStateValues}
-                                                        replyButtonClicked={this.replyButtonClicked}
-                                                        />
+                                                        replyButtonClicked={this.replyButtonClicked}/>
                                                 : <CustomActivityCard
                                                     key={i}
                                                     id={i}
                                                     activity={ActivityObj}
                                                     changeCardStateValues={this.changeCardStateValues}
                                                     cardStateValues={this.cardStateValues}
-                                                    deleteButtonClicked={this.deleteButtonClicked}
-                                                    />)
+                                                    deleteButtonClicked={this.deleteButtonClicked}/>)
                                         })}
 
                                 </Col>

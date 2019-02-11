@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Container, Row, Col} from 'react-bootstrap';
 
-class CardWithGrid extends Component {
+class CardGroup extends Component {
 
     render() {
         return (
@@ -37,4 +37,4 @@ class CardWithGrid extends Component {
     }
 }
 
-export default CardWithGrid;
+export default CardGroup;
