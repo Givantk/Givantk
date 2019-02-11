@@ -60,7 +60,10 @@ function Home() {
             ]}
                 specialColType
                 specialColColor='danger'
-                specialColText='Ban'/>
+                specialColText='Ban'
+                alterButtonText='Unban'
+                alterButtonColor='secondary'
+                />
             <Activites/>
 
         </div>

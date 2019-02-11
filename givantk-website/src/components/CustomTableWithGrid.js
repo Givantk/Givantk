@@ -10,6 +10,11 @@ class CustomTableWithGrid extends Component {
         UsersData: []
     }
 
+    buttonClicked=(index)=>{
+        console.log(index)
+        
+    }
+
     componentDidMount() {
         // fetching info stored in db.json by json server  you have to start json server
         // first fetch('https://givantk-backend.herokuapp.com/api/user/all') .then(resp
@@ -45,7 +50,11 @@ class CustomTableWithGrid extends Component {
                                         bg='dark'
                                         specialColType={this.props.specialColType}
                                         specialColColor={this.props.specialColColor}
-                                        specialColText={this.props.specialColText}/>
+                                        specialColText={this.props.specialColText}
+                                        buttonClicked={this.buttonClicked}
+                                        alterButtonText={this.props.alterButtonText}
+                                        alterButtonColor={this.props.alterButtonColor}
+                                        />
 
                                 </Col>
 

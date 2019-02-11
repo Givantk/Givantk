@@ -56,7 +56,10 @@ class Services extends Component {
                     titles={titles[0]}
                     specialColType
                     specialColColor='danger'
-                    specialColText='Ban'/>
+                    specialColText='Ban'
+                    alterButtonText='Unban'
+                    alterButtonColor='secondary'
+                    />
 
                 <CustomTableWithGrid
                     url='https://givantk-backend.herokuapp.com/api/profile/all'
@@ -65,7 +68,10 @@ class Services extends Component {
                     titles={titles[1]}
                     specialColType
                     specialColColor='danger'
-                    specialColText='Ban'/>
+                    specialColText='Ban'
+                    alterButtonText='Unban'
+                    alterButtonColor='secondary'
+                    />
 
                 <CustomTableWithGrid
                     url='https://givantk-backend.herokuapp.com/api/profile/all'
@@ -74,7 +80,10 @@ class Services extends Component {
                     titles={titles[1]}
                     specialColType
                     specialColColor='danger'
-                    specialColText='Ban'/>
+                    specialColText='Ban'
+                    alterButtonText='Unban'
+                    alterButtonColor='secondary'
+                    />
             </div>
         )
     }

@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import {MDBDataTable} from 'mdbreact';
 import {Button} from 'react-bootstrap';
-import {pick, isEqual, assign} from 'lodash' //to pick some keys only from an object not the whole object
+import {pick, isEqual} from 'lodash' //to pick some keys only from an object not the whole object
 class CustomTable extends Component {
 
     state = {
-        data: {}
+        data: {},
+        toggle: false
     }
 
     data = {
@@ -16,17 +17,39 @@ class CustomTable extends Component {
     /* This function will assign the data (that's provided as a parameter to the table), with
     the aid of the props => values and headers */
 
-    buttonClicked=(index)=>{
-        console.log(index)
-    }
-
     arrayDetectedinReievedData = (arrayFounded) => {
 
         console.log(arrayFounded);
 
     }
 
-    fillData = (values, headers,titles) => {
+    buttonClicked = (i) => {
+        this.setState({
+            toggle: !this.state.toggle
+        }, () => {
+
+            this.data.rows[i][this.props.headers[this.props.headers.length - 1]] = <Button
+                onClick={() => this.buttonClicked(i)}
+                size='sm'
+                variant={!this.state.toggle
+                ? 'danger'
+                : this.props.alterButtonColor}>{!this.state.toggle
+                    ? this.props.specialColText
+                        ? this.props.specialColText
+                        : 'ban'
+                    : this.props.alterButtonText}
+            </Button>
+
+            this.setState({data: this.data})
+        })
+
+        this
+            .props
+            .buttonClicked(i)
+
+    }
+
+    fillData = (values, headers, titles) => {
         titles.map((title) => {
             this
                 .data
@@ -35,13 +58,13 @@ class CustomTable extends Component {
             return true
         });
 
-        values.map((dataObj,i) => {
+        values.map((dataObj, i) => {
 
             //loop over the keys of the object
 
             for (let key in dataObj) {
                 if (Array.isArray(dataObj[key])) {
-                   dataObj[key]=dataObj[key].join(', ')
+                    dataObj[key] = dataObj[key].join(', ')
                 }
             }
 
@@ -55,17 +78,27 @@ class CustomTable extends Component {
                 /*assign the button element object (whose only property will has a key which is the same as the
                 last element in the header) with a button */
 
-                ButtonElement[headers[headers.length - 1]] = <Button onClick={()=>this.buttonClicked(i)}
+
+                /*when you connect this to the backend you have to check the banned value first
+                to choose which button you have to add to the object */      
+
+                ButtonElement[headers[headers.length - 1]] = <Button
+                    onClick={() => this.buttonClicked(i)}
                     size='sm'
-                    variant={this.props.specialColColor
-                    ? this.props.specialColColor
-                    : 'danger'}>{this.props.specialColColor
+                    variant={!this.props.toggle
+                    ? 'danger'
+                    : 'warning'}>{this.props.specialColText
                         ? this.props.specialColText
-                        : 'ban'}</Button>
+                        : 'ban'
+}
+                </Button>
 
                 //copy the values of button element object in the data object
 
-                assign(dataObj, ButtonElement);
+                dataObj = {
+                    ...dataObj,
+                    ...ButtonElement
+                }
 
                 /* from the recieved data only pick the ones in the headers in order to choose
                 some properties only of the object*/
@@ -102,7 +135,7 @@ class CustomTable extends Component {
         //if the props is not the same than fill the table data then change state
         if (!isEqual(this.props.values, nextprops.values)) {
 
-            this.fillData(nextprops.values, nextprops.headers,nextprops.titles);
+            this.fillData(nextprops.values, nextprops.headers, nextprops.titles);
             this.setState({data: this.data})
         }
     }
