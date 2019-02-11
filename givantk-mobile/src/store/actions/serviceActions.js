@@ -1,7 +1,7 @@
 import * as actionTypes from './actionTypes';
 import http, { serviceAPI } from '../../assets/utils/httpService';
 
-export const getAllServices = () => (dispatch) => {
+export const getAllServices = (callback) => (dispatch) => {
   dispatch({
     type: actionTypes.GET_ALL_SERVICES_START,
   });
@@ -12,6 +12,7 @@ export const getAllServices = () => (dispatch) => {
         type: actionTypes.GET_ALL_SERVICES_FINISH,
         payload: res.data,
       });
+      if (callback) callback();
     })
     .catch((err) => {
       dispatch({
@@ -60,6 +61,7 @@ export const proposeToService = (serviceId, proposal, callback) => (
       dispatch({
         type: actionTypes.PROPOSE_TO_SERVICE_FINISH,
       });
+
       if (callback) callback();
     })
     .catch((err) => {
@@ -69,6 +71,31 @@ export const proposeToService = (serviceId, proposal, callback) => (
       });
       dispatch({
         type: actionTypes.PROPOSE_TO_SERVICE_FINISH,
+      });
+    });
+};
+
+export const getServiceById = (serviceId, callback) => (dispatch) => {
+  dispatch({
+    type: actionTypes.GET_SERVICE_START,
+  });
+
+  http
+    .get(`${serviceAPI}/${serviceId}`)
+    .then((res) => {
+      dispatch({
+        type: actionTypes.GET_SERVICE_FINISH,
+        payload: res.data,
+      });
+      if (callback) callback();
+    })
+    .catch((err) => {
+      dispatch({
+        type: actionTypes.SET_ERRORS,
+        payload: err.response.data,
+      });
+      dispatch({
+        type: actionTypes.GET_SERVICE_FINISH,
       });
     });
 };

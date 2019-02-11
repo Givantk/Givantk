@@ -7,9 +7,8 @@ import React from 'react';
 import { colors } from '../../../assets/styles/base';
 import * as ServiceActions from '../../../store/actions/serviceActions';
 import DefaultTextInput from '../../../components/commons/UI/DefaultTextInput/DefaultTextInput';
+import Loading from '../../../components/commons/UI/Loading/Loading';
 import ServiceCard from '../../../components/commons/Service-Related-Components/ServiceCard/ServiceCard';
-
-// import services from '../../../assets/data/fakeServices';
 import styles from './FeaturedScreenStyles';
 
 class FeaturedScreen extends React.Component {
@@ -41,7 +40,7 @@ class FeaturedScreen extends React.Component {
   };
 
   render() {
-    const { allServices } = this.props;
+    const { allServices, getAllServicesLoading } = this.props;
 
     return (
       <View style={styles.container}>
@@ -55,6 +54,8 @@ class FeaturedScreen extends React.Component {
             <Icon type="Feather" name="search" style={styles.searchIcon} />
           </TouchableWithoutFeedback>
         </View>
+
+        {getAllServicesLoading && <Loading />}
 
         {allServices && (
           <FlatList
@@ -73,10 +74,13 @@ FeaturedScreen.propTypes = {
   navigation: PropTypes.shape({}),
   allServices: PropTypes.arrayOf(PropTypes.shape({})),
   getAllServices: PropTypes.func,
+  getAllServicesLoading: PropTypes.bool,
 };
+
 const mapStateToProps = (state) => ({
   errors: state.errors,
   allServices: state.service.allServices,
+  getAllServicesLoading: state.service.getAllServicesLoading,
 });
 
 const mapDispatchToProps = {

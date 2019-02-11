@@ -2,9 +2,12 @@ import * as actionTypes from '../actions/actionTypes';
 
 const INITIAL_STATE = {
   allServices: [],
+  selectedService: [],
+
   getAllServicesLoading: false,
   createServiceLoading: false,
   proposeToServiceLoading: false,
+  getServiceLoading: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -44,6 +47,21 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         proposeToServiceLoading: false,
+      };
+
+    case actionTypes.GET_SERVICE_START:
+      return {
+        ...state,
+        getServiceLoading: true,
+      };
+
+    case actionTypes.GET_SERVICE_FINISH:
+      return {
+        ...state,
+        getServiceLoading: false,
+        selectedService: action.payload
+          ? action.payload
+          : [...state.selectedService],
       };
 
     default:

@@ -1,5 +1,5 @@
 import { Toast } from 'native-base';
-import { colors } from '../styles/base';
+import { colors } from '../../../../assets/styles/base';
 
 const quickNotification = (notification) =>
   Toast.show({

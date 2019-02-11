@@ -9,11 +9,12 @@ import { dimensions } from '../../../assets/styles/base';
 import * as ServiceActions from '../../../store/actions/serviceActions';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
 import Picker from '../../../components/commons/UI/Picker/Picker';
-import quickNotification from '../../../assets/utils/quickNotification';
+import QuickNotification from '../../../components/commons/UI/QuickNotification/QuickNotification';
 import servicesNatures from '../../../assets/data/servicesNatures';
 import servicesTypes from '../../../assets/data/servicesTypes';
 import styles from './AddServiceScreenStyles';
 import TextInput from '../../../components/commons/UI/TextInput/TextInput';
+import Loading from '../../../components/commons/UI/Loading/Loading';
 
 class AddServiceScreen extends React.Component {
   static navigationOptions = () => ({
@@ -50,7 +51,7 @@ class AddServiceScreen extends React.Component {
       nature: nature.value,
     };
     const callback = () => {
-      quickNotification('Service posted successfully');
+      QuickNotification('Service posted successfully');
       getAllServices();
       navigation.replace('Tab');
     };
@@ -59,7 +60,7 @@ class AddServiceScreen extends React.Component {
 
   render() {
     const { type, nature } = this.state;
-    const { errors } = this.props;
+    const { errors, createServiceLoading } = this.props;
     return (
       <View style={styles.container}>
         <AvoidKeyboard bottomPadding={120}>
@@ -140,9 +141,12 @@ class AddServiceScreen extends React.Component {
           </View> */}
 
           <View style={styles.row}>
-            <Button style={styles.addButton} onPress={this.onAddService}>
-              <Text style={styles.addButtonText}>ADD</Text>
-            </Button>
+            {createServiceLoading && <Loading />}
+            {createServiceLoading || (
+              <Button style={styles.addButton} onPress={this.onAddService}>
+                <Text style={styles.addButtonText}>ADD</Text>
+              </Button>
+            )}
           </View>
         </AvoidKeyboard>
       </View>
@@ -155,10 +159,12 @@ AddServiceScreen.propTypes = {
   createService: PropTypes.func,
   getAllServices: PropTypes.func,
   errors: PropTypes.shape({}),
+  createServiceLoading: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
   errors: state.errors,
+  createServiceLoading: state.service.createServiceLoading,
 });
 
 const mapDispatchToProps = {
