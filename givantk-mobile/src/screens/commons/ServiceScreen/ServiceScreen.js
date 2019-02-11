@@ -12,6 +12,7 @@ import {
 import React, { Component } from 'react';
 
 import styles from './ServiceScreenStyles';
+import Loading from '../../../components/commons/UI/Loading/Loading';
 
 class ServiceScreen extends Component {
   static navigationOptions = () => ({
@@ -19,6 +20,7 @@ class ServiceScreen extends Component {
   });
 
   state = {
+    service: null,
     loggedInUser: {
       ownService: false,
       appliedBefore: false,
@@ -26,26 +28,60 @@ class ServiceScreen extends Component {
   };
 
   componentDidMount() {
-    const { currentUser, navigation } = this.props;
-    const service = navigation.getParam('service', null);
+    const { navigation } = this.props;
 
-    if (currentUser._id === service.asker._id) {
-      this.setState((prevState) => ({
-        loggedInUser: { ...prevState.loggedInUser, ownService: true },
-      }));
-    }
-    if (
-      service.applicants.filter(
-        (applicant) => applicant.user !== currentUser._id,
-      ).length < service.applicants.length
-    ) {
-      this.setState((prevState) => ({
-        loggedInUser: { ...prevState.loggedInUser, appliedBefore: true },
-      }));
-    }
+    const { service } = navigation.state.params;
+
+    this.setService(service);
   }
 
-  navigateToAskerProfile = () => {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (!nextProps.allServices || !prevState.service || !nextProps.currentUser)
+      return {};
+
+    const { currentUser } = nextProps;
+
+    // Updating service in local state through allServices passed through Redux store
+    const currentService = nextProps.allServices.find(
+      (s) => s._id === prevState.service._id,
+    );
+
+    const ownService = currentUser._id === currentService.asker._id;
+
+    const appliedBefore =
+      currentService.applicants.filter(
+        (applicant) => applicant.user !== currentUser._id,
+      ).length < currentService.applicants.length;
+
+    return {
+      service: currentService,
+      loggedInUser: {
+        ownService,
+        appliedBefore,
+      },
+    };
+  }
+
+  setService = (service) => {
+    const { currentUser } = this.props;
+
+    const ownService = currentUser._id === service.asker._id;
+
+    const appliedBefore =
+      service.applicants.filter(
+        (applicant) => applicant.user !== currentUser._id,
+      ).length < service.applicants.length;
+
+    this.setState(() => ({
+      service,
+      loggedInUser: {
+        ownService,
+        appliedBefore,
+      },
+    }));
+  };
+
+  onPressOnAsker = () => {
     const { navigation } = this.props;
     navigation.navigate('Profile');
   };
@@ -63,15 +99,14 @@ class ServiceScreen extends Component {
   };
 
   render() {
-    const { navigation } = this.props;
-    const service = navigation.getParam('service', null);
+    const { service, loggedInUser } = this.state;
 
-    const { loggedInUser } = this.state;
+    if (!service) return <Loading />;
 
     return (
       <ScrollView>
         <View style={styles.wrapper}>
-          <TouchableWithoutFeedback onPress={this.navigateToAskerProfile}>
+          <TouchableWithoutFeedback onPress={this.onPressOnAsker}>
             <View style={styles.header}>
               {/* <Image
                 source={{
@@ -127,6 +162,7 @@ ServiceScreen.propTypes = {
 
 const mapStateToProps = (state) => ({
   currentUser: state.auth.user,
+  allServices: state.service.allServices,
 });
 
 export default connect(

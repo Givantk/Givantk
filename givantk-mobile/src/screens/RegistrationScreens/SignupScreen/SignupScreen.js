@@ -8,7 +8,7 @@ import { styles } from './SignupScreenStyles';
 import * as AuthActions from '../../../store/actions/authActions';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
 import Header from '../../../components/RegistrationsScreensComponents/SignupScreenComponents/Header/Header';
-import quickNotification from '../../../assets/utils/quickNotification';
+import QuickNotification from '../../../components/commons/UI/QuickNotification/QuickNotification';
 import SignupInputs from '../../../components/RegistrationsScreensComponents/SignupScreenComponents/SignupInputs/SignupInputs';
 
 class SignupScreen extends React.Component {
@@ -23,7 +23,7 @@ class SignupScreen extends React.Component {
     const { navigation, signupUser } = this.props;
 
     const callback = () => {
-      quickNotification('Successfully Signed Up, Please Login');
+      QuickNotification('Successfully Signed Up, Please Login');
       navigation.navigate('Login');
     };
 

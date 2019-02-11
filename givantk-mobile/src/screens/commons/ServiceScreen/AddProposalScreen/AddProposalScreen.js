@@ -6,7 +6,8 @@ import React, { Component } from 'react';
 
 import { dimensions } from '../../../../assets/styles/base';
 import * as ServiceActions from '../../../../store/actions/serviceActions';
-import quickNotification from '../../../../assets/utils/quickNotification';
+import Loading from '../../../../components/commons/UI/Loading/Loading';
+import QuickNotification from '../../../../components/commons/UI/QuickNotification/QuickNotification';
 import styles from './AddProposalScreenStyles';
 
 class AddProposalScreen extends Component {
@@ -15,16 +16,28 @@ class AddProposalScreen extends Component {
   });
 
   state = {
+    service: null,
     proposal: '',
+  };
+
+  componentDidMount() {
+    const { navigation } = this.props;
+    const { service } = navigation.state.params;
+
+    this.setService(service);
+  }
+
+  setService = (service) => {
+    this.setState(() => ({ service }));
   };
 
   onSubmitProposal = () => {
     const { proposal } = this.state;
     const { proposeToService, getAllServices, navigation } = this.props;
-    const service = navigation.getParam('service', null);
+    const { service } = navigation.state.params;
 
     const callback = () => {
-      quickNotification('Successfully proposed to service');
+      QuickNotification('Successfully proposed to service');
       getAllServices();
       navigation.goBack();
     };
@@ -33,8 +46,10 @@ class AddProposalScreen extends Component {
   };
 
   render() {
-    const { navigation, errors } = this.props;
-    const service = navigation.getParam('service', null);
+    const { errors, proposeToServiceLoading } = this.props;
+    const { service } = this.state;
+
+    if (!service) return <Loading />;
 
     return (
       <View style={styles.wrapper}>
@@ -52,8 +67,11 @@ class AddProposalScreen extends Component {
               errors.unauthorized}
           </Text>
         </View>
-        <View style={styles.submitButtonContainer}>
-          <Button title="Submit Proposal" onPress={this.onSubmitProposal} />
+        <View style={styles.submitContainer}>
+          {proposeToServiceLoading && <Loading />}
+          {proposeToServiceLoading || (
+            <Button title="Submit Proposal" onPress={this.onSubmitProposal} />
+          )}
         </View>
       </View>
     );
@@ -65,10 +83,13 @@ AddProposalScreen.propTypes = {
   proposeToService: PropTypes.func,
   getAllServices: PropTypes.func,
   errors: PropTypes.shape({}),
+  proposeToServiceLoading: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
   errors: state.errors,
+  allServices: state.service.allServices,
+  proposeToServiceLoading: state.service.proposeToServiceLoading,
 });
 
 const mapDispatchToProps = {

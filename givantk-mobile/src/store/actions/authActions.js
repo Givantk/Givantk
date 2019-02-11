@@ -8,8 +8,9 @@ import http, {
   setAuthToken,
   removeAuthToken,
 } from '../../assets/utils/httpService';
-import quickNotification from '../../assets/utils/quickNotification';
+
 import storedJWTname from '../../assets/constants/storedJWTname';
+import QuickNotification from '../../components/commons/UI/QuickNotification/QuickNotification';
 
 export const signupUser = (userData, callback) => (dispatch) => {
   http
@@ -30,11 +31,11 @@ export const loginUser = (userData, callback) => (dispatch) => {
     .post(`${userAPI}/login`, userData)
     .then((res) => {
       const { token } = res.data;
-      quickNotification('Login Successful');
+      QuickNotification('Login Successful');
 
       // Save token to storage
       AsyncStorage.setItem(storedJWTname, token).catch(() => {
-        quickNotification('Could not save your credentials');
+        QuickNotification('Could not save your credentials');
       });
 
       // Set Authorization header
@@ -62,7 +63,7 @@ export const loginUser = (userData, callback) => (dispatch) => {
 export const logoutUser = () => (dispatch) => {
   // Remove token from storage
   AsyncStorage.removeItem(storedJWTname).catch(() => {
-    quickNotification('Could not remove your saved credentials');
+    QuickNotification('Could not remove your saved credentials');
   });
 
   // Remove Authorization header

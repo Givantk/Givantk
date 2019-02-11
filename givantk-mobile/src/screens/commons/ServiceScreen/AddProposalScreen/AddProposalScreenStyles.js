@@ -34,8 +34,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontFamily: fontTypes.main,
   },
-  submitButtonContainer: {
+  submitContainer: {
     marginTop: 30,
+    height: 100,
   },
 });
 
