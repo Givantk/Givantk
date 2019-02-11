@@ -4,7 +4,8 @@ import { Text, View, Image, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { logoutUser } from '../../../store/actions/authActions';
+import * as AuthActions from '../../../store/actions/authActions';
+import * as ProfileActions from '../../../store/actions/profileActions';
 import accountListItems from '../../../components/0-MainScreensComponents/5-AccountScreenComponents/data/AccountListItems';
 import CardList from '../../../components/commons/UI/CardList/CardList';
 import profile from '../../../assets/data/fakeProfile';
@@ -23,13 +24,19 @@ class AccountScreen extends React.Component {
   });
 
   onPressSignOut = () => {
-    const { navigation, onLogoutUser } = this.props;
+    const { navigation, logoutUser } = this.props;
     navigation.replace('Login');
-    onLogoutUser();
+    logoutUser();
   };
 
   render() {
-    const { navigation } = this.props;
+    const {
+      navigation,
+      currentUserProfile,
+      currentUserHasProfile,
+    } = this.props;
+
+    if (currentUserHasProfile) console.log(currentUserProfile.notifications);
 
     return (
       <View style={styles.container}>
@@ -74,14 +81,24 @@ class AccountScreen extends React.Component {
 
 AccountScreen.propTypes = {
   navigation: PropTypes.shape({}),
-  onLogoutUser: PropTypes.func,
+  currentUserProfile: PropTypes.shape({}),
+  currentUserHasProfile: PropTypes.bool,
+  logoutUser: PropTypes.func,
 };
 
+const mapStateToProps = (state) => ({
+  currentUser: state.auth.user,
+  currentUserProfile: state.profile.currentUserProfile,
+  currentUserHasProfile: state.profile.currentUserHasProfile,
+  errors: state.errors,
+});
+
 const mapDispatchToProps = {
-  onLogoutUser: logoutUser,
+  logoutUser: AuthActions.logoutUser,
+  getCurrentUserProfile: ProfileActions.getCurrentUserProfile,
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(AccountScreen);

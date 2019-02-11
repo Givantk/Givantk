@@ -3,7 +3,7 @@ const notifications = [
     title: 'Ali applied for your service',
     type: '', // ?
     navigateTo: {
-      type: 'service', // service or profile
+      kind: 'service', // service or profile
       _id: '',
     },
     isUserAssociated: true,
@@ -20,7 +20,7 @@ const notifications = [
     title: 'Mahmoud accepted your request',
     type: '',
     navigateTo: {
-      type: 'service',
+      kind: 'service',
       _id: '',
     },
     isUserAssociated: true,
@@ -37,7 +37,7 @@ const notifications = [
     title: 'Balaha applied for your service',
     type: '',
     navigateTo: {
-      type: 'service',
+      kind: 'service',
       _id: '',
     },
     isUserAssociated: true,

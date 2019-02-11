@@ -6,6 +6,8 @@ import React from 'react';
 import { colors } from '../../../assets/styles/base';
 import { styles } from './LoginScreenStyles';
 import * as AuthActions from '../../../store/actions/authActions';
+import * as ProfileActions from '../../../store/actions/profileActions';
+import * as ServiceActions from '../../../store/actions/serviceActions';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
 import DefaultButton from '../../../components/commons/UI/DefaultButton/DefaultButton';
 import DefaultTextInput from '../../../components/commons/UI/DefaultTextInput/DefaultTextInput';
@@ -25,25 +27,26 @@ class LoginScreen extends React.Component {
   };
 
   componentDidMount() {
-    const { navigation, checkSavedUserThenLogin } = this.props;
+    const { checkSavedUserThenLogin } = this.props;
 
-    const callback = () => {
-      navigation.replace('Tab');
-    };
     // Check if user has previously signed in
-    checkSavedUserThenLogin(callback);
+    checkSavedUserThenLogin(this.callbackAfterLogin);
   }
 
+  callbackAfterLogin = () => {
+    const { navigation, getAllServices, getCurrentUserProfile } = this.props;
+
+    navigation.replace('Tab');
+    getAllServices();
+    getCurrentUserProfile();
+  };
+
   handleLogin = () => {
-    const { navigation, loginUser } = this.props;
+    const { loginUser } = this.props;
 
     const { email, password } = this.state;
 
-    const callback = () => {
-      navigation.replace('Tab');
-    };
-
-    loginUser({ email, password }, callback);
+    loginUser({ email, password }, this.callbackAfterLogin);
   };
 
   onChangeTextValue = (name, value) => {
@@ -112,6 +115,8 @@ LoginScreen.propTypes = {
   navigation: PropTypes.shape({}),
   loginUser: PropTypes.func,
   checkSavedUserThenLogin: PropTypes.func,
+  getAllServices: PropTypes.func,
+  getCurrentUserProfile: PropTypes.func,
   errors: PropTypes.shape({}),
 };
 
@@ -122,6 +127,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   loginUser: AuthActions.loginUser,
   checkSavedUserThenLogin: AuthActions.checkSavedUserThenLogin,
+  getAllServices: ServiceActions.getAllServices,
+  getCurrentUserProfile: ProfileActions.getCurrentUserProfile,
 };
 
 export default connect(

@@ -58,7 +58,8 @@ module.exports = proposeToService = (req, res) => {
                   service: service._id
                 },
                 is_user_associated: true,
-                user_associated: applicantProfile._id
+                user_associated: applicantProfile.user,
+                user_profile_associated: applicantProfile._id
               });
               askerProfile.save();
             });

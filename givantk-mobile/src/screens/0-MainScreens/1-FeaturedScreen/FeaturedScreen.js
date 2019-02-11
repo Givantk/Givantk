@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import { colors } from '../../../assets/styles/base';
-import * as ServiceActions from '../../../store/actions/serviceActions';
 import DefaultTextInput from '../../../components/commons/UI/DefaultTextInput/DefaultTextInput';
 import Loading from '../../../components/commons/UI/Loading/Loading';
 import ServiceCard from '../../../components/commons/Service-Related-Components/ServiceCard/ServiceCard';
@@ -22,11 +21,6 @@ class FeaturedScreen extends React.Component {
       />
     ),
   });
-
-  componentDidMount() {
-    const { getAllServices } = this.props;
-    getAllServices();
-  }
 
   navigateToSearchScreen = () => {
     const { navigation } = this.props;
@@ -73,7 +67,6 @@ class FeaturedScreen extends React.Component {
 FeaturedScreen.propTypes = {
   navigation: PropTypes.shape({}),
   allServices: PropTypes.arrayOf(PropTypes.shape({})),
-  getAllServices: PropTypes.func,
   getAllServicesLoading: PropTypes.bool,
 };
 
@@ -83,11 +76,7 @@ const mapStateToProps = (state) => ({
   getAllServicesLoading: state.service.getAllServicesLoading,
 });
 
-const mapDispatchToProps = {
-  getAllServices: ServiceActions.getAllServices,
-};
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  null,
 )(FeaturedScreen);
