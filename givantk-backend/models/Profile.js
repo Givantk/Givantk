@@ -43,6 +43,10 @@ const ProfileSchema = new Schema({
         user_associated: {
           type: mongoose.Schema.Types.ObjectId,
           ref: 'user'
+        },
+        user_profile_associated: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'profile'
         }
       }
     ]

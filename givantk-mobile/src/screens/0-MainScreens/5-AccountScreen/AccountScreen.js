@@ -30,9 +30,13 @@ class AccountScreen extends React.Component {
   };
 
   render() {
-    const { navigation, currentUserProfile } = this.props;
+    const {
+      navigation,
+      currentUserProfile,
+      currentUserHasProfile,
+    } = this.props;
 
-    console.log(currentUserProfile);
+    if (currentUserHasProfile) console.log(currentUserProfile.notifications);
 
     return (
       <View style={styles.container}>
@@ -78,12 +82,14 @@ class AccountScreen extends React.Component {
 AccountScreen.propTypes = {
   navigation: PropTypes.shape({}),
   currentUserProfile: PropTypes.shape({}),
+  currentUserHasProfile: PropTypes.bool,
   logoutUser: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
   currentUser: state.auth.user,
   currentUserProfile: state.profile.currentUserProfile,
+  currentUserHasProfile: state.profile.currentUserHasProfile,
   errors: state.errors,
 });
 

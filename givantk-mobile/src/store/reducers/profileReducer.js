@@ -1,9 +1,10 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const INITIAL_STATE = {
-  hasProfile: false,
   currentUserProfile: null,
+  currentUserHasProfile: false,
   selectedProfile: null,
+  selectedUserHasProfile: false,
 
   getCurrentProfileLoading: false,
   getProfileLoading: false,
@@ -23,8 +24,8 @@ export default (state = INITIAL_STATE, action) => {
         getCurrentProfileLoading: false,
         currentUserProfile: action.payload.success
           ? action.payload.profile
-          : [...state.currentUserProfile],
-        hasProfile: !!action.payload.success,
+          : null,
+        currentUserHasProfile: !!action.payload.success,
       };
 
     case actionTypes.GET_PROFILE_START:
@@ -37,7 +38,8 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         getProfileLoading: false,
-        selectedProfile: action.payload,
+        selectedProfile: action.payload.success ? action.payload.profile : null,
+        selectedUserHasProfile: !!action.payload.success,
       };
 
     default:

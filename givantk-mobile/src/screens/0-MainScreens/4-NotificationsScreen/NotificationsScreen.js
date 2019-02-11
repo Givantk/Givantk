@@ -1,15 +1,27 @@
+import { connect } from 'react-redux';
 import { View, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import NotificationCard from '../../../components/0-MainScreensComponents/4-NotificationsScreenComponents/NotificationCard/NotificationCard';
-import notifications from '../../../assets/data/fakeNotifications';
+// import notifications from '../../../assets/data/fakeNotifications';
 import styles from './NotificationsScreenStyles';
 
-export default class NotificationsScreen extends React.Component {
+class NotificationsScreen extends React.Component {
   static navigationOptions = () => ({
     headerTitle: 'Notifications',
   });
+
+  state = {
+    notifications: null,
+  };
+
+  componentDidMount() {
+    const { currentUserProfile } = this.props;
+    this.setState(() => ({
+      notifications: currentUserProfile.notifications,
+    }));
+  }
 
   renderItem = (notification) => {
     const { navigation } = this.props;
@@ -22,6 +34,7 @@ export default class NotificationsScreen extends React.Component {
   };
 
   render() {
+    const { notifications } = this.state;
     return (
       <View style={styles.container}>
         <FlatList
@@ -37,4 +50,14 @@ export default class NotificationsScreen extends React.Component {
 
 NotificationsScreen.propTypes = {
   navigation: PropTypes.shape({}),
+  currentUserProfile: PropTypes.shape({}),
 };
+
+const mapStateToProps = (state) => ({
+  currentUserProfile: state.profile.currentUserProfile,
+});
+
+export default connect(
+  mapStateToProps,
+  null,
+)(NotificationsScreen);
