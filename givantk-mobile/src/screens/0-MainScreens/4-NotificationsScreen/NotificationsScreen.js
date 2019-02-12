@@ -13,17 +13,6 @@ class NotificationsScreen extends React.Component {
     headerTitle: 'Notifications',
   });
 
-  state = {
-    notifications: null,
-  };
-
-  componentDidMount() {
-    const { currentUserProfile } = this.props;
-    this.setState(() => ({
-      notifications: currentUserProfile.notifications,
-    }));
-  }
-
   renderItem = (notification) => {
     const { navigation } = this.props;
     return (
@@ -35,8 +24,11 @@ class NotificationsScreen extends React.Component {
   };
 
   render() {
-    const { notifications } = this.state;
-    const { getCurrentProfileLoading, currentUserHasProfile } = this.props;
+    const {
+      getCurrentProfileLoading,
+      currentUserHasProfile,
+      notifications,
+    } = this.props;
 
     if (getCurrentProfileLoading) {
       return <Loading />;
@@ -60,6 +52,7 @@ class NotificationsScreen extends React.Component {
 
 NotificationsScreen.propTypes = {
   navigation: PropTypes.shape({}),
+  notifications: PropTypes.shape({}),
   currentUserProfile: PropTypes.shape({}),
   getCurrentProfileLoading: PropTypes.bool,
   currentUserHasProfile: PropTypes.bool,

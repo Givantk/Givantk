@@ -22,10 +22,14 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         getCurrentProfileLoading: false,
-        currentUserProfile: action.payload.success
+        currentUserProfile: !action.payload
+          ? null
+          : action.payload.success
           ? action.payload.profile
           : null,
-        currentUserHasProfile: !!action.payload.success,
+        currentUserHasProfile: !action.payload
+          ? false
+          : !!action.payload.success,
       };
 
     case actionTypes.GET_PROFILE_START:
@@ -38,8 +42,14 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         getProfileLoading: false,
-        selectedProfile: action.payload.success ? action.payload.profile : null,
-        selectedUserHasProfile: !!action.payload.success,
+        selectedProfile: !action.payload
+          ? null
+          : action.payload.success
+          ? action.payload.profile
+          : null,
+        selectedUserHasProfile: !action.payload
+          ? false
+          : !!action.payload.success,
       };
 
     default:

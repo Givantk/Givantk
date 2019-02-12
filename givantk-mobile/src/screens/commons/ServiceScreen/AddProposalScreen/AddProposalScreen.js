@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 import { dimensions } from '../../../../assets/styles/base';
+import * as ProfileActions from '../../../../store/actions/profileActions';
 import * as ServiceActions from '../../../../store/actions/serviceActions';
 import Loading from '../../../../components/commons/UI/Loading/Loading';
 import QuickNotification from '../../../../components/commons/UI/QuickNotification/QuickNotification';
@@ -33,12 +34,18 @@ class AddProposalScreen extends Component {
 
   onSubmitProposal = () => {
     const { proposal } = this.state;
-    const { proposeToService, getAllServices, navigation } = this.props;
+    const {
+      proposeToService,
+      getAllServices,
+      getCurrentUserProfile,
+      navigation,
+    } = this.props;
     const { service } = navigation.state.params;
 
     const callback = () => {
       QuickNotification('Successfully proposed to service');
       getAllServices();
+      getCurrentUserProfile();
       navigation.goBack();
     };
 
@@ -82,6 +89,7 @@ AddProposalScreen.propTypes = {
   navigation: PropTypes.shape({}),
   proposeToService: PropTypes.func,
   getAllServices: PropTypes.func,
+  getCurrentUserProfile: PropTypes.func,
   errors: PropTypes.shape({}),
   proposeToServiceLoading: PropTypes.bool,
 };
@@ -95,6 +103,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   proposeToService: ServiceActions.proposeToService,
   getAllServices: ServiceActions.getAllServices,
+  getCurrentUserProfile: ProfileActions.getCurrentUserProfile,
 };
 
 export default connect(

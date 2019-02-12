@@ -1,20 +1,20 @@
 import { connect } from 'react-redux';
 import { Icon, Label, Textarea, Button } from 'native-base';
-import { TextArea } from 'react-native-ui-lib';
 import { View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import { dimensions } from '../../../assets/styles/base';
+import * as ProfileActions from '../../../store/actions/profileActions';
 import * as ServiceActions from '../../../store/actions/serviceActions';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
+import Loading from '../../../components/commons/UI/Loading/Loading';
 import Picker from '../../../components/commons/UI/Picker/Picker';
 import QuickNotification from '../../../components/commons/UI/QuickNotification/QuickNotification';
 import servicesNatures from '../../../assets/data/servicesNatures';
 import servicesTypes from '../../../assets/data/servicesTypes';
 import styles from './AddServiceScreenStyles';
 import TextInput from '../../../components/commons/UI/TextInput/TextInput';
-import Loading from '../../../components/commons/UI/Loading/Loading';
 
 class AddServiceScreen extends React.Component {
   static navigationOptions = () => ({
@@ -42,7 +42,12 @@ class AddServiceScreen extends React.Component {
   };
 
   onAddService = () => {
-    const { createService, getAllServices, navigation } = this.props;
+    const {
+      createService,
+      getAllServices,
+      getCurrentUserProfile,
+      navigation,
+    } = this.props;
     const { name, type, nature, description } = this.state;
     const service = {
       name,
@@ -53,6 +58,7 @@ class AddServiceScreen extends React.Component {
     const callback = () => {
       QuickNotification('Service posted successfully');
       getAllServices();
+      getCurrentUserProfile();
       navigation.replace('Tab');
     };
     createService(service, callback);
@@ -119,14 +125,15 @@ class AddServiceScreen extends React.Component {
           </View>
           <View style={{ width: dimensions.fullWidth * 0.88 }}>
             <Textarea
+              placeholder="Service Description"
               style={[
                 styles.textarea,
                 errors.description ? styles.warningInput : {},
               ]}
               onChangeText={(v) => this.onChangeValue('description', v)}
             />
+            <Text style={styles.error}>{errors.description}</Text>
           </View>
-          <TextArea title="DS" placeholder="hihi" />
 
           {/* <View style={styles.row}>
             <Text style={styles.text}>Do you have a specific budget? </Text>
@@ -143,8 +150,8 @@ class AddServiceScreen extends React.Component {
           <View style={styles.row}>
             {createServiceLoading && <Loading />}
             {createServiceLoading || (
-              <Button style={styles.addButton} onPress={this.onAddService}>
-                <Text style={styles.addButtonText}>ADD</Text>
+              <Button style={styles.submitButton} onPress={this.onAddService}>
+                <Text style={styles.submitButtonText}>ADD</Text>
               </Button>
             )}
           </View>
@@ -158,6 +165,7 @@ AddServiceScreen.propTypes = {
   navigation: PropTypes.shape({}),
   createService: PropTypes.func,
   getAllServices: PropTypes.func,
+  getCurrentUserProfile: PropTypes.func,
   errors: PropTypes.shape({}),
   createServiceLoading: PropTypes.bool,
 };
@@ -170,6 +178,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   createService: ServiceActions.createService,
   getAllServices: ServiceActions.getAllServices,
+  getCurrentUserProfile: ProfileActions.getCurrentUserProfile,
 };
 
 export default connect(

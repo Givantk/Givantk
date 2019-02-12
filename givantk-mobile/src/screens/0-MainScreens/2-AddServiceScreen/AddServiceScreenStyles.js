@@ -55,33 +55,29 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     padding: 10,
   },
-  warningText: {
-    fontSize: 8.5,
-    margin: 0,
-    padding: 0,
-    marginLeft: 10,
-    color: colors.red,
-    fontWeight: '100',
-    borderBottomWidth: 0,
-    width: '70%',
-  },
   budgetInputContainer: {
     width: '20%',
   },
-  addButton: {
-    width: 100,
-    justifyContent: 'center',
-    borderRadius: 20,
-    backgroundColor: colors.secondary,
-  },
-  addButtonText: {
-    color: colors.trueWhite,
-    fontWeight: 'bold',
-    fontSize: 20,
+  error: {
+    color: colors.red.lighten(0.5),
+    marginTop: -16,
+    fontSize: 14,
   },
   warningInput: {
     borderColor: colors.red,
     borderWidth: 2,
+  },
+  submitButton: {
+    width: 100,
+    justifyContent: 'center',
+    borderRadius: 20,
+    backgroundColor: colors.secondary,
+    marginTop: 10,
+  },
+  submitButtonText: {
+    color: colors.trueWhite,
+    fontWeight: 'bold',
+    fontSize: 20,
   },
 });
 
