@@ -117,8 +117,8 @@ class MakeProfileScreen extends Component {
 MakeProfileScreen.propTypes = {
   navigation: PropTypes.shape(),
   errors: PropTypes.shape(),
-  makeProfile: ProfileActions.func,
-  getCurrentUserProfile: ProfileActions.func,
+  makeProfile: PropTypes.func,
+  getCurrentUserProfile: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
