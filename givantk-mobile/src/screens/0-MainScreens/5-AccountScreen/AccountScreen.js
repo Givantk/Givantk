@@ -52,7 +52,7 @@ class AccountScreen extends React.Component {
           </TouchableWithoutFeedback>
         </View>
 
-        {/* Imagne and name */}
+        {/* Image and name */}
 
         <TouchableWithoutFeedback
           onPress={() =>

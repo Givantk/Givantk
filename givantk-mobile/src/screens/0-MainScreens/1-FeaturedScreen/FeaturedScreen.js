@@ -1,13 +1,12 @@
 import { connect } from 'react-redux';
 import { Icon } from 'native-base';
-import { View, FlatList, TouchableWithoutFeedback } from 'react-native';
+import { View, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import { colors } from '../../../assets/styles/base';
 import DefaultTextInput from '../../../components/commons/UI/DefaultTextInput/DefaultTextInput';
-import Loading from '../../../components/commons/UI/Loading/Loading';
-import ServiceCard from '../../../components/commons/Service-Related-Components/ServiceCard/ServiceCard';
+import ServicesList from '../../../components/commons/Service-Related-Components/ServicesList/ServicesList';
 import styles from './FeaturedScreenStyles';
 
 class FeaturedScreen extends React.Component {
@@ -27,14 +26,8 @@ class FeaturedScreen extends React.Component {
     navigation.navigate('SearchResults');
   };
 
-  renderItem = (service) => {
-    const { navigation } = this.props;
-
-    return <ServiceCard service={service.item} navigation={navigation} />;
-  };
-
   render() {
-    const { allServices, getAllServicesLoading } = this.props;
+    const { navigation, allServices, getAllServicesLoading } = this.props;
 
     return (
       <View style={styles.container}>
@@ -49,14 +42,11 @@ class FeaturedScreen extends React.Component {
           </TouchableWithoutFeedback>
         </View>
 
-        {getAllServicesLoading && <Loading />}
-
         {allServices && (
-          <FlatList
-            data={allServices}
-            keyExtractor={(item) => item._id}
-            showsVerticalScrollIndicator={false}
-            renderItem={this.renderItem}
+          <ServicesList
+            services={allServices}
+            loading={getAllServicesLoading}
+            navigation={navigation}
           />
         )}
       </View>

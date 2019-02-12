@@ -16,15 +16,13 @@ const ServicesIAppliedFor = (props) => {
   };
 
   return (
-    <View style={{ height: '100%' }}>
-      <FlatList
-        style={{ height: '100%' }}
-        data={services}
-        keyExtractor={(item) => item._id}
-        showsVerticalScrollIndicator={false}
-        renderItem={renderItem}
-      />
-    </View>
+    <FlatList
+      style={{ height: '100%' }}
+      data={services}
+      keyExtractor={(item) => item._id}
+      showsVerticalScrollIndicator={false}
+      renderItem={renderItem}
+    />
   );
 };
 

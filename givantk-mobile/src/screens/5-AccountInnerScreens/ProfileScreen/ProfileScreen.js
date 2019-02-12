@@ -4,15 +4,14 @@ import { Text, View, Image, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { colors } from '../../../assets/styles/base';
+import { colors, dimensions } from '../../../assets/styles/base';
 import * as ProfileActions from '../../../store/actions/profileActions';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
 import Loading from '../../../components/commons/UI/Loading/Loading';
 import fakeProfile from '../../../assets/data/fakeProfile';
-import ServicesIAppliedFor from '../../../components/0-MainScreensComponents/3-MyServicesScreenComponents/ServicesIAppliedFor/ServicesIAppliedFor';
-import ServicesIAskedFor from '../../../components/0-MainScreensComponents/3-MyServicesScreenComponents/ServicesIAskedFor/ServicesIAskedFor';
 import SnakeNavigator from '../../../components/commons/UI/SnakeNavigator/SnakeNavigator';
 import styles from './ProfileScreenStyles';
+import ServicesList from '../../../components/commons/Service-Related-Components/ServicesList/ServicesList';
 
 class ProfileScreen extends React.Component {
   // When navigating to this screen, we will always pass to it the userId in the
@@ -34,16 +33,31 @@ class ProfileScreen extends React.Component {
     getProfileByUserId(userId);
   }
 
-  getSnakeNavigatorContent = (profile) => [
-    {
-      name: `${profile.first_name} asked for`,
-      component: ServicesIAskedFor,
-    },
-    {
-      name: `${profile.first_name} helped in`,
-      component: ServicesIAppliedFor,
-    },
-  ];
+  getSnakeNavigatorContent = () => {
+    const { profile, getProfileLoading, navigation } = this.props;
+    return [
+      {
+        name: `${profile.first_name} asked for`,
+        component: () => (
+          <ServicesList
+            services={profile.services_asked_for}
+            loading={getProfileLoading}
+            navigation={navigation}
+          />
+        ),
+      },
+      {
+        name: `${profile.first_name} helped in`,
+        component: () => (
+          <ServicesList
+            services={profile.services_helped_in}
+            loading={getProfileLoading}
+            navigation={navigation}
+          />
+        ),
+      },
+    ];
+  };
 
   render() {
     const {
@@ -53,12 +67,9 @@ class ProfileScreen extends React.Component {
       selectedUserHasProfile,
     } = this.props;
 
-    if (getProfileLoading) {
-      return <Loading />;
-    }
-    if (!selectedUserHasProfile) {
-      return <Text>You have no profile yet</Text>;
-    }
+    if (getProfileLoading) return <Loading />;
+
+    if (!selectedUserHasProfile) return <Text>You have no profile yet</Text>;
 
     return (
       <View style={styles.container}>
@@ -92,9 +103,9 @@ class ProfileScreen extends React.Component {
 
           {/* Services */}
           <SnakeNavigator
-            content={this.getSnakeNavigatorContent(profile)}
+            content={this.getSnakeNavigatorContent()}
             navigation={navigation}
-            snakeWidth="65%"
+            snakeWidth={dimensions.fullWidth * 0.7}
           />
         </AvoidKeyboard>
       </View>

@@ -1,8 +1,9 @@
 import { Icon } from 'native-base';
-import { View, Text, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, Image, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import fakeProfile from '../../../../assets/data/fakeProfile';
 import styles from './ServiceCardStyles';
 
 class ServiceCard extends React.PureComponent {
@@ -16,8 +17,10 @@ class ServiceCard extends React.PureComponent {
   };
 
   onPressAskerAvatar = () => {
-    const { navigation } = this.props;
-    navigation.navigate('Profile');
+    const { navigation, service } = this.props;
+    navigation.navigate('Profile', {
+      userId: service.asker._id,
+    });
   };
 
   render() {
@@ -26,14 +29,16 @@ class ServiceCard extends React.PureComponent {
       <TouchableWithoutFeedback onPress={this.onPressCard}>
         <View style={styles.serviceCard}>
           <View style={styles.header}>
-            {/* <TouchableWithoutFeedback onPress={this.navigateToAskerProfile}>
-              <Image
-                source={{
-                  uri: service.asker.imageURL,
-                }}
-                style={styles.userImage}
-              />
-            </TouchableWithoutFeedback> */}
+            <TouchableWithoutFeedback onPress={this.navigateToAskerProfile}>
+              <View>
+                <Image
+                  source={{
+                    uri: fakeProfile.avatar,
+                  }}
+                  style={styles.userImage}
+                />
+              </View>
+            </TouchableWithoutFeedback>
             <View style={styles.headerRight}>
               <TouchableWithoutFeedback onPress={this.onPressAskerAvatar}>
                 <View>

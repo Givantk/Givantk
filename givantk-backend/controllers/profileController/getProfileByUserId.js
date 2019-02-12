@@ -6,6 +6,22 @@ const Profile = mongoose.model('profile');
 module.exports = getProfileById = (req, res) => {
   const errors = {};
   Profile.findOne({ user: req.params.user_id })
+    .populate({
+      path: 'services_asked_for',
+      populate: { path: 'asker' }
+    })
+    .populate({
+      path: 'services_helped_in',
+      populate: { path: 'asker' }
+    })
+    .populate({
+      path: 'services_bookmarked',
+      populate: { path: 'asker' }
+    })
+    .populate({
+      path: 'services_proposed_for',
+      populate: { path: 'asker' }
+    })
     .then((profile) => {
       if (!profile) {
         errors.noprofile = 'No profile';

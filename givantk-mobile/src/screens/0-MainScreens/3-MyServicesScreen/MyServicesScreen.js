@@ -1,14 +1,16 @@
+import { connect } from 'react-redux';
 import { Icon } from 'native-base';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import ServicesIAppliedFor from '../../../components/0-MainScreensComponents/3-MyServicesScreenComponents/ServicesIAppliedFor/ServicesIAppliedFor';
-import ServicesIAskedFor from '../../../components/0-MainScreensComponents/3-MyServicesScreenComponents/ServicesIAskedFor/ServicesIAskedFor';
+import { dimensions } from '../../../assets/styles/base';
+import Loading from '../../../components/commons/UI/Loading/Loading';
+import ServicesList from '../../../components/commons/Service-Related-Components/ServicesList/ServicesList';
 import SnakeNavigator from '../../../components/commons/UI/SnakeNavigator/SnakeNavigator';
 import styles from './MyServicesScreenStyles';
 
-export default class MyServicesScreen extends React.Component {
+class MyServicesScreen extends React.Component {
   static navigationOptions = () => ({
     tabBarLabel: 'My Services',
     tabBarIcon: ({ tintColor }) => (
@@ -20,19 +22,49 @@ export default class MyServicesScreen extends React.Component {
     ),
   });
 
-  SnakeNavigatorContent = [
-    { name: 'I Asked for', component: ServicesIAskedFor },
-    { name: 'I Helped in', component: ServicesIAppliedFor },
-  ];
+  getSnakeNavigatorContent = () => {
+    const { profile, getCurrentProfileLoading, navigation } = this.props;
+    return [
+      {
+        name: 'I asked for',
+        component: () => (
+          <ServicesList
+            services={profile.services_asked_for}
+            loading={getCurrentProfileLoading}
+            navigation={navigation}
+          />
+        ),
+      },
+      {
+        name: 'I helped in',
+        component: () => (
+          <ServicesList
+            services={profile.services_helped_in}
+            loading={getCurrentProfileLoading}
+            navigation={navigation}
+          />
+        ),
+      },
+    ];
+  };
 
   render() {
-    const { navigation } = this.props;
+    const {
+      navigation,
+      getCurrentProfileLoading,
+      currentUserHasProfile,
+    } = this.props;
+
+    if (getCurrentProfileLoading) return <Loading />;
+
+    if (!currentUserHasProfile) return <Text>You have no profile yet</Text>;
+
     return (
       <View style={styles.container}>
         <SnakeNavigator
-          content={this.SnakeNavigatorContent}
+          content={this.getSnakeNavigatorContent()}
           navigation={navigation}
-          snakeWidth="65%"
+          snakeWidth={dimensions.fullWidth * 0.7}
         />
       </View>
     );
@@ -41,4 +73,19 @@ export default class MyServicesScreen extends React.Component {
 
 MyServicesScreen.propTypes = {
   navigation: PropTypes.shape({}),
+  profile: PropTypes.shape({}),
+  getCurrentProfileLoading: PropTypes.bool,
+  currentUserHasProfile: PropTypes.bool,
 };
+
+const mapStateToProps = (state) => ({
+  profile: state.profile.currentUserProfile,
+  currentUserHasProfile: state.profile.currentUserHasProfile,
+  getCurrentProfileLoading: state.profile.getCurrentProfileLoading,
+  errors: state.errors,
+});
+
+export default connect(
+  mapStateToProps,
+  null,
+)(MyServicesScreen);
