@@ -99,4 +99,14 @@ router.get(
   serviceController.unproposeToService
 );
 
+// @route  GET api/service/search
+// @desc   search for a service
+// @access Private
+// @errors noservice error
+router.get(
+  '/search', 
+  serviceController.search
+);
+
+
 module.exports = router;
