@@ -1,9 +1,12 @@
-const accountListItems = (navigation) => [
+const accountListItems = (navigation, userId) => [
   {
     title: 'View Profile',
     iconName: 'ios-happy',
     iconType: 'Ionicons',
-    onPress: () => navigation.navigate('Profile'),
+    onPress: () =>
+      navigation.navigate('Profile', {
+        userId,
+      }),
   },
   {
     title: 'Bookmarked Services',

@@ -1,8 +1,9 @@
-import { View, TouchableWithoutFeedback, Text } from 'react-native';
+import { View, TouchableWithoutFeedback, Image, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import styles from './NotificationCardStyles';
+import profile from '../../../../assets/data/fakeProfile';
 
 class NotificationCard extends React.PureComponent {
   onPressAvatar = () => {
@@ -36,15 +37,12 @@ class NotificationCard extends React.PureComponent {
       <TouchableWithoutFeedback onPress={this.onPressBody}>
         <View style={styles.container}>
           <TouchableWithoutFeedback onPress={this.onPressAvatar}>
-            {/* <Image
+            <Image
               source={{
-                uri: notification.userAssociated.imageURL,
+                uri: profile.avatar,
               }}
               style={styles.image}
-            /> */}
-            <View style={{ marginRight: 20 }}>
-              <Text>(Avatar)</Text>
-            </View>
+            />
           </TouchableWithoutFeedback>
           <View style={styles.textContainer}>
             <Text style={styles.text}>{notification.title}</Text>

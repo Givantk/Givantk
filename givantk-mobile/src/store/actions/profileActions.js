@@ -25,3 +25,28 @@ export const getCurrentUserProfile = (callback) => (dispatch) => {
       });
     });
 };
+
+export const getProfileByUserId = (userId, callback) => (dispatch) => {
+  dispatch({
+    type: actionTypes.GET_PROFILE_START,
+  });
+
+  http
+    .get(`${profileAPI}/${userId}`)
+    .then((res) => {
+      dispatch({
+        type: actionTypes.GET_PROFILE_FINISH,
+        payload: res.data,
+      });
+      if (callback) callback();
+    })
+    .catch((err) => {
+      dispatch({
+        type: actionTypes.SET_ERRORS,
+        payload: err.response.data,
+      });
+      dispatch({
+        type: actionTypes.GET_PROFILE_FINISH,
+      });
+    });
+};

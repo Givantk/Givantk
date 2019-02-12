@@ -1,9 +1,9 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const INITIAL_STATE = {
-  currentUserProfile: null,
+  currentUserProfile: {},
   currentUserHasProfile: false,
-  selectedProfile: null,
+  selectedProfile: {},
   selectedUserHasProfile: false,
 
   getCurrentProfileLoading: false,

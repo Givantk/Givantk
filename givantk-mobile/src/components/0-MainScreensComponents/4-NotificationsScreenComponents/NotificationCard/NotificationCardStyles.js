@@ -25,12 +25,12 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     borderWidth: 2,
     borderColor: colors.secondary,
-    marginRight: 10,
+    marginRight: 20,
   },
   text: {
     fontFamily: fontTypes.mainBold,
   },
-  textContainer: { width: '80%' },
+  textContainer: { flex: 1 },
 });
 
 export default styles;

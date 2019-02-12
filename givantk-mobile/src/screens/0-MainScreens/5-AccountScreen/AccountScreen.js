@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import * as AuthActions from '../../../store/actions/authActions';
-import * as ProfileActions from '../../../store/actions/profileActions';
 import accountListItems from '../../../components/0-MainScreensComponents/5-AccountScreenComponents/data/AccountListItems';
 import CardList from '../../../components/commons/UI/CardList/CardList';
 import profile from '../../../assets/data/fakeProfile';
@@ -30,13 +29,7 @@ class AccountScreen extends React.Component {
   };
 
   render() {
-    const {
-      navigation,
-      currentUserProfile,
-      currentUserHasProfile,
-    } = this.props;
-
-    if (currentUserHasProfile) console.log(currentUserProfile.notifications);
+    const { navigation, currentUser } = this.props;
 
     return (
       <View style={styles.container}>
@@ -62,18 +55,20 @@ class AccountScreen extends React.Component {
         {/* Imagne and name */}
 
         <TouchableWithoutFeedback
-          onPress={() => navigation.navigate('Profile')}
+          onPress={() =>
+            navigation.navigate('Profile', { userId: currentUser._id })
+          }
         >
           <View style={styles.imageContainer}>
             <Image source={{ uri: profile.avatar }} style={styles.image} />
             <Text style={styles.userName}>
-              {profile.firstName} {profile.lastName}
+              {currentUser.first_name} {currentUser.last_name}
             </Text>
           </View>
         </TouchableWithoutFeedback>
 
         {/* List */}
-        <CardList items={accountListItems(navigation)} />
+        <CardList items={accountListItems(navigation, currentUser._id)} />
       </View>
     );
   }
@@ -81,21 +76,17 @@ class AccountScreen extends React.Component {
 
 AccountScreen.propTypes = {
   navigation: PropTypes.shape({}),
-  currentUserProfile: PropTypes.shape({}),
-  currentUserHasProfile: PropTypes.bool,
+  currentUser: PropTypes.shape({}),
   logoutUser: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
   currentUser: state.auth.user,
-  currentUserProfile: state.profile.currentUserProfile,
-  currentUserHasProfile: state.profile.currentUserHasProfile,
   errors: state.errors,
 });
 
 const mapDispatchToProps = {
   logoutUser: AuthActions.logoutUser,
-  getCurrentUserProfile: ProfileActions.getCurrentUserProfile,
 };
 
 export default connect(
