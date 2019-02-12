@@ -2,7 +2,6 @@ import React from 'react';
 import CardGroup from '../components/CardGroup';
 import CustomCard from '../components/CustomCard'
 import CustomTableWithGrid from '../components/CustomTableWithGrid';
-import Activites from '../components/Activites';
 
 function Home() {
     return (
@@ -64,7 +63,6 @@ function Home() {
                 alterButtonText='Unban'
                 alterButtonColor='secondary'
                 />
-            <Activites/>
 
         </div>
     )

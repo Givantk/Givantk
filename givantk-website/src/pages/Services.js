@@ -8,12 +8,12 @@ class Services extends Component {
         var headers = [
 
             [
-                'first_name',
-                'last_name',
-                'gender',
-                'phone_number',
-                'date_of_birth',
-                'ban'
+                'name',
+                'description',
+                'nature',
+                'state',
+                'date',
+                'delete'
 
             ],
             [
@@ -30,12 +30,12 @@ class Services extends Component {
 
         var titles = [
             [
-                'First Name',
-                'Last Name',
-                'Gender',
-                'Phone Number ',
-                'Date of birth',
-                'Ban user'
+                'Service name',
+                'Service description',
+                'Service nature',
+                'Service state',
+                'Service date',
+                'Delete service'
             ],
             [
                 'First Name',
@@ -50,14 +50,14 @@ class Services extends Component {
         return (
             <div>
                 <CustomTableWithGrid
-                    url='https://givantk-backend.herokuapp.com/api/profile/all'
-                    name='Personal Information'
+                    url='https://givantk-backend.herokuapp.com/api/service/all'
+                    name='Services info'
                     headers={headers[0]}
                     titles={titles[0]}
                     specialColType
                     specialColColor='danger'
-                    specialColText='Ban'
-                    alterButtonText='Unban'
+                    specialColText='Delete'
+                    alterButtonText='Undelete'
                     alterButtonColor='secondary'
                     />
 

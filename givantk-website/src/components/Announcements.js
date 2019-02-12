@@ -22,7 +22,9 @@ class Announcements extends Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({announcementBody: this.state.textareaVal})
+            body: JSON.stringify({announcementBody: this.state.textareaVal,
+            id:123
+            })
 
            
         })

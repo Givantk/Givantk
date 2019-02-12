@@ -1,4 +1,4 @@
-import React, {Component, useEffect} from 'react';
+import React, {Component} from 'react';
 import {Container, Row, Col} from 'react-bootstrap';
 import CustomActivityCard from './CustomActivityCard';
 import CustomMessageCard from './CustomMessageCard';
