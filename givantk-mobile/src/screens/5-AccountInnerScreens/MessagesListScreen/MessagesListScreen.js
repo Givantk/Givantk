@@ -1,32 +1,32 @@
-import { View, Text, StyleSheet, Button } from "react-native";
-import PropTypes from "prop-types";
-import React, { Component } from "react";
+import { View, Text, Button } from 'react-native';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-import { colors } from "../../../assets/styles/base";
-import styles from "./MessagesListScreenStyles";
+import { colors } from '../../../assets/styles/base';
+import styles from './MessagesListScreenStyles';
 
 export default class MessagesListScreen extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    headerTitle: "Messages List Screen",
+  static navigationOptions = () => ({
+    headerTitle: 'Messages List Screen',
     headerStyle: {
-      backgroundColor: colors.primary
+      backgroundColor: colors.primary,
     },
     headerTitleStyle: {
-      color: colors.white
-    }
+      color: colors.white,
+    },
   });
 
   render() {
+    const { navigation } = this.props;
     return (
       <View style={styles.wrapper}>
         <Text>Messages List Screen</Text>
-        <Button
-          title="Chat"
-          onPress={() => this.props.navigation.navigate("Chat")}
-        />
+        <Button title="Chat" onPress={() => navigation.navigate('Chat')} />
       </View>
     );
   }
 }
 
-MessagesListScreen.propTypes = {};
+MessagesListScreen.propTypes = {
+  navigation: PropTypes.shape(),
+};

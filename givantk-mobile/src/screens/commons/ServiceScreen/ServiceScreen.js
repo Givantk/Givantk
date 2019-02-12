@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import {
   View,
   Text,
+  Image,
   Button,
   ScrollView,
   TouchableWithoutFeedback,
@@ -13,6 +14,7 @@ import React, { Component } from 'react';
 
 import styles from './ServiceScreenStyles';
 import Loading from '../../../components/commons/UI/Loading/Loading';
+import fakeProfile from '../../../assets/data/fakeProfile';
 
 class ServiceScreen extends Component {
   static navigationOptions = () => ({
@@ -83,7 +85,10 @@ class ServiceScreen extends Component {
 
   onPressOnAsker = () => {
     const { navigation } = this.props;
-    navigation.navigate('Profile');
+    const { service } = this.state;
+    navigation.navigate('Profile', {
+      userId: service.asker._id,
+    });
   };
 
   onPressOfferHelp = () => {
@@ -108,12 +113,12 @@ class ServiceScreen extends Component {
         <View style={styles.wrapper}>
           <TouchableWithoutFeedback onPress={this.onPressOnAsker}>
             <View style={styles.header}>
-              {/* <Image
+              <Image
                 source={{
-                  uri: service.asker.imageURL,
+                  uri: fakeProfile.avatar,
                 }}
                 style={styles.userImage}
-              /> */}
+              />
               <View style={styles.headerRight}>
                 <Text style={styles.userName}>
                   {`${service.asker.first_name} ${service.asker.last_name}`}

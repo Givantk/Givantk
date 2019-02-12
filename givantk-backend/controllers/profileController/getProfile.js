@@ -12,7 +12,22 @@ module.exports = getProfile = (req, res) => {
       path: 'notifications.navigateTo.service',
       populate: { path: 'asker' }
     })
-    .populate('notifications.navigateTo.profile')
+    .populate({
+      path: 'services_asked_for',
+      populate: { path: 'asker' }
+    })
+    .populate({
+      path: 'services_helped_in',
+      populate: { path: 'asker' }
+    })
+    .populate({
+      path: 'services_bookmarked',
+      populate: { path: 'asker' }
+    })
+    .populate({
+      path: 'services_proposed_for',
+      populate: { path: 'asker' }
+    })
     .then((profile) => {
       if (!profile) {
         errors.noprofile = 'You have no profile';

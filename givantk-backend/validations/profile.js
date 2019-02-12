@@ -4,7 +4,18 @@ const Validator = require('validator');
 module.exports = function validateProfile(data) {
   let errors = {};
 
-  // skills
+  // For required fields
+  data.name = !isEmpty(data.description) ? data.description : '';
+  data.description = !isEmpty(data.phone_number) ? data.phone_number : '';
+
+  if (Validator.isEmpty(data.description)) {
+    errors.description = 'Description is required';
+  }
+
+  if (Validator.isEmpty(data.phone_number)) {
+    errors.phone_number = 'Phone number is required';
+  }
+
   if (!data.skills || data.skills.length === 0) {
     errors.skills = 'Skills are required';
   }

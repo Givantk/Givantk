@@ -25,6 +25,7 @@ const MainNavigator = createStackNavigator(
     AddProposal: screens.AddProposalScreen,
     VerifyIdentity: screens.VerifyIdentityScreen,
     MessagesList: screens.MessagesListScreen,
+    MakeProfile: screens.MakeProfileScreen,
   },
   {
     initialRouteName: 'Login',

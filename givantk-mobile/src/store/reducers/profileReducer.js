@@ -1,13 +1,14 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const INITIAL_STATE = {
-  currentUserProfile: null,
+  currentUserProfile: {},
   currentUserHasProfile: false,
-  selectedProfile: null,
+  selectedProfile: {},
   selectedUserHasProfile: false,
 
   getCurrentProfileLoading: false,
   getProfileLoading: false,
+  makeProfileLoading: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -22,10 +23,14 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         getCurrentProfileLoading: false,
-        currentUserProfile: action.payload.success
+        currentUserProfile: !action.payload
+          ? null
+          : action.payload.success
           ? action.payload.profile
           : null,
-        currentUserHasProfile: !!action.payload.success,
+        currentUserHasProfile: !action.payload
+          ? false
+          : !!action.payload.success,
       };
 
     case actionTypes.GET_PROFILE_START:
@@ -38,8 +43,26 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         getProfileLoading: false,
-        selectedProfile: action.payload.success ? action.payload.profile : null,
-        selectedUserHasProfile: !!action.payload.success,
+        selectedProfile: !action.payload
+          ? null
+          : action.payload.success
+          ? action.payload.profile
+          : null,
+        selectedUserHasProfile: !action.payload
+          ? false
+          : !!action.payload.success,
+      };
+
+    case actionTypes.MAKE_PROFILE_START:
+      return {
+        ...state,
+        makeProfileLoading: true,
+      };
+
+    case actionTypes.MAKE_PROFILE_FINISH:
+      return {
+        ...state,
+        makeProfileLoading: false,
       };
 
     default:

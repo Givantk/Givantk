@@ -27,6 +27,10 @@ export const signupUser = (userData, callback) => (dispatch) => {
 };
 
 export const loginUser = (userData, callback) => (dispatch) => {
+  dispatch({
+    type: actionTypes.LOGIN_USER_START,
+  });
+
   http
     .post(`${userAPI}/login`, userData)
     .then((res) => {
@@ -61,6 +65,10 @@ export const loginUser = (userData, callback) => (dispatch) => {
 };
 
 export const logoutUser = () => (dispatch) => {
+  dispatch({
+    type: actionTypes.LOGIN_USER_START,
+  });
+
   // Remove token from storage
   AsyncStorage.removeItem(storedJWTname).catch(() => {
     QuickNotification('Could not remove your saved credentials');

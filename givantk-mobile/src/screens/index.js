@@ -18,6 +18,7 @@ import SearchResultsScreen from './1-FeaturedInnerScreens/SearchResultsScreen/Se
 import ServiceScreen from './commons/ServiceScreen/ServiceScreen';
 import SignupScreen from './RegistrationScreens/SignupScreen/SignupScreen';
 import VerifyIdentityScreen from './5-AccountInnerScreens/VerifyIdentityScreen/VerifyIdentityScreen';
+import MakeProfileScreen from './5-AccountInnerScreens/MakeProfileScreen/MakeProfileScreen';
 
 const screens = {
   AccountScreen,
@@ -30,6 +31,7 @@ const screens = {
   InviteFriendsScreen,
   LoginScreen,
   MessagesListScreen,
+  MakeProfileScreen,
   NotificationsScreen,
   PaymentInfoScreen,
   PersonalInfoScreen,

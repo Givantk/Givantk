@@ -6,73 +6,50 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
-    alignItems: 'center',
     justifyContent: 'flex-start',
     padding: 20,
   },
-  text: {
-    fontWeight: 'bold',
-    fontSize: 15,
-    marginLeft: 10,
-  },
-  left: {
-    alignSelf: 'flex-start',
-    marginLeft: '2%',
-  },
-  tabBarIcon: { fontSize: 35 },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-around',
-  },
-  inputContainer: {
-    width: '60%',
-    margin: 10,
-    height: 50,
-    justifyContent: 'center',
-  },
-  pickerContainer: {
-    backgroundColor: colors.trueWhite,
-    borderRadius: 5,
-    borderColor: colors.primary,
-    borderWidth: 1,
-    width: '50%',
-    margin: 10,
-    height: 30,
-    justifyContent: 'center',
-    flexDirection: 'column',
+  input: {
+    height: 40,
   },
   picker: {
     color: colors.gray01,
   },
-  textarea: {
+  textarea1: {
     backgroundColor: colors.trueWhite,
     borderRadius: 10,
     borderWidth: 1,
     borderColor: colors.primary,
-    height: 170,
-    marginTop: 10,
+    height: 100,
+    marginTop: 5,
     marginBottom: 20,
     padding: 10,
   },
-  budgetInputContainer: {
-    width: '20%',
+  textarea2: {
+    backgroundColor: colors.trueWhite,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: colors.primary,
+    height: 120,
+    marginTop: 5,
+    marginBottom: 20,
+    padding: 10,
+  },
+  label: {
+    color: colors.gray02,
   },
   error: {
     color: colors.red.lighten(0.5),
     marginTop: -16,
     fontSize: 14,
-  },
-  warningInput: {
-    borderColor: colors.red,
-    borderWidth: 2,
+    marginBottom: 10,
   },
   submitButton: {
     width: 100,
     justifyContent: 'center',
+    alignSelf: 'center',
     borderRadius: 20,
     backgroundColor: colors.secondary,
-    marginTop: 10,
   },
   submitButtonText: {
     color: colors.trueWhite,
