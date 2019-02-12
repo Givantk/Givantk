@@ -50,3 +50,27 @@ export const getProfileByUserId = (userId, callback) => (dispatch) => {
       });
     });
 };
+
+export const makeProfile = (profile, callback) => (dispatch) => {
+  dispatch({
+    type: actionTypes.MAKE_PROFILE_START,
+  });
+
+  http
+    .post(`${profileAPI}`, profile)
+    .then(() => {
+      dispatch({
+        type: actionTypes.MAKE_PROFILE_FINISH,
+      });
+      if (callback) callback();
+    })
+    .catch((err) => {
+      dispatch({
+        type: actionTypes.SET_ERRORS,
+        payload: err.response.data,
+      });
+      dispatch({
+        type: actionTypes.MAKE_PROFILE_FINISH,
+      });
+    });
+};

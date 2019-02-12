@@ -28,7 +28,7 @@ const MainNavigator = createStackNavigator(
     MakeProfile: screens.MakeProfileScreen,
   },
   {
-    initialRouteName: 'MakeProfile',
+    initialRouteName: 'Login',
 
     // We need to configure the header options only for the 'tab' screens only here
     navigationOptions: ({ navigation }) => {

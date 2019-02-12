@@ -8,6 +8,7 @@ const INITIAL_STATE = {
 
   getCurrentProfileLoading: false,
   getProfileLoading: false,
+  makeProfileLoading: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -50,6 +51,18 @@ export default (state = INITIAL_STATE, action) => {
         selectedUserHasProfile: !action.payload
           ? false
           : !!action.payload.success,
+      };
+
+    case actionTypes.MAKE_PROFILE_START:
+      return {
+        ...state,
+        makeProfileLoading: true,
+      };
+
+    case actionTypes.MAKE_PROFILE_FINISH:
+      return {
+        ...state,
+        makeProfileLoading: false,
       };
 
     default:
