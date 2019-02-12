@@ -12,6 +12,7 @@ import fakeProfile from '../../../assets/data/fakeProfile';
 import SnakeNavigator from '../../../components/commons/UI/SnakeNavigator/SnakeNavigator';
 import styles from './ProfileScreenStyles';
 import ServicesList from '../../../components/commons/Service-Related-Components/ServicesList/ServicesList';
+import NoProfileDisclaimer from '../../../components/commons/NoProfileDisclaimer/NoProfileDisclaimer';
 
 class ProfileScreen extends React.Component {
   // When navigating to this screen, we will always pass to it the userId in the
@@ -69,7 +70,8 @@ class ProfileScreen extends React.Component {
 
     if (getProfileLoading) return <Loading />;
 
-    if (!selectedUserHasProfile) return <Text>You have no profile yet</Text>;
+    if (!selectedUserHasProfile)
+      return <NoProfileDisclaimer navigation={navigation} />;
 
     return (
       <View style={styles.container}>

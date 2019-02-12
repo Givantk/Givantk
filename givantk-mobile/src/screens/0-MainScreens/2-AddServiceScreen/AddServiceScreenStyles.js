@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     alignItems: 'center',
     justifyContent: 'flex-start',
-    paddingHorizontal: 20,
+    padding: 20,
   },
   text: {
     fontWeight: 'bold',

@@ -25,9 +25,10 @@ const MainNavigator = createStackNavigator(
     AddProposal: screens.AddProposalScreen,
     VerifyIdentity: screens.VerifyIdentityScreen,
     MessagesList: screens.MessagesListScreen,
+    MakeProfile: screens.MakeProfileScreen,
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'MakeProfile',
 
     // We need to configure the header options only for the 'tab' screens only here
     navigationOptions: ({ navigation }) => {

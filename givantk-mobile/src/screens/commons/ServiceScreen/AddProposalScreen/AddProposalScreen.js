@@ -10,6 +10,7 @@ import * as ServiceActions from '../../../../store/actions/serviceActions';
 import Loading from '../../../../components/commons/UI/Loading/Loading';
 import QuickNotification from '../../../../components/commons/UI/QuickNotification/QuickNotification';
 import styles from './AddProposalScreenStyles';
+import NoProfileDisclaimer from '../../../../components/commons/NoProfileDisclaimer/NoProfileDisclaimer';
 
 class AddProposalScreen extends Component {
   static navigationOptions = () => ({
@@ -53,8 +54,19 @@ class AddProposalScreen extends Component {
   };
 
   render() {
-    const { errors, proposeToServiceLoading } = this.props;
+    const {
+      errors,
+      proposeToServiceLoading,
+      getCurrentProfileLoading,
+      currentUserHasProfile,
+      navigation,
+    } = this.props;
     const { service } = this.state;
+
+    if (getCurrentProfileLoading) return <Loading />;
+
+    if (!currentUserHasProfile)
+      return <NoProfileDisclaimer navigation={navigation} />;
 
     if (!service) return <Loading />;
 
@@ -92,12 +104,16 @@ AddProposalScreen.propTypes = {
   getCurrentUserProfile: PropTypes.func,
   errors: PropTypes.shape({}),
   proposeToServiceLoading: PropTypes.bool,
+  getCurrentProfileLoading: PropTypes.bool,
+  currentUserHasProfile: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
   errors: state.errors,
   allServices: state.service.allServices,
   proposeToServiceLoading: state.service.proposeToServiceLoading,
+  getCurrentProfileLoading: state.profile.getCurrentProfileLoading,
+  currentUserHasProfile: state.profile.currentUserHasProfile,
 });
 
 const mapDispatchToProps = {

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { View, FlatList, Text } from 'react-native';
+import { View, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -7,6 +7,7 @@ import NotificationCard from '../../../components/0-MainScreensComponents/4-Noti
 // import notifications from '../../../assets/data/fakeNotifications';
 import styles from './NotificationsScreenStyles';
 import Loading from '../../../components/commons/UI/Loading/Loading';
+import NoProfileDisclaimer from '../../../components/commons/NoProfileDisclaimer/NoProfileDisclaimer';
 
 class NotificationsScreen extends React.Component {
   static navigationOptions = () => ({
@@ -28,14 +29,13 @@ class NotificationsScreen extends React.Component {
       getCurrentProfileLoading,
       currentUserHasProfile,
       notifications,
+      navigation,
     } = this.props;
 
-    if (getCurrentProfileLoading) {
-      return <Loading />;
-    }
-    if (!currentUserHasProfile) {
-      return <Text>You have no profile yet</Text>;
-    }
+    if (getCurrentProfileLoading) return <Loading />;
+
+    if (!currentUserHasProfile)
+      return <NoProfileDisclaimer navigation={navigation} />;
 
     return (
       <View style={styles.container}>

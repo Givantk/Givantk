@@ -1,4 +1,4 @@
-const servicesCategories = [
+const servicesTypes = [
   {
     label: 'Knowledge Exchange',
     value: 'KE',
@@ -17,4 +17,4 @@ const servicesCategories = [
   },
 ];
 
-export default servicesCategories;
+export default servicesTypes;

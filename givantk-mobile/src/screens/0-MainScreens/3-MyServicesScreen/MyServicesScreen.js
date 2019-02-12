@@ -9,6 +9,7 @@ import Loading from '../../../components/commons/UI/Loading/Loading';
 import ServicesList from '../../../components/commons/Service-Related-Components/ServicesList/ServicesList';
 import SnakeNavigator from '../../../components/commons/UI/SnakeNavigator/SnakeNavigator';
 import styles from './MyServicesScreenStyles';
+import NoProfileDisclaimer from '../../../components/commons/NoProfileDisclaimer/NoProfileDisclaimer';
 
 class MyServicesScreen extends React.Component {
   static navigationOptions = () => ({
@@ -57,7 +58,8 @@ class MyServicesScreen extends React.Component {
 
     if (getCurrentProfileLoading) return <Loading />;
 
-    if (!currentUserHasProfile) return <Text>You have no profile yet</Text>;
+    if (!currentUserHasProfile)
+      return <NoProfileDisclaimer navigation={navigation} />;
 
     return (
       <View style={styles.container}>

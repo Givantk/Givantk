@@ -15,6 +15,7 @@ import servicesNatures from '../../../assets/data/servicesNatures';
 import servicesTypes from '../../../assets/data/servicesTypes';
 import styles from './AddServiceScreenStyles';
 import TextInput from '../../../components/commons/UI/TextInput/TextInput';
+import NoProfileDisclaimer from '../../../components/commons/NoProfileDisclaimer/NoProfileDisclaimer';
 
 class AddServiceScreen extends React.Component {
   static navigationOptions = () => ({
@@ -66,7 +67,19 @@ class AddServiceScreen extends React.Component {
 
   render() {
     const { type, nature } = this.state;
-    const { errors, createServiceLoading } = this.props;
+    const {
+      errors,
+      createServiceLoading,
+      getCurrentProfileLoading,
+      currentUserHasProfile,
+      navigation,
+    } = this.props;
+
+    if (getCurrentProfileLoading) return <Loading />;
+
+    if (!currentUserHasProfile)
+      return <NoProfileDisclaimer navigation={navigation} />;
+
     return (
       <View style={styles.container}>
         <AvoidKeyboard bottomPadding={120}>
@@ -168,11 +181,15 @@ AddServiceScreen.propTypes = {
   getCurrentUserProfile: PropTypes.func,
   errors: PropTypes.shape({}),
   createServiceLoading: PropTypes.bool,
+  getCurrentProfileLoading: PropTypes.bool,
+  currentUserHasProfile: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
   errors: state.errors,
   createServiceLoading: state.service.createServiceLoading,
+  getCurrentProfileLoading: state.profile.getCurrentProfileLoading,
+  currentUserHasProfile: state.profile.currentUserHasProfile,
 });
 
 const mapDispatchToProps = {
