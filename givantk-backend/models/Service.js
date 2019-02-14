@@ -34,8 +34,8 @@ const ServiceSchema = new Schema({
   start_time: Date,
   end_time: Date,
   reveal_asker: Boolean,
-  state: String, // 'new' or 'pending' or 'done'
-  applicants: [
+  state: String, // 'new' or 'pending' or 'progressing' or 'done'
+  applications: [
     {
       user: { type: mongoose.Schema.Types.ObjectId, ref: 'user' },
       proposal: String

@@ -51,9 +51,9 @@ class ServiceScreen extends Component {
     const ownService = currentUser._id === currentService.asker._id;
 
     const appliedBefore =
-      currentService.applicants.filter(
+      currentService.applications.filter(
         (applicant) => applicant.user !== currentUser._id,
-      ).length < currentService.applicants.length;
+      ).length < currentService.applications.length;
 
     return {
       service: currentService,
@@ -70,9 +70,9 @@ class ServiceScreen extends Component {
     const ownService = currentUser._id === service.asker._id;
 
     const appliedBefore =
-      service.applicants.filter(
+      service.applications.filter(
         (applicant) => applicant.user !== currentUser._id,
-      ).length < service.applicants.length;
+      ).length < service.applications.length;
 
     this.setState(() => ({
       service,
@@ -107,6 +107,8 @@ class ServiceScreen extends Component {
     const { service, loggedInUser } = this.state;
 
     if (!service) return <Loading />;
+
+    console.log(service);
 
     return (
       <ScrollView>

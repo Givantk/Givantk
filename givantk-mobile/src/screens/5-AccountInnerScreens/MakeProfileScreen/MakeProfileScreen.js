@@ -12,6 +12,7 @@ import Loading from '../../../components/commons/UI/Loading/Loading';
 import Picker from '../../../components/commons/UI/Picker/Picker';
 import styles from './MakeProfileScreenStyles';
 import TextInput from '../../../components/commons/UI/TextInput/TextInput';
+import QuickNotification from '../../../components/commons/UI/QuickNotification/QuickNotification';
 
 class MakeProfileScreen extends Component {
   static navigationOptions = () => ({
@@ -49,8 +50,9 @@ class MakeProfileScreen extends Component {
     };
 
     const callback = () => {
-      navigation.navigate('Featured');
       getCurrentUserProfile();
+      navigation.goBack();
+      QuickNotification('Profile Successfully created');
     };
 
     makeProfile(newProfile, callback);
