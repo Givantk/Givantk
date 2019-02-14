@@ -103,12 +103,17 @@ class ServiceScreen extends Component {
     });
   };
 
+  onPressApplicant = (applicantId) => {
+    const { navigation } = this.props;
+    navigation.navigate('Profile', {
+      userId: applicantId,
+    });
+  };
+
   render() {
     const { service, loggedInUser } = this.state;
 
     if (!service) return <Loading />;
-
-    console.log(service);
 
     return (
       <ScrollView>
@@ -156,6 +161,35 @@ class ServiceScreen extends Component {
               <Icon type="Feather" name="star" style={styles.favoriteIcon} />
             </View>
           </View>
+          <View style={styles.proposalsHeadingContainer}>
+            <Text style={styles.proposalsHeadingText}>Proposals:</Text>
+          </View>
+          {service.applications.map((application) => (
+            <View style={styles.proposalsContainer} key={application._id}>
+              <TouchableWithoutFeedback
+                onPress={() => this.onPressApplicant(application.user._id)}
+              >
+                <View style={styles.proposalHeader}>
+                  <Image
+                    source={{
+                      uri: fakeProfile.avatar,
+                    }}
+                    style={styles.proposalUserImage}
+                  />
+                  <View style={styles.headerRight}>
+                    <Text style={styles.proposalUserName}>
+                      {`${application.user.first_name} ${
+                        application.user.last_name
+                      }`}
+                    </Text>
+                  </View>
+                </View>
+              </TouchableWithoutFeedback>
+              <View style={styles.proposalTextContainer}>
+                <Text style={styles.proposalText}>{application.proposal}</Text>
+              </View>
+            </View>
+          ))}
         </View>
       </ScrollView>
     );

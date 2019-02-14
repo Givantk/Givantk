@@ -3,11 +3,10 @@ import { View, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import NotificationCard from '../../../components/0-MainScreensComponents/4-NotificationsScreenComponents/NotificationCard/NotificationCard';
-// import notifications from '../../../assets/data/fakeNotifications';
-import styles from './NotificationsScreenStyles';
 import Loading from '../../../components/commons/UI/Loading/Loading';
 import NoProfileDisclaimer from '../../../components/commons/NoProfileDisclaimer/NoProfileDisclaimer';
+import NotificationCard from '../../../components/0-MainScreensComponents/4-NotificationsScreenComponents/NotificationCard/NotificationCard';
+import styles from './NotificationsScreenStyles';
 
 class NotificationsScreen extends React.Component {
   static navigationOptions = () => ({
@@ -28,7 +27,7 @@ class NotificationsScreen extends React.Component {
     const {
       getCurrentProfileLoading,
       currentUserHasProfile,
-      notifications,
+      currentUserProfile,
       navigation,
     } = this.props;
 
@@ -40,7 +39,7 @@ class NotificationsScreen extends React.Component {
     return (
       <View style={styles.container}>
         <FlatList
-          data={notifications}
+          data={currentUserProfile.notifications}
           keyExtractor={(item) => item._id}
           showsVerticalScrollIndicator={false}
           renderItem={this.renderItem}
@@ -52,7 +51,6 @@ class NotificationsScreen extends React.Component {
 
 NotificationsScreen.propTypes = {
   navigation: PropTypes.shape({}),
-  notifications: PropTypes.shape({}),
   currentUserProfile: PropTypes.shape({}),
   getCurrentProfileLoading: PropTypes.bool,
   currentUserHasProfile: PropTypes.bool,
