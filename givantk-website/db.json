@@ -179,5 +179,20 @@
       "announcementBody": "yyy",
       "id": 3
     }
-  ]
+  ],
+  "Statistics": {
+    "numberOfUsers": 14,
+    "approvedUsers": 13,
+    "bannedUsers": 2,
+    "registeredToday": 1,
+    "services": 123,
+    "servicesDone": 120,
+    "servicesUndone":2,
+    "servicesWithNoProposals":1,
+    "noOfCustomerMessages":123,
+    "transactionsValue":"13,000$",
+    "noOfTransactions":12,
+    "todayIncome":"2000$"
+
+  }
 }

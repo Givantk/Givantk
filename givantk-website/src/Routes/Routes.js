@@ -18,7 +18,7 @@ const Routes=()=>{
         <BrowserRouter>
             <Switch>
                 <Route  path="/login" component={Login}/>
-                <ProtectedRoute component={DefaultContainer} />
+                <ProtectedRoute path='/' component={DefaultContainer} />
 
             </Switch>
 

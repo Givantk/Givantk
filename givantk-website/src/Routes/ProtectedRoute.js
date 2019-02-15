@@ -5,8 +5,7 @@ import auth from '../components/auth';
 const ProtectedRoute = (props) => {
 
     // if user is authenticated go to the route that contains default container
-    if (auth.isAuthenticated) {
-        console.log('Every thing is well')
+    if (auth.isAuthenticated()===true) {
         return <Route {...props}/>
 
         //else redirect to login
