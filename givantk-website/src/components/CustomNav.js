@@ -157,16 +157,16 @@ class CustomNav extends Component {
 
                                                 <Nav.Item as='li' className='icon-parent'>
 
-                                                    <Nav.Link className='icon-bullet'>
+                                                    <NavLink className='icon-bullet nav-link' to='/messages' >
                                                         <i className='fas fa-comments text-muted fa-lg'></i>
-                                                    </Nav.Link>
+                                                    </NavLink>
                                                 </Nav.Item>
 
                                                 <Nav.Item as='li' className='icon-parent'>
 
-                                                    <Nav.Link className='icon-bullet'>
+                                                    <NavLink className='icon-bullet nav-link' to="/activites" >
                                                         <i className='fas fa-lg text-muted fa-bell'></i>
-                                                    </Nav.Link>
+                                                    </NavLink>
                                                 </Nav.Item>
 
                                                 <Nav.Item as='li' className='ml-md-auto'>
