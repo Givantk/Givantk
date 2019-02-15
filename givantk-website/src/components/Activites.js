@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Container, Row, Col} from 'react-bootstrap';
 import CustomActivityCard from './CustomActivityCard';
 import CustomMessageCard from './CustomMessageCard';
+import axios from 'axios';
 
 class Activites extends Component {
 
@@ -56,15 +57,19 @@ class Activites extends Component {
 
     replyButtonClicked = (value, i) => {
 
-        fetch('http://localhost:3001/message-replies/', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({MessageId: this.state.Activities[i].id, announcementBody: value})
+        axios
+            .post('http://localhost:3001/message-replies/', {
+                MessageId: this.state.Activities[i].id,
+                replyBody: value
+            })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
 
-        })
+     
 
     }
 

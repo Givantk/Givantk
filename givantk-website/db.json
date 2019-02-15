@@ -103,64 +103,9 @@
   ],
   "Announcements": [
     {
-      "announcementBody": "hi bye",
+      "announcementBody": "gggg",
+      "ident": 123,
       "id": 1
-    },
-    {
-      "announcementBody": "hi bye",
-      "id": 2
-    },
-    {
-      "announcementBody": "hi bye",
-      "id": 3
-    },
-    {
-      "announcementBody": "haha",
-      "id": 4
-    },
-    {
-      "announcementBody": "fkfkf",
-      "id": 5
-    },
-    {
-      "announcementBody": "hahah",
-      "id": 6
-    },
-    {
-      "announcementBody": "ya 7biby",
-      "id": 7
-    },
-    {
-      "announcementBody": "gggl",
-      "id": 8
-    },
-    {
-      "announcementBody": "اهواك بلا امل",
-      "id": 9
-    },
-    {
-      "announcementBody": "kdkd",
-      "id": 10
-    },
-    {
-      "announcementBody": "dd",
-      "id": 11
-    },
-    {
-      "announcementBody": "dd",
-      "id": 12
-    },
-    {
-      "announcementBody": "اهواك واتمنى لو انساك وانسى روحى وياك",
-      "id": 13
-    },
-    {
-      "announcementBody": "tyyioii",
-      "id": 14
-    },
-    {
-      "announcementBody": "fjjfjffjfjf",
-      "id": 123
     }
   ],
   "message-replies": [
@@ -178,6 +123,11 @@
       "MessageId": "1adkd",
       "announcementBody": "yyy",
       "id": 3
+    },
+    {
+      "MessageId": "1adkd",
+      "announcementBody": "sss",
+      "id": 4
     }
   ],
   "Statistics": {
@@ -187,12 +137,11 @@
     "registeredToday": 1,
     "services": 123,
     "servicesDone": 120,
-    "servicesUndone":2,
-    "servicesWithNoProposals":1,
-    "noOfCustomerMessages":123,
-    "transactionsValue":"13,000$",
-    "noOfTransactions":12,
-    "todayIncome":"2000$"
-
+    "servicesUndone": 2,
+    "servicesWithNoProposals": 1,
+    "noOfCustomerMessages": 123,
+    "transactionsValue": "13,000$",
+    "noOfTransactions": 12,
+    "todayIncome": "2000$"
   }
 }
