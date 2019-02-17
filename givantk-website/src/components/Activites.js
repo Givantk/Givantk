@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Container, Row, Col} from 'react-bootstrap';
+import {Container, Row, Col, Pagination} from 'react-bootstrap';
 import CustomActivityCard from './CustomActivityCard';
 import CustomMessageCard from './CustomMessageCard';
 import axios from 'axios';
@@ -10,7 +10,11 @@ class Activites extends Component {
 
         Activities: [],
 
-        open: []
+        open: [],
+
+        ActivitiesPage: [],
+
+        active: 1
 
     }
 
@@ -34,7 +38,7 @@ class Activites extends Component {
 
         this
             .state
-            .Activities
+            .ActivitiesPage
             .map(() => {
                 // as th
                 this
@@ -59,7 +63,7 @@ class Activites extends Component {
 
         axios
             .post('http://localhost:3001/message-replies/', {
-                MessageId: this.state.Activities[i].id,
+                MessageId: this.state.ActivitiesPage[i].id,
                 replyBody: value
             })
             .then(function (response) {
@@ -69,8 +73,6 @@ class Activites extends Component {
                 console.log(error);
             });
 
-     
-
     }
 
     deleteButtonClicked = (i) => {
@@ -79,21 +81,84 @@ class Activites extends Component {
         database
         */
 
-        const {Activities} = this.state;
+        const {ActivitiesPage} = this.state;
         //starting from index i delete one element only
-        Activities.splice(i, 1)
+        ActivitiesPage.splice(i, 1)
 
         //update state to render the component
-        this.setState({Activities: Activities})
+        this.setState({ActivitiesPage: ActivitiesPage})
 
+    }
+
+    /*this function divides the big array that's coming from the api into smaller ones
+     in order to be displayed in pages
+     
+     It returns array of arrays each of these arrays represents a page objects of activites
+     to be displayed    
+     */
+
+    DivideDataArray = () => {
+        let size = 6;
+        let arrayOfArrays = [];
+        for (let i = 0; i < this.state.Activities.length; i += size) {
+            arrayOfArrays.push(this.state.Activities.slice(i, i + size));
+        }
+        return (arrayOfArrays);
+    }
+
+
+
+    DisplayWhich = (i) => {
+        this.setState({
+            ActivitiesPage: this.DivideDataArray()[i - 1]
+        })
+        this.setState({active: i})
+    }
+
+    performPagination = () => {
+        let numberOfPages = Math.ceil(this.state.Activities.length / 6);
+        console.log(numberOfPages)
+        let items = [];
+        for (let i = 1; i <= numberOfPages; i++) {
+            items.push(
+                <Pagination.Item
+                    onClick={() => this.DisplayWhich(i)}
+                    key={i}
+                    active={i === this.state.active}>
+                    {i}
+                </Pagination.Item>
+
+            );
+        }
+        return <Pagination>
+            <Pagination.Prev/> {items}
+            <Pagination.Next/>
+
+        </Pagination>;
     }
 
     componentDidMount() {
         // fetching info stored in db.json by json server  you have to start json server
         // first
-        fetch(this.props.url)
-            .then(resp => resp.json())
-            .then(jsonData => this.setState({Activities: jsonData}));
+        axios
+            .get(this.props.url)
+            .then(res => {
+
+                this
+                    .setState({
+                        Activities: res.data
+                    }, function () {
+                        console.log('hi');
+                        this.setState({
+                            ActivitiesPage: this
+                                .state
+                                .Activities
+                                .slice(0, 6)
+                        }, function () {
+                            console.log(this.state.ActivitiesPage)
+                        })
+                    })
+            });
 
         //fill the card state array with intitial values (false)
         this.initialCardStateValues();
@@ -116,7 +181,7 @@ class Activites extends Component {
 
                                     {this
                                         .state
-                                        .Activities
+                                        .ActivitiesPage
                                         .map((ActivityObj, i) => {
 
                                             return (this.props.message
@@ -136,9 +201,14 @@ class Activites extends Component {
                                                     deleteButtonClicked={this.deleteButtonClicked}/>)
                                         })}
 
+                                    <Row className='justify-content-center ml-auto'>
+                                        {this.performPagination()}
+                                    </Row>
+
                                 </Col>
 
                             </Row>
+
                         </Col>
                     </Row>
 

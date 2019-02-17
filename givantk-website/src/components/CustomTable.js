@@ -15,11 +15,15 @@ class CustomTable extends Component {
         rows: []
     };
 
+    // this variable is passed to buttonActionConfirmed function which shows the
+    // content of the modal for a certain button, the variable holds the index of
+    // the button
     buttonIndex = 0
 
     /* This function will assign the data (that's provided as a parameter to the table), with
     the aid of the props => values and headers */
 
+  
     arrayDetectedinReievedData = arrayFounded => {
         console.log(arrayFounded);
     };
@@ -123,6 +127,7 @@ class CustomTable extends Component {
 
                 /* from the recieved data only pick the ones in the headers in order to choose
                 some properties only of the object*/
+
 
                 const filteredObj = pick(dataObj, headers);
 

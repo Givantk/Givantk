@@ -5,10 +5,10 @@ import axios from 'axios'
 
 class Statistics extends Component {
 
-    url='http://localhost:3001/statistics'
+    url = 'http://localhost:3001/statistics'
 
-    state={
-        StatisticsData:{}
+    state = {
+        StatisticsData: {}
     }
 
     componentDidMount = () => {
@@ -19,15 +19,14 @@ class Statistics extends Component {
             });
     };
 
-    
     render() {
-        
-        const StatisticsData={...this.state.StatisticsData}
+
+        const StatisticsData = {
+            ...this.state.StatisticsData
+        }
         console.log(StatisticsData)
 
         return (
-
-            
 
             <div>
                 <CardGroup header="All Statistics">
