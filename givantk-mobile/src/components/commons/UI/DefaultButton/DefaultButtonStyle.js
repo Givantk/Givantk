@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     alignItems: 'center',
+    minHeight: 55,
   },
   button: {
     margin: gaps.sm,

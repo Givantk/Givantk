@@ -12,6 +12,7 @@ import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKey
 import DefaultButton from '../../../components/commons/UI/DefaultButton/DefaultButton';
 import DefaultTextInput from '../../../components/commons/UI/DefaultTextInput/DefaultTextInput';
 import Header from '../../../components/RegistrationsScreensComponents/SignupScreenComponents/Header/Header';
+import Loading from '../../../components/commons/UI/Loading/Loading';
 
 class LoginScreen extends React.Component {
   static navigationOptions = () => ({
@@ -60,7 +61,7 @@ class LoginScreen extends React.Component {
   };
 
   render() {
-    const { navigation, errors } = this.props;
+    const { navigation, errors, setCurrentUserLoading } = this.props;
 
     return (
       <AvoidKeyboard
@@ -86,7 +87,14 @@ class LoginScreen extends React.Component {
               name="password"
               errorText={errors.password}
             />
-            <DefaultButton onPress={this.handleLogin}>Sign In</DefaultButton>
+
+            <DefaultButton
+              onPress={this.handleLogin}
+              loading={setCurrentUserLoading}
+            >
+              Sign In
+            </DefaultButton>
+
             <DefaultButton onPress={this.handleSignInWithFacebook}>
               Sign In With Facebook
             </DefaultButton>
@@ -118,10 +126,12 @@ LoginScreen.propTypes = {
   getAllServices: PropTypes.func,
   getCurrentUserProfile: PropTypes.func,
   errors: PropTypes.shape({}),
+  setCurrentUserLoading: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
   errors: state.errors,
+  setCurrentUserLoading: state.auth.setCurrentUserLoading,
 });
 
 const mapDispatchToProps = {
