@@ -27,6 +27,8 @@ const MainNavigator = createStackNavigator(
     AddProposal: screens.AddProposalScreen,
     VerifyIdentity: screens.VerifyIdentityScreen,
     MessagesList: screens.MessagesListScreen,
+    BookmarkedServices: screens.BookmarkedServicesScreen,
+    ProposedForServices: screens.ProposedForServicesScreen,
     MakeProfile: screens.MakeProfileScreen,
   },
   {

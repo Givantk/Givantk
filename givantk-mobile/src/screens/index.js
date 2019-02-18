@@ -19,6 +19,8 @@ import ServiceScreen from './commons/ServiceScreen/ServiceScreen';
 import SignupScreen from './RegistrationScreens/SignupScreen/SignupScreen';
 import VerifyIdentityScreen from './5-AccountInnerScreens/VerifyIdentityScreen/VerifyIdentityScreen';
 import MakeProfileScreen from './5-AccountInnerScreens/MakeProfileScreen/MakeProfileScreen';
+import BookmarkedServicesScreen from './5-AccountInnerScreens/BookmarkedServicesScreen/BookmarkedServicesScreen';
+import ProposedForServicesScreen from './5-AccountInnerScreens/ProposedForServicesScreen/ProposedForServicesScreen';
 
 const screens = {
   AccountScreen,
@@ -36,6 +38,8 @@ const screens = {
   PaymentInfoScreen,
   PersonalInfoScreen,
   ProfileScreen,
+  BookmarkedServicesScreen,
+  ProposedForServicesScreen,
   SearchResultsScreen,
   ServiceScreen,
   SignupScreen,
