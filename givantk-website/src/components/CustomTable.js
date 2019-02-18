@@ -72,12 +72,16 @@ class CustomTable extends Component {
                 );
 
                 this.setState({data: this.data});
+                this
+                .props
+                .action(this.props.values[buttonIndex]);
 
             }/*the button is not alterable which means it doesn't change its text for example
-        from ban to unban, this case is applicable only when deleting
-        so the code considered alterable buttons as delete button
+        from ban to unban, this case is applicable only in navigation and deleting
+        so the code considered alterable buttons as delete button if navigation
+        prop sent with the table is false
         */);
-        } else {
+        } else if (!this.props.navigable){
 
             /*A connection to the backend should be me made to delete component from the
         database
@@ -104,14 +108,17 @@ class CustomTable extends Component {
             this.fillData(newValue, this.props.headers, this.props.titles);
             this.setState({data: this.data});
 
+            this
+            .props
+            .action(this.state.data.rows[buttonIndex]);
 
+        }else{
+            this.props.navigate()
         }
 
         this.hideModal()
 
-        this
-            .props
-            .buttonClicked(buttonIndex);
+     
 
     }
 
@@ -151,9 +158,9 @@ class CustomTable extends Component {
                     <Button
                         onClick={() => this.ShowConfirmationModal(i)}
                         size="sm"
-                        variant={!this.props.toggle
-                        ? "danger"
-                        : "warning"}>
+                        variant={this.props.specialColColor
+                        ? this.props.specialColColor
+                        : "success"}>
                         {this.props.specialColText
                             ? this.props.specialColText
                             : "ban"}
@@ -219,13 +226,13 @@ class CustomTable extends Component {
                     ? true
                     : false}
                     data={this.state.data}
-                    searching={false}
+                    searching={true}
                     entriesLabel=""
                     responsive/>
 
                 <CustomModal
                     show={this.state.showModal}
-                    title='Are you sure you want to do this?'
+                    title='Are you sure you want to take this action?'
                     body='Choose Yes to confirm or No to disconfirm'
                     hide={this.hideModal}>
 

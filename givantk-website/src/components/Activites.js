@@ -20,13 +20,9 @@ class Activites extends Component {
 
     /* cardStateValues is an array which holds the state whether it's true or false for every
     activity card
-
     when a value is true the card will be opened to expand its body
-
     when a value is false the card will be closed to hide the body
-
     its value is copied to the array after that
-
     */
 
     cardStateValues = []
@@ -40,7 +36,7 @@ class Activites extends Component {
             .state
             .ActivitiesPage
             .map(() => {
-                // as th
+                
                 this
                     .cardStateValues
                     .push(false);
@@ -88,11 +84,12 @@ class Activites extends Component {
         //update state to render the component
         this.setState({ActivitiesPage: ActivitiesPage})
 
+        this.initialCardStateValues()
+
     }
 
     /*this function divides the big array that's coming from the api into smaller ones
      in order to be displayed in pages
-
      It returns array of arrays each of these arrays represents a page objects of activites
      to be displayed
      */
@@ -115,6 +112,8 @@ class Activites extends Component {
             ActivitiesPage: this.DivideDataArray()[i - 1]
         })
         this.setState({active: i})
+
+        this.initialCardStateValues()
     }
     performPagination = () => {
         let numberOfPages = Math.ceil(this.state.Activities.length / 6);

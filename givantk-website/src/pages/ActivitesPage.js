@@ -5,7 +5,7 @@ function ActivitesPage() {
     return (
         <div>
 
-            <Activites url='http://localhost:3001/Activities' title='Recent Customers Activites'/>
+            <Activites url='http://localhost:3001/Activities' title='Activities to be approved'/>
 
                  
         </div>

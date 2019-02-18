@@ -9,6 +9,9 @@ import Services from '../pages/Services';
 import Settings from '../pages/Settings';
 import Statistics from '../pages/Statistics';
 import Users from '../pages/Users';
+import ServicesAskedFor from '../pages/ServicesAskedFor';
+import ServicesHelpedIn from '../pages/ServicesHelpedIn';
+import CommentsPage from '../pages/CommentsPage';
 import CustomNav from '../components/CustomNav';
 import CustomFooter from '../components/CustomFooter';
 import '../CustomNav.css';
@@ -19,13 +22,16 @@ export default function DefaultContainer(props) {
             <Container fluid={true} id='main-container'>
                 <CustomNav  history={props.history}/>
                 <Switch>
-                    <Route path='/activites' component={ActivitesPage}/>
+                    <Route path='/activities' component={ActivitesPage}/>
                     <Route path='/announcements' component={AnnouncementsPage}/>
                     <Route path='/messages' component={Messages}/>
                     <Route path='/services' component={Services}/>
                     <Route path='/settings' component={Settings}/>
                     <Route path='/statistics' component={Statistics}/>
                     <Route path='/users' component={Users}/>
+                    <Route path='/helped/:id' component={ServicesHelpedIn} />
+                    <Route path='/asked/:id' component={ServicesAskedFor} />
+                    <Route path='/comments/:id' component={CommentsPage} />
                     <Route path='/' component={Home}/>
                 </Switch>
                 <CustomFooter/>

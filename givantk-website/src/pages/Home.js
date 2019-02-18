@@ -40,21 +40,23 @@ function Home() {
             </CardGroup>
 
             <CustomTableWithGrid
-                url='http://localhost:3001/Users'
+                url='http://localhost:3001/PersonalInfo'
                 headers={[
                 'first_name',
                 'last_name',
+                'phone_number',
                 'email',
                 'location',
-                'date',
+                'registration_date',
                 'ban'
             ]}
                 titles={[
                 'First Name',
                 'Last Name',
+                'Phone Number',
                 'Email',
                 'Location',
-                'Date',
+                'Registration Date',
                 'Ban user'
             ]}
                 specialColType

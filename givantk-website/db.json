@@ -1,28 +1,267 @@
 {
-  "Users": [
+  "PersonalInfo": [
     {
       "id": 1,
       "first_name": "Abdelrahman",
       "last_name": "Ahmed",
+      "gender": "male",
+      "phone_number": "01122952868",
       "email": "abdo@gmail.com",
       "location": "cairo",
-      "date": "16/6/2018"
+      "registration_date": "16/6/2018",
+      "date_of_birth": "1/1/2001",
+      "skills": [
+        "tennis",
+        "squash"
+      ],
+      "givantk_points": 3,
+      "money_points": 4
     },
     {
       "id": 2,
       "first_name": "Hossam",
       "last_name": "Ahmed",
+      "gender": "male",
+      "phone_number": "01122952868",
       "email": "hamy@gmail.com",
       "location": "alexandria",
-      "date": "19/1/2019"
+      "registration_date": "19/1/2019",
+      "date_of_birth": "1/1/2001",
+      "skills": [
+        "football",
+        "basketball",
+        "swimming"
+      ],
+      "givantk_points": 3,
+      "money_points": 4
     },
     {
       "id": 3,
       "first_name": "Kamal",
       "last_name": "Ahmed",
+      "gender": "male",
+      "phone_number": "01122952868",
       "email": "kimo@gmail.com",
       "location": "Giza",
-      "date": "14/2/2019"
+      "registration_date": "14/2/2019",
+      "date_of_birth": "1/1/2001",
+      "skills": [
+        "squash",
+        "football"
+      ],
+      "givantk-points": 3,
+      "money_points": 4
+    }
+  ],
+  "userServices": [
+    {
+      "id": 1,
+      "first_name": "Abdelrahman",
+      "last_name": "Ahmed",
+      "services_asked_for": 12,
+      "services_helped_in": 23,
+      "services_proposed_for": 26,
+      "services_asked_for_finished": 10,
+      "services_helped_in_finished": 20
+    },
+    {
+      "id": 2,
+      "first_name": "Nehal",
+      "last_name": "Ahmed",
+      "services_asked_for": 12,
+      "services_helped_in": 23,
+      "services_proposed_for": 26,
+      "services_asked_for_finished": 10,
+      "services_helped_in_finished": 20
+    },
+    {
+      "id": 3,
+      "first_name": "Manal",
+      "last_name": "Ahmed",
+      "services_asked_for": 12,
+      "services_helped_in": 22,
+      "services_proposed_for": 262,
+      "services_asked_for_finished": 10,
+      "services_helped_in_finished": 20
+    }
+  ],
+  "servicesHelpedIn": [
+    {
+      "user_id": 1,
+      "first_name": "Hamda",
+      "last_name": "Galal",
+      "services_helped_in": [
+        {
+          "service_id": 13,
+          "service_date": "12/12/2018",
+          "asker_first_name": "Salah",
+          "asker_Second_name": "Abdeltawab",
+          "asker_email": "mohamed2m2018@gmail.com",
+          "asker_location": "bab el louk",
+          "service_name": "Buy potato for me",
+          "service_nature": "paid",
+          "service_type": "Rc",
+          "service_state": "progressing"
+        }
+      ]
+    },
+    {
+      "user_id": 2,
+      "first_name": "Ahmed",
+      "last_name": "Zaki",
+      "services_helped_in": [
+        {
+          "service_id": 113,
+          "service_date": "13/12/2018",
+          "asker_first_name": "Salah",
+          "asker_Second_name": "Abdeltawab",
+          "asker_email": "mohamed2m2018@gmail.com",
+          "asker_location": "cairo",
+          "service_name": "Buy ay 7aga for me please",
+          "service_nature": "free",
+          "service_type": "Rc",
+          "service_state": "progressing"
+        }
+      ]
+    }
+  ],
+  "servicesAskedFor": [
+    {
+      "user_id": 1,
+      "first_name": "Salah",
+      "last_name": "Galal",
+      "services_asked-for": [
+        {
+          "service_id": 13,
+          "service_date": "12/12/2018",
+          "helper_first_name": "Salah",
+          "helper_Second_name": "Abdeltawab",
+          "helper_email": "mohamed2m2018@gmail.com",
+          "helper_location": "bab el louk",
+          "service_name": "Buy potato for me",
+          "service_nature": "paid",
+          "service_type": "Rc",
+          "service_state": "progressing"
+        },
+        {
+          "service_id": 14,
+          "service_date": "12/12/2018",
+          "helper_first_name": "Salah",
+          "helper_Second_name": "Abdeltawab",
+          "helper_email": "mohamed2m2018@gmail.com",
+          "helper_location": "bab el louk",
+          "service_name": "Buy potato for me",
+          "service_nature": "paid",
+          "service_type": "Rc",
+          "service_state": "progressing"
+        }
+      ]
+    },
+    {
+      "user_id": 2,
+      "first_name": "Hamada",
+      "last_name": "Elshrbini",
+      "services_helped_in": [
+        {
+          "service_id": 113,
+          "service_date": "13/12/2018",
+          "helper_first_name": "Salah",
+          "helper_Second_name": "Abdeltawab",
+          "helper_email": "mohamed2m2018@gmail.com",
+          "helper_location": "cairo",
+          "service_name": "Buy ay 7aga for me please",
+          "service_nature": "free",
+          "service_type": "Rc",
+          "service_state": "progressing"
+        }
+      ]
+    }
+  ],
+  "servicesInfo": [
+    {
+      "service_id": 1,
+      "service_nature": "paid",
+      "service_title": "أرجوك أعطنى هذا الدواء",
+      "service_description": "عايز دواء كحة ضرورى يا اخوانا علشان خاطرى اللهى يا رب ما يحوجكوا",
+      "asker_id": 3,
+      "helper_id": 4,
+      "applicants_id": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "service_date": "2/2/2019",
+      "service_state": "progressing",
+      "service_comments": [
+        {
+          "comment_id": 1,
+          "user_id": 5,
+          "comment_body": "أنا عارف انك مدمن وهبلغ عنك فاهمنى هبلغ عنك "
+        }
+      ]
+    },
+    {
+      "service_id": 2,
+      "service_nature": "free",
+      "service_title": "لا للتعديلات الدستورية",
+      "service_description": "يا جماعة يلا بينا كلنا نتحد حنفضل لحد امتى متفرقين كده قولوا ورايا لاااااااااااا",
+      "asker_id": 3,
+      "helper_id": 4,
+      "applicants_id": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "service_date": "2/2/2019",
+      "service_state": "finished"
+    },
+    {
+      "service_id": 14,
+      "service_nature": "paid",
+      "service_title": "أرجوك أعطنى هذا الدواء",
+      "service_description": "عايز دواء كحة ضرورى يا اخوانا علشان خاطرى اللهى يا رب ما يحوجكوا",
+      "asker_id": 3,
+      "helper_id": 4,
+      "applicants_id": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "service_date": "2/2/2019",
+      "service_state": "progressing",
+      "service_comments": [
+        {
+          "comment_id": 1,
+          "user_id": 5,
+          "comment_body": "أنا عارف انك مدمن وهبلغ عنك فاهمنى هبلغ عنك "
+        }
+      ]
+    },
+    {
+      "service_id": 7,
+      "service_nature": "paid",
+      "service_title": "أرجوك أعطنى هذا الدواء",
+      "service_description": "عايز دواء كحة ضرورى يا اخوانا علشان خاطرى اللهى يا رب ما يحوجكوا",
+      "asker_id": 3,
+      "helper_id": 4,
+      "applicants_id": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "service_date": "2/2/2019",
+      "service_state": "progressing",
+      "service_comments": [
+        {
+          "comment_id": 1,
+          "user_id": 5,
+          "comment_body": "أنا عارف انك مدمن وهبلغ عنك فاهمنى هبلغ عنك "
+        }
+      ]
     }
   ],
   "Payments": [
@@ -129,35 +368,6 @@
       "body": "Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear Hi dear"
     }
   ],
-  "Announcements": [
-    {
-      "announcementBody": "gggg",
-      "ident": 123,
-      "id": 1
-    }
-  ],
-  "message-replies": [
-    {
-      "MessageId": "1adkd",
-      "announcementBody": "jdjd",
-      "id": 1
-    },
-    {
-      "MessageId": "332A7",
-      "announcementBody": "اهواك واتمنى لو انساك وانسى روحى وياك وان ضاعت يبقى فداك",
-      "id": 2
-    },
-    {
-      "MessageId": "1adkd",
-      "announcementBody": "yyy",
-      "id": 3
-    },
-    {
-      "MessageId": "1adkd",
-      "announcementBody": "sss",
-      "id": 4
-    }
-  ],
   "Statistics": {
     "numberOfUsers": 14,
     "approvedUsers": 13,
@@ -171,5 +381,95 @@
     "transactionsValue": "13,000$",
     "noOfTransactions": 12,
     "todayIncome": "2000$"
-  }
+  },
+  "Announcements": [
+    {
+      "announcement_body": "gggg",
+      "announcement_id": 123
+    }
+  ],
+  "message-replies": [
+    {
+      "message_id": "1adkd",
+      "reply_body": "jdjd"
+    },
+    {
+      "message_id": "332A7",
+      "reply_body": "اهواك واتمنى لو انساك وانسى روحى وياك وان ضاعت يبقى فداك"
+    },
+    {
+      "message_id": "1adkd",
+      "reply_body": "yyy"
+    },
+    {
+      "message_id": "1adkd",
+      "reply_body": "sss"
+    }
+  ],
+  "deleteService": [
+    {
+      "service_id": 14,
+      "id": 1
+    },
+    {
+      "service_id": 7,
+      "id": 2
+    }
+  ],
+  "banUser": [
+    {
+      "user_id": 0,
+      "id": 1
+    },
+    {
+      "user_id": 2,
+      "id": 2
+    },
+    {
+      "user_id": 1,
+      "id": 4
+    },
+    {
+      "user_id": 3,
+      "id": 5
+    },
+    {
+      "user_id": 1,
+      "id": 6
+    },
+    {
+      "user_id": 2,
+      "id": 7
+    },
+    {
+      "user_id": 1,
+      "id": 8
+    }
+  ],
+  "unbanUser": [
+    {
+      "user_id": "4"
+    }
+  ],
+  "login": [
+    {
+      "email": "abdo@gmail.com",
+      "password": "pass"
+    }
+  ],
+  "deleteComment": [
+    {
+      "service_id": 2,
+      "comment_id": 1
+    }
+  ],
+  "settings": [
+    {
+      "enable_publishing": true,
+      "enable_registration": true,
+      "display_ads": false,
+      "published_services_per_hour": 100,
+      "adv_per_page": 2
+    }
+  ]
 }
