@@ -38,7 +38,8 @@ const ServiceSchema = new Schema({
   applications: [
     {
       user: { type: mongoose.Schema.Types.ObjectId, ref: 'user' },
-      proposal: String
+      proposal: String,
+      chosen: Boolean
     }
   ],
   asker: { type: mongoose.Schema.Types.ObjectId, ref: 'user', required: true },

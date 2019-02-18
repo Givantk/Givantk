@@ -7,6 +7,7 @@ module.exports = getAllServices = (req, res) => {
   const errors = {};
   Service.find()
     .populate('asker')
+    .populate('applications.user')
     .sort({ date: -1 })
     .then((services) => {
       if (services.length === 0) {

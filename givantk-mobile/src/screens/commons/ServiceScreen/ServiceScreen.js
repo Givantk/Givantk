@@ -52,7 +52,8 @@ class ServiceScreen extends Component {
 
     const appliedBefore =
       currentService.applications.filter(
-        (applicant) => applicant.user !== currentUser._id,
+        (applicant) =>
+          (applicant.user._id || applicant.user) !== currentUser._id,
       ).length < currentService.applications.length;
 
     return {
@@ -71,7 +72,8 @@ class ServiceScreen extends Component {
 
     const appliedBefore =
       service.applications.filter(
-        (applicant) => applicant.user !== currentUser._id,
+        (applicant) =>
+          (applicant.user._id || applicant.user) !== currentUser._id,
       ).length < service.applications.length;
 
     this.setState(() => ({

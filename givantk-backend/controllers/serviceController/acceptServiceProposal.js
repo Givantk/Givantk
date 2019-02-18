@@ -34,6 +34,13 @@ module.exports = proposeToService = (req, res) => {
       Profile.findOne({ user: application.user._id.toString() }).then(
         (applicantProfile) => {
           // Updating service
+          const proposalIndex = service.applications.findIndex(
+            (item) => item._id.toString() === proposalId
+          );
+          service.applications = service.applications.map((ap, i) => {
+            if (i === proposalIndex) ap.chosen = true;
+            else ap.chosen = false;
+          });
           service.state = 'progressing';
           service.helper = req.user._id;
 
