@@ -62,6 +62,7 @@ function Home() {
                 specialColText='Ban'
                 alterButtonText='Unban'
                 alterButtonColor='secondary'
+                alterable
                 />
 
         </div>

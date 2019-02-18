@@ -45,8 +45,7 @@ class Services extends Component {
           specialColType
           specialColColor="danger"
           specialColText="Delete"
-          alterButtonText="Undelete"
-          alterButtonColor="secondary"
+          
         />
 
         <CustomTableWithGrid
@@ -59,6 +58,7 @@ class Services extends Component {
           specialColText="Ban"
           alterButtonText="Unban"
           alterButtonColor="secondary"
+          alterable
         />
 
         <CustomTableWithGrid
@@ -71,6 +71,7 @@ class Services extends Component {
           specialColText="Ban"
           alterButtonText="Unban"
           alterButtonColor="secondary"
+          alterable
         />
       </div>
     );

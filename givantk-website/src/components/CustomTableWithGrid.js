@@ -43,6 +43,7 @@ class CustomTableWithGrid extends Component {
                     buttonClicked={this.buttonClicked}
                     alterButtonText={this.props.alterButtonText}
                     alterButtonColor={this.props.alterButtonColor}
+                    alterable={this.props.alterable}
                   />
                 </Col>
               </Row>

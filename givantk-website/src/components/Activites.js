@@ -92,9 +92,9 @@ class Activites extends Component {
 
     /*this function divides the big array that's coming from the api into smaller ones
      in order to be displayed in pages
-     
+
      It returns array of arrays each of these arrays represents a page objects of activites
-     to be displayed    
+     to be displayed
      */
 
     DivideDataArray = () => {
@@ -106,7 +106,9 @@ class Activites extends Component {
         return (arrayOfArrays);
     }
 
+    getNextPages = () => {}
 
+    getPreviousPages = () => {}
 
     DisplayWhich = (i) => {
         this.setState({
@@ -114,7 +116,6 @@ class Activites extends Component {
         })
         this.setState({active: i})
     }
-
     performPagination = () => {
         let numberOfPages = Math.ceil(this.state.Activities.length / 6);
         console.log(numberOfPages)

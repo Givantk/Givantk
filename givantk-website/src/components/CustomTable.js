@@ -5,9 +5,13 @@ import {pick, isEqual} from "lodash";
 import {CustomModal} from './CustomModal';
 class CustomTable extends Component {
     state = {
-        data: {},
+        data: {
+            columns: [],
+            rows: []
+        },
         toggle: false,
-        showModal: false
+        showModal: false,
+        buttonIndex: []
     };
 
     data = {
@@ -23,12 +27,12 @@ class CustomTable extends Component {
     /* This function will assign the data (that's provided as a parameter to the table), with
     the aid of the props => values and headers */
 
-  
     arrayDetectedinReievedData = arrayFounded => {
         console.log(arrayFounded);
     };
 
     ShowConfirmationModal = i => {
+        console.log(this.state.data);
         this.setState({showModal: true});
         this.buttonIndex = i;
     };
@@ -40,32 +44,68 @@ class CustomTable extends Component {
 
     buttonActionConfirmed = buttonIndex => {
 
-        this.setState({
-            toggle: !this.state.toggle
-        }, () => {
+        //Check first if this button will be altered or not
 
-            // replace the old button with a new button here we acccess index i in rows
-            // array the accessing the last key in th object that is holded within this
-            // index
+        if (this.props.alterable) {
 
-            this.data.rows[buttonIndex][this.props.headers[this.props.headers.length - 1]] = (
-                <Button
-                    onClick={() => this.ShowConfirmationModal(buttonIndex)}
-                    size="sm"
-                    variant={!this.state.toggle
-                    ? "danger"
-                    : this.props.alterButtonColor}>
-                    {!this.state.toggle
-                        ? this.props.specialColText
+            this.setState({
+                toggle: !this.state.toggle
+            }, () => {
+
+                // replace the old button with a new button here we acccess index i in rows
+                // array the accessing the last key in th object that is holded within this
+                // index
+
+                this.data.rows[buttonIndex][this.props.headers[this.props.headers.length - 1]] = (
+                    <Button
+                        onClick={() => this.ShowConfirmationModal(buttonIndex)}
+                        size="sm"
+                        variant={!this.state.toggle
+                        ? "danger"
+                        : this.props.alterButtonColor}>
+                        {!this.state.toggle
                             ? this.props.specialColText
-                            : "ban"
-                        : this.props.alterButtonText}
-                </Button>
-            );
+                                ? this.props.specialColText
+                                : "ban"
+                            : this.props.alterButtonText}
+                    </Button>
+                );
 
+                this.setState({data: this.data});
+
+            }/*the button is not alterable which means it doesn't change its text for example
+        from ban to unban, this case is applicable only when deleting
+        so the code considered alterable buttons as delete button
+        */);
+        } else {
+
+            /*A connection to the backend should be me made to delete component from the
+        database
+        */
+
+            /* then
+         */
+
+                    
+            //filtering the row data to be supplied again to fill data 
+            
+            let newValue = this
+                .data
+                .rows
+                .filter((_, i) => i !== buttonIndex);
+
+            console.log(newValue)    
+
+            this.data = {
+                columns: [],
+                rows: []
+            }
+
+            this.fillData(newValue, this.props.headers, this.props.titles);
             this.setState({data: this.data});
 
-        });
+
+        }
 
         this.hideModal()
 
@@ -76,6 +116,7 @@ class CustomTable extends Component {
     }
 
     fillData = (values, headers, titles) => {
+
         titles.map(title => {
             this
                 .data
@@ -85,6 +126,7 @@ class CustomTable extends Component {
         });
 
         values.map((dataObj, i) => {
+
             //loop over the keys of the object
 
             for (let key in dataObj) {
@@ -128,7 +170,6 @@ class CustomTable extends Component {
                 /* from the recieved data only pick the ones in the headers in order to choose
                 some properties only of the object*/
 
-
                 const filteredObj = pick(dataObj, headers);
 
                 //push the filtered object to the rows array in the data obj
@@ -152,6 +193,7 @@ class CustomTable extends Component {
     };
 
     componentWillReceiveProps = nextprops => {
+        console.log('I am here')
         //if the props is not the same than fill the table data then change state
         if (!isEqual(this.props.values, nextprops.values)) {
             this.fillData(nextprops.values, nextprops.headers, nextprops.titles);
