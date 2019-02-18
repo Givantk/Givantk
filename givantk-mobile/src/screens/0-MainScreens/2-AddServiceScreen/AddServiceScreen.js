@@ -16,6 +16,7 @@ import servicesTypes from '../../../assets/data/servicesTypes';
 import styles from './AddServiceScreenStyles';
 import TextInput from '../../../components/commons/UI/TextInput/TextInput';
 import NoProfileDisclaimer from '../../../components/commons/NoProfileDisclaimer/NoProfileDisclaimer';
+import MainButton from '../../../components/commons/UI/MainButton/MainButton';
 
 class AddServiceScreen extends React.Component {
   static navigationOptions = () => ({
@@ -91,14 +92,6 @@ class AddServiceScreen extends React.Component {
             onChange={this.onChangeValue}
           />
 
-          {/* <View style={styles.row}>
-            <Text style={[styles.text, { fontSize: 13 }]}>Service Type </Text>
-            <View
-              style={[
-                styles.pickerContainer,
-                errors.type ? styles.warningInput : {},
-              ]}
-            > */}
           <Picker
             title="Service Type"
             placeholder="Pick a type"
@@ -109,17 +102,7 @@ class AddServiceScreen extends React.Component {
             value={type}
             error={errors.type}
           />
-          {/* </View>
-          </View> */}
 
-          {/* <View style={styles.row}> */}
-          {/* <Text style={[styles.text, { fontSize: 13 }]}>Service Nature </Text>
-            <View
-              style={[
-                styles.pickerContainer,
-                errors.nature ? styles.warningInput : {},
-              ]}
-            > */}
           <Picker
             title="Service Nature"
             placeholder="Pick a nature"
@@ -130,8 +113,6 @@ class AddServiceScreen extends React.Component {
             value={nature}
             error={errors.nature}
           />
-          {/* </View>
-          </View> */}
 
           <View style={styles.left}>
             <Label style={styles.text}>Description </Label>
@@ -148,25 +129,14 @@ class AddServiceScreen extends React.Component {
             <Text style={styles.error}>{errors.description}</Text>
           </View>
 
-          {/* <View style={styles.row}>
-            <Text style={styles.text}>Do you have a specific budget? </Text>
-            <View style={[styles.inputContainer, styles.budgetInputContainer]}>
-              <DefaultTextInput
-                keyboardType="numeric"
-                maxLength={4}
-                placeholder="EGP"
-                style={styles.input}
-              />
-            </View>
-          </View> */}
-
           <View style={styles.row}>
-            {createServiceLoading && <Loading />}
-            {createServiceLoading || (
-              <Button style={styles.submitButton} onPress={this.onAddService}>
-                <Text style={styles.submitButtonText}>ADD</Text>
-              </Button>
-            )}
+            <MainButton
+              onPress={this.onAddService}
+              loading={createServiceLoading}
+              big
+            >
+              ADD
+            </MainButton>
           </View>
         </AvoidKeyboard>
       </View>
