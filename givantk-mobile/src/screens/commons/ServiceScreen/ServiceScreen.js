@@ -16,6 +16,7 @@ import styles from './ServiceScreenStyles';
 import Loading from '../../../components/commons/UI/Loading/Loading';
 import fakeProfile from '../../../assets/data/fakeProfile';
 import Proposal from './Proposal/Proposal';
+import * as ServiceActions from '../../../store/actions/serviceActions';
 
 class ServiceScreen extends Component {
   static navigationOptions = () => ({
@@ -113,6 +114,17 @@ class ServiceScreen extends Component {
     });
   };
 
+  onPressAcceptProposal = (proposalId) => {
+    const { acceptServiceProposal, getAllServices } = this.props;
+    const { service } = this.state;
+
+    const callback = () => {
+      getAllServices();
+    };
+
+    acceptServiceProposal(service._id, proposalId, callback);
+  };
+
   render() {
     const { service, loggedInUser } = this.state;
 
@@ -171,9 +183,9 @@ class ServiceScreen extends Component {
             application.chosen ? (
               <Proposal
                 application={application}
-                chosen
                 key={application._id}
                 onPressApplicant={this.onPressApplicant}
+                onPressAcceptProposal={this.onPressAcceptProposal}
               />
             ) : null,
           )}
@@ -183,6 +195,7 @@ class ServiceScreen extends Component {
                 application={application}
                 key={application._id}
                 onPressApplicant={this.onPressApplicant}
+                onPressAcceptProposal={this.onPressAcceptProposal}
               />
             ) : null,
           )}
@@ -195,14 +208,22 @@ class ServiceScreen extends Component {
 ServiceScreen.propTypes = {
   navigation: PropTypes.shape({}),
   currentUser: PropTypes.shape({}),
+  acceptServiceProposal: PropTypes.func,
+  getAllServices: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
   currentUser: state.auth.user,
   allServices: state.service.allServices,
+  errors: state.errors,
 });
+
+const mapDispatchToProps = {
+  acceptServiceProposal: ServiceActions.acceptServiceProposal,
+  getAllServices: ServiceActions.getAllServices,
+};
 
 export default connect(
   mapStateToProps,
-  null,
+  mapDispatchToProps,
 )(ServiceScreen);

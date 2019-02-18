@@ -1,10 +1,9 @@
-import { TouchableOpacity, Text, View } from "react-native";
-import React from "react";
+import { TouchableOpacity, Text, View } from 'react-native';
+import React from 'react';
 
-import styles from "./DefaultButtonStyle";
+import styles from './DefaultButtonStyle';
 
-const DefaultButton = props => {
-  return (
+const DefaultButton = (props) => (
     <View style={styles.container}>
       <TouchableOpacity
         style={[styles.button, props.style]}
@@ -15,10 +14,9 @@ const DefaultButton = props => {
       </TouchableOpacity>
     </View>
   );
-};
 
-//Props expected:
-//onPress (func)
-//style (object)
+// Props expected:
+// onPress (func)
+// style (object)
 
 export default DefaultButton;

@@ -3,12 +3,6 @@ import { StyleSheet } from 'react-native';
 import { colors, fontTypes, fontSizes } from '../../../../assets/styles/base';
 
 const styles = StyleSheet.create({
-  headerRight: {
-    flexDirection: 'column',
-    marginLeft: 10,
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-  },
   proposalsHeadingContainer: {
     marginHorizontal: 30,
     marginVertical: 10,
@@ -36,6 +30,11 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: colors.secondary,
   },
+  proposalUserNameContainer: {
+    marginLeft: 10,
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+  },
   proposalUserName: {
     color: colors.black,
     fontSize: fontSizes.msm,
@@ -47,6 +46,10 @@ const styles = StyleSheet.create({
   proposalText: {
     fontSize: fontSizes.msm,
     fontFamily: fontTypes.main,
+  },
+  buttonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
   },
 });
 

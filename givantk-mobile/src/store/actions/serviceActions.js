@@ -99,3 +99,29 @@ export const getServiceById = (serviceId, callback) => (dispatch) => {
       });
     });
 };
+
+export const acceptServiceProposal = (serviceId, proposalId, callback) => (
+  dispatch,
+) => {
+  dispatch({
+    type: actionTypes.ACCEPT_SERVICE_PROPOSAL_START,
+  });
+
+  http
+    .post(`${serviceAPI}/accept-service-proposal/${serviceId}/${proposalId}`)
+    .then(() => {
+      dispatch({
+        type: actionTypes.ACCEPT_SERVICE_PROPOSAL_FINISH,
+      });
+      if (callback) callback();
+    })
+    .catch((err) => {
+      dispatch({
+        type: actionTypes.SET_ERRORS,
+        payload: err.response.data,
+      });
+      dispatch({
+        type: actionTypes.ACCEPT_SERVICE_PROPOSAL_FINISH,
+      });
+    });
+};

@@ -1,10 +1,12 @@
+import { Button } from 'native-base';
 import { View, Text, TouchableWithoutFeedback, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-import fakeProfile from '../../../../assets/data/fakeProfile';
-import styles from './ProposalStyles';
 import { colors } from '../../../../assets/styles/base';
+import fakeProfile from '../../../../assets/data/fakeProfile';
+import MainButton from '../../../../components/commons/UI/MainButton/MainButton';
+import styles from './ProposalStyles';
 
 export default class Proposal extends Component {
   state = {
@@ -12,13 +14,13 @@ export default class Proposal extends Component {
   };
 
   render() {
-    const { application, onPressApplicant, chosen } = this.props;
+    const { application, onPressApplicant, onPressAcceptProposal } = this.props;
 
     return (
       <View
         style={[
           styles.proposalsContainer,
-          chosen && { borderColor: colors.red },
+          application.chosen && { borderColor: colors.red },
         ]}
         key={application._id}
       >
@@ -32,7 +34,7 @@ export default class Proposal extends Component {
               }}
               style={styles.proposalUserImage}
             />
-            <View style={styles.headerRight}>
+            <View style={styles.proposalUserNameContainer}>
               <Text style={styles.proposalUserName}>
                 {`${application.user.first_name} ${application.user.last_name}`}
               </Text>
@@ -42,6 +44,14 @@ export default class Proposal extends Component {
         <View style={styles.proposalTextContainer}>
           <Text style={styles.proposalText}>{application.proposal}</Text>
         </View>
+        <View style={styles.buttonsContainer}>
+          <MainButton onPress={() => onPressAcceptProposal(application._id)}>
+            Accept
+          </MainButton>
+          <MainButton backgroundColor={colors.primaryLight}>
+            Ask More
+          </MainButton>
+        </View>
       </View>
     );
   }
@@ -50,5 +60,6 @@ export default class Proposal extends Component {
 Proposal.propTypes = {
   application: PropTypes.shape({}),
   onPressApplicant: PropTypes.func,
+  onPressAcceptProposal: PropTypes.func,
   chosen: PropTypes.bool,
 };

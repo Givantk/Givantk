@@ -40,6 +40,7 @@ module.exports = proposeToService = (req, res) => {
           service.applications = service.applications.map((ap, i) => {
             if (i === proposalIndex) ap.chosen = true;
             else ap.chosen = false;
+            return ap;
           });
           service.state = 'progressing';
           service.helper = req.user._id;
