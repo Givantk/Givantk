@@ -1,7 +1,6 @@
 {
-  "name": "empty-project-template",
+  "name": "givantk-mobile",
   "main": "node_modules/expo/AppEntry.js",
-  "private": true,
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -10,13 +9,14 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "babel-plugin-transform-react-jsx-source": "^6.22.0",
     "color": "^3.1.0",
-    "expo": "^30.0.1",
+    "expo": "^32.0.0",
     "jwt-decode": "^2.2.0",
     "native-base": "^2.8.1",
     "prop-types": "^15.6.2",
-    "react": "16.3.1",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz",
+    "react": "16.5.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-native-ui-lib": "^3.16.4",
     "react-navigation": "^2.18.2",
     "react-redux": "^6.0.0",
@@ -24,6 +24,7 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
+    "babel-preset-expo": "^5.0.0",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.10.0",
     "eslint-config-airbnb": "^17.1.0",
@@ -32,5 +33,6 @@
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.11.1",
     "eslint-plugin-react-native": "^3.5.0"
-  }
+  },
+  "private": true
 }
