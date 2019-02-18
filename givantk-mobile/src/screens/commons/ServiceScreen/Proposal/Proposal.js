@@ -1,4 +1,4 @@
-import { Button } from 'native-base';
+import { Badge, Icon } from 'native-base';
 import { View, Text, TouchableWithoutFeedback, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
@@ -20,7 +20,7 @@ export default class Proposal extends Component {
       <View
         style={[
           styles.proposalsContainer,
-          application.chosen && { borderColor: colors.red },
+          application.chosen && { borderWidth: 8 },
         ]}
         key={application._id}
       >
@@ -28,17 +28,38 @@ export default class Proposal extends Component {
           onPress={() => onPressApplicant(application.user._id)}
         >
           <View style={styles.proposalHeader}>
-            <Image
-              source={{
-                uri: fakeProfile.avatar,
-              }}
-              style={styles.proposalUserImage}
-            />
-            <View style={styles.proposalUserNameContainer}>
-              <Text style={styles.proposalUserName}>
-                {`${application.user.first_name} ${application.user.last_name}`}
-              </Text>
+            <View style={styles.helperIdentityContainer}>
+              <Image
+                source={{
+                  uri: fakeProfile.avatar,
+                }}
+                style={styles.proposalUserImage}
+              />
+              <View style={styles.proposalUserNameContainer}>
+                <Text style={styles.proposalUserName}>
+                  {`${application.user.first_name} ${
+                    application.user.last_name
+                  }`}
+                </Text>
+              </View>
             </View>
+            {application.chosen && (
+              <Badge danger>
+                <View>
+                  <Text style={{ color: colors.trueWhite, lineHeight: 85 }}>
+                    Chosen Helper{' '}
+                    <Icon
+                      name="star"
+                      style={{
+                        fontSize: 30,
+                        color: colors.trueWhite,
+                        lineHeight: 50,
+                      }}
+                    />
+                  </Text>
+                </View>
+              </Badge>
+            )}
           </View>
         </TouchableWithoutFeedback>
         <View style={styles.proposalTextContainer}>
@@ -61,5 +82,4 @@ Proposal.propTypes = {
   application: PropTypes.shape({}),
   onPressApplicant: PropTypes.func,
   onPressAcceptProposal: PropTypes.func,
-  chosen: PropTypes.bool,
 };

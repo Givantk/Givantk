@@ -21,6 +21,10 @@ const styles = StyleSheet.create({
   },
   proposalHeader: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  helperIdentityContainer: {
+    flexDirection: 'row',
     justifyContent: 'flex-start',
   },
   proposalUserImage: {

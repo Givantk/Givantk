@@ -76,6 +76,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginTop: 10,
   },
   cost: { color: colors.primary },
   footerLeft: {

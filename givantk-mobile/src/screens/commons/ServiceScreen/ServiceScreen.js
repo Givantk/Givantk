@@ -176,9 +176,7 @@ class ServiceScreen extends Component {
               <Icon type="Feather" name="star" style={styles.favoriteIcon} />
             </View>
           </View>
-          <View style={styles.proposalsHeadingContainer}>
-            <Text style={styles.proposalsHeadingText}>Proposals:</Text>
-          </View>
+
           {service.applications.map((application) =>
             application.chosen ? (
               <Proposal
@@ -189,14 +187,20 @@ class ServiceScreen extends Component {
               />
             ) : null,
           )}
-          {service.applications.map((application) =>
+          {service.applications.map((application, i) =>
             !application.chosen ? (
-              <Proposal
-                application={application}
-                key={application._id}
-                onPressApplicant={this.onPressApplicant}
-                onPressAcceptProposal={this.onPressAcceptProposal}
-              />
+              <View key={application._id}>
+                {i === 0 && (
+                  <View style={styles.proposalsHeadingContainer}>
+                    <Text style={styles.proposalsHeadingText}>Proposals:</Text>
+                  </View>
+                )}
+                <Proposal
+                  application={application}
+                  onPressApplicant={this.onPressApplicant}
+                  onPressAcceptProposal={this.onPressAcceptProposal}
+                />
+              </View>
             ) : null,
           )}
         </View>
