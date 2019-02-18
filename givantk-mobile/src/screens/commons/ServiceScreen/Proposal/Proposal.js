@@ -14,6 +14,7 @@ const Proposal = ({
   onPressAcceptProposal,
   ownService,
   hasHelper,
+  acceptServiceProposalLoading,
 }) => (
   <View
     style={[
@@ -67,7 +68,10 @@ const Proposal = ({
         (!ownService || hasHelper) && { display: 'none' },
       ]}
     >
-      <MainButton onPress={() => onPressAcceptProposal(application._id)}>
+      <MainButton
+        onPress={() => onPressAcceptProposal(application._id)}
+        loading={acceptServiceProposalLoading}
+      >
         Accept
       </MainButton>
       <MainButton
@@ -86,6 +90,7 @@ Proposal.propTypes = {
   onPressAcceptProposal: PropTypes.func,
   ownService: PropTypes.bool,
   hasHelper: PropTypes.bool,
+  acceptServiceProposalLoading: PropTypes.bool,
 };
 
 export default Proposal;

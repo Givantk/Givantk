@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { Icon, Label, Textarea, Button } from 'native-base';
+import { Icon, Label, Textarea } from 'native-base';
 import { View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -9,14 +9,14 @@ import * as ProfileActions from '../../../store/actions/profileActions';
 import * as ServiceActions from '../../../store/actions/serviceActions';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
 import Loading from '../../../components/commons/UI/Loading/Loading';
+import MainButton from '../../../components/commons/UI/MainButton/MainButton';
+import NoProfileDisclaimer from '../../../components/commons/NoProfileDisclaimer/NoProfileDisclaimer';
 import Picker from '../../../components/commons/UI/Picker/Picker';
 import QuickNotification from '../../../components/commons/UI/QuickNotification/QuickNotification';
 import servicesNatures from '../../../assets/data/servicesNatures';
 import servicesTypes from '../../../assets/data/servicesTypes';
 import styles from './AddServiceScreenStyles';
 import TextInput from '../../../components/commons/UI/TextInput/TextInput';
-import NoProfileDisclaimer from '../../../components/commons/NoProfileDisclaimer/NoProfileDisclaimer';
-import MainButton from '../../../components/commons/UI/MainButton/MainButton';
 
 class AddServiceScreen extends React.Component {
   static navigationOptions = () => ({

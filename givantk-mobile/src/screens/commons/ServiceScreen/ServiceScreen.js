@@ -17,6 +17,7 @@ import Loading from '../../../components/commons/UI/Loading/Loading';
 import fakeProfile from '../../../assets/data/fakeProfile';
 import Proposal from './Proposal/Proposal';
 import * as ServiceActions from '../../../store/actions/serviceActions';
+import QuickNotification from '../../../components/commons/UI/QuickNotification/QuickNotification';
 
 class ServiceScreen extends Component {
   static navigationOptions = () => ({
@@ -120,6 +121,7 @@ class ServiceScreen extends Component {
 
     const callback = () => {
       getAllServices();
+      QuickNotification('Successfully assigned helper');
     };
 
     acceptServiceProposal(service._id, proposalId, callback);
@@ -127,6 +129,8 @@ class ServiceScreen extends Component {
 
   render() {
     const { service, loggedInUser } = this.state;
+
+    const { acceptServiceProposalLoading } = this.props;
 
     if (!service) return <Loading />;
 
@@ -186,6 +190,7 @@ class ServiceScreen extends Component {
                 onPressAcceptProposal={this.onPressAcceptProposal}
                 ownService={loggedInUser.ownService}
                 hasHelper={!!service.helper}
+                acceptServiceProposalLoading={acceptServiceProposalLoading}
               />
             ) : null,
           )}
@@ -203,6 +208,7 @@ class ServiceScreen extends Component {
                   onPressAcceptProposal={this.onPressAcceptProposal}
                   ownService={loggedInUser.ownService}
                   hasHelper={!!service.helper}
+                  acceptServiceProposalLoading={acceptServiceProposalLoading}
                 />
               </View>
             ) : null,
@@ -218,11 +224,13 @@ ServiceScreen.propTypes = {
   currentUser: PropTypes.shape({}),
   acceptServiceProposal: PropTypes.func,
   getAllServices: PropTypes.func,
+  acceptServiceProposalLoading: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
   currentUser: state.auth.user,
   allServices: state.service.allServices,
+  acceptServiceProposalLoading: state.service.acceptServiceProposalLoading,
   errors: state.errors,
 });
 
