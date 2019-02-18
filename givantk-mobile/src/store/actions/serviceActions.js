@@ -125,3 +125,31 @@ export const acceptServiceProposal = (serviceId, proposalId, callback) => (
       });
     });
 };
+
+export const bookmarkService = (serviceId, callback) => (dispatch) => {
+  http
+    .get(`${serviceAPI}/bookmark/${serviceId}`)
+    .then(() => {
+      if (callback) callback();
+    })
+    .catch((err) => {
+      dispatch({
+        type: actionTypes.SET_ERRORS,
+        payload: err.response.data,
+      });
+    });
+};
+
+export const unbookmarkService = (serviceId, callback) => (dispatch) => {
+  http
+    .get(`${serviceAPI}/unbookmark/${serviceId}`)
+    .then(() => {
+      if (callback) callback();
+    })
+    .catch((err) => {
+      dispatch({
+        type: actionTypes.SET_ERRORS,
+        payload: err.response.data,
+      });
+    });
+};

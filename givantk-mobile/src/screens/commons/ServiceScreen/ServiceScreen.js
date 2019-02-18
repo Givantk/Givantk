@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { Icon } from 'native-base';
 import PropTypes from 'prop-types';
 
 import {
@@ -173,13 +172,6 @@ class ServiceScreen extends Component {
               {'You successfully applied for this service 💪🏻'}
             </Text>
           )}
-
-          <View style={styles.footer}>
-            <Text style={styles.cost}>{service.cost}</Text>
-            <View style={styles.footerLeft}>
-              <Icon type="Feather" name="star" style={styles.favoriteIcon} />
-            </View>
-          </View>
 
           {service.applications.length === 0 && (
             <View>

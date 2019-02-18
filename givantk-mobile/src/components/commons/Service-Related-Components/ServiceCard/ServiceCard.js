@@ -7,6 +7,15 @@ import fakeProfile from '../../../../assets/data/fakeProfile';
 import styles from './ServiceCardStyles';
 
 class ServiceCard extends React.PureComponent {
+  state = {
+    bookmarked: false,
+  };
+
+  componentDidMount() {
+    const { bookmarked } = this.props;
+    this.setState(() => ({ bookmarked }));
+  }
+
   onPressCard = () => {
     const { service } = this.props;
 
@@ -23,8 +32,27 @@ class ServiceCard extends React.PureComponent {
     });
   };
 
+  onPressStar = () => {
+    const { service, onBookmark, onUnbookmark } = this.props;
+
+    const { bookmarked } = this.state;
+
+    if (bookmarked) {
+      onUnbookmark(service._id);
+    } else {
+      onBookmark(service._id);
+    }
+
+    this.setState((prevState) => ({
+      bookmarked: !prevState.bookmarked,
+    }));
+  };
+
   render() {
     const { service } = this.props;
+
+    const { bookmarked } = this.state;
+
     return (
       <TouchableWithoutFeedback onPress={this.onPressCard}>
         <View style={styles.serviceCard}>
@@ -60,7 +88,13 @@ class ServiceCard extends React.PureComponent {
           <View style={styles.footer}>
             <Text style={styles.cost}>{service.cost}</Text>
             <View style={styles.footerLeft}>
-              <Icon type="Feather" name="star" style={styles.favoriteIcon} />
+              <TouchableWithoutFeedback onPress={this.onPressStar}>
+                <Icon
+                  type="AntDesign"
+                  name={bookmarked ? 'star' : 'staro'}
+                  style={styles.favoriteIcon}
+                />
+              </TouchableWithoutFeedback>
             </View>
           </View>
         </View>
@@ -71,6 +105,13 @@ class ServiceCard extends React.PureComponent {
 
 export default ServiceCard;
 
+ServiceCard.defaultProps = {
+  onBookmark: () => null,
+  onUnbookmark: () => null,
+  bookmarked: false,
+  service: {},
+};
+
 ServiceCard.propTypes = {
   navigation: PropTypes.shape({}),
   service: PropTypes.shape({
@@ -78,4 +119,7 @@ ServiceCard.propTypes = {
     description: PropTypes.string,
     asker: PropTypes.shape({}),
   }),
+  onBookmark: PropTypes.func,
+  onUnbookmark: PropTypes.func,
+  bookmarked: PropTypes.bool,
 };
