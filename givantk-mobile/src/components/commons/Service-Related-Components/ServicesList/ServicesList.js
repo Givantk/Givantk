@@ -1,9 +1,10 @@
-import { Text, FlatList } from 'react-native';
+import { FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import ServiceCard from '../ServiceCard/ServiceCard';
+import Announcement from '../../UI/Announcement/Announcement';
 import Loading from '../../UI/Loading/Loading';
+import ServiceCard from '../ServiceCard/ServiceCard';
 
 const ServicesList = (props) => {
   const { navigation, services, loading } = props;
@@ -13,7 +14,7 @@ const ServicesList = (props) => {
   );
 
   if (loading) return <Loading />;
-  if (services.length === 0) return <Text>No services yet</Text>;
+  if (services.length === 0) return <Announcement text="No services yet" />;
 
   return (
     <FlatList

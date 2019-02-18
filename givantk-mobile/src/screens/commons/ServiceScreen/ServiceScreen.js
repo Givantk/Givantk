@@ -18,6 +18,7 @@ import fakeProfile from '../../../assets/data/fakeProfile';
 import Proposal from './Proposal/Proposal';
 import * as ServiceActions from '../../../store/actions/serviceActions';
 import QuickNotification from '../../../components/commons/UI/QuickNotification/QuickNotification';
+import Announcement from '../../../components/commons/UI/Announcement/Announcement';
 
 class ServiceScreen extends Component {
   static navigationOptions = () => ({
@@ -183,9 +184,7 @@ class ServiceScreen extends Component {
           {service.applications.length === 0 && (
             <View>
               <View>
-                <Text style={styles.noProposalsDisclaimerHeading}>
-                  No Proposals Yet
-                </Text>
+                <Announcement text="No Proposals Yet" />
               </View>
               <View>
                 {!loggedInUser.ownService && (

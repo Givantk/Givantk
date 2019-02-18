@@ -87,11 +87,6 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: colors.primary,
   },
-  noProposalsDisclaimerHeading: {
-    alignSelf: 'center',
-    fontFamily: fontTypes.main,
-    fontSize: 17,
-  },
   noProposalsDisclaimer: {
     alignSelf: 'center',
     fontFamily: fontTypes.main,
