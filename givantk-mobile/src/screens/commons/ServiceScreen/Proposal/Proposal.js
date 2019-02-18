@@ -44,11 +44,11 @@ const Proposal = ({
           <Badge danger>
             <View>
               <Text style={{ color: colors.trueWhite, lineHeight: 85 }}>
-                Chosen Helper{' '}
+                Helper{' '}
                 <Icon
                   name="star"
                   style={{
-                    fontSize: 30,
+                    fontSize: 25,
                     color: colors.trueWhite,
                     lineHeight: 50,
                   }}

@@ -84,35 +84,37 @@ class AddServiceScreen extends React.Component {
     return (
       <View style={styles.container}>
         <AvoidKeyboard bottomPadding={120}>
-          <TextInput
-            title="Service Name"
-            placeholder="Type the service name"
-            error={errors.name}
-            name="name"
-            onChange={this.onChangeValue}
-          />
+          <View style={styles.topInputsContainer}>
+            <TextInput
+              title="Service Name"
+              placeholder="Type the service name"
+              error={errors.name}
+              name="name"
+              onChange={this.onChangeValue}
+            />
 
-          <Picker
-            title="Service Type"
-            placeholder="Pick a type"
-            style={styles.picker}
-            name="type"
-            onChange={this.onChangeValue}
-            options={servicesTypes}
-            value={type}
-            error={errors.type}
-          />
+            <Picker
+              title="Service Type"
+              placeholder="Pick a type"
+              style={styles.picker}
+              name="type"
+              onChange={this.onChangeValue}
+              options={servicesTypes}
+              value={type}
+              error={errors.type}
+            />
 
-          <Picker
-            title="Service Nature"
-            placeholder="Pick a nature"
-            style={styles.picker}
-            name="nature"
-            onChange={this.onChangeValue}
-            options={servicesNatures}
-            value={nature}
-            error={errors.nature}
-          />
+            <Picker
+              title="Service Nature"
+              placeholder="Pick a nature"
+              style={styles.picker}
+              name="nature"
+              onChange={this.onChangeValue}
+              options={servicesNatures}
+              value={nature}
+              error={errors.nature}
+            />
+          </View>
 
           <View style={styles.left}>
             <Label style={styles.text}>Description </Label>
