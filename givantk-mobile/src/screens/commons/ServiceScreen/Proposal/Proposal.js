@@ -14,7 +14,13 @@ export default class Proposal extends Component {
   };
 
   render() {
-    const { application, onPressApplicant, onPressAcceptProposal } = this.props;
+    const {
+      application,
+      onPressApplicant,
+      onPressAcceptProposal,
+      ownService,
+      hasHelper,
+    } = this.props;
 
     return (
       <View
@@ -65,11 +71,19 @@ export default class Proposal extends Component {
         <View style={styles.proposalTextContainer}>
           <Text style={styles.proposalText}>{application.proposal}</Text>
         </View>
-        <View style={styles.buttonsContainer}>
+        <View
+          style={[
+            styles.buttonsContainer,
+            (!ownService || hasHelper) && { display: 'none' },
+          ]}
+        >
           <MainButton onPress={() => onPressAcceptProposal(application._id)}>
             Accept
           </MainButton>
-          <MainButton backgroundColor={colors.primaryLight}>
+          <MainButton
+            onPress={() => onPressApplicant(application.user._id)}
+            backgroundColor={colors.primaryLight}
+          >
             Ask More
           </MainButton>
         </View>
@@ -82,4 +96,6 @@ Proposal.propTypes = {
   application: PropTypes.shape({}),
   onPressApplicant: PropTypes.func,
   onPressAcceptProposal: PropTypes.func,
+  ownService: PropTypes.bool,
+  hasHelper: PropTypes.bool,
 };

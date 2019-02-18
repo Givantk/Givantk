@@ -184,6 +184,8 @@ class ServiceScreen extends Component {
                 key={application._id}
                 onPressApplicant={this.onPressApplicant}
                 onPressAcceptProposal={this.onPressAcceptProposal}
+                ownService={loggedInUser.ownService}
+                hasHelper={!!service.helper}
               />
             ) : null,
           )}
@@ -199,6 +201,8 @@ class ServiceScreen extends Component {
                   application={application}
                   onPressApplicant={this.onPressApplicant}
                   onPressAcceptProposal={this.onPressAcceptProposal}
+                  ownService={loggedInUser.ownService}
+                  hasHelper={!!service.helper}
                 />
               </View>
             ) : null,
