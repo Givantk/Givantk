@@ -4,14 +4,15 @@ import React from 'react';
 
 import styles from './AnnouncementStyle';
 
-const Announcement = ({ text }) => (
-  <Text style={styles.root}>
+const Announcement = ({ text, style }) => (
+  <Text style={[styles.root, style]}>
     {text} {'🎈'}
   </Text>
 );
 
 Announcement.propTypes = {
   text: PropTypes.string,
+  style: PropTypes.shape({}),
 };
 
 export default Announcement;

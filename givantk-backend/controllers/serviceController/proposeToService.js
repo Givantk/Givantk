@@ -52,7 +52,7 @@ module.exports = proposeToService = (req, res) => {
               askerProfile.notifications.unshift({
                 title: `${
                   applicantProfile.first_name
-                } proposed to your service ${service.name}`,
+                } proposed to your service \"${service.name}\"`,
                 navigateTo: {
                   kind: 'service',
                   service: service._id

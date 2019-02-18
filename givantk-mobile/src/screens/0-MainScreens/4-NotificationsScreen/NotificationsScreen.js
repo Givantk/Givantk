@@ -8,6 +8,7 @@ import Loading from '../../../components/commons/UI/Loading/Loading';
 import NoProfileDisclaimer from '../../../components/commons/NoProfileDisclaimer/NoProfileDisclaimer';
 import NotificationCard from '../../../components/0-MainScreensComponents/4-NotificationsScreenComponents/NotificationCard/NotificationCard';
 import styles from './NotificationsScreenStyles';
+import Announcement from '../../../components/commons/UI/Announcement/Announcement';
 
 class NotificationsScreen extends React.Component {
   static navigationOptions = () => ({
@@ -41,6 +42,11 @@ class NotificationsScreen extends React.Component {
 
     if (!currentUserHasProfile)
       return <NoProfileDisclaimer navigation={navigation} />;
+
+    if (currentUserProfile.notifications.length === 0)
+      return (
+        <Announcement text="No Notifications yet" style={{ marginTop: 20 }} />
+      );
 
     return (
       <View style={styles.container}>
