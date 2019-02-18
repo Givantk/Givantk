@@ -176,7 +176,6 @@ class ServiceScreen extends Component {
           <View style={styles.footer}>
             <Text style={styles.cost}>{service.cost}</Text>
             <View style={styles.footerLeft}>
-              <Icon type="EvilIcons" name="envelope" style={styles.shareIcon} />
               <Icon type="Feather" name="star" style={styles.favoriteIcon} />
             </View>
           </View>

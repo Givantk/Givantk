@@ -12,7 +12,6 @@ import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKey
 import DefaultButton from '../../../components/commons/UI/DefaultButton/DefaultButton';
 import DefaultTextInput from '../../../components/commons/UI/DefaultTextInput/DefaultTextInput';
 import Header from '../../../components/RegistrationsScreensComponents/SignupScreenComponents/Header/Header';
-import Loading from '../../../components/commons/UI/Loading/Loading';
 
 class LoginScreen extends React.Component {
   static navigationOptions = () => ({
@@ -36,7 +35,6 @@ class LoginScreen extends React.Component {
 
   callbackAfterLogin = () => {
     const { navigation, getAllServices, getCurrentUserProfile } = this.props;
-
     navigation.replace('Tab');
     getAllServices();
     getCurrentUserProfile();
