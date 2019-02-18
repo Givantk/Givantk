@@ -3,6 +3,7 @@ import { View, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import * as ProfileActions from '../../../store/actions/profileActions';
 import Loading from '../../../components/commons/UI/Loading/Loading';
 import NoProfileDisclaimer from '../../../components/commons/NoProfileDisclaimer/NoProfileDisclaimer';
 import NotificationCard from '../../../components/0-MainScreensComponents/4-NotificationsScreenComponents/NotificationCard/NotificationCard';
@@ -12,6 +13,11 @@ class NotificationsScreen extends React.Component {
   static navigationOptions = () => ({
     headerTitle: 'Notifications',
   });
+
+  componentDidMount() {
+    const { setNotificationsSeen } = this.props;
+    setNotificationsSeen();
+  }
 
   renderItem = (notification) => {
     const { navigation } = this.props;
@@ -54,6 +60,7 @@ NotificationsScreen.propTypes = {
   currentUserProfile: PropTypes.shape({}),
   getCurrentProfileLoading: PropTypes.bool,
   currentUserHasProfile: PropTypes.bool,
+  setNotificationsSeen: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
@@ -62,7 +69,11 @@ const mapStateToProps = (state) => ({
   currentUserHasProfile: state.profile.currentUserHasProfile,
 });
 
+const mapDispatchToProps = {
+  setNotificationsSeen: ProfileActions.setNotificationsSeen,
+};
+
 export default connect(
   mapStateToProps,
-  null,
+  mapDispatchToProps,
 )(NotificationsScreen);

@@ -180,6 +180,23 @@ class ServiceScreen extends Component {
             </View>
           </View>
 
+          {service.applications.length === 0 && (
+            <View>
+              <View>
+                <Text style={styles.noProposalsDisclaimerHeading}>
+                  No Proposals Yet
+                </Text>
+              </View>
+              <View>
+                {!loggedInUser.ownService && (
+                  <Text style={styles.noProposalsDisclaimer}>
+                    Be the first one to apply {'💪'}
+                  </Text>
+                )}
+              </View>
+            </View>
+          )}
+
           {service.applications.map((application) =>
             application.chosen ? (
               <Proposal

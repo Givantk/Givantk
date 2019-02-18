@@ -43,7 +43,7 @@ module.exports = router;
 // @desc   Set the notifications of the logged in user to be seen
 // @access Private
 // @errors noprofile error
-router.get(
+router.post(
   '/set-notifications-seen',
   passport.authenticate('jwt', { session: false }),
   profileController.setNotificationsSeen

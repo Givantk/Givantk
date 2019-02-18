@@ -6,10 +6,10 @@ import React from 'react';
 
 import { dimensions } from '../../../assets/styles/base';
 import Loading from '../../../components/commons/UI/Loading/Loading';
+import NoProfileDisclaimer from '../../../components/commons/NoProfileDisclaimer/NoProfileDisclaimer';
 import ServicesList from '../../../components/commons/Service-Related-Components/ServicesList/ServicesList';
 import SnakeNavigator from '../../../components/commons/UI/SnakeNavigator/SnakeNavigator';
 import styles from './MyServicesScreenStyles';
-import NoProfileDisclaimer from '../../../components/commons/NoProfileDisclaimer/NoProfileDisclaimer';
 
 class MyServicesScreen extends React.Component {
   static navigationOptions = () => ({
@@ -25,6 +25,7 @@ class MyServicesScreen extends React.Component {
 
   getSnakeNavigatorContent = () => {
     const { profile, getCurrentProfileLoading, navigation } = this.props;
+
     return [
       {
         name: 'I asked for',

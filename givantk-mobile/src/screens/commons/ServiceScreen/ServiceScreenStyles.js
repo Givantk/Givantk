@@ -83,13 +83,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  shareIcon: {
-    fontSize: 40,
-    color: colors.primary,
-  },
   favoriteIcon: {
     fontSize: 30,
     color: colors.primary,
+  },
+  noProposalsDisclaimerHeading: {
+    alignSelf: 'center',
+    fontFamily: fontTypes.main,
+    fontSize: 17,
+  },
+  noProposalsDisclaimer: {
+    alignSelf: 'center',
+    fontFamily: fontTypes.main,
+    fontSize: 13,
   },
   proposalsHeadingContainer: {
     marginHorizontal: 30,
