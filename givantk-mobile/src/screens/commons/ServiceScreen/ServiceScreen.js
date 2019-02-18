@@ -15,6 +15,7 @@ import React, { Component } from 'react';
 import styles from './ServiceScreenStyles';
 import Loading from '../../../components/commons/UI/Loading/Loading';
 import fakeProfile from '../../../assets/data/fakeProfile';
+import Proposal from './Proposal/Proposal';
 
 class ServiceScreen extends Component {
   static navigationOptions = () => ({
@@ -166,32 +167,25 @@ class ServiceScreen extends Component {
           <View style={styles.proposalsHeadingContainer}>
             <Text style={styles.proposalsHeadingText}>Proposals:</Text>
           </View>
-          {service.applications.map((application) => (
-            <View style={styles.proposalsContainer} key={application._id}>
-              <TouchableWithoutFeedback
-                onPress={() => this.onPressApplicant(application.user._id)}
-              >
-                <View style={styles.proposalHeader}>
-                  <Image
-                    source={{
-                      uri: fakeProfile.avatar,
-                    }}
-                    style={styles.proposalUserImage}
-                  />
-                  <View style={styles.headerRight}>
-                    <Text style={styles.proposalUserName}>
-                      {`${application.user.first_name} ${
-                        application.user.last_name
-                      }`}
-                    </Text>
-                  </View>
-                </View>
-              </TouchableWithoutFeedback>
-              <View style={styles.proposalTextContainer}>
-                <Text style={styles.proposalText}>{application.proposal}</Text>
-              </View>
-            </View>
-          ))}
+          {service.applications.map((application) =>
+            application.chosen ? (
+              <Proposal
+                application={application}
+                chosen
+                key={application._id}
+                onPressApplicant={this.onPressApplicant}
+              />
+            ) : null,
+          )}
+          {service.applications.map((application) =>
+            !application.chosen ? (
+              <Proposal
+                application={application}
+                key={application._id}
+                onPressApplicant={this.onPressApplicant}
+              />
+            ) : null,
+          )}
         </View>
       </ScrollView>
     );
