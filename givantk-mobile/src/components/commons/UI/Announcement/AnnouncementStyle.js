@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
     color: colors.black,
     padding: 10,
     margin: 5,
+    marginTop: 30,
     fontWeight: 'bold',
     borderWidth: 2,
     borderRadius: 5,

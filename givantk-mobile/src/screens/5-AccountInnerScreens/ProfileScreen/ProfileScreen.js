@@ -28,10 +28,21 @@ class ProfileScreen extends React.Component {
     },
   });
 
+  state = {
+    userId: null,
+  };
+
   componentDidMount() {
     const { navigation, getProfileByUserId } = this.props;
-    const { userId } = navigation.state.params;
-    getProfileByUserId(userId);
+
+    if (navigation.state.params) {
+      const { userId } = navigation.state.params;
+
+      this.setState(() => ({
+        userId,
+      }));
+      getProfileByUserId(userId);
+    }
   }
 
   getSnakeNavigatorContent = () => {
@@ -68,7 +79,9 @@ class ProfileScreen extends React.Component {
       selectedUserHasProfile,
     } = this.props;
 
-    if (getProfileLoading) return <Loading />;
+    const { userId } = this.state;
+
+    if (getProfileLoading || !userId) return <Loading />;
 
     if (!selectedUserHasProfile)
       return <NoProfileDisclaimer navigation={navigation} />;

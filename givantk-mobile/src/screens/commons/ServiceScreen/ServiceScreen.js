@@ -36,9 +36,11 @@ class ServiceScreen extends Component {
   componentDidMount() {
     const { navigation } = this.props;
 
-    const { service } = navigation.state.params;
+    if (navigation.state.params) {
+      const { service } = navigation.state.params;
 
-    this.setService(service);
+      if (service) this.setService(service);
+    }
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -99,9 +101,7 @@ class ServiceScreen extends Component {
 
   onPressOfferHelp = () => {
     const { navigation } = this.props;
-
-    // Get service from passed params
-    const service = navigation.getParam('service', null);
+    const { service } = this.state;
 
     // Pass service to AddProposal Screen
     navigation.navigate('AddProposal', {

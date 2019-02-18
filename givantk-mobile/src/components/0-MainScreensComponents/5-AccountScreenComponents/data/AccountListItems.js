@@ -1,4 +1,4 @@
-const accountListItems = (navigation, userId) => [
+const accountListItems = (navigation, userId, currentUserProfile) => [
   {
     title: 'View Profile',
     iconName: 'ios-happy',
@@ -9,16 +9,22 @@ const accountListItems = (navigation, userId) => [
       }),
   },
   {
-    title: 'Bookmarked Services',
+    title: 'Services you bookmarked',
     iconName: 'md-star',
     iconType: 'Ionicons',
-    onPress: () => navigation.navigate('BookmarkedServices'),
+    onPress: () =>
+      navigation.navigate('BookmarkedServices', {
+        currentUserProfile,
+      }),
   },
   {
     title: 'Services you proposed for',
     iconName: 'account-card-details',
     iconType: 'MaterialCommunityIcons',
-    onPress: () => navigation.navigate('ProposedForServices'),
+    onPress: () =>
+      navigation.navigate('ProposedForServices', {
+        currentUserProfile,
+      }),
   },
   {
     title: 'Payment Info',

@@ -27,6 +27,11 @@ const ServicesList = (props) => {
   );
 };
 
+ServicesList.defaultProps = {
+  services: [],
+  loading: false,
+};
+
 ServicesList.propTypes = {
   navigation: PropTypes.shape({}),
   services: PropTypes.arrayOf(PropTypes.shape({})),
