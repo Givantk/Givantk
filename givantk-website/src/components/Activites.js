@@ -32,9 +32,9 @@ class Activites extends Component {
     /*approved is an array that's manipulated by this page instead of the state
 
     then we transfer the value to approved array in the state
-    
-    this array is related to the approval badge, when it's true the approval badge 
-    
+
+    this array is related to the approval badge, when it's true the approval badge
+
     appears
     */
 
@@ -72,8 +72,8 @@ class Activites extends Component {
                 return true;
             })
 
-            this.setState({approved: this.approved})
-       
+        this.setState({approved: this.approved})
+
     }
 
     /*this function is used to change the state of certain index (certian card) in the array
@@ -87,17 +87,13 @@ class Activites extends Component {
 
     replyButtonClicked = (value, i) => {
 
-        axios
-            .post('http://localhost:3001/message-replies/', {
-                MessageId: this.state.ActivitiesPage[i].id,
-                replyBody: value
-            })
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        console.log('I am value '+value);
+        console.log('I am i '+i)
+        console.log(this.props.actions)
+        this
+            .props
+            .actions
+            .messageReplies(value, this.state.ActivitiesPage[i])
 
     }
 
@@ -109,10 +105,10 @@ class Activites extends Component {
         this
             .props
             .actions
-            .approveActivity(this.state.ActivitiesPage[i])
+            .deleteActivity(this.state.ActivitiesPage[i])
 
-        this.approved[i]=true    
-        this.setState({approved:this.approved })
+        this.approved[i] = true
+        this.setState({approved: this.approved})
 
     }
 
@@ -173,7 +169,7 @@ class Activites extends Component {
 
         this.initialCardStateValues();
 
-        this.approved=[];
+        this.approved = [];
 
         this.initialApprovedValues();
 

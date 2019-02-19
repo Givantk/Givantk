@@ -402,22 +402,11 @@
       "announcement_id": 123
     }
   ],
-  "message-replies": [
+  "messageReplies": [
     {
-      "message_id": "1adkd",
-      "reply_body": "jdjd"
-    },
-    {
-      "message_id": "332A7",
-      "reply_body": "اهواك واتمنى لو انساك وانسى روحى وياك وان ضاعت يبقى فداك"
-    },
-    {
-      "message_id": "1adkd",
-      "reply_body": "yyy"
-    },
-    {
-      "message_id": "1adkd",
-      "reply_body": "sss"
+      "MessageId": "332A7",
+      "replyBody": "ya rab",
+      "id": 1
     }
   ],
   "deleteService": [
@@ -486,7 +475,6 @@
       "activity_id": 3,
       "id": 1
     }
-   
   ],
   "deleteComment": [
     {
