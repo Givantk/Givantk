@@ -104,7 +104,8 @@ router.get(
 // @access Private
 // @errors noservice error
 router.get(
-  '/search', 
+  '/search',
+  passport.authenticate('jwt', { session: false }), 
   serviceController.search
 );
 
