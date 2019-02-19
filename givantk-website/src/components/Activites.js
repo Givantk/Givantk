@@ -25,7 +25,9 @@ class Activites extends Component {
     its value is copied to the array after that
     */
 
-    cardStateValues = []
+    cardStateValues = [];
+
+    arrayOfArrays = [];
 
     // for every activity object in the activities array push false to the array
     // then set the state to hold this value
@@ -77,9 +79,16 @@ class Activites extends Component {
         database
         */
 
+        console.log(this.state.ActivitiesPage[i])
         const {ActivitiesPage} = this.state;
         //starting from index i delete one element only
-        ActivitiesPage.splice(i, 1)
+        ActivitiesPage.splice(i, 1);
+
+        /*editing the value of array of arrays in case you returned to 
+        the deleted items page you find it already deleted
+        */
+
+        this.arrayOfArrays[this.state.active-1]=ActivitiesPage;
 
         //update state to render the component
         this.setState({ActivitiesPage: ActivitiesPage})
@@ -96,11 +105,11 @@ class Activites extends Component {
 
     DivideDataArray = () => {
         let size = 6;
-        let arrayOfArrays = [];
+         
         for (let i = 0; i < this.state.Activities.length; i += size) {
-            arrayOfArrays.push(this.state.Activities.slice(i, i + size));
+            this.arrayOfArrays.push(this.state.Activities.slice(i, i + size));
         }
-        return (arrayOfArrays);
+        return (this.arrayOfArrays);
     }
 
     getNextPages = () => {}
@@ -108,12 +117,13 @@ class Activites extends Component {
     getPreviousPages = () => {}
 
     DisplayWhich = (i) => {
+        this.initialCardStateValues()
+
         this.setState({
             ActivitiesPage: this.DivideDataArray()[i - 1]
         })
         this.setState({active: i})
 
-        this.initialCardStateValues()
     }
     performPagination = () => {
         let numberOfPages = Math.ceil(this.state.Activities.length / 6);
