@@ -1,92 +1,84 @@
-import React, {Component} from 'react';
-import CustomTableWithGrid from '../components/CustomTableWithGrid'
-import '../CustomNav.css'
+import React, {Component} from "react";
+import CustomTableWithGrid from "../components/CustomTableWithGrid";
+import tableActions from "../functions/tableActions";
+import "../CustomNav.css";
 
 class Services extends Component {
     render() {
-
         var headers = [
-
             [
-                'first_name',
-                'last_name',
-                'gender',
-                'phone_number',
-                'date_of_birth',
-                'ban'
-
+                "service_id",
+                "service_nature",
+                "service_title",
+                "service_description",
+                "asker_id",
+                "helper_id",
+                "applicants_id",
+                "service_date",
+                "service_state",
+                "delete_service"
             ],
             [
-                'first_name',
-                'last_name',
-                'givantk_points',
-                'money_points',
-                'skills',
-                'ban'
-
+                "service_id",
+                "service_title",
+                "service_description",
+                "service_comments",
+               
             ]
-
-        ]
+        ];
 
         var titles = [
             [
-                'First Name',
-                'Last Name',
-                'Gender',
-                'Phone Number ',
-                'Date of birth',
-                'Ban user'
+                "Service Id",
+                "Service Nature",
+                "Service Title",
+                "Service Description",
+                "Asker Id",
+                "Helper Id",
+                "Applicants Id",
+                "Service Date",
+                "Service State",
+                "Delete service"
             ],
             [
-                'First Name',
-                'Last Name',
-                'Givantk points',
-                'Money Points',
-                'Skills',
-                'Ban user'
+                "Service Id",
+                "Service Title",
+                "Service Description",
+                "Comments",
+              
             ]
-        ]
+        ];
 
         return (
             <div>
                 <CustomTableWithGrid
-                    url='https://givantk-backend.herokuapp.com/api/profile/all'
-                    name='Personal Information'
+                    url="http://localhost:3001/servicesInfo"
+                    name="Services info"
                     headers={headers[0]}
                     titles={titles[0]}
                     specialColType
-                    specialColColor='danger'
-                    specialColText='Ban'
-                    alterButtonText='Unban'
-                    alterButtonColor='secondary'
+                    specialColColor="danger"
+                    specialColText="Delete"
+                    action={tableActions.deleteService}
+                    
                     />
 
                 <CustomTableWithGrid
-                    url='https://givantk-backend.herokuapp.com/api/profile/all'
-                    name='Points and Skills'
+                    url="http://localhost:3001/servicesInfo"
+                    name="Services and Comments"
                     headers={headers[1]}
                     titles={titles[1]}
                     specialColType
-                    specialColColor='danger'
-                    specialColText='Ban'
-                    alterButtonText='Unban'
-                    alterButtonColor='secondary'
+                    specialColColor="info"
+                    specialColText="View Comments"
+                    navigable
+                    navigate={() => this.props.history.push('/')}/>
+
                     />
 
-                <CustomTableWithGrid
-                    url='https://givantk-backend.herokuapp.com/api/profile/all'
-                    name='Users and services'
-                    headers={headers[1]}
-                    titles={titles[1]}
-                    specialColType
-                    specialColColor='danger'
-                    specialColText='Ban'
-                    alterButtonText='Unban'
-                    alterButtonColor='secondary'
-                    />
             </div>
-        )
+        );
     }
 }
 
-export default Services
+export default Services;

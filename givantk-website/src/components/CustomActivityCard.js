@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Customer from '../images/cust1.jpeg';
-import {Card, Button, Collapse} from 'react-bootstrap';
+import {Card, Button, Collapse, Badge} from 'react-bootstrap';
 
 export default class CustomActivityCard extends Component {
 
@@ -8,42 +8,58 @@ export default class CustomActivityCard extends Component {
         const i = this.props.id;
 
         return (
-            <Card>
-                <Card.Header>
-                    <Button
-                        onClick={() => this.props.changeCardStateValues(i)}
-                        aria-controls="collapsable-activity"
-                        aria-expanded={this.props.cardStateValues[i]}
-                        variant='secondary'
-                        className='text-light text-left'
-                        block>
-                        <img className='mr-3 rounded ' alt="" src={Customer} width='50'></img>
-                        {this.props.activity.title}
-                    </Button>
-                </Card.Header>
+            <div>
+                <Card>
+                    <Card.Header>
+                        <Button
+                            onClick={() => this.props.changeCardStateValues(i)}
+                            aria-controls="collapsable-activity"
+                            aria-expanded={this.props.cardStateValues[i]}
+                            variant='secondary'
+                            className='text-light text-left'
+                            block>
+                            <img className='mr-3 rounded ' alt="" src={Customer} width='50'></img>
+                            {this.props.activity.title}
+                        </Button>
+                    </Card.Header>
 
-                <div>
+                    <div>
 
-                    <Collapse in={this.props.cardStateValues[i]}>
+                        <Collapse in={this.props.cardStateValues[i]}>
 
-                        <Card.Body id="collapsable-activity">
-                            {this.props.activity.body}
+                            <Card.Body id="collapsable-activity">
+                                {this.props.activity.body}
 
-                            <footer className='d-flex'>
-                                <Button
-                                    variant='danger '
-                                    onClick={() => this.props.deleteButtonClicked(this.props.id)}
-                                    className='mt-2 ml-auto'>
-                                    Delete this activity
-                                </Button>
+                                <footer className='d-flex'>
 
-                            </footer>
+                                    {this.props.approved
+                                        ? <Badge variant='success' className='mt-2 ml-auto'>
+                                                Activity is approved
+                                            </Badge>
+                                        : <Button
+                                            variant='info'
+                                            onClick={() => this.props.approvalButtonCicked(this.props.id)}
+                                            className='mt-2 ml-auto'>
+                                            Approve this activity
+                                        </Button>
+}
 
-                        </Card.Body>
+                                    <Button
+                                        variant='danger '
+                                        onClick={() => this.props.deleteButtonClicked(this.props.id)}
+                                        className='mt-2 ml-2'>
+                                        Delete this activity
+                                    </Button>
 
-                    </Collapse>
-                </div>
-            </Card>
+                                </footer>
+
+                            </Card.Body>
+
+                        </Collapse>
+                    </div>
+                </Card>
+
+            </div>
         )
     }
 }

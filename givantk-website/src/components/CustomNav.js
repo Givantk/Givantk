@@ -111,8 +111,8 @@ class CustomNav extends Component {
                                             <NavLink
                                                 activeClassName='current'
                                                 className='nav-link p-2 mb-2 sidebar-link text-white'
-                                                to="/activites">
-                                                <i className='fas fa-bell  fa-lg mr-3'></i>Activites</NavLink>
+                                                to="/activities">
+                                                <i className='fas fa-bell  fa-lg mr-3'></i>Activities</NavLink>
                                         </li>
 
                                         <li>
@@ -157,16 +157,16 @@ class CustomNav extends Component {
 
                                                 <Nav.Item as='li' className='icon-parent'>
 
-                                                    <Nav.Link className='icon-bullet'>
+                                                    <NavLink className='icon-bullet nav-link' to='/messages'>
                                                         <i className='fas fa-comments text-muted fa-lg'></i>
-                                                    </Nav.Link>
+                                                    </NavLink>
                                                 </Nav.Item>
 
                                                 <Nav.Item as='li' className='icon-parent'>
 
-                                                    <Nav.Link className='icon-bullet'>
+                                                    <NavLink className='icon-bullet nav-link' to="/activities">
                                                         <i className='fas fa-lg text-muted fa-bell'></i>
-                                                    </Nav.Link>
+                                                    </NavLink>
                                                 </Nav.Item>
 
                                                 <Nav.Item as='li' className='ml-md-auto'>

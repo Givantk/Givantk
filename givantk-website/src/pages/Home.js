@@ -2,7 +2,6 @@ import React from 'react';
 import CardGroup from '../components/CardGroup';
 import CustomCard from '../components/CustomCard'
 import CustomTableWithGrid from '../components/CustomTableWithGrid';
-import Activites from '../components/Activites';
 
 function Home() {
     return (
@@ -41,21 +40,23 @@ function Home() {
             </CardGroup>
 
             <CustomTableWithGrid
-                url='http://localhost:3001/Users'
+                url='http://localhost:3001/PersonalInfo'
                 headers={[
                 'first_name',
                 'last_name',
+                'phone_number',
                 'email',
                 'location',
-                'date',
+                'registration_date',
                 'ban'
             ]}
                 titles={[
                 'First Name',
                 'Last Name',
+                'Phone Number',
                 'Email',
                 'Location',
-                'Date',
+                'Registration Date',
                 'Ban user'
             ]}
                 specialColType
@@ -63,6 +64,7 @@ function Home() {
                 specialColText='Ban'
                 alterButtonText='Unban'
                 alterButtonColor='secondary'
+                alterable
                 />
 
         </div>

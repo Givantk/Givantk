@@ -8,29 +8,32 @@ import {
     Button
 } from 'react-bootstrap';
 
+import axios from 'axios';
+
 class Announcements extends Component {
 
     state = {
-        textareaVal: "",
+        textareaVal: ""
     }
 
     postAnnouncements = () => {
         console.log(this.state.textareaVal)
-        fetch('http://localhost:3001/Announcements', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({announcementBody: this.state.textareaVal})
 
-           
-        })
-        this.setState({
-            textareaVal:"",
-        })
+        axios
+            .post('http://localhost:3001/Announcements', {
+                announcementBody: this.state.textareaVal,
+                ident:123
+            })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+      
+        this.setState({textareaVal: ""})
     }
-
 
     render() {
 
