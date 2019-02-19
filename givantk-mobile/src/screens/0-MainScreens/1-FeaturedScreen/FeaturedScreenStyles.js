@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.trueWhite,
     alignItems: 'center',
-    justifyContent: 'space-around',
+    justifyContent: 'flex-start',
     alignContent: 'center',
   },
   searchContainer: {

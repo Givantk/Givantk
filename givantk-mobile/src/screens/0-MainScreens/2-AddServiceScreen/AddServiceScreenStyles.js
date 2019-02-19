@@ -8,8 +8,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     alignItems: 'center',
     justifyContent: 'flex-start',
-    padding: 20,
+    paddingHorizontal: 20,
   },
+  topInputsContainer: { marginTop: 10 },
   text: {
     fontWeight: 'bold',
     fontSize: 15,

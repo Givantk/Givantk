@@ -31,7 +31,6 @@ const styles = StyleSheet.create({
     width: '70%',
   },
   buttonsContainer: { width: '100%', marginVertical: '10%' },
-  button: { margin: 7 },
 });
 
 export default styles;

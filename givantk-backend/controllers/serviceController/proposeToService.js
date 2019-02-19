@@ -22,7 +22,7 @@ module.exports = proposeToService = (req, res) => {
       }
 
       if (
-        service.applicants.filter(
+        service.applications.filter(
           (item) => item.user.toString() === req.user._id.toString()
         ).length > 0
       ) {
@@ -37,7 +37,7 @@ module.exports = proposeToService = (req, res) => {
         }
 
         // Updating service
-        service.applicants.unshift({
+        service.applications.unshift({
           user: req.user._id,
           proposal: req.body.proposal
         });
@@ -52,7 +52,7 @@ module.exports = proposeToService = (req, res) => {
               askerProfile.notifications.unshift({
                 title: `${
                   applicantProfile.first_name
-                } proposed to your service ${service.name}`,
+                } proposed to your service \"${service.name}\"`,
                 navigateTo: {
                   kind: 'service',
                   service: service._id

@@ -35,7 +35,7 @@ class SignupScreen extends React.Component {
   };
 
   render() {
-    const { errors } = this.props;
+    const { errors, signupLoading } = this.props;
     return (
       <AvoidKeyboard
         bottomPadding={-30}
@@ -48,6 +48,7 @@ class SignupScreen extends React.Component {
             onSignup={this.handleSignup}
             onSignupWithFacebook={this.handleSignupWithFacebook}
             errors={errors}
+            loading={signupLoading}
           />
         </View>
       </AvoidKeyboard>
@@ -59,10 +60,12 @@ SignupScreen.propTypes = {
   navigation: PropTypes.shape({}),
   signupUser: PropTypes.func,
   errors: PropTypes.shape({}),
+  signupLoading: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
   errors: state.errors,
+  signupLoading: state.auth.signupLoading,
 });
 
 const mapDispatchToProps = {

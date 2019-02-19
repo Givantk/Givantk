@@ -15,7 +15,7 @@ module.exports = unproposeToService = (req, res) => {
       }
 
       if (
-        service.applicants.filter(
+        service.applications.filter(
           (item) => item.user.toString() === req.user._id.toString()
         ).length === 0
       ) {
@@ -29,10 +29,10 @@ module.exports = unproposeToService = (req, res) => {
           return res.status(400).json(errors);
         }
         // Updating service
-        const newApplicants = service.applicants.filter(
+        const newApplications = service.applications.filter(
           (item) => item.user.toString() !== req.user._id.toString()
         );
-        service.applicants = newApplicants;
+        service.applications = newApplications;
 
         // Updating profile
         const newServices = profile.services_proposed_for.filter(

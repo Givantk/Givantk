@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+
 import { colors, dimensions, fontTypes } from '../../../../assets/styles/base';
 
 const styles = StyleSheet.create({
@@ -62,12 +63,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  shareIcon: {
-    fontSize: 40,
-    color: colors.primary,
-  },
   favoriteIcon: {
-    fontSize: 30,
+    fontSize: 35,
     color: colors.primary,
   },
 });

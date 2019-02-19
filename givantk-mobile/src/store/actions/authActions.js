@@ -13,15 +13,25 @@ import storedJWTname from '../../assets/constants/storedJWTname';
 import QuickNotification from '../../components/commons/UI/QuickNotification/QuickNotification';
 
 export const signupUser = (userData, callback) => (dispatch) => {
+  dispatch({
+    type: actionTypes.SIGN_UP_START,
+  });
+
   http
     .post(userAPI, userData)
     .then(() => {
       if (callback) callback();
+      dispatch({
+        type: actionTypes.SIGN_UP_END,
+      });
     })
     .catch((err) => {
       dispatch({
         type: actionTypes.SET_ERRORS,
         payload: err.response.data,
+      });
+      dispatch({
+        type: actionTypes.SIGN_UP_END,
       });
     });
 };
@@ -60,6 +70,9 @@ export const loginUser = (userData, callback) => (dispatch) => {
       dispatch({
         type: actionTypes.SET_ERRORS,
         payload: err.response.data,
+      });
+      dispatch({
+        type: actionTypes.SET_CURRENT_USER,
       });
     });
 };

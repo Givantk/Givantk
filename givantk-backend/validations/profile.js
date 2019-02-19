@@ -21,10 +21,10 @@ module.exports = function validateProfile(data) {
   }
 
   // description
-  if (!isEmpty(data.description))
-    if (!Validator.isLength(data.description, { min: 20, max: 600 })) {
-      errors.description = 'Description must be between 20 and 600 characters';
-    }
+  // if (!isEmpty(data.description))
+  //   if (!Validator.isLength(data.description, { min: 20, max: 600 })) {
+  //     errors.description = 'Description must be between 20 and 600 characters';
+  //   }
 
   //date_of_birth
   if (data.date_of_birth)

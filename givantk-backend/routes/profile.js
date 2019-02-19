@@ -1,4 +1,5 @@
 const express = require('express');
+
 const router = express.Router();
 const passport = require('passport');
 
@@ -35,5 +36,17 @@ router.get(
 // @access Public
 // @errors
 router.get('/:user_id', profileController.getProfileByUserId);
+
+module.exports = router;
+
+// @route  GET api/profile/set-notifications-seen
+// @desc   Set the notifications of the logged in user to be seen
+// @access Private
+// @errors noprofile error
+router.post(
+  '/set-notifications-seen',
+  passport.authenticate('jwt', { session: false }),
+  profileController.setNotificationsSeen
+);
 
 module.exports = router;
