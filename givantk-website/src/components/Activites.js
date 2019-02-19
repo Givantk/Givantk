@@ -38,7 +38,7 @@ class Activites extends Component {
             .state
             .ActivitiesPage
             .map(() => {
-                
+
                 this
                     .cardStateValues
                     .push(false);
@@ -84,16 +84,18 @@ class Activites extends Component {
         //starting from index i delete one element only
         ActivitiesPage.splice(i, 1);
 
-        /*editing the value of array of arrays in case you returned to 
+        /*editing the value of array of arrays in case you returned to
         the deleted items page you find it already deleted
         */
 
-        this.arrayOfArrays[this.state.active-1]=ActivitiesPage;
+        this.arrayOfArrays[this.state.active - 1] = ActivitiesPage;
+
+        this.cardStateValues = []
+
+        this.initialCardStateValues()
 
         //update state to render the component
         this.setState({ActivitiesPage: ActivitiesPage})
-
-        this.initialCardStateValues()
 
     }
 
@@ -105,9 +107,11 @@ class Activites extends Component {
 
     DivideDataArray = () => {
         let size = 6;
-         
+
         for (let i = 0; i < this.state.Activities.length; i += size) {
-            this.arrayOfArrays.push(this.state.Activities.slice(i, i + size));
+            this
+                .arrayOfArrays
+                .push(this.state.Activities.slice(i, i + size));
         }
         return (this.arrayOfArrays);
     }
@@ -117,6 +121,9 @@ class Activites extends Component {
     getPreviousPages = () => {}
 
     DisplayWhich = (i) => {
+        
+        this.cardStateValues = []
+
         this.initialCardStateValues()
 
         this.setState({
