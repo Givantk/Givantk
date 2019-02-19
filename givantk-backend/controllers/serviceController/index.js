@@ -9,6 +9,7 @@ const unbookmarkService = require('./unbookmarkService');
 const deleteService = require('./deleteService');
 const proposeToService = require('./proposeToService');
 const unproposeToService = require('./unproposeToService');
+const acceptServiceProposal = require('./acceptServiceProposal');
 
 module.exports = {
   getAllServices,
@@ -21,5 +22,6 @@ module.exports = {
   unbookmarkService,
   deleteService,
   proposeToService,
-  unproposeToService
+  unproposeToService,
+  acceptServiceProposal
 };

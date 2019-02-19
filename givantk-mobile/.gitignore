@@ -1,5 +1,12 @@
 node_modules/**/*
 .expo/*
 npm-debug.*
+<<<<<<< HEAD
 
+=======
+*.jks
+*.p12
+*.key
+*.mobileprovision
+>>>>>>> 768c62e890fa47e1f8639261f7616c08ab80367c
 *.apk

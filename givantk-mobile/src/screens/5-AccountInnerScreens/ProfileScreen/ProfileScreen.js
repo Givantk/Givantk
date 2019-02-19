@@ -7,12 +7,12 @@ import React from 'react';
 import { colors, dimensions } from '../../../assets/styles/base';
 import * as ProfileActions from '../../../store/actions/profileActions';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
-import Loading from '../../../components/commons/UI/Loading/Loading';
 import fakeProfile from '../../../assets/data/fakeProfile';
+import Loading from '../../../components/commons/UI/Loading/Loading';
+import NoProfileDisclaimer from '../../../components/commons/NoProfileDisclaimer/NoProfileDisclaimer';
+import ServicesList from '../../../components/commons/Service-Related-Components/ServicesList/ServicesList';
 import SnakeNavigator from '../../../components/commons/UI/SnakeNavigator/SnakeNavigator';
 import styles from './ProfileScreenStyles';
-import ServicesList from '../../../components/commons/Service-Related-Components/ServicesList/ServicesList';
-import NoProfileDisclaimer from '../../../components/commons/NoProfileDisclaimer/NoProfileDisclaimer';
 
 class ProfileScreen extends React.Component {
   // When navigating to this screen, we will always pass to it the userId in the
@@ -28,10 +28,21 @@ class ProfileScreen extends React.Component {
     },
   });
 
+  state = {
+    userId: null,
+  };
+
   componentDidMount() {
     const { navigation, getProfileByUserId } = this.props;
-    const { userId } = navigation.state.params;
-    getProfileByUserId(userId);
+
+    if (navigation.state.params) {
+      const { userId } = navigation.state.params;
+
+      this.setState(() => ({
+        userId,
+      }));
+      getProfileByUserId(userId);
+    }
   }
 
   getSnakeNavigatorContent = () => {
@@ -68,7 +79,9 @@ class ProfileScreen extends React.Component {
       selectedUserHasProfile,
     } = this.props;
 
-    if (getProfileLoading) return <Loading />;
+    const { userId } = this.state;
+
+    if (getProfileLoading || !userId) return <Loading />;
 
     if (!selectedUserHasProfile)
       return <NoProfileDisclaimer navigation={navigation} />;

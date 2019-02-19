@@ -2,15 +2,16 @@ import { View, TouchableWithoutFeedback, Image, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import styles from './NotificationCardStyles';
 import profile from '../../../../assets/data/fakeProfile';
+import styles from './NotificationCardStyles';
 
 class NotificationCard extends React.PureComponent {
   onPressAvatar = () => {
     const { navigation, notification } = this.props;
     if (notification.is_user_associated) {
       navigation.navigate('Profile', {
-        profile: notification.user_profile_associated,
+        userId:
+          notification.user_associated._id || notification.user_associated,
       });
     } else {
       this.onPressBody();
@@ -19,13 +20,16 @@ class NotificationCard extends React.PureComponent {
 
   onPressBody = () => {
     const { navigation, notification } = this.props;
+
     if (notification.navigateTo.kind === 'service') {
       navigation.navigate('Service', {
         service: notification.navigateTo.service,
       });
     } else if (notification.navigateTo.kind === 'profile') {
       navigation.navigate('Profile', {
-        profile: notification.navigateTo.profile,
+        userId:
+          notification.navigateTo.profile.user._id ||
+          notification.navigateTo.profile.user,
       });
     }
   };

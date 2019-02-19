@@ -8,6 +8,7 @@ const INITIAL_STATE = {
   createServiceLoading: false,
   proposeToServiceLoading: false,
   getServiceLoading: false,
+  acceptServiceProposalLoading: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -62,6 +63,18 @@ export default (state = INITIAL_STATE, action) => {
         selectedService: action.payload
           ? action.payload
           : [...state.selectedService],
+      };
+
+    case actionTypes.ACCEPT_SERVICE_PROPOSAL_START:
+      return {
+        ...state,
+        acceptServiceProposalLoading: true,
+      };
+
+    case actionTypes.ACCEPT_SERVICE_PROPOSAL_FINISH:
+      return {
+        ...state,
+        acceptServiceProposalLoading: false,
       };
 
     default:

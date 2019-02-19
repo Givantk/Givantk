@@ -23,8 +23,19 @@ class ServiceCard extends React.PureComponent {
     });
   };
 
+  onPressStar = () => {
+    const { service, onBookmark, onUnbookmark, bookmarked } = this.props;
+
+    if (bookmarked) {
+      onUnbookmark(service._id);
+    } else {
+      onBookmark(service._id);
+    }
+  };
+
   render() {
-    const { service } = this.props;
+    const { service, bookmarked } = this.props;
+
     return (
       <TouchableWithoutFeedback onPress={this.onPressCard}>
         <View style={styles.serviceCard}>
@@ -60,8 +71,13 @@ class ServiceCard extends React.PureComponent {
           <View style={styles.footer}>
             <Text style={styles.cost}>{service.cost}</Text>
             <View style={styles.footerLeft}>
-              <Icon type="EvilIcons" name="envelope" style={styles.shareIcon} />
-              <Icon type="Feather" name="star" style={styles.favoriteIcon} />
+              <TouchableWithoutFeedback onPress={this.onPressStar}>
+                <Icon
+                  type="AntDesign"
+                  name={bookmarked ? 'star' : 'staro'}
+                  style={styles.favoriteIcon}
+                />
+              </TouchableWithoutFeedback>
             </View>
           </View>
         </View>
@@ -72,6 +88,13 @@ class ServiceCard extends React.PureComponent {
 
 export default ServiceCard;
 
+ServiceCard.defaultProps = {
+  onBookmark: () => null,
+  onUnbookmark: () => null,
+  bookmarked: false,
+  service: {},
+};
+
 ServiceCard.propTypes = {
   navigation: PropTypes.shape({}),
   service: PropTypes.shape({
@@ -79,4 +102,7 @@ ServiceCard.propTypes = {
     description: PropTypes.string,
     asker: PropTypes.shape({}),
   }),
+  onBookmark: PropTypes.func,
+  onUnbookmark: PropTypes.func,
+  bookmarked: PropTypes.bool,
 };

@@ -42,7 +42,7 @@ export default class SignupInputs extends Component {
 
   render() {
     const { location } = this.state;
-    const { onSignupWithFacebook, errors } = this.props;
+    const { onSignupWithFacebook, errors, loading } = this.props;
     return (
       <View
         style={{
@@ -121,10 +121,10 @@ export default class SignupInputs extends Component {
           {errors.location || 'Error'}
         </Text>
         <View style={styles.buttonsContainer}>
-          <DefaultButton onPress={this.onSignup} style={styles.button}>
+          <DefaultButton onPress={this.onSignup} loading={loading}>
             Sign Up
           </DefaultButton>
-          <DefaultButton onPress={onSignupWithFacebook} style={styles.button}>
+          <DefaultButton onPress={onSignupWithFacebook}>
             Sign Up With Facebook
           </DefaultButton>
         </View>
@@ -137,4 +137,5 @@ SignupInputs.propTypes = {
   onSignup: PropTypes.func,
   onSignupWithFacebook: PropTypes.func,
   errors: PropTypes.shape({}),
+  loading: PropTypes.bool,
 };

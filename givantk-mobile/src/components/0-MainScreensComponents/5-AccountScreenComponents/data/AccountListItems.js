@@ -1,4 +1,4 @@
-const accountListItems = (navigation, userId) => [
+const accountListItems = (navigation, userId, currentUserProfile) => [
   {
     title: 'View Profile',
     iconName: 'ios-happy',
@@ -9,16 +9,22 @@ const accountListItems = (navigation, userId) => [
       }),
   },
   {
-    title: 'Bookmarked Services',
+    title: 'Services you bookmarked',
     iconName: 'md-star',
     iconType: 'Ionicons',
-    onPress: () => {},
+    onPress: () =>
+      navigation.navigate('BookmarkedServices', {
+        currentUserProfile,
+      }),
   },
   {
-    title: 'Proposed for services',
+    title: 'Services you proposed for',
     iconName: 'account-card-details',
     iconType: 'MaterialCommunityIcons',
-    onPress: () => {},
+    onPress: () =>
+      navigation.navigate('ProposedForServices', {
+        currentUserProfile,
+      }),
   },
   {
     title: 'Payment Info',
@@ -26,24 +32,24 @@ const accountListItems = (navigation, userId) => [
     iconType: 'FontAwesome',
     onPress: () => navigation.navigate('PaymentInfo'),
   },
-  {
-    title: 'Personal Info',
-    iconName: 'magnifying-glass',
-    iconType: 'Foundation',
-    onPress: () => navigation.navigate('PersonalInfo'),
-  },
-  {
-    title: 'Invite Friends',
-    iconName: 'ios-people',
-    iconType: 'Ionicons',
-    onPress: () => navigation.navigate('InviteFriends'),
-  },
-  {
-    title: 'Verify Identity',
-    iconName: 'verified-user',
-    iconType: 'MaterialIcons',
-    onPress: () => navigation.navigate('VerifyIdentity'),
-  },
+  // {
+  //   title: 'Personal Info',
+  //   iconName: 'magnifying-glass',
+  //   iconType: 'Foundation',
+  //   onPress: () => navigation.navigate('PersonalInfo'),
+  // },
+  // {
+  //   title: 'Invite Friends',
+  //   iconName: 'ios-people',
+  //   iconType: 'Ionicons',
+  //   onPress: () => navigation.navigate('InviteFriends'),
+  // },
+  // {
+  //   title: 'Verify Identity',
+  //   iconName: 'verified-user',
+  //   iconType: 'MaterialIcons',
+  //   onPress: () => navigation.navigate('VerifyIdentity'),
+  // },
 ];
 
 export default accountListItems;

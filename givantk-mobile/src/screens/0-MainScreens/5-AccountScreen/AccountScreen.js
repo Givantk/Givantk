@@ -29,7 +29,7 @@ class AccountScreen extends React.Component {
   };
 
   render() {
-    const { navigation, currentUser } = this.props;
+    const { navigation, currentUser, currentUserProfile } = this.props;
 
     return (
       <View style={styles.container}>
@@ -68,7 +68,13 @@ class AccountScreen extends React.Component {
         </TouchableWithoutFeedback>
 
         {/* List */}
-        <CardList items={accountListItems(navigation, currentUser._id)} />
+        <CardList
+          items={accountListItems(
+            navigation,
+            currentUser._id,
+            currentUserProfile,
+          )}
+        />
       </View>
     );
   }
@@ -77,11 +83,13 @@ class AccountScreen extends React.Component {
 AccountScreen.propTypes = {
   navigation: PropTypes.shape({}),
   currentUser: PropTypes.shape({}),
+  currentUserProfile: PropTypes.shape({}),
   logoutUser: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
   currentUser: state.auth.user,
+  currentUserProfile: state.profile.currentUserProfile,
   errors: state.errors,
 });
 
