@@ -13,3 +13,5 @@ router.post(
   passport.authenticate('jwt', { session: false }),
   ChatController.openChat
 );
+
+module.exports = router;
