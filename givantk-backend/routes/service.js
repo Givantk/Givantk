@@ -99,6 +99,16 @@ router.get(
   serviceController.unproposeToService
 );
 
+// @route  GET api/service/search
+// @desc   search for a service
+// @access Private
+// @errors noservice error
+router.get(
+  '/search',
+  passport.authenticate('jwt', { session: false }),
+  serviceController.search
+);
+
 // @route  POST api/service/accept-service-proposal/:service_id/:proposal_id
 // @desc   Accept a proposal
 // @access Private

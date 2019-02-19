@@ -64,7 +64,6 @@ function Home() {
                 alterButtonText='Unban'
                 alterButtonColor='secondary'
                 />
-            <Activites/>
 
         </div>
     )
