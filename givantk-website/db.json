@@ -280,58 +280,72 @@
   ],
   "Activities": [
     {
+      "activity_id": 1,
       "title": "Ahmed asked for a new service",
       "body": "يا ليته يعلمُ أنّي لستُ أذكرهُ وكيف أذكرهُ إذ لستُ أنساهُ"
     },
     {
+      "activity_id": 2,
       "title": "Kamal posted a new comment",
       "body": "lorem ipsum"
     },
     {
+      "activity_id": 3,
       "title": "Dalal posted a new comment",
       "body": "lorem ipsum"
     },
     {
+      "activity_id": 4,
       "title": "Noha posted a new comment",
       "body": "lorem ipsum"
     },
     {
+      "activity_id": 5,
       "title": "Hassan posted a new comment",
       "body": "lorem ipsum"
     },
     {
+      "activity_id": 6,
       "title": "Darwish asked for a new service",
       "body": "lorem ipsum"
     },
     {
+      "activity_id": 18,
       "title": "Seham finished a new service",
       "body": "lorem ipsum"
     },
     {
+      "activity_id": 11,
       "title": "Ahmed asked for a new service",
       "body": "يا ليته يعلمُ أنّي لستُ أذكرهُ وكيف أذكرهُ إذ لستُ أنساهُ"
     },
     {
+      "activity_id": 23,
       "title": "Kamal posted a new comment",
       "body": "lorem ipsum"
     },
     {
+      "activity_id": 12,
       "title": "Dalal posted a new comment",
       "body": "lorem ipsum"
     },
     {
+      "activity_id": 30,
       "title": "Kamal posted a new comment",
       "body": "lorem ipsum"
     },
     {
+      "activity_id": 32,
       "title": "Hassan posted a new comment",
       "body": "lorem ipsum"
     },
     {
+      "activity_id": 9,
       "title": "Darwish asked for a new service",
       "body": "lorem ipsum"
     },
     {
+      "activity_id": 111,
       "title": "Seham finished a new service",
       "body": "lorem ipsum"
     }
@@ -456,6 +470,23 @@
       "email": "abdo@gmail.com",
       "password": "pass"
     }
+  ],
+  "deleteActivity": [
+    {
+      "activity_id": 11,
+      "id": 1
+    },
+    {
+      "activity_id": 3,
+      "id": 2
+    }
+  ],
+  "approveActivity": [
+    {
+      "activity_id": 3,
+      "id": 1
+    }
+   
   ],
   "deleteComment": [
     {

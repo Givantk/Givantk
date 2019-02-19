@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Customer from '../images/cust1.jpeg';
-import {Card, Button, Collapse} from 'react-bootstrap';
+import {Card, Button, Collapse, Badge} from 'react-bootstrap';
 
 export default class CustomActivityCard extends Component {
 
@@ -32,12 +32,17 @@ export default class CustomActivityCard extends Component {
 
                                 <footer className='d-flex'>
 
-                                    <Button
-                                        variant='success'
-                                        onClick={() => this.props.approvalButtonClicked(this.props.id)}
-                                        className='mt-2 ml-auto'>
-                                        Approve this activity
-                                    </Button>
+                                    {this.props.approved
+                                        ? <Badge variant='success' className='mt-2 ml-auto'>
+                                                Activity is approved
+                                            </Badge>
+                                        : <Button
+                                            variant='info'
+                                            onClick={() => this.props.approvalButtonCicked(this.props.id)}
+                                            className='mt-2 ml-auto'>
+                                            Approve this activity
+                                        </Button>
+}
 
                                     <Button
                                         variant='danger '

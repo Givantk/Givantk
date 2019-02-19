@@ -14,7 +14,9 @@ class Activites extends Component {
 
         ActivitiesPage: [],
 
-        active: 1
+        active: 1,
+
+        approved: []
 
     }
 
@@ -26,6 +28,17 @@ class Activites extends Component {
     */
 
     cardStateValues = [];
+
+    /*approved is an array that's manipulated by this page instead of the state
+
+    then we transfer the value to approved array in the state
+    
+    this array is related to the approval badge, when it's true the approval badge 
+    
+    appears
+    */
+
+    approved = []
 
     arrayOfArrays = [];
 
@@ -46,6 +59,21 @@ class Activites extends Component {
             })
 
         this.setState({open: this.cardStateValues})
+    }
+
+    initialApprovedValues = () => {
+        this
+            .state
+            .ActivitiesPage
+            .map(() => {
+                this
+                    .approved
+                    .push(false);
+                return true;
+            })
+
+            this.setState({approved: this.approved})
+       
     }
 
     /*this function is used to change the state of certain index (certian card) in the array
@@ -73,11 +101,30 @@ class Activites extends Component {
 
     }
 
-    deleteButtonClicked = (i) => {
-
-        /*A connection to the backend should be me made to delete component from the
+    approvalButtonClicked = (i) => {
+        /*A connection to the backend should be me made to approve activity in the
         database
         */
+
+        this
+            .props
+            .actions
+            .approveActivity(this.state.ActivitiesPage[i])
+
+        this.approved[i]=true    
+        this.setState({approved:this.approved })
+
+    }
+
+    deleteButtonClicked = (i) => {
+
+        /*A connection to the backend should be me made to delete this activity from the
+        database
+        */
+        this
+            .props
+            .actions
+            .deleteActivity(this.state.ActivitiesPage[i])
 
         console.log(this.state.ActivitiesPage[i])
         const {ActivitiesPage} = this.state;
@@ -121,10 +168,14 @@ class Activites extends Component {
     getPreviousPages = () => {}
 
     DisplayWhich = (i) => {
-        
-        this.cardStateValues = []
 
-        this.initialCardStateValues()
+        this.cardStateValues = [];
+
+        this.initialCardStateValues();
+
+        this.approved=[];
+
+        this.initialApprovedValues();
 
         this.setState({
             ActivitiesPage: this.DivideDataArray()[i - 1]
@@ -215,7 +266,9 @@ class Activites extends Component {
                                                     activity={ActivityObj}
                                                     changeCardStateValues={this.changeCardStateValues}
                                                     cardStateValues={this.cardStateValues}
-                                                    deleteButtonClicked={this.deleteButtonClicked}/>)
+                                                    deleteButtonClicked={this.deleteButtonClicked}
+                                                    approvalButtonCicked={this.approvalButtonClicked}
+                                                    approved={this.state.approved[i]}/>)
                                         })}
 
                                     <Row className='justify-content-center ml-auto'>
