@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { Icon } from 'native-base';
 import PropTypes from 'prop-types';
 
 import {
@@ -15,6 +14,10 @@ import React, { Component } from 'react';
 import styles from './ServiceScreenStyles';
 import Loading from '../../../components/commons/UI/Loading/Loading';
 import fakeProfile from '../../../assets/data/fakeProfile';
+import Proposal from './Proposal/Proposal';
+import * as ServiceActions from '../../../store/actions/serviceActions';
+import QuickNotification from '../../../components/commons/UI/QuickNotification/QuickNotification';
+import Announcement from '../../../components/commons/UI/Announcement/Announcement';
 
 class ServiceScreen extends Component {
   static navigationOptions = () => ({
@@ -32,9 +35,11 @@ class ServiceScreen extends Component {
   componentDidMount() {
     const { navigation } = this.props;
 
-    const { service } = navigation.state.params;
+    if (navigation.state.params) {
+      const { service } = navigation.state.params;
 
-    this.setService(service);
+      if (service) this.setService(service);
+    }
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -51,9 +56,10 @@ class ServiceScreen extends Component {
     const ownService = currentUser._id === currentService.asker._id;
 
     const appliedBefore =
-      currentService.applicants.filter(
-        (applicant) => applicant.user !== currentUser._id,
-      ).length < currentService.applicants.length;
+      currentService.applications.filter(
+        (applicant) =>
+          (applicant.user._id || applicant.user) !== currentUser._id,
+      ).length < currentService.applications.length;
 
     return {
       service: currentService,
@@ -70,9 +76,10 @@ class ServiceScreen extends Component {
     const ownService = currentUser._id === service.asker._id;
 
     const appliedBefore =
-      service.applicants.filter(
-        (applicant) => applicant.user !== currentUser._id,
-      ).length < service.applicants.length;
+      service.applications.filter(
+        (applicant) =>
+          (applicant.user._id || applicant.user) !== currentUser._id,
+      ).length < service.applications.length;
 
     this.setState(() => ({
       service,
@@ -93,9 +100,7 @@ class ServiceScreen extends Component {
 
   onPressOfferHelp = () => {
     const { navigation } = this.props;
-
-    // Get service from passed params
-    const service = navigation.getParam('service', null);
+    const { service } = this.state;
 
     // Pass service to AddProposal Screen
     navigation.navigate('AddProposal', {
@@ -103,8 +108,29 @@ class ServiceScreen extends Component {
     });
   };
 
+  onPressApplicant = (applicantId) => {
+    const { navigation } = this.props;
+    navigation.navigate('Profile', {
+      userId: applicantId,
+    });
+  };
+
+  onPressAcceptProposal = (proposalId) => {
+    const { acceptServiceProposal, getAllServices } = this.props;
+    const { service } = this.state;
+
+    const callback = () => {
+      getAllServices();
+      QuickNotification('Successfully assigned helper');
+    };
+
+    acceptServiceProposal(service._id, proposalId, callback);
+  };
+
   render() {
     const { service, loggedInUser } = this.state;
+
+    const { acceptServiceProposalLoading } = this.props;
 
     if (!service) return <Loading />;
 
@@ -147,13 +173,53 @@ class ServiceScreen extends Component {
             </Text>
           )}
 
-          <View style={styles.footer}>
-            <Text style={styles.cost}>{service.cost}</Text>
-            <View style={styles.footerLeft}>
-              <Icon type="EvilIcons" name="envelope" style={styles.shareIcon} />
-              <Icon type="Feather" name="star" style={styles.favoriteIcon} />
+          {service.applications.length === 0 && (
+            <View>
+              <View>
+                <Announcement text="No Proposals Yet" />
+              </View>
+              <View>
+                {!loggedInUser.ownService && (
+                  <Text style={styles.noProposalsDisclaimer}>
+                    Be the first one to apply {'💪'}
+                  </Text>
+                )}
+              </View>
             </View>
-          </View>
+          )}
+
+          {service.applications.map((application) =>
+            application.chosen ? (
+              <Proposal
+                application={application}
+                key={application._id}
+                onPressApplicant={this.onPressApplicant}
+                onPressAcceptProposal={this.onPressAcceptProposal}
+                ownService={loggedInUser.ownService}
+                hasHelper={!!service.helper}
+                acceptServiceProposalLoading={acceptServiceProposalLoading}
+              />
+            ) : null,
+          )}
+          {service.applications.map((application, i) =>
+            !application.chosen ? (
+              <View key={application._id}>
+                {i === 0 && (
+                  <View style={styles.proposalsHeadingContainer}>
+                    <Text style={styles.proposalsHeadingText}>Proposals:</Text>
+                  </View>
+                )}
+                <Proposal
+                  application={application}
+                  onPressApplicant={this.onPressApplicant}
+                  onPressAcceptProposal={this.onPressAcceptProposal}
+                  ownService={loggedInUser.ownService}
+                  hasHelper={!!service.helper}
+                  acceptServiceProposalLoading={acceptServiceProposalLoading}
+                />
+              </View>
+            ) : null,
+          )}
         </View>
       </ScrollView>
     );
@@ -163,14 +229,24 @@ class ServiceScreen extends Component {
 ServiceScreen.propTypes = {
   navigation: PropTypes.shape({}),
   currentUser: PropTypes.shape({}),
+  acceptServiceProposal: PropTypes.func,
+  getAllServices: PropTypes.func,
+  acceptServiceProposalLoading: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
   currentUser: state.auth.user,
   allServices: state.service.allServices,
+  acceptServiceProposalLoading: state.service.acceptServiceProposalLoading,
+  errors: state.errors,
 });
+
+const mapDispatchToProps = {
+  acceptServiceProposal: ServiceActions.acceptServiceProposal,
+  getAllServices: ServiceActions.getAllServices,
+};
 
 export default connect(
   mapStateToProps,
-  null,
+  mapDispatchToProps,
 )(ServiceScreen);

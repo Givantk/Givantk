@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   isAuthenticated: false,
   user: {},
   setCurrentUserLoading: false,
+  signupLoading: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -28,6 +29,18 @@ export default (state = INITIAL_STATE, action) => {
         user: null,
         isAuthenticated: false,
         setCurrentUserLoading: false,
+      };
+
+    case actionTypes.SIGN_UP_START:
+      return {
+        ...state,
+        signupLoading: true,
+      };
+
+    case actionTypes.SIGN_UP_END:
+      return {
+        ...state,
+        signupLoading: false,
       };
     default:
       return state;

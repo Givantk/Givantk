@@ -28,6 +28,10 @@ const ProfileSchema = new Schema({
     type: [
       {
         title: String,
+        seen: {
+          type: Boolean,
+          default: false
+        },
         navigateTo: {
           kind: String, // service or profile
           service: {

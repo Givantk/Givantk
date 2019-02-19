@@ -21,6 +21,7 @@ export const headerHeight = 60;
 export const gaps = {
   xsm: 5,
   sm: 10,
+  msm: 15,
   md: 20,
   lg: 30,
   xl: 40,
@@ -34,6 +35,7 @@ export const gaps = {
 export const fontSizes = {
   xs: 10,
   sm: 12,
+  msm: 15,
   md: 18,
   lg: 28,
   xlg: 40,

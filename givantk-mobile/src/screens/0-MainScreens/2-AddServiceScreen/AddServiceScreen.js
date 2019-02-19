@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { Icon, Label, Textarea, Button } from 'native-base';
+import { Icon, Label, Textarea } from 'native-base';
 import { View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -9,13 +9,14 @@ import * as ProfileActions from '../../../store/actions/profileActions';
 import * as ServiceActions from '../../../store/actions/serviceActions';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
 import Loading from '../../../components/commons/UI/Loading/Loading';
+import MainButton from '../../../components/commons/UI/MainButton/MainButton';
+import NoProfileDisclaimer from '../../../components/commons/NoProfileDisclaimer/NoProfileDisclaimer';
 import Picker from '../../../components/commons/UI/Picker/Picker';
 import QuickNotification from '../../../components/commons/UI/QuickNotification/QuickNotification';
 import servicesNatures from '../../../assets/data/servicesNatures';
 import servicesTypes from '../../../assets/data/servicesTypes';
 import styles from './AddServiceScreenStyles';
 import TextInput from '../../../components/commons/UI/TextInput/TextInput';
-import NoProfileDisclaimer from '../../../components/commons/NoProfileDisclaimer/NoProfileDisclaimer';
 
 class AddServiceScreen extends React.Component {
   static navigationOptions = () => ({
@@ -83,55 +84,37 @@ class AddServiceScreen extends React.Component {
     return (
       <View style={styles.container}>
         <AvoidKeyboard bottomPadding={120}>
-          <TextInput
-            title="Service Name"
-            placeholder="Type the service name"
-            error={errors.name}
-            name="name"
-            onChange={this.onChangeValue}
-          />
+          <View style={styles.topInputsContainer}>
+            <TextInput
+              title="Service Name"
+              placeholder="Type the service name"
+              error={errors.name}
+              name="name"
+              onChange={this.onChangeValue}
+            />
 
-          {/* <View style={styles.row}>
-            <Text style={[styles.text, { fontSize: 13 }]}>Service Type </Text>
-            <View
-              style={[
-                styles.pickerContainer,
-                errors.type ? styles.warningInput : {},
-              ]}
-            > */}
-          <Picker
-            title="Service Type"
-            placeholder="Pick a type"
-            style={styles.picker}
-            name="type"
-            onChange={this.onChangeValue}
-            options={servicesTypes}
-            value={type}
-            error={errors.type}
-          />
-          {/* </View>
-          </View> */}
+            <Picker
+              title="Service Type"
+              placeholder="Pick a type"
+              style={styles.picker}
+              name="type"
+              onChange={this.onChangeValue}
+              options={servicesTypes}
+              value={type}
+              error={errors.type}
+            />
 
-          {/* <View style={styles.row}> */}
-          {/* <Text style={[styles.text, { fontSize: 13 }]}>Service Nature </Text>
-            <View
-              style={[
-                styles.pickerContainer,
-                errors.nature ? styles.warningInput : {},
-              ]}
-            > */}
-          <Picker
-            title="Service Nature"
-            placeholder="Pick a nature"
-            style={styles.picker}
-            name="nature"
-            onChange={this.onChangeValue}
-            options={servicesNatures}
-            value={nature}
-            error={errors.nature}
-          />
-          {/* </View>
-          </View> */}
+            <Picker
+              title="Service Nature"
+              placeholder="Pick a nature"
+              style={styles.picker}
+              name="nature"
+              onChange={this.onChangeValue}
+              options={servicesNatures}
+              value={nature}
+              error={errors.nature}
+            />
+          </View>
 
           <View style={styles.left}>
             <Label style={styles.text}>Description </Label>
@@ -148,25 +131,14 @@ class AddServiceScreen extends React.Component {
             <Text style={styles.error}>{errors.description}</Text>
           </View>
 
-          {/* <View style={styles.row}>
-            <Text style={styles.text}>Do you have a specific budget? </Text>
-            <View style={[styles.inputContainer, styles.budgetInputContainer]}>
-              <DefaultTextInput
-                keyboardType="numeric"
-                maxLength={4}
-                placeholder="EGP"
-                style={styles.input}
-              />
-            </View>
-          </View> */}
-
           <View style={styles.row}>
-            {createServiceLoading && <Loading />}
-            {createServiceLoading || (
-              <Button style={styles.submitButton} onPress={this.onAddService}>
-                <Text style={styles.submitButtonText}>ADD</Text>
-              </Button>
-            )}
+            <MainButton
+              onPress={this.onAddService}
+              loading={createServiceLoading}
+              big
+            >
+              ADD
+            </MainButton>
           </View>
         </AvoidKeyboard>
       </View>

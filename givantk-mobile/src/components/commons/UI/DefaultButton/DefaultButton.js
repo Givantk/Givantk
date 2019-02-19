@@ -1,24 +1,32 @@
-import { TouchableOpacity, Text, View } from "react-native";
-import React from "react";
+import { TouchableOpacity, Text, View } from 'react-native';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-import styles from "./DefaultButtonStyle";
+import { colors } from '../../../../assets/styles/base';
+import Loading from '../Loading/Loading';
+import styles from './DefaultButtonStyle';
 
-const DefaultButton = props => {
-  return (
-    <View style={styles.container}>
+const DefaultButton = ({ style, onPress, children, loading }) => (
+  <View style={styles.container}>
+    {loading ? (
+      <Loading color={colors.secondary} />
+    ) : (
       <TouchableOpacity
-        style={[styles.button, props.style]}
-        onPress={props.onPress}
+        style={[styles.button, style]}
+        onPress={onPress}
         activeOpacity={0.5}
       >
-        <Text style={styles.buttonText}>{props.children}</Text>
+        <Text style={styles.buttonText}>{children}</Text>
       </TouchableOpacity>
-    </View>
-  );
-};
+    )}
+  </View>
+);
 
-//Props expected:
-//onPress (func)
-//style (object)
+DefaultButton.propTypes = {
+  style: PropTypes.shape({}),
+  onPress: PropTypes.func,
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  loading: PropTypes.bool,
+};
 
 export default DefaultButton;

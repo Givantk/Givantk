@@ -35,7 +35,6 @@ class LoginScreen extends React.Component {
 
   callbackAfterLogin = () => {
     const { navigation, getAllServices, getCurrentUserProfile } = this.props;
-
     navigation.replace('Tab');
     getAllServices();
     getCurrentUserProfile();
@@ -60,7 +59,7 @@ class LoginScreen extends React.Component {
   };
 
   render() {
-    const { navigation, errors } = this.props;
+    const { navigation, errors, setCurrentUserLoading } = this.props;
 
     return (
       <AvoidKeyboard
@@ -86,7 +85,14 @@ class LoginScreen extends React.Component {
               name="password"
               errorText={errors.password}
             />
-            <DefaultButton onPress={this.handleLogin}>Sign In</DefaultButton>
+
+            <DefaultButton
+              onPress={this.handleLogin}
+              loading={setCurrentUserLoading}
+            >
+              Sign In
+            </DefaultButton>
+
             <DefaultButton onPress={this.handleSignInWithFacebook}>
               Sign In With Facebook
             </DefaultButton>
@@ -118,10 +124,12 @@ LoginScreen.propTypes = {
   getAllServices: PropTypes.func,
   getCurrentUserProfile: PropTypes.func,
   errors: PropTypes.shape({}),
+  setCurrentUserLoading: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
   errors: state.errors,
+  setCurrentUserLoading: state.auth.setCurrentUserLoading,
 });
 
 const mapDispatchToProps = {

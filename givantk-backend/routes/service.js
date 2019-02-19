@@ -99,4 +99,14 @@ router.get(
   serviceController.unproposeToService
 );
 
+// @route  POST api/service/accept-service-proposal/:service_id/:proposal_id
+// @desc   Accept a proposal
+// @access Private
+// @errors unauthorized noproposal alreadyhashelper error
+router.post(
+  '/accept-service-proposal/:service_id/:proposal_id',
+  passport.authenticate('jwt', { session: false }),
+  serviceController.acceptServiceProposal
+);
+
 module.exports = router;
