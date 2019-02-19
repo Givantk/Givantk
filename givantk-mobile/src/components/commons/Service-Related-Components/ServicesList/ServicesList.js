@@ -3,6 +3,7 @@ import { FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import * as ProfileActions from '../../../../store/actions/profileActions';
 import * as ServiceActions from '../../../../store/actions/serviceActions';
 import Announcement from '../../UI/Announcement/Announcement';
 import Loading from '../../UI/Loading/Loading';
@@ -15,6 +16,7 @@ const ServicesList = (props) => {
     services,
     loading,
     currentUserProfile,
+    getCurrentUserProfile,
     bookmarkService,
     unbookmarkService,
   } = props;
@@ -29,10 +31,12 @@ const ServicesList = (props) => {
     }
 
     const bookmarkCallback = () => {
+      getCurrentUserProfile();
       QuickNotification('Successfully bookmarked service');
     };
 
     const unbookmarkCallback = () => {
+      getCurrentUserProfile();
       QuickNotification('Service unbookmarked');
     };
 
@@ -79,6 +83,7 @@ ServicesList.propTypes = {
   loading: PropTypes.bool,
   bookmarkService: PropTypes.func,
   unbookmarkService: PropTypes.func,
+  getCurrentUserProfile: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
@@ -88,6 +93,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   bookmarkService: ServiceActions.bookmarkService,
   unbookmarkService: ServiceActions.unbookmarkService,
+  getCurrentUserProfile: ProfileActions.getCurrentUserProfile,
 };
 
 export default connect(

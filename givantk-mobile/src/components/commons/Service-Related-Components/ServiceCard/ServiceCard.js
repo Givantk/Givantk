@@ -7,15 +7,6 @@ import fakeProfile from '../../../../assets/data/fakeProfile';
 import styles from './ServiceCardStyles';
 
 class ServiceCard extends React.PureComponent {
-  state = {
-    bookmarked: false,
-  };
-
-  componentDidMount() {
-    const { bookmarked } = this.props;
-    this.setState(() => ({ bookmarked }));
-  }
-
   onPressCard = () => {
     const { service } = this.props;
 
@@ -33,25 +24,17 @@ class ServiceCard extends React.PureComponent {
   };
 
   onPressStar = () => {
-    const { service, onBookmark, onUnbookmark } = this.props;
-
-    const { bookmarked } = this.state;
+    const { service, onBookmark, onUnbookmark, bookmarked } = this.props;
 
     if (bookmarked) {
       onUnbookmark(service._id);
     } else {
       onBookmark(service._id);
     }
-
-    this.setState((prevState) => ({
-      bookmarked: !prevState.bookmarked,
-    }));
   };
 
   render() {
-    const { service } = this.props;
-
-    const { bookmarked } = this.state;
+    const { service, bookmarked } = this.props;
 
     return (
       <TouchableWithoutFeedback onPress={this.onPressCard}>

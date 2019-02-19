@@ -24,7 +24,7 @@ class MyServicesScreen extends React.Component {
   });
 
   getSnakeNavigatorContent = () => {
-    const { profile, getCurrentProfileLoading, navigation } = this.props;
+    const { profile, getAllServicesLoading, navigation } = this.props;
 
     return [
       {
@@ -32,7 +32,7 @@ class MyServicesScreen extends React.Component {
         component: () => (
           <ServicesList
             services={profile.services_asked_for}
-            loading={getCurrentProfileLoading}
+            loading={getAllServicesLoading}
             navigation={navigation}
           />
         ),
@@ -42,7 +42,7 @@ class MyServicesScreen extends React.Component {
         component: () => (
           <ServicesList
             services={profile.services_helped_in}
-            loading={getCurrentProfileLoading}
+            loading={getAllServicesLoading}
             navigation={navigation}
           />
         ),
@@ -51,13 +51,7 @@ class MyServicesScreen extends React.Component {
   };
 
   render() {
-    const {
-      navigation,
-      getCurrentProfileLoading,
-      currentUserHasProfile,
-    } = this.props;
-
-    if (getCurrentProfileLoading) return <Loading />;
+    const { navigation, currentUserHasProfile } = this.props;
 
     if (!currentUserHasProfile)
       return <NoProfileDisclaimer navigation={navigation} />;
@@ -77,14 +71,14 @@ class MyServicesScreen extends React.Component {
 MyServicesScreen.propTypes = {
   navigation: PropTypes.shape({}),
   profile: PropTypes.shape({}),
-  getCurrentProfileLoading: PropTypes.bool,
+  getAllServicesLoading: PropTypes.bool,
   currentUserHasProfile: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
   profile: state.profile.currentUserProfile,
   currentUserHasProfile: state.profile.currentUserHasProfile,
-  getCurrentProfileLoading: state.profile.getCurrentProfileLoading,
+  getAllServicesLoading: state.service.getAllServicesLoading,
   errors: state.errors,
 });
 
