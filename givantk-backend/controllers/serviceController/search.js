@@ -5,7 +5,8 @@ const Service = mongoose.model('service');
 
 module.exports = search = (req, res) => {
   const errors = {};
-  Service.find({ name: new RegExp('^' + req.params.name + '$', 'i') })
+  console.log(req.params.name);
+  Service.find({ name: req.params.name })
     .sort({ date: -1 })
     .then((services) => {
       if (services.length === 0) {
