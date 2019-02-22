@@ -16,8 +16,7 @@ class CustomTableWithGrid extends Component {
     axios.get(this.props.url, { crossdomain: true }).then((res) => {
       //this step is necessary to read nested object in json as using res.data directly will not read them
       let jsonString = JSON.stringify(res.data);
-      console.log(JSON.parse(jsonString));
-      this.setState({ UsersData: res.data });
+      this.setState({ UsersData: JSON.parse(jsonString) });
     });
   }
 
