@@ -43,7 +43,7 @@ module.exports = proposeToService = (req, res) => {
             return ap;
           });
           service.state = 'progressing';
-          service.helper = req.user._id;
+          service.helper = applicantProfile.user;
 
           // Updating applicant profile
           applicantProfile.services_helped_in.unshift(service._id);

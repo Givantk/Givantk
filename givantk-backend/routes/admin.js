@@ -49,4 +49,16 @@ router.get(
   adminController.servicesHelpedIn
 );
 
+// @route  GET api/admin/services-asked-for
+// @desc   Get users with the info of the services which they asked for
+// @access Private
+// @errors unauthorized error
+// @params
+// @body
+router.get(
+  '/services-asked-for',
+  passport.authenticate('jwt', { session: false }),
+  adminController.servicesAskedFor
+);
+
 module.exports = router;
