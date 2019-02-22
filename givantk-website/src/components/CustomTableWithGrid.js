@@ -1,19 +1,22 @@
-import React, { Component } from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import CustomTable from "./CustomTable";
-import axios from "axios";
+import React, { Component } from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+import CustomTable from './CustomTable';
+import axios from 'axios';
 
 class CustomTableWithGrid extends Component {
   state = {
-    UsersData: []
+    UsersData: [],
   };
 
-  buttonClicked = index => {
+  buttonClicked = (index) => {
     console.log(index);
   };
 
   componentDidMount() {
-    axios.get(this.props.url, { crossdomain: true }).then(res => {
+    axios.get(this.props.url, { crossdomain: true }).then((res) => {
+      //this step is necessary to read nested object in json as using res.data directly will not read them
+      let jsonString = JSON.stringify(res.data);
+      console.log(JSON.parse(jsonString));
       this.setState({ UsersData: res.data });
     });
   }
