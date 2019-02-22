@@ -23,7 +23,7 @@ const ServicesList = (props) => {
 
   const renderItem = (service) => {
     let bookmarked = false;
-    if (currentUserProfile.services_bookmarked) {
+    if (currentUserProfile && currentUserProfile.services_bookmarked) {
       bookmarked =
         currentUserProfile.services_bookmarked
           .map((s) => s._id || s)
