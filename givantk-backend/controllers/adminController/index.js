@@ -1,5 +1,7 @@
 const loginAdmin = require('./loginAdmin');
+const personalInfo = require('./personalInfo');
 
 module.exports = {
-  loginAdmin
+  loginAdmin,
+  personalInfo
 };
