@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { Container, Row, Col, Pagination } from "react-bootstrap";
-import CustomActivityCard from "./CustomActivityCard";
-import CustomMessageCard from "./CustomMessageCard";
-import axios from "axios";
+import React, { Component } from 'react';
+import { Container, Row, Col, Pagination } from 'react-bootstrap';
+import CustomActivityCard from './CustomActivityCard';
+import CustomMessageCard from './CustomMessageCard';
+import axios from 'axios';
 
 class Activites extends Component {
   state = {
@@ -14,7 +14,7 @@ class Activites extends Component {
 
     active: 1,
 
-    approved: []
+    approved: [],
   };
 
   /* cardStateValues is an array which holds the state whether it's true or false for every
@@ -51,6 +51,12 @@ class Activites extends Component {
     this.setState({ open: this.cardStateValues });
   };
 
+  resetCardValues = () => {
+    this.cardStateValues = [];
+
+    this.initialCardStateValues();
+  };
+
   initialApprovedValues = () => {
     this.state.ActivitiesPage.map(() => {
       this.approved.push(false);
@@ -60,39 +66,40 @@ class Activites extends Component {
     this.setState({ approved: this.approved });
   };
 
+  resetApprovalValues = () => {
+    this.approved = [];
+
+    this.initialApprovedValues();
+  };
+
   /*this function is used to change the state of certain index (certian card) in the array
     it's called when someone clicks on a card */
 
-  changeCardStateValues = index => {
+  changeCardStateValues = (index) => {
     this.cardStateValues[index] = !this.cardStateValues[index];
     this.setState({ open: this.cardStateValues });
   };
 
   replyButtonClicked = (value, i) => {
-    console.log("I am value " + value);
-    console.log("I am i " + i);
-    console.log(this.props.actions);
     this.props.actions.messageReplies(value, this.state.ActivitiesPage[i]);
   };
 
-  approvalButtonClicked = i => {
+  approvalButtonClicked = (i) => {
     /*A connection to the backend should be me made to approve activity in the
         database
         */
 
     this.props.actions.deleteActivity(this.state.ActivitiesPage[i]);
-
     this.approved[i] = true;
     this.setState({ approved: this.approved });
   };
 
-  deleteButtonClicked = i => {
+  deleteButtonClicked = (i) => {
     /*A connection to the backend should be me made to delete this activity from the
         database
         */
     this.props.actions.deleteActivity(this.state.ActivitiesPage[i]);
 
-    console.log(this.state.ActivitiesPage[i]);
     const { ActivitiesPage } = this.state;
     //starting from index i delete one element only
     ActivitiesPage.splice(i, 1);
@@ -103,9 +110,8 @@ class Activites extends Component {
 
     this.arrayOfArrays[this.state.active - 1] = ActivitiesPage;
 
-    this.cardStateValues = [];
-
-    this.initialCardStateValues();
+    //resetting card state values
+    this.resetCardValues();
 
     //update state to render the component
     this.setState({ ActivitiesPage: ActivitiesPage });
@@ -126,27 +132,25 @@ class Activites extends Component {
     return this.arrayOfArrays;
   };
 
-  getNextPages = () => {};
+  DisplayWhich = (i) => {
+    //resetting card states and approval values
 
-  getPreviousPages = () => {};
+    this.resetCardValues();
+    this.resetApprovalValues();
 
-  DisplayWhich = i => {
-    this.cardStateValues = [];
-
-    this.initialCardStateValues();
-
-    this.approved = [];
-
-    this.initialApprovedValues();
+    //assign new activities from the data array to the activities page
 
     this.setState({
-      ActivitiesPage: this.DivideDataArray()[i - 1]
+      ActivitiesPage: this.DivideDataArray()[i - 1],
     });
+
+    //change current active page
+
     this.setState({ active: i });
   };
+
   performPagination = () => {
     let numberOfPages = Math.ceil(this.state.Activities.length / 6);
-    console.log(numberOfPages);
     let items = [];
     for (let i = 1; i <= numberOfPages; i++) {
       items.push(
@@ -156,7 +160,7 @@ class Activites extends Component {
           active={i === this.state.active}
         >
           {i}
-        </Pagination.Item>
+        </Pagination.Item>,
       );
     }
     return (
@@ -170,22 +174,16 @@ class Activites extends Component {
   componentDidMount() {
     // fetching info stored in db.json by json server  you have to start json server
     // first
-    axios.get(this.props.url).then(res => {
+    axios.get(this.props.url).then((res) => {
       this.setState(
         {
-          Activities: res.data
+          Activities: res.data,
         },
         function() {
-          console.log("hi");
-          this.setState(
-            {
-              ActivitiesPage: this.state.Activities.slice(0, 6)
-            },
-            function() {
-              console.log(this.state.ActivitiesPage);
-            }
-          );
-        }
+          this.setState({
+            ActivitiesPage: this.state.Activities.slice(0, 6),
+          });
+        },
       );
     });
 

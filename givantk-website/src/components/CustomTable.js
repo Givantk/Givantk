@@ -1,22 +1,22 @@
-import React, { Component } from "react";
-import { MDBDataTable } from "mdbreact";
-import { Button } from "react-bootstrap";
-import { pick, isEqual } from "lodash";
-import { CustomModal } from "./CustomModal";
+import React, { Component } from 'react';
+import { MDBDataTable } from 'mdbreact';
+import { Button } from 'react-bootstrap';
+import { pick, isEqual } from 'lodash';
+import { CustomModal } from './CustomModal';
 class CustomTable extends Component {
   state = {
     data: {
       columns: [],
-      rows: []
+      rows: [],
     },
     toggle: false,
     showModal: false,
-    buttonIndex: []
+    buttonIndex: [],
   };
 
   data = {
     columns: [],
-    rows: []
+    rows: [],
   };
 
   // this variable is passed to buttonActionConfirmed function which shows the
@@ -27,12 +27,7 @@ class CustomTable extends Component {
   /* This function will assign the data (that's provided as a parameter to the table), with
     the aid of the props => values and headers */
 
-  arrayDetectedinReievedData = arrayFounded => {
-    console.log(arrayFounded);
-  };
-
-  ShowConfirmationModal = i => {
-    console.log(this.state.data);
+  ShowConfirmationModal = (i) => {
     this.setState({ showModal: true });
     this.buttonIndex = i;
   };
@@ -41,13 +36,13 @@ class CustomTable extends Component {
     this.setState({ showModal: false });
   };
 
-  buttonActionConfirmed = buttonIndex => {
+  buttonActionConfirmed = (buttonIndex) => {
     //Check first if this button will be altered or not
 
     if (this.props.alterable) {
       this.setState(
         {
-          toggle: !this.state.toggle
+          toggle: !this.state.toggle,
         },
         () => {
           // replace the old button with a new button here we acccess index i in rows
@@ -61,13 +56,13 @@ class CustomTable extends Component {
               onClick={() => this.ShowConfirmationModal(buttonIndex)}
               size="sm"
               variant={
-                !this.state.toggle ? "danger" : this.props.alterButtonColor
+                !this.state.toggle ? 'danger' : this.props.alterButtonColor
               }
             >
               {!this.state.toggle
                 ? this.props.specialColText
                   ? this.props.specialColText
-                  : "ban"
+                  : 'ban'
                 : this.props.alterButtonText}
             </Button>
           );
@@ -78,26 +73,23 @@ class CustomTable extends Component {
         from ban to unban, this case is applicable only in navigation and deleting
         so the code considered alterable buttons as delete button if navigation
         prop sent with the table is false
-        */
+        */,
       );
     } else if (!this.props.navigable) {
       /*A connection to the backend should be me made to delete component from the
         database
         */
 
-      /* then
-       */
-
       //filtering the row data to be supplied again to fill data
 
       let newValue = this.data.rows.filter((_, i) => i !== buttonIndex);
 
-      console.log(newValue);
-
       this.data = {
         columns: [],
-        rows: []
+        rows: [],
       };
+
+      //Filling the tables again after deleting
 
       this.fillData(newValue, this.props.headers, this.props.titles);
       this.setState({ data: this.data });
@@ -111,8 +103,8 @@ class CustomTable extends Component {
   };
 
   fillData = (values, headers, titles) => {
-    titles.map(title => {
-      this.data.columns.push({ label: title, field: title, sort: "asc" });
+    titles.map((title) => {
+      this.data.columns.push({ label: title, field: title, sort: 'asc' });
       return true;
     });
 
@@ -121,7 +113,7 @@ class CustomTable extends Component {
 
       for (let key in dataObj) {
         if (Array.isArray(dataObj[key])) {
-          dataObj[key] = dataObj[key].join(", ");
+          dataObj[key] = dataObj[key].join(', ');
         }
       }
 
@@ -144,10 +136,10 @@ class CustomTable extends Component {
             variant={
               this.props.specialColColor
                 ? this.props.specialColColor
-                : "success"
+                : 'success'
             }
           >
-            {this.props.specialColText ? this.props.specialColText : "ban"}
+            {this.props.specialColText ? this.props.specialColText : 'ban'}
           </Button>
         );
 
@@ -155,7 +147,7 @@ class CustomTable extends Component {
 
         dataObj = {
           ...dataObj,
-          ...ButtonElement
+          ...ButtonElement,
         };
 
         /* from the recieved data only pick the ones in the headers in order to choose
@@ -177,8 +169,7 @@ class CustomTable extends Component {
     });
   };
 
-  componentWillReceiveProps = nextprops => {
-    console.log("I am here");
+  componentWillReceiveProps = (nextprops) => {
     //if the props is not the same than fill the table data then change state
     if (!isEqual(this.props.values, nextprops.values)) {
       this.fillData(nextprops.values, nextprops.headers, nextprops.titles);
@@ -200,7 +191,7 @@ class CustomTable extends Component {
           hover
           small
           searchLabel=""
-          dark={this.props.bg === "dark" ? true : false}
+          dark={this.props.bg === 'dark' ? true : false}
           data={this.state.data}
           searching={true}
           entriesLabel=""
