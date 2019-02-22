@@ -26,7 +26,7 @@ router.get(
 );
 
 // @route  GET api/admin/user-services
-// @desc   Get users with their services info
+// @desc   Get users with their associated services numbers
 // @access Private
 // @errors unauthorized error
 // @params
@@ -35,6 +35,18 @@ router.get(
   '/user-services',
   passport.authenticate('jwt', { session: false }),
   adminController.userServices
+);
+
+// @route  GET api/admin/services-helped-in
+// @desc   Get users with the info of the services which they helped in
+// @access Private
+// @errors unauthorized error
+// @params
+// @body
+router.get(
+  '/services-helped-in',
+  passport.authenticate('jwt', { session: false }),
+  adminController.servicesHelpedIn
 );
 
 module.exports = router;
