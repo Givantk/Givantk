@@ -61,4 +61,16 @@ router.get(
   adminController.servicesAskedFor
 );
 
+// @route  GET api/admin/services-info
+// @desc   Get services info
+// @access Private
+// @errors unauthorized error
+// @params
+// @body
+router.get(
+  '/services-info',
+  passport.authenticate('jwt', { session: false }),
+  adminController.servicesInfo
+);
+
 module.exports = router;

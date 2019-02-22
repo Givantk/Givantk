@@ -42,6 +42,12 @@ const ServiceSchema = new Schema({
       chosen: Boolean
     }
   ],
+  comments: [
+    {
+      user: { type: mongoose.Schema.Types.ObjectId, ref: 'user' },
+      body: String
+    }
+  ],
   asker: { type: mongoose.Schema.Types.ObjectId, ref: 'user', required: true },
   helper: { type: mongoose.Schema.Types.ObjectId, ref: 'user' },
   date: {

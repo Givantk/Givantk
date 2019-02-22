@@ -21,10 +21,6 @@ module.exports = servicesAskedFor = (req, res) => {
       populate: { path: 'helper' }
     })
     .then((profiles) => {
-      profiles = profiles.map((profile) => {
-        profile.notifications = null;
-        return profile;
-      });
       profiles.forEach((profile) => {
         servicesAskedForArray.unshift({
           id: profile.user._id,
