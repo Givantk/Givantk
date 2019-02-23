@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import { Textarea, Button } from 'native-base';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
+import { ImagePicker } from 'expo';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-
 import { colors } from '../../../assets/styles/base';
 import * as ProfileActions from '../../../store/actions/profileActions';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
@@ -31,6 +31,18 @@ class MakeProfileScreen extends Component {
     phone_number: '',
     date_of_birth: '',
     skills: '',
+    image: null,
+  };
+
+  _pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+      this.setState({ image: result.uri });
+    }
   };
 
   onChangeValue = (name, value) => {
@@ -59,11 +71,23 @@ class MakeProfileScreen extends Component {
   };
 
   render() {
-    const { gender } = this.state;
+    const { gender, image } = this.state;
     const { errors } = this.props;
     return (
       <AvoidKeyboard bottomPadding={80}>
         <View style={styles.container}>
+          <Text style={styles.label}>Profile picture</Text>
+          <Button style={styles.uploadButton} onPress={this._pickImage}>
+            <Text style={styles.uploadButtonText}>Pick from gallery </Text>
+          </Button>
+          <View style={styles.imageView}>
+            {image && (
+              <Image style={styles.image}
+                source={{ uri: image }}
+              />
+            )}
+          </View>
+
           <Picker
             title="Gender"
             placeholder="Male / Female"

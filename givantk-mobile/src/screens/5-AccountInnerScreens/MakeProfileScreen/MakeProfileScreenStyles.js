@@ -12,6 +12,27 @@ const styles = StyleSheet.create({
   input: {
     height: 40,
   },
+  uploadButton: {
+    justifyContent: 'center',
+    alignSelf: 'stretch',
+    borderRadius: 20,
+    backgroundColor: colors.primaryLight,
+    marginBottom: 10,
+    marginTop: 10,
+  },
+  uploadButtonText: {
+    color: colors.trueWhite,
+    fontSize: 20,
+  },
+  imageView: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  image: {
+    borderRadius: 100,
+    width: 200,
+    height: 200,
+  },
   picker: {
     color: colors.gray01,
   },
