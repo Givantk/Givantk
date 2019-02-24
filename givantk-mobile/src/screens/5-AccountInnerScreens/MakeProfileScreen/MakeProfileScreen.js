@@ -31,17 +31,16 @@ class MakeProfileScreen extends Component {
     phone_number: '',
     date_of_birth: '',
     skills: '',
-    image: null,
+    avatar: null,
   };
 
-  _pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-    });
+  pickImage = async () => {
+    const result = await ImagePicker.launchImageLibraryAsync({});
 
-    console.log(result);
+    const { uri } = result;
 
     if (!result.cancelled) {
-      this.setState({ image: result.uri });
+      this.setState({ avatar: uri });
     }
   };
 
@@ -52,14 +51,33 @@ class MakeProfileScreen extends Component {
   };
 
   onSubmit = () => {
-    const { gender, skills } = this.state;
+    const {
+      gender,
+      skills,
+      avatar,
+      description,
+      phone_number,
+      date_of_birth,
+    } = this.state;
     const { navigation, makeProfile, getCurrentUserProfile } = this.props;
 
-    const newProfile = {
-      ...this.state,
-      gender: gender.value,
-      skills: skills.split(','),
-    };
+    let uriParts = avatar.split('.');
+    let fileType = uriParts[uriParts.length - 1];
+
+    newProfile = new FormData();
+
+    //appending keys and value in the new profile form data
+
+    newProfile.append('gender', gender.value);
+    newProfile.append('skills', JSON.stringify(skills.split(',')));
+    newProfile.append('avatar', {
+      uri: avatar,
+      name: avatar.split('/').pop(),
+      type: `image/${fileType}`,
+    });
+    newProfile.append('description', description);
+    newProfile.append('phone_number', phone_number);
+    newProfile.append('date_Of_birth', date_of_birth);
 
     const callback = () => {
       getCurrentUserProfile();
@@ -71,21 +89,17 @@ class MakeProfileScreen extends Component {
   };
 
   render() {
-    const { gender, image } = this.state;
+    const { gender, avatar } = this.state;
     const { errors } = this.props;
     return (
       <AvoidKeyboard bottomPadding={80}>
         <View style={styles.container}>
           <Text style={styles.label}>Profile picture</Text>
-          <Button style={styles.uploadButton} onPress={this._pickImage}>
+          <Button style={styles.uploadButton} onPress={this.pickImage}>
             <Text style={styles.uploadButtonText}>Pick from gallery </Text>
           </Button>
           <View style={styles.imageView}>
-            {image && (
-              <Image style={styles.image}
-                source={{ uri: image }}
-              />
-            )}
+            {avatar && <Image style={styles.image} source={{ uri: avatar }} />}
           </View>
 
           <Picker

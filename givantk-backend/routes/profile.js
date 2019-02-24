@@ -1,9 +1,25 @@
 const express = require('express');
-
+const multer = require('multer');
 const router = express.Router();
 const passport = require('passport');
-
 const profileController = require('../controllers/profileController/index.js');
+
+//setting profile photo storage
+
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, './assets/images/');
+  },
+  filename: function(req, file, cb) {
+    cb(null, Date.now() + file.originalname);
+  },
+});
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 5,
+  },
+});
 
 // @route  GET api/profile/all
 // @desc   Get all profiles
@@ -17,8 +33,9 @@ router.get('/all', profileController.getAllProfiles);
 // @errors skills description date_of_birth error
 router.post(
   '/',
+  upload.single('avatar'),
   passport.authenticate('jwt', { session: false }),
-  profileController.makeProfile
+  profileController.makeProfile,
 );
 
 // @route  GET api/profile
@@ -28,7 +45,7 @@ router.post(
 router.get(
   '/',
   passport.authenticate('jwt', { session: false }),
-  profileController.getProfile
+  profileController.getProfile,
 );
 
 // @route  GET api/profile/:user_id
@@ -46,7 +63,7 @@ module.exports = router;
 router.post(
   '/set-notifications-seen',
   passport.authenticate('jwt', { session: false }),
-  profileController.setNotificationsSeen
+  profileController.setNotificationsSeen,
 );
 
 module.exports = router;

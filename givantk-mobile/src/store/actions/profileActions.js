@@ -56,9 +56,15 @@ export const makeProfile = (profile, callback) => (dispatch) => {
     type: actionTypes.MAKE_PROFILE_START,
   });
 
+  const config = {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  };
+
   http
-    .post(`${profileAPI}`, profile)
-    .then(() => {
+    .post(`${profileAPI}`, profile, config)
+    .then((req) => {
       dispatch({
         type: actionTypes.MAKE_PROFILE_FINISH,
       });

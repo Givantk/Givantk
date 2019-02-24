@@ -18,16 +18,17 @@ module.exports = makeProfile = (req, res) => {
         return res.status(400).json(errors);
       }
 
+      console.log(req.file)
+
       const newProfile = {
         user: req.user._id,
         first_name: req.user.first_name,
         last_name: req.user.last_name,
         gender: req.body.gender,
-        avatar: req.body.avatar,
-        description: req.body.description,
+        avatar: req.file.path,
         phone_number: req.body.phone_number,
         date_of_birth: req.body.date_of_birth,
-        skills: req.body.skills,
+        skills: JSON.parse(req.body.skills),
         description: req.body.description,
         givantk_points: 0,
         money_points: 0,

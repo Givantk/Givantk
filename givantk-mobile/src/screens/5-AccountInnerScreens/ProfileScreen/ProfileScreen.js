@@ -3,11 +3,10 @@ import { Icon } from 'native-base';
 import { Text, View, Image, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
-
 import { colors, dimensions } from '../../../assets/styles/base';
 import * as ProfileActions from '../../../store/actions/profileActions';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
-import fakeProfile from '../../../assets/data/fakeProfile';
+import {serverPath} from '../../../assets/utils/httpService'
 import Loading from '../../../components/commons/UI/Loading/Loading';
 import NoProfileDisclaimer from '../../../components/commons/NoProfileDisclaimer/NoProfileDisclaimer';
 import ServicesList from '../../../components/commons/Service-Related-Components/ServicesList/ServicesList';
@@ -92,7 +91,7 @@ class ProfileScreen extends React.Component {
           {/* Imagne and name */}
 
           <View style={styles.imageContainer}>
-            <Image source={{ uri: fakeProfile.avatar }} style={styles.image} />
+            <Image source={{ uri: `${serverPath+profile.avatar}` }} style={styles.image} />
             <Text style={styles.userName}>
               {profile.first_name} {profile.last_name}
             </Text>
