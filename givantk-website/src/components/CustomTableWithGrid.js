@@ -13,13 +13,22 @@ class CustomTableWithGrid extends Component {
   };
 
   componentDidMount() {
-    axios.get(this.props.url, { crossdomain: true }).then((res) => {
-      //this step is necessary to read nested object in json as using res.data directly will not read them
-      let jsonString = JSON.stringify(res.data);
-      this.setState({ UsersData: JSON.parse(jsonString) });
-    });
+    console.log(this.props.dataArray)
+    !this.props.dataArray?
+      axios
+        .get(this.props.url, { crossdomain: true })
+        .then((res) => {
+          //this step is necessary to read nested object in json as using res.data directly will not read them
+          let jsonString = JSON.stringify(res.data);
+          this.setState({ UsersData: JSON.parse(jsonString) });
+          console.log(JSON.parse(jsonString));
+        })
+        .catch((err) => {
+          console.log(err);
+        }):this.setState({ UsersData: this.props.dataArray });
   }
 
+  
   render() {
     var { UsersData } = this.state; // json array
 

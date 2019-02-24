@@ -3,8 +3,10 @@ import { MDBDataTable } from 'mdbreact';
 import { Button } from 'react-bootstrap';
 import { pick, isEqual } from 'lodash';
 import { CustomModal } from './CustomModal';
+import toBeShowed from '../functions/toBeShowed';
 class CustomTable extends Component {
   state = {
+
     data: {
       columns: [],
       rows: [],
@@ -96,6 +98,11 @@ class CustomTable extends Component {
 
       this.props.action(this.state.data.rows[buttonIndex]);
     } else {
+      const dataObj = this.props.values[buttonIndex];
+      const { navigationTitle } = this.props;
+      console.log('this is');
+      console.log(dataObj[navigationTitle]);
+      toBeShowed.setShowed(dataObj[navigationTitle]);
       this.props.navigate();
     }
 
@@ -111,11 +118,11 @@ class CustomTable extends Component {
     values.map((dataObj, i) => {
       //loop over the keys of the object
 
-      for (let key in dataObj) {
+      /*  for (let key in dataObj) {
         if (Array.isArray(dataObj[key])) {
           dataObj[key] = dataObj[key].join(', ');
         }
-      }
+      }*/
 
       // special column type is a column that contains button, if its value is
       // assigned to true then the condition below will be achieved
