@@ -1,8 +1,11 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 
+const rules = require('../../assets/rules');
+
 // Models
 const Profile = mongoose.model('profile');
+const User = mongoose.model('user');
 
 // Validations
 const validateProfile = require('../../validations/profile');
@@ -18,8 +21,6 @@ module.exports = makeProfile = (req, res) => {
         return res.status(400).json(errors);
       }
 
-      console.log(req.file)
-
       const newProfile = {
         user: req.user._id,
         first_name: req.user.first_name,
@@ -30,8 +31,8 @@ module.exports = makeProfile = (req, res) => {
         date_of_birth: req.body.date_of_birth,
         skills: JSON.parse(req.body.skills),
         description: req.body.description,
-        givantk_points: 0,
-        money_points: 0,
+        givantk_points: rules.numberOfGivantkPointsOnSignup,
+        money_points: rules.numberOfMoneyPointsOnSignup,
         notifications: [],
         services_asked_for: [],
         services_helped_in: [],
@@ -46,6 +47,11 @@ module.exports = makeProfile = (req, res) => {
       new Profile(newProfile)
         .save()
         .then((profile) => {
+          User.findById(req.user._id).then((user) => {
+            user.avatar = req.file.path;
+            user.save();
+          });
+
           res.json({ profile, success: true });
         })
         .catch((err) => {

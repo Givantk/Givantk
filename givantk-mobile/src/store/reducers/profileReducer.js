@@ -1,4 +1,6 @@
 import * as actionTypes from '../actions/actionTypes';
+import { serverPath } from '../../assets/utils/httpService';
+import fakeProfile from '../../assets/data/fakeProfile';
 
 const INITIAL_STATE = {
   currentUserProfile: {},
@@ -26,7 +28,13 @@ export default (state = INITIAL_STATE, action) => {
         currentUserProfile: !action.payload
           ? null
           : action.payload.success
-          ? action.payload.profile
+          ? {
+              ...action.payload.profile,
+              image:
+                action.payload.profile && action.payload.profile.avatar
+                  ? `${serverPath + action.payload.profile.avatar}`
+                  : fakeProfile.avatar,
+            }
           : null,
         currentUserHasProfile: !action.payload
           ? false
@@ -46,7 +54,14 @@ export default (state = INITIAL_STATE, action) => {
         selectedProfile: !action.payload
           ? null
           : action.payload.success
-          ? action.payload.profile
+          ? {
+              ...action.payload.profile,
+
+              image:
+                action.payload.profile && action.payload.profile.avatar
+                  ? `${serverPath + action.payload.profile.avatar}`
+                  : fakeProfile.avatar,
+            }
           : null,
         selectedUserHasProfile: !action.payload
           ? false
