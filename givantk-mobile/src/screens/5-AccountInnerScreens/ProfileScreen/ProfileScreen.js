@@ -93,13 +93,7 @@ class ProfileScreen extends React.Component {
 
           <View style={styles.imageContainer}>
             <Image
-              source={
-                profile
-                  ? profile.avatar
-                    ? { uri: `${serverPath + profile.avatar}` }
-                    : { uri: fakeProfile.avatar }
-                  : { uri: fakeProfile.avatar }
-              }
+              source={{ uri: profile && profile.image }}
               style={styles.image}
             />
             <Text style={styles.userName}>

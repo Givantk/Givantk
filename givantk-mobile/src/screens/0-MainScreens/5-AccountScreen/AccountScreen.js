@@ -7,8 +7,7 @@ import React from 'react';
 import * as AuthActions from '../../../store/actions/authActions';
 import accountListItems from '../../../components/0-MainScreensComponents/5-AccountScreenComponents/data/AccountListItems';
 import CardList from '../../../components/commons/UI/CardList/CardList';
-import profile from '../../../assets/data/fakeProfile';
-import { serverPath } from '../../../assets/utils/httpService';
+import fakeProfile from '../../../assets/data/fakeProfile';
 import styles from './AccountScreenStyles';
 
 class AccountScreen extends React.Component {
@@ -61,13 +60,12 @@ class AccountScreen extends React.Component {
           }
         >
           <View style={styles.imageContainer}>
-
             <Image
-              source={
-                currentUserProfile
-                  ? currentUserProfile.avatar? { uri: `${serverPath + currentUserProfile.avatar}` }
-                  : { uri: profile.avatar }:{ uri: profile.avatar }
-              }
+              source={{
+                uri:
+                  (currentUserProfile && currentUserProfile.image) ||
+                  fakeProfile.avatar,
+              }}
               style={styles.image}
             />
 

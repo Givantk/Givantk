@@ -11,14 +11,15 @@ const storage = multer.diskStorage({
     cb(null, './assets/images/');
   },
   filename: function(req, file, cb) {
-    cb(null, Date.now() + file.originalname);
-  },
+    cb(null, file.originalname + '-' + Date.now());
+  }
 });
+
 const upload = multer({
   storage: storage,
   limits: {
-    fileSize: 1024 * 1024 * 5,
-  },
+    fileSize: 1024 * 1024 * 5
+  }
 });
 
 // @route  GET api/profile/all
@@ -35,7 +36,7 @@ router.post(
   '/',
   upload.single('avatar'),
   passport.authenticate('jwt', { session: false }),
-  profileController.makeProfile,
+  profileController.makeProfile
 );
 
 // @route  GET api/profile
@@ -45,7 +46,7 @@ router.post(
 router.get(
   '/',
   passport.authenticate('jwt', { session: false }),
-  profileController.getProfile,
+  profileController.getProfile
 );
 
 // @route  GET api/profile/:user_id
@@ -63,7 +64,7 @@ module.exports = router;
 router.post(
   '/set-notifications-seen',
   passport.authenticate('jwt', { session: false }),
-  profileController.setNotificationsSeen,
+  profileController.setNotificationsSeen
 );
 
 module.exports = router;

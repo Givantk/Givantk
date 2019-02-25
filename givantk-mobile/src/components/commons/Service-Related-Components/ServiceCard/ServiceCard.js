@@ -3,6 +3,7 @@ import { View, Text, Image, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { serverPath } from '../../../../assets/utils/httpService';
 import fakeProfile from '../../../../assets/data/fakeProfile';
 import styles from './ServiceCardStyles';
 
@@ -44,7 +45,10 @@ class ServiceCard extends React.PureComponent {
               <View>
                 <Image
                   source={{
-                    uri: fakeProfile.avatar,
+                    uri:
+                      service.asker && service.asker.avatar
+                        ? `${serverPath + service.asker.avatar}`
+                        : fakeProfile.avatar,
                   }}
                   style={styles.userImage}
                 />
