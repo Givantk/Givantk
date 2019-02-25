@@ -5,8 +5,8 @@ module.exports = function validateProfile(data) {
   let errors = {};
 
   // For required fields
-  data.name = !isEmpty(data.description) ? data.description : '';
-  data.description = !isEmpty(data.phone_number) ? data.phone_number : '';
+  data.phone_number = !isEmpty(data.phone_number) ? data.phone_number : '';
+  data.description = !isEmpty(data.description) ? data.description : '';
 
   if (Validator.isEmpty(data.description)) {
     errors.description = 'Description is required';
@@ -38,6 +38,6 @@ module.exports = function validateProfile(data) {
 
   return {
     errors,
-    isValid: isEmpty(errors)
+    isValid: isEmpty(errors),
   };
 };

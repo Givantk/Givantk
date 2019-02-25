@@ -1,22 +1,22 @@
-import { connect } from 'react-redux';
-import { View } from 'react-native';
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import { connect } from "react-redux";
+import { View } from "react-native";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
 
-import Loading from '../../../components/commons/UI/Loading/Loading';
-import NoProfileDisclaimer from '../../../components/commons/NoProfileDisclaimer/NoProfileDisclaimer';
-import ServicesList from '../../../components/commons/Service-Related-Components/ServicesList/ServicesList';
+import Loading from "../../../components/commons/UI/Loading/Loading";
+import NoProfileDisclaimer from "../../../components/commons/NoProfileDisclaimer/NoProfileDisclaimer";
+import ServicesList from "../../../components/commons/Service-Related-Components/ServicesList/ServicesList";
 
 class BookmarkedServicesScreen extends Component {
   static navigationOptions = () => ({
-    headerTitle: 'You bookmarked',
+    headerTitle: "You bookmarked"
   });
 
   render() {
     const {
       navigation,
       getCurrentProfileLoading,
-      currentUserHasProfile,
+      currentUserHasProfile
     } = this.props;
     const { currentUserProfile } = navigation.state.params;
 
@@ -27,7 +27,10 @@ class BookmarkedServicesScreen extends Component {
 
     return (
       <View>
-        <ServicesList services={currentUserProfile.services_bookmarked} />
+        <ServicesList
+          services={currentUserProfile.services_bookmarked}
+          navigation={navigation}
+        />
       </View>
     );
   }
@@ -36,12 +39,12 @@ class BookmarkedServicesScreen extends Component {
 BookmarkedServicesScreen.propTypes = {
   navigation: PropTypes.shape({}),
   getCurrentProfileLoading: PropTypes.bool,
-  currentUserHasProfile: PropTypes.bool,
+  currentUserHasProfile: PropTypes.bool
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   getCurrentProfileLoading: state.profile.getCurrentProfileLoading,
-  currentUserHasProfile: state.profile.currentUserHasProfile,
+  currentUserHasProfile: state.profile.currentUserHasProfile
 });
 
 export default connect(mapStateToProps)(BookmarkedServicesScreen);

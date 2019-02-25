@@ -11,7 +11,7 @@ import Statistics from '../pages/Statistics';
 import Users from '../pages/Users';
 import ServicesAskedFor from '../pages/ServicesAskedFor';
 import ServicesHelpedIn from '../pages/ServicesHelpedIn';
-import CommentsPage from '../pages/CommentsPage';
+import ServicesProposals from '../pages/ServicesProposals';
 import CustomNav from '../components/CustomNav';
 import CustomFooter from '../components/CustomFooter';
 import '../CustomNav.css';
@@ -29,9 +29,9 @@ export default function DefaultContainer(props) {
                     <Route path='/settings' component={Settings}/>
                     <Route path='/statistics' component={Statistics}/>
                     <Route path='/users' component={Users}/>
-                    <Route path='/helped/:id' component={ServicesHelpedIn} />
-                    <Route path='/asked/:id' component={ServicesAskedFor} />
-                    <Route path='/comments/:id' component={CommentsPage} />
+                    <Route path='/helped' component={ServicesHelpedIn} />
+                    <Route path='/asked' component={ServicesAskedFor} />
+                    <Route path='/comments' component={ServicesProposals} />
                     <Route path='/' component={Home}/>
                 </Switch>
                 <CustomFooter/>
@@ -39,4 +39,3 @@ export default function DefaultContainer(props) {
         </div>
     )
 }
-

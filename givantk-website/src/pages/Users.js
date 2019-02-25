@@ -96,7 +96,9 @@ class Users extends Component {
                     specialColColor="success"
                     specialColText="Go to services helped in"
                     navigable
-                    navigate={() => this.props.history.push('/')}/>
+                    navigate={() => this.props.history.push('/helped')}
+                    navigationTitle="services_helped_in"
+                    />
 
                 <CustomTableWithGrid
                     url="http://localhost:3001/servicesAskedFor"
@@ -107,7 +109,9 @@ class Users extends Component {
                     specialColColor="success"
                     specialColText="Go to services asked for"
                     navigable
-                    navigate={() => this.props.history.push('/')}/>
+                    navigate={() => this.props.history.push('/asked')}
+                    navigationTitle="services_asked-for"
+                    />
             </div>
         );
     }

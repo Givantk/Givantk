@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import { Textarea, Button } from 'native-base';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
+import { ImagePicker } from 'expo';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-
 import { colors } from '../../../assets/styles/base';
 import * as ProfileActions from '../../../store/actions/profileActions';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
@@ -31,6 +31,17 @@ class MakeProfileScreen extends Component {
     phone_number: '',
     date_of_birth: '',
     skills: '',
+    avatar: null,
+  };
+
+  pickImage = async () => {
+    const result = await ImagePicker.launchImageLibraryAsync({});
+
+    const { uri } = result;
+
+    if (!result.cancelled) {
+      this.setState({ avatar: uri });
+    }
   };
 
   onChangeValue = (name, value) => {
@@ -40,14 +51,33 @@ class MakeProfileScreen extends Component {
   };
 
   onSubmit = () => {
-    const { gender, skills } = this.state;
+    const {
+      gender,
+      skills,
+      avatar,
+      description,
+      phone_number,
+      date_of_birth,
+    } = this.state;
     const { navigation, makeProfile, getCurrentUserProfile } = this.props;
 
-    const newProfile = {
-      ...this.state,
-      gender: gender.value,
-      skills: skills.split(','),
-    };
+    let uriParts = avatar.split('.');
+    let fileType = uriParts[uriParts.length - 1];
+
+    newProfile = new FormData();
+
+    //appending keys and value in the new profile form data
+
+    newProfile.append('gender', gender.value);
+    newProfile.append('skills', JSON.stringify(skills.split(',')));
+    newProfile.append('avatar', {
+      uri: avatar,
+      name: avatar.split('/').pop(),
+      type: `image/${fileType}`,
+    });
+    newProfile.append('description', description);
+    newProfile.append('phone_number', phone_number);
+    newProfile.append('date_Of_birth', date_of_birth);
 
     const callback = () => {
       getCurrentUserProfile();
@@ -59,11 +89,19 @@ class MakeProfileScreen extends Component {
   };
 
   render() {
-    const { gender } = this.state;
+    const { gender, avatar } = this.state;
     const { errors } = this.props;
     return (
       <AvoidKeyboard bottomPadding={80}>
         <View style={styles.container}>
+          <Text style={styles.label}>Profile picture</Text>
+          <Button style={styles.uploadButton} onPress={this.pickImage}>
+            <Text style={styles.uploadButtonText}>Pick from gallery </Text>
+          </Button>
+          <View style={styles.imageView}>
+            {avatar && <Image style={styles.image} source={{ uri: avatar }} />}
+          </View>
+
           <Picker
             title="Gender"
             placeholder="Male / Female"

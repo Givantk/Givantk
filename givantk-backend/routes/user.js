@@ -9,6 +9,7 @@ const userController = require('../controllers/userController/index.js');
 // @desc   Get all users
 // @access Public
 // @errors nousers error
+
 router.get('/all', userController.getAllUsers);
 
 // @route  POST api/user
@@ -30,7 +31,7 @@ router.post('/login', userController.loginUser);
 router.patch(
   '/',
   passport.authenticate('jwt', { session: false }),
-  userController.updateUser
+  userController.updateUser,
 );
 
 // @route  DELETE api/user
@@ -40,7 +41,7 @@ router.patch(
 router.delete(
   '/',
   passport.authenticate('jwt', { session: false }),
-  userController.deleteUser
+  userController.deleteUser,
 );
 
 // @route  GET api/user
@@ -50,7 +51,7 @@ router.delete(
 router.get(
   '/',
   passport.authenticate('jwt', { session: false }),
-  userController.getUser
+  userController.getUser,
 );
 
 // @route  GET api/user/:id

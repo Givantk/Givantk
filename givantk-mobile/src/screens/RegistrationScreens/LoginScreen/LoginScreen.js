@@ -49,8 +49,10 @@ class LoginScreen extends React.Component {
   };
 
   onChangeTextValue = (name, value) => {
+    // \s* means any numbers of white space and $ means at the end of the string
+
     this.setState({
-      [name]: value,
+      [name]: value.replace(/\s*$/, ''),
     });
   };
 

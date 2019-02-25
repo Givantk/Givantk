@@ -1,24 +1,34 @@
-import React, { Component } from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import CustomTable from "./CustomTable";
-import axios from "axios";
+import React, { Component } from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+import CustomTable from './CustomTable';
+import axios from 'axios';
 
 class CustomTableWithGrid extends Component {
   state = {
-    UsersData: []
+    UsersData: [],
   };
 
-  buttonClicked = index => {
+  buttonClicked = (index) => {
     console.log(index);
   };
 
   componentDidMount() {
-
-    axios.get(this.props.url, { crossdomain: true }).then(res => {
-      this.setState({ UsersData: res.data });
-    });
+    console.log(this.props.dataArray)
+    !this.props.dataArray?
+      axios
+        .get(this.props.url, { crossdomain: true })
+        .then((res) => {
+          //this step is necessary to read nested object in json as using res.data directly will not read them
+          let jsonString = JSON.stringify(res.data);
+          this.setState({ UsersData: JSON.parse(jsonString) });
+          console.log(JSON.parse(jsonString));
+        })
+        .catch((err) => {
+          console.log(err);
+        }):this.setState({ UsersData: this.props.dataArray });
   }
 
+  
   render() {
     var { UsersData } = this.state; // json array
 
@@ -29,22 +39,7 @@ class CustomTableWithGrid extends Component {
             <Col xl="10" lg="9" md="8" className="ml-auto">
               <Row>
                 <Col xl="12" className="mb-4">
-                  <CustomTable
-                    name={this.props.name}
-                    headers={this.props.headers}
-                    titles={this.props.titles}
-                    values={UsersData}
-                    bg="dark"
-                    specialColType={this.props.specialColType}
-                    specialColColor={this.props.specialColColor}
-                    specialColText={this.props.specialColText}
-                    action={this.props.action}
-                    alterButtonText={this.props.alterButtonText}
-                    alterButtonColor={this.props.alterButtonColor}
-                    alterable={this.props.alterable}
-                    navigable={this.props.navigable}
-                    navigate={this.props.navigate}
-                  />
+                  <CustomTable {...this.props} values={UsersData} bg="dark" />
                 </Col>
               </Row>
             </Col>
