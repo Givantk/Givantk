@@ -5,8 +5,13 @@ const Service = mongoose.model('service');
 
 module.exports = search = (req, res) => {
   const errors = {};
-  console.log(req.params.name);
-  Service.find({ name: req.params.name })
+  /* if the given search word is e.g.(wake) it will search for
+    - wake (case INSENSITIVE)
+    - wake + any number of words, wake can be in any place in the sentence
+    - wake + any continuation of the word, like wakes..etc
+    
+  */
+  Service.find({ name: { $regex: req.params.name, $options: 'i' } })
     .sort({ date: -1 })
     .then((services) => {
       if (services.length === 0) {
