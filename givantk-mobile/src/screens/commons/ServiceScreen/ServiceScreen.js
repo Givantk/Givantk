@@ -13,12 +13,11 @@ import React, { Component } from 'react';
 
 import styles from './ServiceScreenStyles';
 import Loading from '../../../components/commons/UI/Loading/Loading';
-import fakeProfile from '../../../assets/data/fakeProfile';
 import Proposal from './Proposal/Proposal';
 import * as ServiceActions from '../../../store/actions/serviceActions';
 import QuickNotification from '../../../components/commons/UI/QuickNotification/QuickNotification';
 import Announcement from '../../../components/commons/UI/Announcement/Announcement';
-import { serverPath } from '../../../assets/utils/httpService';
+import getUserImage from '../../../assets/utils/getUserImage';
 
 class ServiceScreen extends Component {
   static navigationOptions = () => ({
@@ -142,10 +141,7 @@ class ServiceScreen extends Component {
             <View style={styles.header}>
               <Image
                 source={{
-                  uri:
-                    service.asker && service.asker.avatar
-                      ? `${serverPath + service.asker.avatar}`
-                      : fakeProfile.avatar,
+                  uri: service.asker && getUserImage(service.asker.avatar),
                 }}
                 style={styles.userImage}
               />
