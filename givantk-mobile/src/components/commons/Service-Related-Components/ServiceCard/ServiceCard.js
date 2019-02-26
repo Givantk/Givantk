@@ -36,7 +36,6 @@ class ServiceCard extends React.PureComponent {
 
   render() {
     const { service, bookmarked } = this.props;
-    {console.log(service.asker.avatar)}
 
     return (
       <TouchableWithoutFeedback onPress={this.onPressCard}>
