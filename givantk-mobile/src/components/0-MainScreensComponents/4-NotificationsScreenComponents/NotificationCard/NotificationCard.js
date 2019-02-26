@@ -2,7 +2,7 @@ import { View, TouchableWithoutFeedback, Image, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import profile from '../../../../assets/data/fakeProfile';
+import { newUserImage } from '../../../../assets/constants';
 import styles from './NotificationCardStyles';
 
 class NotificationCard extends React.PureComponent {
@@ -43,7 +43,7 @@ class NotificationCard extends React.PureComponent {
           <TouchableWithoutFeedback onPress={this.onPressAvatar}>
             <Image
               source={{
-                uri: profile.avatar,
+                uri: newUserImage,
               }}
               style={styles.image}
             />

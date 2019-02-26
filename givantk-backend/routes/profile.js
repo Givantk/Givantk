@@ -1,17 +1,18 @@
 const express = require('express');
 const multer = require('multer');
+
 const router = express.Router();
 const passport = require('passport');
 const profileController = require('../controllers/profileController/index.js');
 
-//setting profile photo storage
+//Setting profile photo storage
 
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
     cb(null, './assets/images/');
   },
   filename: function(req, file, cb) {
-    cb(null, file.originalname + '-' + Date.now());
+    cb(null, Date.now() + '-' + file.originalname);
   }
 });
 

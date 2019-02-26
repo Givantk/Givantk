@@ -92,6 +92,7 @@ class MakeProfileScreen extends Component {
   render() {
     const { gender, avatar } = this.state;
     const { errors } = this.props;
+
     return (
       <AvoidKeyboard bottomPadding={80}>
         <View style={styles.container}>
