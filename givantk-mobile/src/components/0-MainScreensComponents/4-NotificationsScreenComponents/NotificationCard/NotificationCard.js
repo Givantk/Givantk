@@ -4,6 +4,7 @@ import React from 'react';
 
 import { newUserImage } from '../../../../assets/constants';
 import styles from './NotificationCardStyles';
+import getUserImage from '../../../../assets/utils/getUserImage';
 
 class NotificationCard extends React.PureComponent {
   onPressAvatar = () => {
@@ -43,7 +44,9 @@ class NotificationCard extends React.PureComponent {
           <TouchableWithoutFeedback onPress={this.onPressAvatar}>
             <Image
               source={{
-                uri: newUserImage,
+                uri: notification.is_user_associated
+                  ? getUserImage(notification.user_associated.avatar)
+                  : newUserImage,
               }}
               style={styles.image}
             />

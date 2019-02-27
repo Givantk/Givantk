@@ -153,3 +153,51 @@ export const unbookmarkService = (serviceId, callback) => (dispatch) => {
       });
     });
 };
+
+export const markServiceAsDone = (serviceId, callback) => (dispatch) => {
+  dispatch({
+    type: actionTypes.MARK_SERVICE_DONE_START,
+  });
+
+  http
+    .post(`${serviceAPI}/mark-as-done/${serviceId}`)
+    .then(() => {
+      dispatch({
+        type: actionTypes.MARK_SERVICE_DONE_FINISH,
+      });
+      if (callback) callback();
+    })
+    .catch((err) => {
+      dispatch({
+        type: actionTypes.SET_ERRORS,
+        payload: err.response.data,
+      });
+      dispatch({
+        type: actionTypes.MARK_SERVICE_DONE_FINISH,
+      });
+    });
+};
+
+export const archiveService = (serviceId, callback) => (dispatch) => {
+  dispatch({
+    type: actionTypes.ARCHIVE_SERVICE_START,
+  });
+
+  http
+    .post(`${serviceAPI}/archive/${serviceId}`)
+    .then(() => {
+      dispatch({
+        type: actionTypes.ARCHIVE_SERVICE_FINISH,
+      });
+      if (callback) callback();
+    })
+    .catch((err) => {
+      dispatch({
+        type: actionTypes.SET_ERRORS,
+        payload: err.response.data,
+      });
+      dispatch({
+        type: actionTypes.ARCHIVE_SERVICE_FINISH,
+      });
+    });
+};
