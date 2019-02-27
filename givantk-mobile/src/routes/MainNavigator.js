@@ -29,6 +29,7 @@ const MainNavigator = createStackNavigator(
     MessagesList: screens.MessagesListScreen,
     BookmarkedServices: screens.BookmarkedServicesScreen,
     ProposedForServices: screens.ProposedForServicesScreen,
+    ArchivedServices: screens.ArchivedServicesScreen,
     MakeProfile: screens.MakeProfileScreen,
   },
   {

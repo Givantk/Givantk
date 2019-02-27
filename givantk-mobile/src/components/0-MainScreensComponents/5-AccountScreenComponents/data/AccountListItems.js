@@ -27,6 +27,15 @@ const accountListItems = (navigation, userId, currentUserProfile) => [
       }),
   },
   {
+    title: 'Services you archived',
+    iconName: 'file-archive-o',
+    iconType: 'FontAwesome',
+    onPress: () =>
+      navigation.navigate('ArchivedServices', {
+        currentUserProfile,
+      }),
+  },
+  {
     title: 'Payment Info',
     iconName: 'money',
     iconType: 'FontAwesome',

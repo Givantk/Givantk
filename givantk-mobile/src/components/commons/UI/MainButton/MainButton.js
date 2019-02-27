@@ -6,13 +6,33 @@ import { colors } from '../../../../assets/styles/base';
 import Loading from '../Loading/Loading';
 import styles from './MainButtonStyle';
 
-const MainButton = ({ backgroundColor, onPress, children, big, loading }) => (
+const MainButton = ({
+  backgroundColor,
+  onPress,
+  children,
+  big,
+  small,
+  loading,
+}) => (
   <View>
     {loading ? (
       <Loading />
     ) : (
-      <Button style={[styles.button, { backgroundColor }]} onPress={onPress}>
-        <Text style={[styles.buttonText, big && styles.textBig]}>
+      <Button
+        style={[
+          styles.button,
+          { backgroundColor },
+          small && styles.buttonSmall,
+        ]}
+        onPress={onPress}
+      >
+        <Text
+          style={[
+            styles.buttonText,
+            big && styles.textBig,
+            small && styles.textSmall,
+          ]}
+        >
           {children}
         </Text>
       </Button>
@@ -29,6 +49,7 @@ MainButton.propTypes = {
   onPress: PropTypes.func,
   children: PropTypes.string,
   big: PropTypes.bool,
+  small: PropTypes.bool,
   loading: PropTypes.bool,
 };
 

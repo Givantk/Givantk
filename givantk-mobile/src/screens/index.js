@@ -21,6 +21,7 @@ import VerifyIdentityScreen from './5-AccountInnerScreens/VerifyIdentityScreen/V
 import MakeProfileScreen from './5-AccountInnerScreens/MakeProfileScreen/MakeProfileScreen';
 import BookmarkedServicesScreen from './5-AccountInnerScreens/BookmarkedServicesScreen/BookmarkedServicesScreen';
 import ProposedForServicesScreen from './5-AccountInnerScreens/ProposedForServicesScreen/ProposedForServicesScreen';
+import ArchivedServicesScreen from './5-AccountInnerScreens/ArchivedServicesScreen/ArchivedServicesScreen';
 
 const screens = {
   AccountScreen,
@@ -40,6 +41,7 @@ const screens = {
   ProfileScreen,
   BookmarkedServicesScreen,
   ProposedForServicesScreen,
+  ArchivedServicesScreen,
   SearchResultsScreen,
   ServiceScreen,
   SignupScreen,
