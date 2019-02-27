@@ -75,6 +75,7 @@ const ProfileSchema = new Schema({
   services_helped_in_finished: [
     { type: mongoose.Schema.Types.ObjectId, ref: 'service' }
   ],
+  services_archived: [{ type: mongoose.Schema.Types.ObjectId, ref: 'service' }],
   date: {
     type: Date,
     default: Date.now

@@ -14,7 +14,7 @@ module.exports = proposeToService = (req, res) => {
     .then((service) => {
       if (service.asker.toString() !== req.user._id.toString()) {
         errors.unauthorized = "You haven't initiated this service";
-        res.status(401).json(errors);
+        return res.status(401).json(errors);
       }
 
       const application = service.applications.find(

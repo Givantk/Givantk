@@ -119,6 +119,16 @@ router.post(
   serviceController.markServiceAsDone
 );
 
+// @route  POST api/service/archive/:service_id
+// @desc   Archive a service, if it has no helpers
+// @access Private
+// @errors unauthorized alreadyhashelper error
+router.post(
+  '/archive/:service_id',
+  passport.authenticate('jwt', { session: false }),
+  serviceController.archiveService
+);
+
 // @route  GET api/service/search/:name
 // @desc   Search for services
 // @access Private

@@ -13,7 +13,7 @@ module.exports = markServiceAsDone = (req, res) => {
     .then((service) => {
       if (service.asker.toString() !== req.user._id.toString()) {
         errors.unauthorized = "You haven't initiated this service";
-        res.status(401).json(errors);
+        return res.status(401).json(errors);
       }
 
       if (!service.helper) {
@@ -59,10 +59,6 @@ module.exports = markServiceAsDone = (req, res) => {
     })
     .catch((err) => {
       errors.error = 'Error fetching service from database';
-      res.status(500).json({ ...errors, ...err });
+      return res.status(500).json({ ...errors, ...err });
     });
 };
-
-//q@q.com
-//Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Yzc1Nzc5NGE3NmU3MTAwMTY0YWM3MWMiLCJmaXJzdF9uYW1lIjoiQWJkbyIsImxhc3RfbmFtZSI6IkZhd2F6IiwiZW1haWwiOiJxQHEuY29tIiwibG9jYXRpb24iOiJFbCBNYXJnIiwiaWF0IjoxNTUxMjg5NzIxfQ.8hQJwKvb5JU0Dyofayw3_DckmdEFyAfWVZOrOolK2TM
-//Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Yzc1NzhiZWE3NmU3MTAwMTY0YWM3MjAiLCJmaXJzdF9uYW1lIjoiWmVpbmFiIiwibGFzdF9uYW1lIjoiSGVzaGFtIiwiZW1haWwiOiJ6QHouY29tIiwibG9jYXRpb24iOiJFbCBNYXRhcmV5YSIsImlhdCI6MTU1MTI4OTkwMH0.TyJGV_yOCZRfe4K5DUjzLlM23nKH6Wq0rwyaSGLvysg
