@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import { colors } from '../../../../assets/styles/base';
-import fakeProfile from '../../../../assets/data/fakeProfile';
+import getUserImage from '../../../../assets/utils/getUserImage';
 import MainButton from '../../../../components/commons/UI/MainButton/MainButton';
 import styles from './ProposalStyles';
 
@@ -30,7 +30,7 @@ const Proposal = ({
         <View style={styles.helperIdentityContainer}>
           <Image
             source={{
-              uri: fakeProfile.avatar,
+              uri: application.user && getUserImage(application.user.avatar),
             }}
             style={styles.proposalUserImage}
           />

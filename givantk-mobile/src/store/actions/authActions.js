@@ -9,7 +9,7 @@ import http, {
   removeAuthToken,
 } from '../../assets/utils/httpService';
 
-import storedJWTname from '../../assets/constants/storedJWTname';
+import { storedJWTname } from '../../assets/constants';
 import QuickNotification from '../../components/commons/UI/QuickNotification/QuickNotification';
 
 export const signupUser = (userData, callback) => (dispatch) => {
