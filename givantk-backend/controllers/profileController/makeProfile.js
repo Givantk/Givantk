@@ -48,7 +48,7 @@ module.exports = makeProfile = (req, res) => {
         .save()
         .then((profile) => {
           User.findById(req.user._id).then((user) => {
-            user.avatar = req.file.path;
+            user.avatar = req.file.location;
             user.save();
           });
 
