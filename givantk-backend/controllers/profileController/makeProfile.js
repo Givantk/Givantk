@@ -26,7 +26,7 @@ module.exports = makeProfile = (req, res) => {
         first_name: req.user.first_name,
         last_name: req.user.last_name,
         gender: req.body.gender,
-        avatar: req.file.path,
+        avatar: req.file.location,
         phone_number: req.body.phone_number,
         date_of_birth: req.body.date_of_birth,
         skills: JSON.parse(req.body.skills),
