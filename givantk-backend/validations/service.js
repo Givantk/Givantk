@@ -9,6 +9,7 @@ module.exports = validateService = (data) => {
   data.description = !isEmpty(data.description) ? data.description : '';
   data.nature = !isEmpty(data.nature) ? data.nature : '';
   data.type = !isEmpty(data.type) ? data.type : '';
+  data.moneyPoints = !isEmpty(data.moneyPoints) ? data.moneyPoints : '';
 
   // name
   if (!Validator.isLength(data.name, { min: 2, max: 40 })) {
@@ -32,6 +33,20 @@ module.exports = validateService = (data) => {
   if (Validator.isEmpty(data.nature)) {
     errors.nature = 'Nature is required';
   }
+
+  //amount
+
+  if (data.paid === true && Validator.isEmpty(data.moneyPoints)) {
+    console.log('I am here');
+    errors.moneyPoints = 'Amount is required';
+  }
+
+  if (data.paid === false && Validator.isEmpty(data.givantkPoints)) {
+    console.log('I am here');
+    errors.givantkPoints = 'Givantk Points is required';
+  }
+
+  //type
 
   if (Validator.isEmpty(data.type)) {
     errors.type = 'Type is required';
@@ -59,6 +74,6 @@ module.exports = validateService = (data) => {
 
   return {
     errors,
-    isValid: isEmpty(errors)
+    isValid: isEmpty(errors),
   };
 };

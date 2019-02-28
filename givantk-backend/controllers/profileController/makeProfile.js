@@ -37,7 +37,7 @@ module.exports = makeProfile = (req, res) => {
         services_asked_for: [],
         services_helped_in: [],
         services_bookmarked: [],
-        services_proposed_for: []
+        services_proposed_for: [],
       };
 
       if (typeof req.body.date_of_birth === 'string') {
@@ -71,12 +71,12 @@ module.exports = makeProfile = (req, res) => {
       Profile.findOneAndUpdate(
         { user: req.user._id },
         { $set: newProfileInfo },
-        { new: true }
+        { new: true },
       ).then((profile) =>
         res.json({
           profile,
-          success: true
-        })
+          success: true,
+        }),
       );
     }
   });

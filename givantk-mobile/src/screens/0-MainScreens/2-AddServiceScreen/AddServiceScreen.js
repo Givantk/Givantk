@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { Icon, Label, Textarea } from 'native-base';
-import { View, Text } from 'react-native';
+import { View, Text, Button } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -15,8 +15,10 @@ import Picker from '../../../components/commons/UI/Picker/Picker';
 import QuickNotification from '../../../components/commons/UI/QuickNotification/QuickNotification';
 import servicesNatures from '../../../assets/data/servicesNatures';
 import servicesTypes from '../../../assets/data/servicesTypes';
+import currencies from '../../../assets/data/Currencies';
 import styles from './AddServiceScreenStyles';
 import TextInput from '../../../components/commons/UI/TextInput/TextInput';
+import { moneyToPointsFraction } from '../../../assets/constants/index';
 
 class AddServiceScreen extends React.Component {
   static navigationOptions = () => ({
@@ -35,12 +37,30 @@ class AddServiceScreen extends React.Component {
     description: '',
     type: '',
     nature: '',
+    paid: false,
+    moneyPoints: 0,
   };
 
   onChangeValue = (name, value) => {
-    this.setState({
-      [name]: value,
-    });
+    if (name === 'nature' && value.label === 'Paid') {
+      this.setState({
+        [name]: value,
+        paid: true,
+      });
+    } else if (name === 'nature' && value.label === 'Free') {
+      this.setState({
+        [name]: value,
+        paid: false,
+      });
+    } else if (name === 'moneyPoints') {
+      this.setState({
+        [name]: value,
+      });
+    } else {
+      this.setState({
+        [name]: value,
+      });
+    }
   };
 
   onAddService = () => {
@@ -50,12 +70,14 @@ class AddServiceScreen extends React.Component {
       getCurrentUserProfile,
       navigation,
     } = this.props;
-    const { name, type, nature, description } = this.state;
+    const { name, type, nature, description, moneyPoints,paid } = this.state;
     const service = {
       name,
       description,
       type: type.value,
       nature: nature.value,
+      moneyPoints: moneyPoints.value / moneyToPointsFraction,
+      paid,
     };
     const callback = () => {
       QuickNotification('Service posted successfully');
@@ -67,7 +89,7 @@ class AddServiceScreen extends React.Component {
   };
 
   render() {
-    const { type, nature } = this.state;
+    const { type, nature, currency, paid, moneyPoints } = this.state;
     const {
       errors,
       createServiceLoading,
@@ -114,6 +136,28 @@ class AddServiceScreen extends React.Component {
               value={nature}
               error={errors.nature}
             />
+            {paid && (
+              <View>
+                <Picker
+                  title="Pick Currency"
+                  placeholder="Pick Currency"
+                  style={styles.picker}
+                  name="currency"
+                  onChange={this.onChangeValue}
+                  options={currencies}
+                  value={currency}
+                />
+                <TextInput
+                  title="Amount you want to pay "
+                  keyboardType="numeric"
+                  maxLength={10}
+                  placeholder="Amount in numbers"
+                  error={errors.moneyPoints}
+                  name="moneyPoints"
+                  onChange={this.onChangeValue}
+                />
+              </View>
+            )}
           </View>
 
           <View style={styles.left}>
