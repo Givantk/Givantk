@@ -56,8 +56,8 @@ module.exports = createService = (req, res) => {
             return res.status(400).json(errors);
           }
           profile.services_asked_for.unshift(service._id);
-         
-          if (req.body.moneyPoints){
+         //check if the service is paid, if it's then subtract its points from user's money points 
+          if (req.body.paid){
             profile.money_points = profile.money_points - req.body.moneyPoints;
           }
           profile
