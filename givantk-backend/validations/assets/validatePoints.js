@@ -1,28 +1,28 @@
 const mongoose = require('mongoose');
 const Profile = mongoose.model('profile');
 
-
 module.exports = async function validatePoints(points, type, id) {
   let error = '';
+  //handle negative numbers and zeros
   if (points <= 0) {
     error = 'Kindly enter an amount greater than zero';
   } else if (!points) error = 'Kindly enter amount in numbers';
   else {
     const profile = await Profile.findOne({ user: id });
     if (type === 'paid') {
-      console.log(profile.money_points);
-      console.log(points)
       if (profile.money_points < points) {
-        //if points are not enough ask him to recharge credit
+        //if points are not enough ask the user to recharge credit
         error = `your money score is ${
           profile.money_points
         } .Recharge from your Account tab :D `;
         console.log(error);
       }
-    } else {
+    }
+    //if type of the service is free
+    else {
       if (profile.givantk_points < points) {
-        console.log(points)
-        //if points are not enough ask him to recharge credit
+        //if points are not enough ask him to make more services or if he ran of points ask him to get 5 points
+        //from his account
         error =
           profile.givantk_points !== 0
             ? `You only have ${

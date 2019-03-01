@@ -63,9 +63,9 @@ module.exports = async function validateService(data, id) {
   //Money validation
 
   if (data.paid) {
-    //Send an error if the Money field_which is translated to money points_ is empty
     try {
       errors.money = await validatePoints(data.moneyPoints, 'paid', id);
+      //deleting errors.money if it's an empty string which means there is no error in it
       if (errors.money === '') {
         const { money, ...rest } = errors;
         errors = rest;
@@ -81,6 +81,7 @@ module.exports = async function validateService(data, id) {
         'free',
         id,
       );
+      //deleting errors.givantkPoints if it's an empty string which means there is no error in it
       if (errors.givantkPoints === '') {
         const { givantkPoints, ...rest } = errors;
         errors = rest;
