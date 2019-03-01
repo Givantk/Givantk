@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     textAlign: 'left',
   },
   points: {
-    color: colors.secondary,
+    color: colors.primary,
     marginTop: 5,
     fontSize: 15,
   },

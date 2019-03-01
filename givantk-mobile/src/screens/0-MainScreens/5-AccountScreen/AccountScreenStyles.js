@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   },
   points:{
 
-    color:colors.secondary,
+    color:colors.primary,
     marginTop:5,
     fontSize:15
 
