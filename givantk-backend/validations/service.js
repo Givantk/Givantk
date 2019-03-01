@@ -1,7 +1,9 @@
 const isEmpty = require('./assets/is-empty');
 const Validator = require('validator');
+const mongoose = require('mongoose');
+const Profile = mongoose.model('profile');
 
-module.exports = validateService = (data) => {
+module.exports = async function validateService(data, id) {
   let errors = {};
 
   // For required fields
@@ -9,7 +11,6 @@ module.exports = validateService = (data) => {
   data.description = !isEmpty(data.description) ? data.description : '';
   data.nature = !isEmpty(data.nature) ? data.nature : '';
   data.type = !isEmpty(data.type) ? data.type : '';
-  data.moneyPoints = !isEmpty(data.moneyPoints) ? data.moneyPoints : '';
 
   // name
   if (!Validator.isLength(data.name, { min: 2, max: 40 })) {
@@ -32,18 +33,6 @@ module.exports = validateService = (data) => {
   // nature
   if (Validator.isEmpty(data.nature)) {
     errors.nature = 'Nature is required';
-  }
-
-  //amount
-
-  if (data.paid === true && Validator.isEmpty(data.moneyPoints)) {
-    console.log('I am here');
-    errors.moneyPoints = 'Amount is required';
-  }
-
-  if (data.paid === false && Validator.isEmpty(data.givantkPoints)) {
-    console.log('I am here');
-    errors.givantkPoints = 'Givantk Points is required';
   }
 
   //type
@@ -71,6 +60,30 @@ module.exports = validateService = (data) => {
     ) {
       errors.end_time = 'End time must be a date';
     }
+
+  //Money validation
+
+  if (data.paid) {
+    //Send an error if the Money field_which is translated to money points_ is empty
+
+    if (data.moneyPoints <= 0)
+      errors.money = 'Kindly enter an amount greater than zero';
+    else if (!data.moneyPoints) errors.money = 'Kindly enter amount in numbers';
+    else {
+      profile = await Profile.findOne({ user: id });
+      //compare profile money points with the entered money points
+
+      if (profile.money_points < data.moneyPoints) {
+        //if points are not enough ask him to recharge credit
+
+        errors.money = 'Not enought credit, recharge from Account tab :D ';
+      }
+    }
+  } //if the service is free
+  else {
+    if (data.givantkPoints === 0)
+      errors.givantkPoints = 'Givantk Points is required';
+  }
 
   return {
     errors,

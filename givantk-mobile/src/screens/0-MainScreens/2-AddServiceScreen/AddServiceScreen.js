@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { Icon, Label, Textarea } from 'native-base';
-import { View, Text, Button } from 'react-native';
+import { View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -54,7 +54,7 @@ class AddServiceScreen extends React.Component {
       });
     } else if (name === 'moneyPoints') {
       this.setState({
-        [name]: value,
+        [name]: parseInt(value) / moneyToPointsFraction,
       });
     } else {
       this.setState({
@@ -70,13 +70,13 @@ class AddServiceScreen extends React.Component {
       getCurrentUserProfile,
       navigation,
     } = this.props;
-    const { name, type, nature, description, moneyPoints,paid } = this.state;
+    const { name, type, nature, description, moneyPoints, paid } = this.state;
     const service = {
       name,
       description,
       type: type.value,
       nature: nature.value,
-      moneyPoints: moneyPoints.value / moneyToPointsFraction,
+      moneyPoints: moneyPoints,
       paid,
     };
     const callback = () => {
@@ -152,7 +152,7 @@ class AddServiceScreen extends React.Component {
                   keyboardType="numeric"
                   maxLength={10}
                   placeholder="Amount in numbers"
-                  error={errors.moneyPoints}
+                  error={errors.money}
                   name="moneyPoints"
                   onChange={this.onChangeValue}
                 />
