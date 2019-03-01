@@ -76,7 +76,7 @@ module.exports = async function validateService(data, id) {
       if (profile.money_points < data.moneyPoints) {
         //if points are not enough ask him to recharge credit
 
-        errors.money = 'Not enought credit, recharge from Account tab :D ';
+        errors.money = 'Not enought score, recharge from Account tab :D ';
       }
     }
   } //if the service is free

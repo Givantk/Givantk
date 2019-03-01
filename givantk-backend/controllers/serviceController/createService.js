@@ -8,6 +8,9 @@ const Profile = mongoose.model('profile');
 // Validations
 const validateService = require('../../validations/service');
 
+//Rules
+const rules = require('../../assets/rules');
+
 module.exports = createService = (req, res) => {
   // Validate
   validateService(req.body, req.user._id).then((valitdation) => {
@@ -24,7 +27,7 @@ module.exports = createService = (req, res) => {
       brief_description: req.body.brief_description,
       nature: req.body.nature,
       givantk_points: req.body.givantkPoints,
-      money_points: req.body.moneyPoints,
+      money_points: rules.AppShareEquation(req.body.moneyPoints),
       type: req.body.type,
       reveal_asker: req.body.reveal_asker,
       state: 'new',
@@ -56,8 +59,8 @@ module.exports = createService = (req, res) => {
             return res.status(400).json(errors);
           }
           profile.services_asked_for.unshift(service._id);
-         //check if the service is paid, if it's then subtract its points from user's money points 
-          if (req.body.paid){
+          //check if the service is paid, if it's then subtract its points from user's money points
+          if (req.body.paid) {
             profile.money_points = profile.money_points - req.body.moneyPoints;
           }
           profile

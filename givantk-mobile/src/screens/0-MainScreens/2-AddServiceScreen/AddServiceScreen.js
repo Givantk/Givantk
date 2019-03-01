@@ -18,7 +18,6 @@ import servicesTypes from '../../../assets/data/servicesTypes';
 import currencies from '../../../assets/data/Currencies';
 import styles from './AddServiceScreenStyles';
 import TextInput from '../../../components/commons/UI/TextInput/TextInput';
-import { moneyToPointsFraction } from '../../../assets/constants/index';
 
 class AddServiceScreen extends React.Component {
   static navigationOptions = () => ({
@@ -54,7 +53,7 @@ class AddServiceScreen extends React.Component {
       });
     } else if (name === 'moneyPoints') {
       this.setState({
-        [name]: parseInt(value) / moneyToPointsFraction,
+        [name]: parseInt(value),
       });
     } else {
       this.setState({
@@ -89,7 +88,7 @@ class AddServiceScreen extends React.Component {
   };
 
   render() {
-    const { type, nature, currency, paid, moneyPoints } = this.state;
+    const { type, nature, currency, paid,} = this.state;
     const {
       errors,
       createServiceLoading,
