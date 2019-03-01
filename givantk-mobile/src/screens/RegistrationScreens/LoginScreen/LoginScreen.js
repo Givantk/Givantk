@@ -77,7 +77,7 @@ class LoginScreen extends React.Component {
               style={styles.textInput}
               onChangeText={this.onChangeTextValue}
               name="email"
-              errorText={errors.email}
+              errorText={errors.email || errors.incorrectinfo}
             />
             <DefaultTextInput
               password

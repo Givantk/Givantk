@@ -64,7 +64,7 @@ export const makeProfile = (profile, callback) => (dispatch) => {
 
   http
     .post(`${profileAPI}`, profile, config)
-    .then((req) => {
+    .then(() => {
       dispatch({
         type: actionTypes.MAKE_PROFILE_FINISH,
       });
@@ -81,8 +81,10 @@ export const makeProfile = (profile, callback) => (dispatch) => {
     });
 };
 
-export const setNotificationsSeen = () => (dispatch) => {
-  http.post(`${profileAPI}/set-notifications-seen`).catch((err) => {
+export const setNotificationsSeen = (callback) => (dispatch) => {
+  http.post(`${profileAPI}/set-notifications-seen`).then(() => {
+    if (callback) callback()
+  }).catch((err) => {
     dispatch({
       type: actionTypes.SET_ERRORS,
       payload: err.response.data,

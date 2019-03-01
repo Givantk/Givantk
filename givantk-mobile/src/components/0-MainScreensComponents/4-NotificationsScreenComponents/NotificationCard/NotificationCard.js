@@ -2,7 +2,7 @@ import { View, TouchableWithoutFeedback, Image, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { newUserImage } from '../../../../assets/constants';
+import { newUserImage, appLogo } from '../../../../assets/constants';
 import styles from './NotificationCardStyles';
 import getUserImage from '../../../../assets/utils/getUserImage';
 
@@ -51,7 +51,7 @@ class NotificationCard extends React.PureComponent {
               source={{
                 uri: notification.is_user_associated
                   ? getUserImage(notification.user_associated.avatar)
-                  : newUserImage,
+                  : appLogo,
               }}
               style={styles.image}
             />
