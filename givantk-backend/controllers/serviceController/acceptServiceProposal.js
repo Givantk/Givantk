@@ -53,7 +53,7 @@ module.exports = proposeToService = (req, res) => {
               applicantProfile.notifications.unshift({
                 title: `${
                   askerProfile.first_name
-                } accepted your proposal to the service \"${service.name}\"`,
+                  } accepted your proposal to the service \"${service.name}\"`,
                 navigateTo: {
                   kind: 'service',
                   service: service._id

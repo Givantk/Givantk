@@ -4,6 +4,7 @@ const userServices = require('./userServices');
 const servicesHelpedIn = require('./servicesHelpedIn');
 const servicesAskedFor = require('./servicesAskedFor');
 const servicesInfo = require('./servicesInfo');
+const createAnnouncement = require('./createAnnouncement');
 
 module.exports = {
   loginAdmin,
@@ -11,5 +12,6 @@ module.exports = {
   userServices,
   servicesHelpedIn,
   servicesAskedFor,
-  servicesInfo
+  servicesInfo,
+  createAnnouncement
 };

@@ -47,7 +47,10 @@ const ProfileSchema = new Schema({
             ref: 'profile'
           }
         },
-        is_user_associated: Boolean,
+        is_user_associated: {
+          type: Boolean,
+          default: false
+        },
         user_associated: {
           type: mongoose.Schema.Types.ObjectId,
           ref: 'user'
