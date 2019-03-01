@@ -37,7 +37,9 @@ class AddServiceScreen extends React.Component {
     type: '',
     nature: '',
     paid: false,
+    free: false,
     moneyPoints: 0,
+    givantkPoints: 0,
   };
 
   onChangeValue = (name, value) => {
@@ -45,13 +47,15 @@ class AddServiceScreen extends React.Component {
       this.setState({
         [name]: value,
         paid: true,
+        free: false,
       });
     } else if (name === 'nature' && value.label === 'Free') {
       this.setState({
         [name]: value,
+        free: true,
         paid: false,
       });
-    } else if (name === 'moneyPoints') {
+    } else if (name === 'moneyPoints' || name === 'givantkPoints') {
       this.setState({
         [name]: parseInt(value),
       });
@@ -69,14 +73,25 @@ class AddServiceScreen extends React.Component {
       getCurrentUserProfile,
       navigation,
     } = this.props;
-    const { name, type, nature, description, moneyPoints, paid } = this.state;
+    const {
+      name,
+      type,
+      nature,
+      description,
+      moneyPoints,
+      paid,
+      free,
+      givantkPoints,
+    } = this.state;
     const service = {
       name,
       description,
       type: type.value,
       nature: nature.value,
       moneyPoints: moneyPoints,
+      givantkPoints: givantkPoints,
       paid,
+      free,
     };
     const callback = () => {
       QuickNotification('Service posted successfully');
@@ -88,7 +103,7 @@ class AddServiceScreen extends React.Component {
   };
 
   render() {
-    const { type, nature, currency, paid,} = this.state;
+    const { type, nature, currency, paid, free } = this.state;
     const {
       errors,
       createServiceLoading,
@@ -147,14 +162,28 @@ class AddServiceScreen extends React.Component {
                   value={currency}
                 />
                 <TextInput
-                  title="Amount you want to pay "
+                  title="Amount you wanna pay "
                   keyboardType="numeric"
                   maxLength={10}
                   placeholder="Amount in numbers"
-                  error={errors.money}
                   name="moneyPoints"
                   onChange={this.onChangeValue}
                 />
+                <Text style={styles.error}>{errors.money}</Text>
+              </View>
+            )}
+
+            {free && (
+              <View>
+                <TextInput
+                  title="Points you wanna give"
+                  keyboardType="numeric"
+                  maxLength={10}
+                  placeholder="Amount in numbers"
+                  name="givantkPoints"
+                  onChange={this.onChangeValue}
+                />
+                <Text style={styles.error}>{errors.givantkPoints}</Text>
               </View>
             )}
           </View>

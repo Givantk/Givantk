@@ -63,6 +63,9 @@ module.exports = createService = (req, res) => {
           if (req.body.paid) {
             profile.money_points = profile.money_points - req.body.moneyPoints;
           }
+          else if(req.body.free){
+            profile.givantk_points=profile.givantk_points-req.body.givantkPoints;
+          }
           profile
             .save()
             .then(() => res.json({ service, success: true }))

@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     width: '20%',
   },
   error: {
-    color: colors.red.lighten(0.5),
+    color: colors.red.lighten(0.3),
     marginTop: -16,
     fontSize: 14,
   },
