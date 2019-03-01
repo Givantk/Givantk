@@ -71,12 +71,13 @@ class AddServiceScreen extends React.Component {
     const {
       errors,
       createServiceLoading,
+      currentUserProfile,
       getCurrentProfileLoading,
       currentUserHasProfile,
       navigation,
     } = this.props;
 
-    if (getCurrentProfileLoading) return <Loading />;
+    if (!currentUserProfile && getCurrentProfileLoading) return <Loading />;
 
     if (!currentUserHasProfile)
       return <NoProfileDisclaimer navigation={navigation} />;
@@ -153,6 +154,7 @@ AddServiceScreen.propTypes = {
   getCurrentUserProfile: PropTypes.func,
   errors: PropTypes.shape({}),
   createServiceLoading: PropTypes.bool,
+  currentUserProfile: PropTypes.shape({}),
   getCurrentProfileLoading: PropTypes.bool,
   currentUserHasProfile: PropTypes.bool,
 };
@@ -160,6 +162,7 @@ AddServiceScreen.propTypes = {
 const mapStateToProps = (state) => ({
   errors: state.errors,
   createServiceLoading: state.service.createServiceLoading,
+  currentUserProfile: state.profile.currentUserProfile,
   getCurrentProfileLoading: state.profile.getCurrentProfileLoading,
   currentUserHasProfile: state.profile.currentUserHasProfile,
 });

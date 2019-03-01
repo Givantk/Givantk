@@ -1,6 +1,8 @@
 import { View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import styles from './AnnouncementScreenStyles';
+
 
 
 export default class AnnouncementScreen extends Component {
@@ -27,11 +29,11 @@ export default class AnnouncementScreen extends Component {
   render() {
 
     const { title, content } = this.state;
-
     return (
-      <View>
-        <Text>{title}</Text>
-        <Text>{content}</Text>
+      <View style={styles.wrapper}>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.content}>{content}</Text>
+        <Text style={styles.signature}>Givantk Team</Text>
       </View>
     );
   }

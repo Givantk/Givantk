@@ -51,7 +51,9 @@ class MyServicesScreen extends React.Component {
   };
 
   render() {
-    const { navigation, currentUserHasProfile } = this.props;
+    const { navigation, currentUserProfile, getCurrentProfileLoading, currentUserHasProfile } = this.props;
+
+    if (!currentUserProfile && getCurrentProfileLoading) return <Loading />;
 
     if (!currentUserHasProfile)
       return <NoProfileDisclaimer navigation={navigation} />;
@@ -72,11 +74,15 @@ MyServicesScreen.propTypes = {
   navigation: PropTypes.shape({}),
   profile: PropTypes.shape({}),
   getAllServicesLoading: PropTypes.bool,
+  currentUserProfile: PropTypes.shape({}),
+  getCurrentProfileLoading: PropTypes.bool,
   currentUserHasProfile: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
   profile: state.profile.currentUserProfile,
+  currentUserProfile: state.profile.currentUserProfile,
+  getCurrentProfileLoading: state.profile.getCurrentProfileLoading,
   currentUserHasProfile: state.profile.currentUserHasProfile,
   getAllServicesLoading: state.service.getAllServicesLoading,
   errors: state.errors,

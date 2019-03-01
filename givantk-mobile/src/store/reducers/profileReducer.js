@@ -1,7 +1,7 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const INITIAL_STATE = {
-  currentUserProfile: {},
+  currentUserProfile: null,
   currentUserHasProfile: false,
   selectedProfile: {},
   selectedUserHasProfile: false,
@@ -26,8 +26,8 @@ export default (state = INITIAL_STATE, action) => {
         currentUserProfile: !action.payload
           ? null
           : action.payload.success
-          ? action.payload.profile
-          : null,
+            ? action.payload.profile
+            : null,
         currentUserHasProfile: !action.payload
           ? false
           : !!action.payload.success,
@@ -46,8 +46,8 @@ export default (state = INITIAL_STATE, action) => {
         selectedProfile: !action.payload
           ? null
           : action.payload.success
-          ? action.payload.profile
-          : null,
+            ? action.payload.profile
+            : null,
         selectedUserHasProfile: !action.payload
           ? false
           : !!action.payload.success,
