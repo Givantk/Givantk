@@ -22,6 +22,8 @@ import MakeProfileScreen from './5-AccountInnerScreens/MakeProfileScreen/MakePro
 import BookmarkedServicesScreen from './5-AccountInnerScreens/BookmarkedServicesScreen/BookmarkedServicesScreen';
 import ProposedForServicesScreen from './5-AccountInnerScreens/ProposedForServicesScreen/ProposedForServicesScreen';
 import ArchivedServicesScreen from './5-AccountInnerScreens/ArchivedServicesScreen/ArchivedServicesScreen';
+import AnnouncementScreen from './4-NotificationsInnerScreens/AnnouncementScreen/AnnouncementScreen';
+
 
 const screens = {
   AccountScreen,
@@ -42,6 +44,7 @@ const screens = {
   BookmarkedServicesScreen,
   ProposedForServicesScreen,
   ArchivedServicesScreen,
+  AnnouncementScreen,
   SearchResultsScreen,
   ServiceScreen,
   SignupScreen,
