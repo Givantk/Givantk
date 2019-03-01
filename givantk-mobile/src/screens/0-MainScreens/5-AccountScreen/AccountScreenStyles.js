@@ -42,6 +42,13 @@ const styles = StyleSheet.create({
     color: colors.black,
     marginTop: 5,
   },
+  points:{
+
+    color:colors.secondary,
+    marginTop:5,
+    fontSize:15
+
+  }
 });
 
 export default styles;

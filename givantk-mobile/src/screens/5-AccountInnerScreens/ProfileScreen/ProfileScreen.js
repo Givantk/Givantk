@@ -108,6 +108,12 @@ class ProfileScreen extends React.Component {
             <Text style={styles.userDescription}>{profile.description}</Text>
           </View>
 
+          <View style={styles.userDescriptionContainer}>
+            <Text style={styles.points}>
+              Givantk points: {profile.givantk_points}
+            </Text>
+          </View>
+
           {/* Send a message */}
 
           <TouchableWithoutFeedback onPress={() => navigation.navigate('Chat')}>

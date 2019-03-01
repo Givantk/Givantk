@@ -15,7 +15,6 @@ module.exports = async function validatePoints(points, type, id) {
         error = `your money score is ${
           profile.money_points
         } .Recharge from your Account tab :D `;
-        console.log(error);
       }
     }
     //if type of the service is free
@@ -29,7 +28,6 @@ module.exports = async function validatePoints(points, type, id) {
                 profile.givantk_points
               } points, do free services to get more :D `
             : `You ran out of points. Get 5 more from your Account tab :D `;
-        console.log(error);
       }
     }
   }
