@@ -32,6 +32,11 @@ class NotificationCard extends React.PureComponent {
           notification.navigateTo.profile.user._id ||
           notification.navigateTo.profile.user,
       });
+    } else if (notification.navigateTo.kind === 'announcement') {
+      navigation.navigate('Announcement', {
+        title: notification.title,
+        content: notification.content,
+      })
     }
   };
 

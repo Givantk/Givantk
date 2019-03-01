@@ -27,13 +27,17 @@ const ProfileSchema = new Schema({
   notifications: {
     type: [
       {
-        title: String,
+        title: {
+          type: String,
+          required: true
+        },
+        content: String,
         seen: {
           type: Boolean,
           default: false
         },
         navigateTo: {
-          kind: String, // service or profile
+          kind: String, // service or profile or announcement
           service: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'service'
