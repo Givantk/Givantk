@@ -1,9 +1,12 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const passport = require('passport');
-const socket = require('socket.io');
+//const socket = require('socket.io');
+
 
 const app = express();
+
+
 
 // Models
 require('./models/loadModels');
@@ -43,16 +46,53 @@ const server = app.listen(port, () =>
   console.log(`Server started on port ${port}`)
 );
 
-// socket.io setup
-const io = socket(server);
-io.on('connection', function(socket) {
-  // waiting for connection with a client
-  console.log('socket connection made and the socket id is ' + socket.id);
 
-  socket.on('chat', function(data) {
-    // waiting for a data to be send from a client
-    io.sockets.emit('chat', data); // send the message back from the server to the rest of the clients
+const io = require('socket.io').listen(server);
+//const ChatController = require('../controllers/chatController/index');
+const Chat = require('./models/Chat');
+io.use((socket, next) => {
+  // accept the user data given from this.socket = io('http://192.168.1.8:5000', {query: users_data}); in front-end
+  socket.id = socket.handshake.query.id1 + '+' + socket.handshake.query.id2; // socket.id is the combination of the 2 ids
+  console.log('A connection is established and socket id is ' + socket.id);
+  console.log(socket.handshake.query.name1 + ' and ' + socket.handshake.query.name2 + ' entered the chat.');
+
+  let socketID = socket.id;
+  let message = {
+    userid: '',
+    content: ''
+  };
+  let chat = new Chat({
+    socketID: socketID,
+    $push: { message: message }
   });
+  chat.save((error) => {
+    console.log('Chat History Created.');
+    if(error)
+      console.log('Chat History Already Exists');
+  });
+  
+
+  // accept the msg entered in the TextInput field from the first user then send it to the other user
+  socket.on('chat message', (msg, userid) => {
+    console.log(userid, msg);
+    Chat.updateOne({socketID: socketID}, {$push: { 
+          message: {
+            "userid": userid,
+            "content": msg
+          } 
+        }
+      }, (error) => {
+        if(error)
+          console.log(error);
+        else
+          console.log('Message Stored');
+      }
+    );
+
+    io.emit('chat message', msg);
+  });
+
+  next();
 });
 
 // To push to heroku, we just do 'git push heroku master' from the backend
