@@ -8,19 +8,6 @@ const stripe = require('stripe')(keys.stripeSecretKey);
 const Profile = mongoose.model('profile');
 
 module.exports = verifyPayment = (req, res) => {
-  (async () => {
-    const charge = await stripe.charges.create({
-      amount: req.body.amount,
-      currency: req.body.currency,
-      description: req.body.description,
-      source: req.body.source,
-    });
-    return charge;
-  })().then((charge) => {
-    if (charge.paid) {
-    }
-  });
-
   const errors = {};
   Profile.findOne({ user: req.user._id })
 

@@ -5,6 +5,7 @@ import StripeCheckout from '../../../components/commons/Payment-Related-Componen
 import PropTypes from 'prop-types';
 import { givantkLogo } from '../../../assets/constants/index';
 import * as paymentActions from '../../../store/actions/paymentActions';
+import QuickNotification from '../../../components/commons/UI/QuickNotification/QuickNotification';
 
 class PayWithStripeScreen extends React.Component {
   static navigationOptions = () => ({
@@ -12,6 +13,9 @@ class PayWithStripeScreen extends React.Component {
   });
 
 
+  successfulPaymentCallback=()=>{
+    QuickNotification('Successful payment');
+  }
 
   onPaymentSuccess = (token) => {
     const { makePayment, navigation } = this.props;
@@ -24,9 +28,8 @@ class PayWithStripeScreen extends React.Component {
       description: 'Charging money score',
       source: token,
     };
-    console.log(payment)
 
-    makePayment(payment);
+    makePayment(payment,this.successfulPaymentCallback);
   };
 
   onClose = () => {
@@ -65,7 +68,7 @@ PayWithStripeScreen.propTypes = {
 
 const mapStateToProps = (state) => ({
   errors: state.errors,
-  success: state.profile.makeProfileLoading,
+  success: state.profile.success,
 });
 
 const mapDispatchToProps = {
