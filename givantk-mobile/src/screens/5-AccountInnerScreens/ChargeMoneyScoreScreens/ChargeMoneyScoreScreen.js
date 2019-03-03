@@ -4,9 +4,10 @@ import MainButton from '../../../components/commons/UI/MainButton/MainButton';
 import styles from './ChargeMoneyScoreScreenStyles';
 import { moneyScoreLogo } from '../../../assets/constants/index';
 import { Akira as TextInput } from 'react-native-textinput-effects';
+import PropTypes from 'prop-types';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
 
-export default class PaymentInfoScreen extends Component {
+export default class ChargeMoneyScoreScreen extends Component {
   static navigationOptions = () => ({
     headerTitle: 'Charge my Money score',
   });
@@ -32,6 +33,9 @@ export default class PaymentInfoScreen extends Component {
       this.setState({
         warning: '',
       });
+      this.props.navigation.navigate('PayWithStripe', {
+        amount: amount,
+      });
     }
   };
 
@@ -55,10 +59,10 @@ export default class PaymentInfoScreen extends Component {
             labelStyle={styles.textInput}
             onChangeText={onChangeValue}
           />
-          <View style={{alignItems:'center'}}>
-          <MainButton onPress={() => onButtonClicked(amount)}>
-            Charge
-          </MainButton>
+          <View style={{ alignItems: 'center' }}>
+            <MainButton onPress={() => onButtonClicked(amount)}>
+              Charge
+            </MainButton>
           </View>
           <Text style={styles.warning}>{warning}</Text>
         </AvoidKeyboard>
@@ -67,4 +71,6 @@ export default class PaymentInfoScreen extends Component {
   }
 }
 
-PaymentInfoScreen.propTypes = {};
+ChargeMoneyScoreScreen.propTypes = {
+  navigation: PropTypes.shape({}),
+};

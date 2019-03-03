@@ -21,6 +21,7 @@ const MainNavigator = createStackNavigator(
     Service: screens.ServiceScreen,
     PersonalInfo: screens.PersonalInfoScreen,
     ChargeMoneyScore: screens.ChargeMoneyScoreScreen,
+    PayWithStripe:screens.PayWithStripeScreen,
     GivantkPoints:screens.GivantkPointsScreen,
     InviteFriends: screens.InviteFriendsScreen,
     Chat: screens.ChatScreen,
