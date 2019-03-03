@@ -6,8 +6,10 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     backgroundColor: colors.white,
-    alignItems: "center",
-    justifyContent: "center"
+    marginTop: 24
+  },
+  scrollView: {
+    marginBottom: 50
   }
 });
 
