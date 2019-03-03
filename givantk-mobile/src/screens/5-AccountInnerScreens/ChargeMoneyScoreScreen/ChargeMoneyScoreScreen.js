@@ -1,14 +1,14 @@
 import { View, Text, Image } from 'react-native';
 import React, { Component } from 'react';
 import MainButton from '../../../components/commons/UI/MainButton/MainButton';
-import styles from './PaymentInfoScreenStyles';
+import styles from './ChargeMoneyScoreScreenStyles';
 import { moneyScoreLogo } from '../../../assets/constants/index';
 import { Akira as TextInput } from 'react-native-textinput-effects';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
 
 export default class PaymentInfoScreen extends Component {
   static navigationOptions = () => ({
-    headerTitle: 'Payment Info',
+    headerTitle: 'Charge my Money score',
   });
 
   state = {
@@ -26,7 +26,7 @@ export default class PaymentInfoScreen extends Component {
   onButtonClicked = (amount) => {
     if (amount < 0 || isNaN(amount)) {
       this.setState({
-        warning: 'Kindly, enter a valid English number.',
+        warning: 'Kindly, enter a valid English Number.',
       });
     } else {
       this.setState({
