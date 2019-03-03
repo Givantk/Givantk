@@ -1,7 +1,7 @@
 import * as actionTypes from '../actions/actionTypes';
 const INITIAL_STATE = {
-  getProfileLoading: false,
-  makeProfileLoading: false,
+ 
+  success:false
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -9,13 +9,13 @@ export default (state = INITIAL_STATE, action) => {
     case actionTypes.MAKE_PAYMENT_START:
       return {
         ...state,
-        makeProfileLoading: true,
+        success: false,
       };
 
     case actionTypes.MAKE_PAYMENT_FINISH:
       return {
         ...state,
-        makeProfileLoading: false,
+        success: true,
       };
 
     default:

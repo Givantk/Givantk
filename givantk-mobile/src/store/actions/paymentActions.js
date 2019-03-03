@@ -1,25 +1,21 @@
 import * as actionTypes from './actionTypes';
 import http, { paymentAPI } from '../../assets/utils/httpService';
 
-export const makePayment = (token, callback) => (dispatch) => {
+export const makePayment = (payment, callback) => (dispatch) => {
   dispatch({
     type: actionTypes.MAKE_PAYMENT_START,
   });
 
-    console.log('I am')
-    console.log(token)
-    console.log(paymentAPI)
-    http
-    .post(`${paymentAPI}`, token)
+  http
+    .post(`${paymentAPI}`, payment)
     .then((req) => {
-        console.log('successfully sent')
       dispatch({
-        type: actionTypes.MAKE_PAYMENT_START,
+        type: actionTypes.MAKE_PAYMENT_FINISH,
+        payload: res.data,
       });
       if (callback) callback();
     })
     .catch((err) => {
-      console.log('fucking error')
       dispatch({
         type: actionTypes.SET_ERRORS,
         payload: err.response.data,

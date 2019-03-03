@@ -11,10 +11,22 @@ class PayWithStripeScreen extends React.Component {
     headerTitle: 'Pay with stripe',
   });
 
+
+
   onPaymentSuccess = (token) => {
-    const {makePayment}=this.props
-    console.log(token);
-    makePayment(token);
+    const { makePayment, navigation } = this.props;
+
+    const { amount } = navigation.state.params;
+
+    const payment = {
+      amount: amount*100,
+      currency: 'EGP',
+      description: 'Charging money score',
+      source: token,
+    };
+    console.log(payment)
+
+    makePayment(payment);
   };
 
   onClose = () => {
@@ -50,6 +62,11 @@ class PayWithStripeScreen extends React.Component {
 PayWithStripeScreen.propTypes = {
   navigation: PropTypes.shape({}),
 };
+
+const mapStateToProps = (state) => ({
+  errors: state.errors,
+  success: state.profile.makeProfileLoading,
+});
 
 const mapDispatchToProps = {
   makePayment: paymentActions.makePayment,
