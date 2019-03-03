@@ -27,11 +27,19 @@ const accountListItems = (navigation, userId, currentUserProfile) => [
       }),
   },
   {
-    title: 'Payment Info',
+    title: 'Charge my Money score',
     iconName: 'money',
     iconType: 'FontAwesome',
     onPress: () => navigation.navigate('PaymentInfo'),
   },
+  {
+    title: 'I ran out of Givantk points',
+    iconName: 'emoji-sad',
+    iconType: 'Entypo',
+    onPress: () => navigation.navigate('PaymentInfo'),
+  },
+
+  
   // {
   //   title: 'Personal Info',
   //   iconName: 'magnifying-glass',
