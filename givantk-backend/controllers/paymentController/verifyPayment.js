@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const Profile = mongoose.model('profile');
 
 module.exports = verifyPayment = (req, res) => {
-  console.log('Connected');
+  console.log(req.body);
   const errors = {};
   Profile.findOne({ user: req.user._id })
 
