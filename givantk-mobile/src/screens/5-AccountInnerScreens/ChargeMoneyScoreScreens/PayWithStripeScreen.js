@@ -14,6 +14,7 @@ class PayWithStripeScreen extends React.Component {
 
 
   successfulPaymentCallback=()=>{
+    console.log('hi');
     QuickNotification('Successful payment');
   }
 
@@ -29,7 +30,7 @@ class PayWithStripeScreen extends React.Component {
       source: token,
     };
 
-    makePayment(payment,this.successfulPaymentCallback);
+    makePayment(payment,()=>{console.log('hi')});
   };
 
   onClose = () => {
@@ -66,10 +67,6 @@ PayWithStripeScreen.propTypes = {
   navigation: PropTypes.shape({}),
 };
 
-const mapStateToProps = (state) => ({
-  errors: state.errors,
-  success: state.profile.success,
-});
 
 const mapDispatchToProps = {
   makePayment: paymentActions.makePayment,
