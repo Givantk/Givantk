@@ -26,7 +26,7 @@ module.exports = makeProfile = (req, res) => {
         first_name: req.user.first_name,
         last_name: req.user.last_name,
         gender: req.body.gender,
-        avatar: req.file.path,
+        avatar: req.file.location,
         phone_number: req.body.phone_number,
         date_of_birth: req.body.date_of_birth,
         skills: JSON.parse(req.body.skills),
@@ -37,7 +37,7 @@ module.exports = makeProfile = (req, res) => {
         services_asked_for: [],
         services_helped_in: [],
         services_bookmarked: [],
-        services_proposed_for: []
+        services_proposed_for: [],
       };
 
       if (typeof req.body.date_of_birth === 'string') {
@@ -48,7 +48,7 @@ module.exports = makeProfile = (req, res) => {
         .save()
         .then((profile) => {
           User.findById(req.user._id).then((user) => {
-            user.avatar = req.file.path;
+            user.avatar = req.file.location;
             user.save();
           });
 
@@ -71,12 +71,12 @@ module.exports = makeProfile = (req, res) => {
       Profile.findOneAndUpdate(
         { user: req.user._id },
         { $set: newProfileInfo },
-        { new: true }
+        { new: true },
       ).then((profile) =>
         res.json({
           profile,
-          success: true
-        })
+          success: true,
+        }),
       );
     }
   });

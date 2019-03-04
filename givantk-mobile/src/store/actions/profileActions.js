@@ -64,7 +64,7 @@ export const makeProfile = (profile, callback) => (dispatch) => {
 
   http
     .post(`${profileAPI}`, profile, config)
-    .then((req) => {
+    .then(() => {
       dispatch({
         type: actionTypes.MAKE_PROFILE_FINISH,
       });

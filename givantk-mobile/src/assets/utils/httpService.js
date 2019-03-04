@@ -26,3 +26,4 @@ export const serverPath = 'https://givantk-backend.herokuapp.com/';
 export const userAPI = 'https://givantk-backend.herokuapp.com/api/user';
 export const serviceAPI = 'https://givantk-backend.herokuapp.com/api/service';
 export const profileAPI = 'https://givantk-backend.herokuapp.com/api/profile';
+export const paymentAPI='https://givantk-backend.herokuapp.com/api/payment'

@@ -29,8 +29,9 @@ export const createService = (service, callback) => (dispatch) => {
   dispatch({
     type: actionTypes.CREATE_SERVICE_START,
   });
+
   http
-    .post(serviceAPI, service)
+    .post(`${serviceAPI}`, service)
     .then(() => {
       dispatch({
         type: actionTypes.CREATE_SERVICE_FINISH,

@@ -53,6 +53,11 @@ const styles = StyleSheet.create({
     color: colors.black,
     textAlign: 'left',
   },
+  points: {
+    color: colors.primary,
+    marginTop: 5,
+    fontSize: 15,
+  },
 });
 
 export default styles;

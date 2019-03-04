@@ -11,7 +11,7 @@ import InviteFriendsScreen from './5-AccountInnerScreens/InviteFriendsScreen/Inv
 import LoginScreen from './RegistrationScreens/LoginScreen/LoginScreen';
 import MessagesListScreen from './5-AccountInnerScreens/MessagesListScreen/MessagesListScreen';
 import NotificationsScreen from './0-MainScreens/4-NotificationsScreen/NotificationsScreen';
-import PaymentInfoScreen from './5-AccountInnerScreens/PaymentInfoScreen/PaymentInfoScreen';
+import ChargeMoneyScoreScreen from './5-AccountInnerScreens/ChargeMoneyScoreScreens/ChargeMoneyScoreScreen';
 import PersonalInfoScreen from './5-AccountInnerScreens/PersonalInfoScreen/PersonalInfoScreen';
 import ProfileScreen from './5-AccountInnerScreens/ProfileScreen/ProfileScreen';
 import SearchResultsScreen from './1-FeaturedInnerScreens/SearchResultsScreen/SearchResultsScreen';
@@ -21,6 +21,8 @@ import VerifyIdentityScreen from './5-AccountInnerScreens/VerifyIdentityScreen/V
 import MakeProfileScreen from './5-AccountInnerScreens/MakeProfileScreen/MakeProfileScreen';
 import BookmarkedServicesScreen from './5-AccountInnerScreens/BookmarkedServicesScreen/BookmarkedServicesScreen';
 import ProposedForServicesScreen from './5-AccountInnerScreens/ProposedForServicesScreen/ProposedForServicesScreen';
+import GivantkPointsScreen from './5-AccountInnerScreens/GivantkPointsScreen/GivantkPointsScreen';
+import PayWithStripeScreen from './5-AccountInnerScreens/ChargeMoneyScoreScreens/PayWithStripeScreen'; 
 
 const screens = {
   AccountScreen,
@@ -35,7 +37,9 @@ const screens = {
   MessagesListScreen,
   MakeProfileScreen,
   NotificationsScreen,
-  PaymentInfoScreen,
+  ChargeMoneyScoreScreen,
+  PayWithStripeScreen,
+  GivantkPointsScreen,
   PersonalInfoScreen,
   ProfileScreen,
   BookmarkedServicesScreen,

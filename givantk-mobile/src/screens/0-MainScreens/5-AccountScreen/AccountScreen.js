@@ -8,7 +8,6 @@ import { newUserImage } from '../../../assets/constants';
 import * as AuthActions from '../../../store/actions/authActions';
 import accountListItems from '../../../components/0-MainScreensComponents/5-AccountScreenComponents/data/AccountListItems';
 import CardList from '../../../components/commons/UI/CardList/CardList';
-import fakeProfile from '../../../assets/data/fakeProfile';
 import getUserImage from '../../../assets/utils/getUserImage';
 import styles from './AccountScreenStyles';
 
@@ -74,6 +73,14 @@ class AccountScreen extends React.Component {
 
             <Text style={styles.userName}>
               {currentUser.first_name} {currentUser.last_name}
+            </Text>
+
+            <Text style={styles.points}>
+              Money Score: {currentUserProfile?currentUserProfile.money_points:'0'}
+            </Text>
+
+            <Text style={styles.points}>
+              Givantk Points: {currentUserProfile?currentUserProfile.givantk_points:'0'}
             </Text>
           </View>
         </TouchableWithoutFeedback>
