@@ -4,8 +4,8 @@ const passport = require('passport');
 
 const pointsController = require('../controllers/pointsController/');
 
-// @route  POST api/payment
-// @desc   Accepting payments from users
+// @route  POST api/points
+// @desc   Adding givantk points to users
 // @access Private
 // @errors noprofiles error
 router.post(
