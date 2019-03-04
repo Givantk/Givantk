@@ -77,6 +77,7 @@ class LoginScreen extends React.Component {
               style={styles.textInput}
               onChangeText={this.onChangeTextValue}
               name="email"
+              autoCapitalize="none"
               errorText={errors.email || errors.incorrectinfo}
             />
             <DefaultTextInput
@@ -85,6 +86,7 @@ class LoginScreen extends React.Component {
               style={styles.textInput}
               onChangeText={this.onChangeTextValue}
               name="password"
+              autoCapitalize="none"
               errorText={errors.password}
             />
 

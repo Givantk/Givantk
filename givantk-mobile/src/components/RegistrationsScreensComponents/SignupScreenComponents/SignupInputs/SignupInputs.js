@@ -80,6 +80,7 @@ export default class SignupInputs extends Component {
           style={styles.textInput}
           onChangeText={this.onChangeTextValue}
           name="email"
+          autoCapitalize="none"
           errorText={errors.email}
         />
         <DefaultTextInput
@@ -88,6 +89,7 @@ export default class SignupInputs extends Component {
           style={styles.textInput}
           onChangeText={this.onChangeTextValue}
           name="password"
+          autoCapitalize="none"
           errorText={errors.password}
         />
         <DefaultTextInput
@@ -96,6 +98,7 @@ export default class SignupInputs extends Component {
           style={styles.textInput}
           onChangeText={this.onChangeTextValue}
           name="password2"
+          autoCapitalize="none"
           errorText={errors.password2}
         />
         <View style={styles.viewInput}>

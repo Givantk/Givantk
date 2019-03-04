@@ -8,7 +8,6 @@ import { newUserImage } from '../../../assets/constants';
 import * as AuthActions from '../../../store/actions/authActions';
 import accountListItems from '../../../components/0-MainScreensComponents/5-AccountScreenComponents/data/AccountListItems';
 import CardList from '../../../components/commons/UI/CardList/CardList';
-import fakeProfile from '../../../assets/data/fakeProfile';
 import getUserImage from '../../../assets/utils/getUserImage';
 import styles from './AccountScreenStyles';
 
