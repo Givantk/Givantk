@@ -63,7 +63,7 @@ export const makeProfile = (profile, callback) => (dispatch) => {
   };
 
   http
-    .post('http://192.168.0.9:5000/api/profile', profile, config)
+    .post(`${profileAPI}`, profile, config)
     .then(() => {
       dispatch({
         type: actionTypes.MAKE_PROFILE_FINISH,

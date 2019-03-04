@@ -31,7 +31,7 @@ export const createService = (service, callback) => (dispatch) => {
   });
 
   http
-    .post("http://192.168.0.8:5000/api/service", service)
+    .post(`${serviceAPI}`, service)
     .then(() => {
       dispatch({
         type: actionTypes.CREATE_SERVICE_FINISH,
