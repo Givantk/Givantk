@@ -66,9 +66,10 @@ io.use((socket, next) => {
     $push: { message: message }
   });
   chat.save((error) => {
-    console.log('Chat History Created.');
     if(error)
       console.log('Chat History Already Exists');
+    else 
+      console.log('Chat History Created.');
   });
   
 
