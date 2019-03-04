@@ -8,17 +8,19 @@ export const makePayment = (payment, callback) => (dispatch) => {
 
   http
     .post(`${paymentAPI}`, payment)
-    .then((req) => {
+    .then((res) => {
       dispatch({
         type: actionTypes.MAKE_PAYMENT_FINISH,
-        payload: res.data,
+        payload: res.data.success,
       });
       if (callback) callback();
     })
     .catch((err) => {
+      console.log('I am here2');
+      console.log(err);
       dispatch({
         type: actionTypes.SET_ERRORS,
-        payload: err.response.data,
+        payload: err,
       });
       dispatch({
         type: actionTypes.MAKE_PAYMENT_FINISH,

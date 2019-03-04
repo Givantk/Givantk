@@ -1,7 +1,6 @@
 import * as actionTypes from '../actions/actionTypes';
 const INITIAL_STATE = {
- 
-  success:false
+  createPaymentLoading: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -9,13 +8,13 @@ export default (state = INITIAL_STATE, action) => {
     case actionTypes.MAKE_PAYMENT_START:
       return {
         ...state,
-        success: false,
+        createPaymentLoading: true,
       };
 
     case actionTypes.MAKE_PAYMENT_FINISH:
       return {
         ...state,
-        success: true,
+        createPaymentLoading: action.payload ? false : true,
       };
 
     default:

@@ -5,59 +5,61 @@ import StripeCheckout from '../../../components/commons/Payment-Related-Componen
 import PropTypes from 'prop-types';
 import { givantkLogo } from '../../../assets/constants/index';
 import * as paymentActions from '../../../store/actions/paymentActions';
+import * as ProfileActions from '../../../store/actions/profileActions';
 import QuickNotification from '../../../components/commons/UI/QuickNotification/QuickNotification';
+import Loading from '../../../components/commons/UI/Loading/Loading';
 
 class PayWithStripeScreen extends React.Component {
   static navigationOptions = () => ({
     headerTitle: 'Pay with stripe',
   });
 
-
-  successfulPaymentCallback=()=>{
-    console.log('hi');
-    QuickNotification('Successful payment');
-  }
-
   onPaymentSuccess = (token) => {
-    const { makePayment, navigation } = this.props;
+    const { makePayment, navigation, getCurrentUserProfile } = this.props;
 
     const { amount } = navigation.state.params;
 
     const payment = {
-      amount: amount*100,
+      amount: amount * 100,
       currency: 'EGP',
       description: 'Charging money score',
       source: token,
     };
 
-    makePayment(payment,()=>{console.log('hi')});
+    successfulPaymentCallback = () => {
+      QuickNotification('Successful payment');
+      getCurrentUserProfile();
+      navigation.replace('Tab');
+    };
+    makePayment(payment, successfulPaymentCallback);
   };
 
-  onClose = () => {
-    console.log('closed');
-
-    // maybe navigate to other screen here?
-  };
+  onClose = () => {};
 
   render() {
-    const { navigation } = this.props;
+    console.log(this.props);
+    const { navigation, createPaymentLoading } = this.props;
     if (navigation.state.params) {
       const { amount } = navigation.state.params;
 
       return (
         <View style={[{ flex: 1 }]}>
-          <StripeCheckout
-            publicKey="pk_test_XPzVOE0qiPQ7Ezq4zwkDlnS7"
-            amount={amount * 100}
-            imageUrl={givantkLogo}
-            storeName="Charging Account"
-            description="Charge your money score"
-            currency="EGP"
-            allowRememberMe={false}
-            prepopulatedEmail="mohamed2m2018@gmail.com"
-            onClose={this.onClose}
-            onPaymentSuccess={this.onPaymentSuccess}
-          />
+          {createPaymentLoading ? (
+            <Loading />
+          ) : (
+            <StripeCheckout
+              publicKey="pk_test_XPzVOE0qiPQ7Ezq4zwkDlnS7"
+              amount={amount * 100}
+              imageUrl={givantkLogo}
+              storeName="Charging Account"
+              description="Charge your money score"
+              currency="EGP"
+              allowRememberMe={false}
+              prepopulatedEmail="mohamed2m2018@gmail.com"
+              onClose={() => this.onClose(navigation)}
+              onPaymentSuccess={this.onPaymentSuccess}
+            />
+          )}
         </View>
       );
     }
@@ -65,14 +67,25 @@ class PayWithStripeScreen extends React.Component {
 }
 PayWithStripeScreen.propTypes = {
   navigation: PropTypes.shape({}),
+  errors: PropTypes.shape({}),
+  currentUserHasProfile: PropTypes.bool,
+  getCurrentUserProfile: PropTypes.func,
+  makePayment: PropTypes.func,
+  createPaymentLoading: PropTypes.bool,
 };
 
+const mapStateToProps = (state) => ({
+  errors: state.errors,
+  currentUserHasProfile: state.profile.currentUserHasProfile,
+  createPaymentLoading: state.payment.createPaymentLoading,
+});
 
 const mapDispatchToProps = {
   makePayment: paymentActions.makePayment,
+  getCurrentUserProfile: ProfileActions.getCurrentUserProfile,
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(PayWithStripeScreen);
