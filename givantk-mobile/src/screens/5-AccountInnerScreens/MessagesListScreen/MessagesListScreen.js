@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import { colors } from '../../../assets/styles/base';
 import styles from './MessagesListScreenStyles';
 
+import MessagesListItem from '../../../components/5-AccountInnerScreensComponents/MessagesListComponents/MessagesListItem';
+
 export default class MessagesListScreen extends Component {
   static navigationOptions = () => ({
     headerTitle: 'Messages List Screen',
@@ -20,8 +22,12 @@ export default class MessagesListScreen extends Component {
     const { navigation } = this.props;
     return (
       <View style={styles.wrapper}>
+        <MessagesListItem />
+        <MessagesListItem />
+        <MessagesListItem />
+        {/* 
         <Text>Messages List Screen</Text>
-        <Button title="Chat" onPress={() => navigation.navigate('Chat')} />
+        <Button title="Chat" onPress={() => navigation.navigate('Chat')} />*/}
       </View>
     );
   }

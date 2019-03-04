@@ -74,6 +74,14 @@ class AccountScreen extends React.Component {
             <Text style={styles.userName}>
               {currentUser.first_name} {currentUser.last_name}
             </Text>
+
+            <Text style={styles.points}>
+              Money Score: {currentUserProfile?currentUserProfile.money_points:'0'}
+            </Text>
+
+            <Text style={styles.points}>
+              Givantk Points: {currentUserProfile?currentUserProfile.givantk_points:'0'}
+            </Text>
           </View>
         </TouchableWithoutFeedback>
 

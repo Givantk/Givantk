@@ -3,27 +3,23 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ChatSchema = new Schema({
-  userID1: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'user',
-    required: true
-  },
-
-  msg1: {
+  socketID: {
     type: String,
-    required: true
+    required: true,
+    unique: true,
+    dropDups: true
   },
-
-  userID2: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'user',
-    required: true
-  },
-
-  msg2: {
-    type: String,
-    required: true
-  }
+  message: [{
+    userid: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'user',
+      required: true
+    },
+    content: {
+      type: String,
+      require: true
+    } 
+  }]
 });
 
 const Chat = mongoose.model('Chat', ChatSchema);

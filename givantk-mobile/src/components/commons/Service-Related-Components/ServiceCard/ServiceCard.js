@@ -80,6 +80,11 @@ class ServiceCard extends React.PureComponent {
               </TouchableWithoutFeedback>
             </View>
           </View>
+          {service.money_points ? (
+            <Text style={styles.points}>Money score: {service.money_points} EGP</Text>
+          ) : (
+            <Text style={styles.points}>Givantk points: {service.givantk_points} </Text>
+          )}
         </View>
       </TouchableWithoutFeedback>
     );
