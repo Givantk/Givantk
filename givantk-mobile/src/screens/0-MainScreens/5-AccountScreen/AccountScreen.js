@@ -76,11 +76,11 @@ class AccountScreen extends React.Component {
             </Text>
 
             <Text style={styles.points}>
-              Money Score: {currentUserProfile.money_points}
+              Money Score: {currentUserProfile?currentUserProfile.money_points:'0'}
             </Text>
 
             <Text style={styles.points}>
-              Givantk Points: {currentUserProfile.givantk_points}
+              Givantk Points: {currentUserProfile?currentUserProfile.givantk_points:'0'}
             </Text>
           </View>
         </TouchableWithoutFeedback>

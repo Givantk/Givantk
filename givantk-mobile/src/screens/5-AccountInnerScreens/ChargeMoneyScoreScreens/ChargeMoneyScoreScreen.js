@@ -6,8 +6,12 @@ import { moneyScoreLogo } from '../../../assets/constants/index';
 import { Akira as TextInput } from 'react-native-textinput-effects';
 import PropTypes from 'prop-types';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
+import Loading from '../../../components/commons/UI/Loading/Loading';
+import NoProfileDisclaimer from '../../../components/commons/NoProfileDisclaimer/NoProfileDisclaimer'
+import { connect } from 'react-redux';
 
-export default class ChargeMoneyScoreScreen extends Component {
+
+class ChargeMoneyScoreScreen extends Component {
   static navigationOptions = () => ({
     headerTitle: 'Charge my Money score',
   });
@@ -43,6 +47,17 @@ export default class ChargeMoneyScoreScreen extends Component {
     const { onButtonClicked, onChangeValue, state } = this;
     const { warning, amount } = state;
 
+    const {
+      getCurrentProfileLoading,
+      currentUserHasProfile,
+      navigation,
+    } = this.props;
+
+    if (getCurrentProfileLoading) return <Loading />;
+
+    if (!currentUserHasProfile)
+      return <NoProfileDisclaimer navigation={navigation} />;
+
     return (
       <View style={styles.wrapper}>
         <AvoidKeyboard bottomPadding={120}>
@@ -73,4 +88,16 @@ export default class ChargeMoneyScoreScreen extends Component {
 
 ChargeMoneyScoreScreen.propTypes = {
   navigation: PropTypes.shape({}),
+  getCurrentProfileLoading: PropTypes.bool,
+  currentUserHasProfile: PropTypes.bool,
 };
+
+const mapStateToProps = (state) => ({
+  getCurrentProfileLoading: state.profile.getCurrentProfileLoading,
+  currentUserHasProfile: state.profile.currentUserHasProfile,
+});
+
+export default connect(
+  mapStateToProps,
+  null,
+)(ChargeMoneyScoreScreen);
