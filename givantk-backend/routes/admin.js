@@ -73,4 +73,29 @@ router.get(
   adminController.servicesInfo
 );
 
+// @route  GET api/admin/services-info
+// @desc   Get services info
+// @access Private
+// @errors unauthorized error
+// @params
+// @body
+router.get(
+  '/services-info',
+  passport.authenticate('jwt', { session: false }),
+  adminController.servicesInfo
+);
+
+
+// @route  POST api/admin/announcement
+// @desc   Post a new announcement
+// @access Private
+// @errors unauthorized invalid error
+// @params
+// @body   title, content
+router.post(
+  '/announcement',
+  passport.authenticate('jwt', { session: false }),
+  adminController.createAnnouncement
+);
+
 module.exports = router;

@@ -21,8 +21,10 @@ import VerifyIdentityScreen from './5-AccountInnerScreens/VerifyIdentityScreen/V
 import MakeProfileScreen from './5-AccountInnerScreens/MakeProfileScreen/MakeProfileScreen';
 import BookmarkedServicesScreen from './5-AccountInnerScreens/BookmarkedServicesScreen/BookmarkedServicesScreen';
 import ProposedForServicesScreen from './5-AccountInnerScreens/ProposedForServicesScreen/ProposedForServicesScreen';
+import ArchivedServicesScreen from './5-AccountInnerScreens/ArchivedServicesScreen/ArchivedServicesScreen';
+import AnnouncementScreen from './4-NotificationsInnerScreens/AnnouncementScreen/AnnouncementScreen';
 import GivantkPointsScreen from './5-AccountInnerScreens/GivantkPointsScreen/GivantkPointsScreen';
-import PayWithStripeScreen from './5-AccountInnerScreens/ChargeMoneyScoreScreens/PayWithStripeScreen'; 
+import PayWithStripeScreen from './5-AccountInnerScreens/ChargeMoneyScoreScreens/PayWithStripeScreen';
 
 const screens = {
   AccountScreen,
@@ -44,6 +46,8 @@ const screens = {
   ProfileScreen,
   BookmarkedServicesScreen,
   ProposedForServicesScreen,
+  ArchivedServicesScreen,
+  AnnouncementScreen,
   SearchResultsScreen,
   ServiceScreen,
   SignupScreen,

@@ -27,13 +27,17 @@ const ProfileSchema = new Schema({
   notifications: {
     type: [
       {
-        title: String,
+        title: {
+          type: String,
+          required: true
+        },
+        content: String,
         seen: {
           type: Boolean,
           default: false
         },
         navigateTo: {
-          kind: String, // service or profile
+          kind: String, // service or profile or announcement
           service: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'service'
@@ -43,7 +47,10 @@ const ProfileSchema = new Schema({
             ref: 'profile'
           }
         },
-        is_user_associated: Boolean,
+        is_user_associated: {
+          type: Boolean,
+          default: false
+        },
         user_associated: {
           type: mongoose.Schema.Types.ObjectId,
           ref: 'user'
@@ -75,6 +82,7 @@ const ProfileSchema = new Schema({
   services_helped_in_finished: [
     { type: mongoose.Schema.Types.ObjectId, ref: 'service' }
   ],
+  services_archived: [{ type: mongoose.Schema.Types.ObjectId, ref: 'service' }],
   date: {
     type: Date,
     default: Date.now

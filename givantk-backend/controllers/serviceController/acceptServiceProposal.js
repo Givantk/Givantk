@@ -14,7 +14,7 @@ module.exports = proposeToService = (req, res) => {
     .then((service) => {
       if (service.asker.toString() !== req.user._id.toString()) {
         errors.unauthorized = "You haven't initiated this service";
-        res.status(401).json(errors);
+        return res.status(401).json(errors);
       }
 
       const application = service.applications.find(
@@ -53,7 +53,7 @@ module.exports = proposeToService = (req, res) => {
               applicantProfile.notifications.unshift({
                 title: `${
                   askerProfile.first_name
-                } accepted your proposal to the service \"${service.name}\"`,
+                  } accepted your proposal to the service \"${service.name}\"`,
                 navigateTo: {
                   kind: 'service',
                   service: service._id

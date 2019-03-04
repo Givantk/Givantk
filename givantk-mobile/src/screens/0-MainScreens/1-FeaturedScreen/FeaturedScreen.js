@@ -27,7 +27,9 @@ class FeaturedScreen extends React.Component {
   };
 
   render() {
-    const { navigation, allServices, getAllServicesLoading } = this.props;
+    const { navigation, getAllServicesLoading } = this.props;
+    let { allServices } = this.props;
+    allServices = allServices.filter((s) => s.state !== 'archived');
 
     return (
       <View style={styles.container}>

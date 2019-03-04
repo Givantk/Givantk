@@ -1,43 +1,42 @@
+import { connect } from 'react-redux';
 import { View, ScrollView } from 'react-native';
-import PropTypes from "prop-types";
-import React, { Component } from "react";
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+
 import io from 'socket.io-client';
+
+import { colors } from '../../../assets/styles/base';
+import * as AuthActions from '../../../store/actions/authActions';
+import * as ProfileActions from '../../../store/actions/profileActions';
 import ChatInputText from '../../../components/commons/ChatComponents/chatInputText';
 import ChatMessage from '../../../components/commons/ChatComponents/chatMessage';
-import { colors } from "../../../assets/styles/base";
-import styles from "./ChatScreenStyles";
-
-import { connect } from 'react-redux';
-import * as ProfileActions from '../../../store/actions/profileActions';
-import * as AuthActions from '../../../store/actions/authActions';
-
 import serverPath from '../../../assets/utils/httpService';
+import styles from './ChatScreenStyles';
 
 class ChatScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
-    headerTitle: "Chat Screen",
+    headerTitle: 'Chat Screen',
     headerStyle: {
-      backgroundColor: colors.primary
+      backgroundColor: colors.primary,
     },
     headerTitleStyle: {
-      color: colors.white
-    }
+      color: colors.white,
+    },
   });
 
-  
   constructor(props) {
     super(props);
     this.state = {
       user1: {
         id: this.props.currentUser._id,
-        name: this.props.currentUser.first_name
+        name: this.props.currentUser.first_name,
       },
       user2: {
         id: this.props.profile._id,
-        name: this.props.profile.first_name
+        name: this.props.profile.first_name,
       },
       chatMessage: '',
-      chatMessages: []
+      chatMessages: [],
     };
   }
 
@@ -46,10 +45,10 @@ class ChatScreen extends Component {
       id1: this.state.user1.id,
       name1: this.state.user1.name,
       id2: this.state.user2.id,
-      name2: this.state.user2.name
-    }
+      name2: this.state.user2.name,
+    };
     // local server is replace with serverPath from heroku
-    this.socket = io({serverPath}, { query: users_data });
+    this.socket = io({ serverPath }, { query: users_data });
 
     this.socket.on('chat message', (msg) => {
       this.setState({ chatMessages: [...this.state.chatMessages, msg] });
@@ -57,7 +56,11 @@ class ChatScreen extends Component {
   }
 
   submitChatMessage() {
-    this.socket.emit('chat message', this.state.chatMessage, this.state.user1.id);
+    this.socket.emit(
+      'chat message',
+      this.state.chatMessage,
+      this.state.user1.id,
+    );
     this.setState({ chatMessage: '' });
   }
 
@@ -69,22 +72,19 @@ class ChatScreen extends Component {
     ));
     return (
       <View style={styles.wrapper}>
-        <ScrollView style={styles.scrollView}>
-          {chatMessages}
-        </ScrollView>
+        <ScrollView style={styles.scrollView}>{chatMessages}</ScrollView>
         <ChatInputText
           autoCorrect={false}
           value={this.state.chatMessage}
           onSubmitEditing={() => this.submitChatMessage()}
           onChangeText={(chatMessage) => {
-            this.setState({ chatMessage: chatMessage });
+            this.setState({ chatMessage });
           }}
         />
       </View>
     );
   }
 }
-
 
 ChatScreen.propTypes = {
   getProfileByUserId: PropTypes.func,

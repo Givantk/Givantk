@@ -99,16 +99,6 @@ router.get(
   serviceController.unproposeToService
 );
 
-// @route  GET api/service/search
-// @desc   search for a service
-// @access Private
-// @errors noservice error
-router.get(
-  '/search/:name',
-  passport.authenticate('jwt', { session: false }),
-  serviceController.search
-);
-
 // @route  POST api/service/accept-service-proposal/:service_id/:proposal_id
 // @desc   Accept a proposal
 // @access Private
@@ -117,6 +107,36 @@ router.post(
   '/accept-service-proposal/:service_id/:proposal_id',
   passport.authenticate('jwt', { session: false }),
   serviceController.acceptServiceProposal
+);
+
+// @route  POST api/service/mark-as-done/:service_id
+// @desc   Mark a service as done, if it has a helper
+// @access Private
+// @errors unauthorized nohelper error
+router.post(
+  '/mark-as-done/:service_id',
+  passport.authenticate('jwt', { session: false }),
+  serviceController.markServiceAsDone
+);
+
+// @route  POST api/service/archive/:service_id
+// @desc   Archive a service, if it has no helpers
+// @access Private
+// @errors unauthorized alreadyhashelper error
+router.post(
+  '/archive/:service_id',
+  passport.authenticate('jwt', { session: false }),
+  serviceController.archiveService
+);
+
+// @route  GET api/service/search/:name
+// @desc   Search for services
+// @access Private
+// @errors noservice error
+router.get(
+  '/search/:name',
+  passport.authenticate('jwt', { session: false }),
+  serviceController.search
 );
 
 module.exports = router;

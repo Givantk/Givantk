@@ -8,12 +8,17 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     margin: 10,
   },
+  buttonSmall: {
+    margin: 5,
+    height: 18,
+  },
   buttonText: {
     color: colors.trueWhite,
     fontWeight: 'bold',
     fontSize: 13,
   },
   textBig: { fontSize: 20 },
+  textSmall: { fontSize: 12 },
 });
 
 export default styles;

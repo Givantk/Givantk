@@ -9,6 +9,8 @@ const INITIAL_STATE = {
   proposeToServiceLoading: false,
   getServiceLoading: false,
   acceptServiceProposalLoading: false,
+  markServiceAsDoneLoading: false,
+  archiveServiceLoading: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -75,6 +77,30 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         acceptServiceProposalLoading: false,
+      };
+
+    case actionTypes.MARK_SERVICE_DONE_START:
+      return {
+        ...state,
+        markServiceAsDoneLoading: true,
+      };
+
+    case actionTypes.MARK_SERVICE_DONE_FINISH:
+      return {
+        ...state,
+        markServiceAsDoneLoading: false,
+      };
+
+    case actionTypes.ARCHIVE_SERVICE_START:
+      return {
+        ...state,
+        archiveServiceLoading: true,
+      };
+
+    case actionTypes.ARCHIVE_SERVICE_FINISH:
+      return {
+        ...state,
+        archiveServiceLoading: false,
       };
 
     default:

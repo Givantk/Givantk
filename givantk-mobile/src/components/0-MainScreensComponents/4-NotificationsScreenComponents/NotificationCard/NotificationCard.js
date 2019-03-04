@@ -2,8 +2,9 @@ import { View, TouchableWithoutFeedback, Image, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { newUserImage } from '../../../../assets/constants';
+import { newUserImage, appLogo } from '../../../../assets/constants';
 import styles from './NotificationCardStyles';
+import getUserImage from '../../../../assets/utils/getUserImage';
 
 class NotificationCard extends React.PureComponent {
   onPressAvatar = () => {
@@ -31,6 +32,11 @@ class NotificationCard extends React.PureComponent {
           notification.navigateTo.profile.user._id ||
           notification.navigateTo.profile.user,
       });
+    } else if (notification.navigateTo.kind === 'announcement') {
+      navigation.navigate('Announcement', {
+        title: notification.title,
+        content: notification.content,
+      })
     }
   };
 
@@ -43,7 +49,9 @@ class NotificationCard extends React.PureComponent {
           <TouchableWithoutFeedback onPress={this.onPressAvatar}>
             <Image
               source={{
-                uri: newUserImage,
+                uri: notification.is_user_associated
+                  ? getUserImage(notification.user_associated.avatar)
+                  : appLogo,
               }}
               style={styles.image}
             />

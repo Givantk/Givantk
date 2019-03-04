@@ -27,6 +27,15 @@ const accountListItems = (navigation, userId, currentUserProfile) => [
       }),
   },
   {
+    title: 'Services you archived',
+    iconName: 'file-archive-o',
+    iconType: 'FontAwesome',
+    onPress: () =>
+      navigation.navigate('ArchivedServices', {
+        currentUserProfile,
+      }),
+  },
+  {
     title: 'Charge my Money score',
     iconName: 'money',
     iconType: 'FontAwesome',
@@ -39,7 +48,6 @@ const accountListItems = (navigation, userId, currentUserProfile) => [
     onPress: () => navigation.navigate('GivantkPoints'),
   },
 
-  
   // {
   //   title: 'Personal Info',
   //   iconName: 'magnifying-glass',

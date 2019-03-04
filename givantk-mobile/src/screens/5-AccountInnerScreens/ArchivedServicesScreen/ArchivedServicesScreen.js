@@ -7,9 +7,9 @@ import Loading from '../../../components/commons/UI/Loading/Loading';
 import NoProfileDisclaimer from '../../../components/commons/NoProfileDisclaimer/NoProfileDisclaimer';
 import ServicesList from '../../../components/commons/Service-Related-Components/ServicesList/ServicesList';
 
-class BookmarkedServicesScreen extends Component {
+class ArchivedServicesScreen extends Component {
   static navigationOptions = () => ({
-    headerTitle: 'You bookmarked',
+    headerTitle: 'You archived',
   });
 
   render() {
@@ -18,6 +18,7 @@ class BookmarkedServicesScreen extends Component {
       getCurrentProfileLoading,
       currentUserHasProfile,
     } = this.props;
+
     const { currentUserProfile } = navigation.state.params;
 
     if (getCurrentProfileLoading) return <Loading />;
@@ -28,7 +29,7 @@ class BookmarkedServicesScreen extends Component {
     return (
       <View>
         <ServicesList
-          services={currentUserProfile.services_bookmarked}
+          services={currentUserProfile.services_archived}
           navigation={navigation}
         />
       </View>
@@ -36,7 +37,7 @@ class BookmarkedServicesScreen extends Component {
   }
 }
 
-BookmarkedServicesScreen.propTypes = {
+ArchivedServicesScreen.propTypes = {
   navigation: PropTypes.shape({}),
   getCurrentProfileLoading: PropTypes.bool,
   currentUserHasProfile: PropTypes.bool,
@@ -47,4 +48,4 @@ const mapStateToProps = (state) => ({
   currentUserHasProfile: state.profile.currentUserHasProfile,
 });
 
-export default connect(mapStateToProps)(BookmarkedServicesScreen);
+export default connect(mapStateToProps)(ArchivedServicesScreen);
