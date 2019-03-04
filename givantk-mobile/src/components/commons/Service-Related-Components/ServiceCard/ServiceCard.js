@@ -3,7 +3,7 @@ import { View, Text, Image, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import fakeProfile from '../../../../assets/data/fakeProfile';
+import getUserImage from '../../../../assets/utils/getUserImage';
 import styles from './ServiceCardStyles';
 
 class ServiceCard extends React.PureComponent {
@@ -44,7 +44,7 @@ class ServiceCard extends React.PureComponent {
               <View>
                 <Image
                   source={{
-                    uri: fakeProfile.avatar,
+                    uri: service.asker && getUserImage(service.asker.avatar),
                   }}
                   style={styles.userImage}
                 />
@@ -80,6 +80,11 @@ class ServiceCard extends React.PureComponent {
               </TouchableWithoutFeedback>
             </View>
           </View>
+          {service.money_points ? (
+            <Text style={styles.points}>Money score: {service.money_points} EGP</Text>
+          ) : (
+            <Text style={styles.points}>Givantk points: {service.givantk_points} </Text>
+          )}
         </View>
       </TouchableWithoutFeedback>
     );

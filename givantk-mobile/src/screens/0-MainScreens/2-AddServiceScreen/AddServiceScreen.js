@@ -15,6 +15,7 @@ import Picker from '../../../components/commons/UI/Picker/Picker';
 import QuickNotification from '../../../components/commons/UI/QuickNotification/QuickNotification';
 import servicesNatures from '../../../assets/data/servicesNatures';
 import servicesTypes from '../../../assets/data/servicesTypes';
+import currencies from '../../../assets/data/Currencies';
 import styles from './AddServiceScreenStyles';
 import TextInput from '../../../components/commons/UI/TextInput/TextInput';
 
@@ -35,12 +36,34 @@ class AddServiceScreen extends React.Component {
     description: '',
     type: '',
     nature: '',
+    paid: false,
+    free: false,
+    moneyPoints: 0,
+    givantkPoints: 0,
   };
 
   onChangeValue = (name, value) => {
-    this.setState({
-      [name]: value,
-    });
+    if (name === 'nature' && value.label === 'Paid') {
+      this.setState({
+        [name]: value,
+        paid: true,
+        free: false,
+      });
+    } else if (name === 'nature' && value.label === 'Free') {
+      this.setState({
+        [name]: value,
+        free: true,
+        paid: false,
+      });
+    } else if (name === 'moneyPoints' || name === 'givantkPoints') {
+      this.setState({
+        [name]: parseInt(value),
+      });
+    } else {
+      this.setState({
+        [name]: value,
+      });
+    }
   };
 
   onAddService = () => {
@@ -50,12 +73,25 @@ class AddServiceScreen extends React.Component {
       getCurrentUserProfile,
       navigation,
     } = this.props;
-    const { name, type, nature, description } = this.state;
+    const {
+      name,
+      type,
+      nature,
+      description,
+      moneyPoints,
+      paid,
+      free,
+      givantkPoints,
+    } = this.state;
     const service = {
       name,
       description,
       type: type.value,
       nature: nature.value,
+      moneyPoints: moneyPoints,
+      givantkPoints: givantkPoints,
+      paid,
+      free,
     };
     const callback = () => {
       QuickNotification('Service posted successfully');
@@ -67,7 +103,7 @@ class AddServiceScreen extends React.Component {
   };
 
   render() {
-    const { type, nature } = this.state;
+    const { type, nature, currency, paid, free } = this.state;
     const {
       errors,
       createServiceLoading,
@@ -114,6 +150,42 @@ class AddServiceScreen extends React.Component {
               value={nature}
               error={errors.nature}
             />
+            {paid && (
+              <View>
+                <Picker
+                  title="Pick Currency"
+                  placeholder="Pick Currency"
+                  style={styles.picker}
+                  name="currency"
+                  onChange={this.onChangeValue}
+                  options={currencies}
+                  value={currency}
+                />
+                <TextInput
+                  title="Amount you wanna pay "
+                  keyboardType="numeric"
+                  maxLength={10}
+                  placeholder="Amount in numbers"
+                  name="moneyPoints"
+                  onChange={this.onChangeValue}
+                />
+                <Text style={styles.error}>{errors.money}</Text>
+              </View>
+            )}
+
+            {free && (
+              <View>
+                <TextInput
+                  title="Points you wanna give"
+                  keyboardType="numeric"
+                  maxLength={10}
+                  placeholder="Amount in numbers"
+                  name="givantkPoints"
+                  onChange={this.onChangeValue}
+                />
+                <Text style={styles.error}>{errors.givantkPoints}</Text>
+              </View>
+            )}
           </View>
 
           <View style={styles.left}>

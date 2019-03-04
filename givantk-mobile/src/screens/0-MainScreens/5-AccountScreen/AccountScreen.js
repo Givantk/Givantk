@@ -4,11 +4,11 @@ import { Text, View, Image, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { newUserImage } from '../../../assets/constants';
 import * as AuthActions from '../../../store/actions/authActions';
 import accountListItems from '../../../components/0-MainScreensComponents/5-AccountScreenComponents/data/AccountListItems';
 import CardList from '../../../components/commons/UI/CardList/CardList';
-import profile from '../../../assets/data/fakeProfile';
-import { serverPath } from '../../../assets/utils/httpService';
+import getUserImage from '../../../assets/utils/getUserImage';
 import styles from './AccountScreenStyles';
 
 class AccountScreen extends React.Component {
@@ -61,18 +61,26 @@ class AccountScreen extends React.Component {
           }
         >
           <View style={styles.imageContainer}>
-
             <Image
-              source={
-                currentUserProfile
-                  ? currentUserProfile.avatar? { uri: `${serverPath + currentUserProfile.avatar}` }
-                  : { uri: profile.avatar }:{ uri: profile.avatar }
-              }
+              source={{
+                uri:
+                  (currentUserProfile &&
+                    getUserImage(currentUserProfile.avatar)) ||
+                  newUserImage,
+              }}
               style={styles.image}
             />
 
             <Text style={styles.userName}>
               {currentUser.first_name} {currentUser.last_name}
+            </Text>
+
+            <Text style={styles.points}>
+              Money Score: {currentUserProfile?currentUserProfile.money_points:'0'}
+            </Text>
+
+            <Text style={styles.points}>
+              Givantk Points: {currentUserProfile?currentUserProfile.givantk_points:'0'}
             </Text>
           </View>
         </TouchableWithoutFeedback>

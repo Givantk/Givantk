@@ -59,14 +59,15 @@ class MakeProfileScreen extends Component {
       phone_number,
       date_of_birth,
     } = this.state;
+
     const { navigation, makeProfile, getCurrentUserProfile } = this.props;
 
-    let uriParts = avatar.split('.');
-    let fileType = uriParts[uriParts.length - 1];
+    const uriParts = avatar.split('.');
+    const fileType = uriParts[uriParts.length - 1];
 
-    newProfile = new FormData();
+    const newProfile = new FormData();
 
-    //appending keys and value in the new profile form data
+    // appending keys and value in the new profile form data
 
     newProfile.append('gender', gender.value);
     newProfile.append('skills', JSON.stringify(skills.split(',')));
@@ -91,6 +92,7 @@ class MakeProfileScreen extends Component {
   render() {
     const { gender, avatar } = this.state;
     const { errors } = this.props;
+
     return (
       <AvoidKeyboard bottomPadding={80}>
         <View style={styles.container}>

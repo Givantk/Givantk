@@ -35,6 +35,8 @@ app.use('/api/profile', require('./routes/profile'));
 app.use('/api/service', require('./routes/service'));
 app.use('/api/chat', require('./routes/chat'));
 app.use('/api/admin', require('./routes/admin'));
+app.use('/api/payment',require('./routes/payment'));
+app.use('/api/points',require('./routes/payment'));
 app.use('/assets/images',express.static('assets/images'));
 
 const port = process.env.PORT || 5000;

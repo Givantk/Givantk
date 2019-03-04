@@ -1,24 +1,36 @@
 const express = require('express');
+const aws = require('aws-sdk');
+
 const multer = require('multer');
+const multerS3 = require('multer-s3');
 const router = express.Router();
 const passport = require('passport');
 const profileController = require('../controllers/profileController/index.js');
+const keys=require('../config/keys.ignore'); 
 
-//setting profile photo storage
 
-const storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-    cb(null, './assets/images/');
-  },
-  filename: function(req, file, cb) {
-    cb(null, Date.now() + file.originalname);
-  },
+//Setting profile photo storage
+aws.config.update({
+  secretAccessKey: keys.aws_secret_access_key,
+  accessKeyId: keys.aws_access_key_id,
+  sessionToken:keys.aws_session_token,
 });
+
+const s3 = new aws.S3();
+
 const upload = multer({
-  storage: storage,
+  storage: multerS3({
+      s3: s3,
+      bucket: 'givantk-photos',
+      acl:'public-read',
+      key: function (req, file, cb) {
+          console.log(file);
+          cb(null, Date.now() + '-' + file.originalname); //use Date.now() for unique file keys
+      }
+  }),
   limits: {
-    fileSize: 1024 * 1024 * 5,
-  },
+    fileSize: 1024 * 1024 * 5
+  }
 });
 
 // @route  GET api/profile/all
@@ -35,7 +47,7 @@ router.post(
   '/',
   upload.single('avatar'),
   passport.authenticate('jwt', { session: false }),
-  profileController.makeProfile,
+  profileController.makeProfile
 );
 
 // @route  GET api/profile
@@ -45,7 +57,7 @@ router.post(
 router.get(
   '/',
   passport.authenticate('jwt', { session: false }),
-  profileController.getProfile,
+  profileController.getProfile
 );
 
 // @route  GET api/profile/:user_id
@@ -63,7 +75,7 @@ module.exports = router;
 router.post(
   '/set-notifications-seen',
   passport.authenticate('jwt', { session: false }),
-  profileController.setNotificationsSeen,
+  profileController.setNotificationsSeen
 );
 
 module.exports = router;
