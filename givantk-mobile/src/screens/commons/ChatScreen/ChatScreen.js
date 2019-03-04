@@ -11,8 +11,7 @@ import { connect } from 'react-redux';
 import * as ProfileActions from '../../../store/actions/profileActions';
 import * as AuthActions from '../../../store/actions/authActions';
 
-
-
+import serverPath from '../../../assets/utils/httpService';
 
 class ChatScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -49,8 +48,8 @@ class ChatScreen extends Component {
       id2: this.state.user2.id,
       name2: this.state.user2.name
     }
-    
-    this.socket = io('http://192.168.1.8:5000', { query: users_data });
+    // local server is replace with serverPath from heroku
+    this.socket = io({serverPath}, { query: users_data });
 
     this.socket.on('chat message', (msg) => {
       this.setState({ chatMessages: [...this.state.chatMessages, msg] });
