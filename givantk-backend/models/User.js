@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 
 //include Service model
 const Service = require('./Service');
-// const Service=mongoose.model('service');
 
 // Create User model
 const UserSchema = new Schema({
@@ -12,10 +11,7 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
-  last_name: {
-    type: String,
-    required: true
-  },
+  last_name: String,
   email: {
     type: String,
     required: true
@@ -24,14 +20,23 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
-  location: {
-    type: String,
-    required: true
-  },
+  location: String,
   avatar: String,
   date: {
     type: Date,
     default: Date.now
+  },
+  login_credentials: {
+    facebook: {
+      id: {
+        type: String,
+        required: true
+      },
+      has_password: {
+        type: Boolean,
+        default: false
+      }
+    }
   }
 });
 

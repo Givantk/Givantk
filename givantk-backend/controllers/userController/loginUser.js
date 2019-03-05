@@ -10,10 +10,14 @@ const User = mongoose.model('user');
 const validateLoginUser = require('../../validations/loginUser');
 
 module.exports = loginUser = (req, res) => {
+  const { isFacebookEntry, facebookId } = req.body;
+
   // Validate
-  const { errors, isValid } = validateLoginUser(req.body);
-  if (!isValid) {
-    return res.status(400).json(errors);
+  if (!isFacebookEntry) {
+    const { errors, isValid } = validateLoginUser(req.body);
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
   }
 
   const email = req.body.email;
@@ -28,9 +32,15 @@ module.exports = loginUser = (req, res) => {
 
     // Check Password
     bcrypt.compare(password, user.password).then((isMatch) => {
-      if (!isMatch) {
+      if (!isFacebookEntry && !isMatch) {
         errors.incorrectinfo = 'Incorrect email or password';
         return res.status(400).json(errors);
+      }
+      if (isFacebookEntry) {
+        if (!(user.login_credentials.facebook.id === facebookId)) {
+          errors.incorrectinfo = 'Not signed up with facebook';
+          return res.status(400).json(errors);
+        }
       }
 
       // User Matched

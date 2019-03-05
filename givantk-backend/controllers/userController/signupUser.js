@@ -8,15 +8,30 @@ const User = mongoose.model('user');
 const validateUser = require('../../validations/user');
 
 module.exports = signupUser = (req, res) => {
+  const { isFacebookEntry, facebookId } = req.body;
+
   // Validate
-  const { errors, isValid } = validateUser(req.body);
-  if (!isValid) {
-    return res.status(400).json(errors);
+  if (!isFacebookEntry) {
+    const { errors, isValid } = validateUser(req.body);
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
   }
 
   // Check if there is a user with the same email
   User.findOne({ email: req.body.email })
     .then((user) => {
+      if (
+        isFacebookEntry &&
+        user &&
+        user.login_credentials.facebook.id === facebookId
+      ) {
+        return res.json({
+          user,
+          success: true
+        });
+      }
+
       if (user) {
         errors.email = 'Email already exists';
         return res.status(400).json(errors);
@@ -25,12 +40,17 @@ module.exports = signupUser = (req, res) => {
       // Create new user
       const newUser = new User({
         first_name: req.body.first_name,
-        last_name: req.body.last_name,
+        last_name: req.body.last_name || '',
         email: req.body.email,
-        password: req.body.password,
-        location: req.body.location,
-        avatar: req.body.avatar || null
+        password: req.body.password || Math.random().toString(),
+        location: req.body.location || '',
+        avatar: req.body.avatar || '',
+        login_credentials: { facebook: {} }
       });
+
+      if (isFacebookEntry) {
+        newUser.login_credentials.facebook.id = facebookId;
+      }
 
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
