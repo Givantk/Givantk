@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
-import { Text, View, TouchableWithoutFeedback } from 'react-native';
+import { Facebook } from 'expo';
+import { Text, View, TouchableWithoutFeedback, Alert } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -56,8 +57,27 @@ class LoginScreen extends React.Component {
     });
   };
 
-  handleSignInWithFacebook = () => {
-    alert('Facebook login clicked');
+  handleSignInWithFacebook = async () => {
+    try {
+      const { type, token } = await Facebook.logInWithReadPermissionsAsync(
+        '2132958976794441',
+        {
+          permissions: ['public_profile'],
+        },
+      );
+      if (type === 'success') {
+        // Get the user's name using Facebook's Graph API
+        const response = await fetch(
+          `https://graph.facebook.com/me?access_token=${token}&fields=id,name,email,picture.type(large)`,
+        );
+        // const userInfo = await response.json();
+        Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
+      } else {
+        // type === 'cancel'
+      }
+    } catch ({ message }) {
+      alert(`Facebook Login Error: ${message}`);
+    }
   };
 
   render() {

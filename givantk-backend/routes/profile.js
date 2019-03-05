@@ -6,27 +6,25 @@ const multerS3 = require('multer-s3');
 const router = express.Router();
 const passport = require('passport');
 const profileController = require('../controllers/profileController/index.js');
-const keys=require('../config/keys.ignore'); 
-
+const keys = require('../config/keys.ignore');
 
 //Setting profile photo storage
 aws.config.update({
   secretAccessKey: keys.aws_secret_access_key,
   accessKeyId: keys.aws_access_key_id,
-  sessionToken:keys.aws_session_token,
+  sessionToken: keys.aws_session_token
 });
 
 const s3 = new aws.S3();
 
 const upload = multer({
   storage: multerS3({
-      s3: s3,
-      bucket: 'givantk-photos',
-      acl:'public-read',
-      key: function (req, file, cb) {
-          console.log(file);
-          cb(null, Date.now() + '-' + file.originalname); //use Date.now() for unique file keys
-      }
+    s3: s3,
+    bucket: 'givantk-photos',
+    acl: 'public-read',
+    key: function(req, file, cb) {
+      cb(null, Date.now() + '-' + file.originalname); //use Date.now() for unique file keys
+    }
   }),
   limits: {
     fileSize: 1024 * 1024 * 5

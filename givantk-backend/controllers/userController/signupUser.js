@@ -28,7 +28,8 @@ module.exports = signupUser = (req, res) => {
         last_name: req.body.last_name,
         email: req.body.email,
         password: req.body.password,
-        location: req.body.location
+        location: req.body.location,
+        avatar: req.body.avatar || null
       });
 
       bcrypt.genSalt(10, (err, salt) => {
