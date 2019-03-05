@@ -13,7 +13,6 @@ const keys=require('../config/keys.ignore');
 aws.config.update({
   secretAccessKey: keys.aws_secret_access_key,
   accessKeyId: keys.aws_access_key_id,
-  sessionToken:keys.aws_session_token,
 });
 
 const s3 = new aws.S3();
@@ -21,7 +20,7 @@ const s3 = new aws.S3();
 const upload = multer({
   storage: multerS3({
       s3: s3,
-      bucket: 'givantk-photos',
+      bucket: 'givantk-profile-pictures',
       acl:'public-read',
       key: function (req, file, cb) {
           console.log(file);
