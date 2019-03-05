@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
-import { Facebook } from 'expo';
-import { Text, View, TouchableWithoutFeedback, Alert } from 'react-native';
+import { Text, View, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -13,6 +12,7 @@ import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKey
 import DefaultButton from '../../../components/commons/UI/DefaultButton/DefaultButton';
 import DefaultTextInput from '../../../components/commons/UI/DefaultTextInput/DefaultTextInput';
 import Header from '../../../components/RegistrationsScreensComponents/SignupScreenComponents/Header/Header';
+import quickNotification from '../../../components/commons/UI/QuickNotification/QuickNotification';
 
 class LoginScreen extends React.Component {
   static navigationOptions = () => ({
@@ -36,6 +36,8 @@ class LoginScreen extends React.Component {
 
   callbackAfterLogin = () => {
     const { navigation, getAllServices, getCurrentUserProfile } = this.props;
+
+    quickNotification('Login Successful');
     navigation.replace('Tab');
     getAllServices();
     getCurrentUserProfile();
@@ -57,27 +59,10 @@ class LoginScreen extends React.Component {
     });
   };
 
-  handleSignInWithFacebook = async () => {
-    try {
-      const { type, token } = await Facebook.logInWithReadPermissionsAsync(
-        '2132958976794441',
-        {
-          permissions: ['public_profile'],
-        },
-      );
-      if (type === 'success') {
-        // Get the user's name using Facebook's Graph API
-        const response = await fetch(
-          `https://graph.facebook.com/me?access_token=${token}&fields=id,name,email,picture.type(large)`,
-        );
-        // const userInfo = await response.json();
-        Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
-      } else {
-        // type === 'cancel'
-      }
-    } catch ({ message }) {
-      alert(`Facebook Login Error: ${message}`);
-    }
+  handleSignInWithFacebook = () => {
+    const { loginUserWithFacebook } = this.props;
+
+    loginUserWithFacebook(this.callbackAfterLogin);
   };
 
   render() {
@@ -144,6 +129,7 @@ class LoginScreen extends React.Component {
 LoginScreen.propTypes = {
   navigation: PropTypes.shape({}),
   loginUser: PropTypes.func,
+  loginUserWithFacebook: PropTypes.func,
   checkSavedUserThenLogin: PropTypes.func,
   getAllServices: PropTypes.func,
   getCurrentUserProfile: PropTypes.func,
@@ -158,6 +144,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   loginUser: AuthActions.loginUser,
+  loginUserWithFacebook: AuthActions.loginUserWithFacebook,
   checkSavedUserThenLogin: AuthActions.checkSavedUserThenLogin,
   getAllServices: ServiceActions.getAllServices,
   getCurrentUserProfile: ProfileActions.getCurrentUserProfile,

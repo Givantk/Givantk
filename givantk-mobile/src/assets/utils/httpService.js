@@ -22,8 +22,8 @@ export const removeAuthToken = () => {
   delete axios.defaults.headers.common.Authorization;
 };
 
-export const serverPath = 'https://givantk-backend.herokuapp.com/';
-export const userAPI = 'https://givantk-backend.herokuapp.com/api/user';
-export const serviceAPI = 'https://givantk-backend.herokuapp.com/api/service';
-export const profileAPI = 'https://givantk-backend.herokuapp.com/api/profile';
-export const paymentAPI='https://givantk-backend.herokuapp.com/api/payment'
+export const serverPath = 'https://192.168.1.6/';
+export const userAPI = 'https://192.168.1.6/api/user';
+export const serviceAPI = 'https://192.168.1.6/api/service';
+export const profileAPI = 'https://192.168.1.6/api/profile';
+export const paymentAPI = 'https://192.168.1.6/api/payment';

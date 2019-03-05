@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
+
 const keys = require('../../config/keys.ignore');
 
 // Models
@@ -21,7 +22,7 @@ module.exports = loginUser = (req, res) => {
   }
 
   const email = req.body.email;
-  const password = req.body.password;
+  const password = req.body.password || '';
 
   // Check for the user email
   User.findOne({ email }).then((user) => {
@@ -32,13 +33,14 @@ module.exports = loginUser = (req, res) => {
 
     // Check Password
     bcrypt.compare(password, user.password).then((isMatch) => {
-      if (!isFacebookEntry && !isMatch) {
-        errors.incorrectinfo = 'Incorrect email or password';
-        return res.status(400).json(errors);
-      }
       if (isFacebookEntry) {
         if (!(user.login_credentials.facebook.id === facebookId)) {
           errors.incorrectinfo = 'Not signed up with facebook';
+          return res.status(400).json(errors);
+        }
+      } else {
+        if (!isMatch) {
+          errors.incorrectinfo = 'Incorrect email or password';
           return res.status(400).json(errors);
         }
       }
@@ -51,7 +53,8 @@ module.exports = loginUser = (req, res) => {
         first_name: user.first_name,
         last_name: user.last_name,
         email: user.email,
-        location: user.location
+        location: user.location,
+        avatar: user.avatar
       };
 
       // Make JWT

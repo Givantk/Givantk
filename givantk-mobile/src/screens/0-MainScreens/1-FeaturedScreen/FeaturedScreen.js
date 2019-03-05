@@ -29,7 +29,10 @@ class FeaturedScreen extends React.Component {
   render() {
     const { navigation, getAllServicesLoading } = this.props;
     let { allServices } = this.props;
+    const { errors } = this.props;
     allServices = allServices.filter((s) => s.state !== 'archived');
+
+    console.log(errors);
 
     return (
       <View style={styles.container}>
@@ -61,6 +64,7 @@ FeaturedScreen.propTypes = {
   navigation: PropTypes.shape({}),
   allServices: PropTypes.arrayOf(PropTypes.shape({})),
   getAllServicesLoading: PropTypes.bool,
+  errors: PropTypes.shape({}),
 };
 
 const mapStateToProps = (state) => ({

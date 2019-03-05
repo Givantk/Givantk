@@ -28,10 +28,7 @@ const UserSchema = new Schema({
   },
   login_credentials: {
     facebook: {
-      id: {
-        type: String,
-        required: true
-      },
+      id: String,
       has_password: {
         type: Boolean,
         default: false

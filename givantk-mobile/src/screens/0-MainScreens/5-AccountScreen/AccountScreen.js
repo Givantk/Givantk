@@ -63,10 +63,9 @@ class AccountScreen extends React.Component {
           <View style={styles.imageContainer}>
             <Image
               source={{
-                uri:
-                  (currentUserProfile &&
-                    getUserImage(currentUserProfile.avatar)) ||
-                  newUserImage,
+                uri: getUserImage(
+                  currentUser.avatar || currentUserProfile.avatar,
+                ),
               }}
               style={styles.image}
             />
@@ -76,11 +75,13 @@ class AccountScreen extends React.Component {
             </Text>
 
             <Text style={styles.points}>
-              Money Score: {currentUserProfile?currentUserProfile.money_points:'0'}
+              Money Score:{' '}
+              {currentUserProfile ? currentUserProfile.money_points : '0'}
             </Text>
 
             <Text style={styles.points}>
-              Givantk Points: {currentUserProfile?currentUserProfile.givantk_points:'0'}
+              Givantk Points:{' '}
+              {currentUserProfile ? currentUserProfile.givantk_points : '0'}
             </Text>
           </View>
         </TouchableWithoutFeedback>
