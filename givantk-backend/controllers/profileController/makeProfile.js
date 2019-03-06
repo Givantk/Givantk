@@ -45,11 +45,11 @@ module.exports = makeProfile = (req, res) => {
 
       User.findById(req.user._id).then((user) => {
         // Check if the user object itself already has an image
-        if (user.avatar) {
-          newProfile.avatar = user.avatar;
-        } else {
-          newProfile.avatar = req.file.location;
+        if (req.file) {
           user.avatar = req.file.location;
+          newProfile.avatar = req.file.location;
+        } else {
+          newProfile.avatar = user.avatar;
         }
         user.save().then(() => {
           new Profile(newProfile)

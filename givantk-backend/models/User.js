@@ -12,14 +12,8 @@ const UserSchema = new Schema({
     required: true
   },
   last_name: String,
-  email: {
-    type: String,
-    required: true
-  },
-  password: {
-    type: String,
-    required: true
-  },
+  email: String,
+  password: String,
   location: String,
   avatar: String,
   date: {
@@ -30,8 +24,7 @@ const UserSchema = new Schema({
     facebook: {
       id: String,
       has_password: {
-        type: Boolean,
-        default: false
+        type: Boolean
       }
     }
   }

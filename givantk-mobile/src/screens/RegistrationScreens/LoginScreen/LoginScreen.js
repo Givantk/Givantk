@@ -67,7 +67,6 @@ class LoginScreen extends React.Component {
 
   render() {
     const { navigation, errors, setCurrentUserLoading } = this.props;
-
     return (
       <AvoidKeyboard
         bottomPadding={0}

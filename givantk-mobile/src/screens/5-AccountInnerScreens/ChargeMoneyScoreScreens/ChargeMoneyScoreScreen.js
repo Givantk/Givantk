@@ -1,15 +1,14 @@
 import { View, Text, Image } from 'react-native';
 import React, { Component } from 'react';
+import { Akira as TextInput } from 'react-native-textinput-effects';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import MainButton from '../../../components/commons/UI/MainButton/MainButton';
 import styles from './ChargeMoneyScoreScreenStyles';
 import { moneyScoreLogo } from '../../../assets/constants/index';
-import { Akira as TextInput } from 'react-native-textinput-effects';
-import PropTypes from 'prop-types';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
 import Loading from '../../../components/commons/UI/Loading/Loading';
-import NoProfileDisclaimer from '../../../components/commons/NoProfileDisclaimer/NoProfileDisclaimer'
-import { connect } from 'react-redux';
-
+import NoProfileDisclaimer from '../../../components/commons/NoProfileDisclaimer/NoProfileDisclaimer';
 
 class ChargeMoneyScoreScreen extends Component {
   static navigationOptions = () => ({
@@ -22,7 +21,6 @@ class ChargeMoneyScoreScreen extends Component {
   };
 
   onChangeValue = (text) => {
-    console.log(text);
     this.setState({
       amount: text,
     });
@@ -38,7 +36,7 @@ class ChargeMoneyScoreScreen extends Component {
         warning: '',
       });
       this.props.navigation.navigate('PayWithStripe', {
-        amount: amount,
+        amount,
       });
     }
   };
@@ -67,8 +65,8 @@ class ChargeMoneyScoreScreen extends Component {
 
           <TextInput
             style={{ alignSelf: 'stretch' }}
-            label={'Amount'}
-            borderColor={'#a5d1cc'}
+            label="Amount"
+            borderColor="#a5d1cc"
             inputPadding={16}
             labelHeight={24}
             labelStyle={styles.textInput}
