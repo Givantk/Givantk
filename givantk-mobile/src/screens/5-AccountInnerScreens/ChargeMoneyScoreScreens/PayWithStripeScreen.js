@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { View } from 'react-native';
-import StripeCheckout from '../../../components/commons/Payment-Related-Components/stripeCheckout/stripeCheckout';
 import PropTypes from 'prop-types';
+import StripeCheckout from '../../../components/commons/Payment-Related-Components/stripeCheckout/stripeCheckout';
 import { givantkLogo } from '../../../assets/constants/index';
 import * as paymentActions from '../../../store/actions/paymentActions';
 import * as ProfileActions from '../../../store/actions/profileActions';
@@ -37,7 +37,6 @@ class PayWithStripeScreen extends React.Component {
   onClose = () => {};
 
   render() {
-    console.log(this.props);
     const { navigation, createPaymentLoading } = this.props;
     if (navigation.state.params) {
       const { amount } = navigation.state.params;

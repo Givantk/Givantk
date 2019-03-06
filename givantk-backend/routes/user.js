@@ -9,19 +9,20 @@ const userController = require('../controllers/userController/index.js');
 // @desc   Get all users
 // @access Public
 // @errors nousers error
-
 router.get('/all', userController.getAllUsers);
 
 // @route  POST api/user
 // @desc   User Signup - Create new user
 // @access Public
 // @errors first_name last_name email password password2 location error
+// @body   isFacebookEntry(optional) facebookId(optional)
 router.post('/', userController.signupUser);
 
 // @route  POST api/user/login
 // @desc   User Login - Return jwt token
 // @access Public
 // @errors incorrectinfo email password error
+// @body   isFacebookEntry(optional) facebookId(optional)
 router.post('/login', userController.loginUser);
 
 // @route  PATCH api/user
@@ -31,7 +32,7 @@ router.post('/login', userController.loginUser);
 router.patch(
   '/',
   passport.authenticate('jwt', { session: false }),
-  userController.updateUser,
+  userController.updateUser
 );
 
 // @route  DELETE api/user
@@ -41,7 +42,7 @@ router.patch(
 router.delete(
   '/',
   passport.authenticate('jwt', { session: false }),
-  userController.deleteUser,
+  userController.deleteUser
 );
 
 // @route  GET api/user
@@ -51,7 +52,7 @@ router.delete(
 router.get(
   '/',
   passport.authenticate('jwt', { session: false }),
-  userController.getUser,
+  userController.getUser
 );
 
 // @route  GET api/user/:id

@@ -61,6 +61,7 @@ FeaturedScreen.propTypes = {
   navigation: PropTypes.shape({}),
   allServices: PropTypes.arrayOf(PropTypes.shape({})),
   getAllServicesLoading: PropTypes.bool,
+  errors: PropTypes.shape({}),
 };
 
 const mapStateToProps = (state) => ({

@@ -16,8 +16,6 @@ export const makePayment = (payment, callback) => (dispatch) => {
       if (callback) callback();
     })
     .catch((err) => {
-      console.log('I am here2');
-      console.log(err);
       dispatch({
         type: actionTypes.SET_ERRORS,
         payload: err,

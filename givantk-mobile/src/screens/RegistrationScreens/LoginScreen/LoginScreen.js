@@ -12,6 +12,7 @@ import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKey
 import DefaultButton from '../../../components/commons/UI/DefaultButton/DefaultButton';
 import DefaultTextInput from '../../../components/commons/UI/DefaultTextInput/DefaultTextInput';
 import Header from '../../../components/RegistrationsScreensComponents/SignupScreenComponents/Header/Header';
+import quickNotification from '../../../components/commons/UI/QuickNotification/QuickNotification';
 
 class LoginScreen extends React.Component {
   static navigationOptions = () => ({
@@ -35,6 +36,8 @@ class LoginScreen extends React.Component {
 
   callbackAfterLogin = () => {
     const { navigation, getAllServices, getCurrentUserProfile } = this.props;
+
+    quickNotification('Login Successful');
     navigation.replace('Tab');
     getAllServices();
     getCurrentUserProfile();
@@ -57,12 +60,13 @@ class LoginScreen extends React.Component {
   };
 
   handleSignInWithFacebook = () => {
-    alert('Facebook login clicked');
+    const { loginUserWithFacebook } = this.props;
+
+    loginUserWithFacebook(this.callbackAfterLogin);
   };
 
   render() {
     const { navigation, errors, setCurrentUserLoading } = this.props;
-
     return (
       <AvoidKeyboard
         bottomPadding={0}
@@ -124,6 +128,7 @@ class LoginScreen extends React.Component {
 LoginScreen.propTypes = {
   navigation: PropTypes.shape({}),
   loginUser: PropTypes.func,
+  loginUserWithFacebook: PropTypes.func,
   checkSavedUserThenLogin: PropTypes.func,
   getAllServices: PropTypes.func,
   getCurrentUserProfile: PropTypes.func,
@@ -138,6 +143,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   loginUser: AuthActions.loginUser,
+  loginUserWithFacebook: AuthActions.loginUserWithFacebook,
   checkSavedUserThenLogin: AuthActions.checkSavedUserThenLogin,
   getAllServices: ServiceActions.getAllServices,
   getCurrentUserProfile: ProfileActions.getCurrentUserProfile,

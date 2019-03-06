@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   user: {},
   setCurrentUserLoading: false,
   signupLoading: false,
+  loginWithFacebookLoading: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -15,12 +16,19 @@ export default (state = INITIAL_STATE, action) => {
         setCurrentUserLoading: true,
       };
 
+    case actionTypes.LOGIN_USER_WITH_FACEBOOK_START:
+      return {
+        ...state,
+        loginWithFacebookLoading: true,
+      };
+
     case actionTypes.SET_CURRENT_USER:
       return {
         ...state,
         user: action.payload,
         isAuthenticated: true,
         setCurrentUserLoading: false,
+        loginWithFacebookLoading: false,
       };
 
     case actionTypes.UNSET_CURRENT_USER:
@@ -29,6 +37,7 @@ export default (state = INITIAL_STATE, action) => {
         user: null,
         isAuthenticated: false,
         setCurrentUserLoading: false,
+        loginWithFacebookLoading: false,
       };
 
     case actionTypes.SIGN_UP_START:
