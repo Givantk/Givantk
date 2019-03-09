@@ -7,6 +7,8 @@ import styles from './GivantkPointsScreenStyles';
 import { givantkPointsLogo } from '../../../assets/constants/index';
 import Loading from '../../../components/commons/UI/Loading/Loading';
 import NoProfileDisclaimer from '../../../components/commons/NoProfileDisclaimer/NoProfileDisclaimer';
+import * as GivantkPointsActions from '../../../store/actions/GivantkPointsActions';
+import * as ProfileActions from '../../../store/actions/profileActions';
 
 class GivantkPointsScreen extends Component {
   static navigationOptions = () => ({
@@ -21,9 +23,8 @@ class GivantkPointsScreen extends Component {
 
   onButtonClicked = () => {
     const { clickedOnce } = this.state;
-    const {currentUserProfile} =this.props;
+    const { currentUserProfile, getCurrentUserProfile, addPoints } = this.props;
 
-    console.log(clickedOnce)
     //set the randomPointsNumber in state to a random number between 1 and 10
     currentUserProfile.givantk_points === 0
       ? !clickedOnce
@@ -33,12 +34,22 @@ class GivantkPointsScreen extends Component {
               clickedOnce: true,
             },
             () => {
-              this.setState((prevState) => ({
-                text:
-                  'Congratulations \n you successfully added ' +
-                  prevState.randomPointsNumber +
-                  ' points to your account',
-              }));
+              const { randomPointsNumber } = this.state;
+
+              successfullAddingCallback = () => {
+                this.setState({
+                  text:
+                    'Congratulations \n you successfully added ' +
+                    randomPointsNumber +
+                    ' points to your account',
+                });
+                getCurrentUserProfile();
+              };
+
+              addPoints(
+                { pointsAdded: randomPointsNumber },
+                successfullAddingCallback,
+              );
             },
           )
         : this.setState((prevState) => ({
@@ -63,6 +74,7 @@ class GivantkPointsScreen extends Component {
       getCurrentProfileLoading,
       currentUserHasProfile,
       navigation,
+      addPointsLoading,
     } = this.props;
 
     if (getCurrentProfileLoading) return <Loading />;
@@ -74,33 +86,45 @@ class GivantkPointsScreen extends Component {
       <View style={styles.wrapper}>
         <Text style={styles.title}>Get Free Givantk Points</Text>
         <Image style={styles.image} source={{ uri: givantkPointsLogo }} />
-        <View style={{ alignItems: 'center' }}>
-          <MainButton onPress={onButtonClicked}>
-            Get Random Number of Points
-          </MainButton>
-          <Text style={styles.text}>{text}</Text>
-        </View>
+        {!addPointsLoading ? (
+          <View style={{ alignItems: 'center' }}>
+            <MainButton onPress={onButtonClicked}>
+              Get Random Number of Points
+            </MainButton>
+            <Text style={styles.text}>{text}</Text>
+          </View>
+        ) : (
+          <Loading />
+        )}
       </View>
     );
   }
 }
 
 GivantkPointsScreen.propTypes = {
+  errors: PropTypes.shape({}),
   navigation: PropTypes.shape({}),
   getCurrentProfileLoading: PropTypes.bool,
   currentUserHasProfile: PropTypes.bool,
   currentUserProfile: PropTypes.shape({}),
+  addPoints: PropTypes.func,
+  addPointsLoading: PropTypes.bool,
+  getCurrentUserProfile: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
-  getCurrentProfileLoading: state.profile.getCurrentProfileLoading,
+  errors: state.errors,
   currentUserHasProfile: state.profile.currentUserHasProfile,
   currentUserProfile: state.profile.currentUserProfile,
+  addPointsLoading: state.points.addPointsLoading,
 });
 
-
+const mapDispatchToProps = {
+  addPoints: GivantkPointsActions.addPoints,
+  getCurrentUserProfile: ProfileActions.getCurrentUserProfile,
+};
 
 export default connect(
   mapStateToProps,
-  null,
+  mapDispatchToProps,
 )(GivantkPointsScreen);
