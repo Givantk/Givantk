@@ -1,28 +1,32 @@
-import React, { Component } from "react";
-import auth from "../components/auth";
-import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
+import React, { Component } from 'react';
+import auth from '../components/auth';
+import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
 
 export default class Login extends Component {
   state = {
-    email: "",
-    password: ""
+    email: '',
+    password: '',
+    error: '',
+  };
+
+  loginCallback = (error) => {
+    if (error)
+      this.setState({
+        error,
+      });
+    else this.props.history.push('/');
   };
 
   LogMeIn = () => {
-    /*when user clicks on login button login function from authentication class
+    /*when user clicks on login button.. login function from authentication class
         is called, it sets the cookie LoggedIn into true and then redirects the user
         into main index */
 
-    auth.login(
-      () => {
-        this.props.history.push("/");
-      },
-      this.state.email,
-      this.state.password
-    );
+    auth.login(this.loginCallback, this.state.email, this.state.password);
   };
 
   render() {
+    const { error } = this.state;
     return (
       <div>
         <Container fluid={true}>
@@ -41,7 +45,7 @@ export default class Login extends Component {
                       <Form.Control
                         type="email"
                         placeholder="Enter email"
-                        onChange={event => {
+                        onChange={(event) => {
                           this.setState({ email: event.target.value });
                         }}
                       />
@@ -55,7 +59,7 @@ export default class Login extends Component {
                       <Form.Control
                         type="password"
                         placeholder="Password"
-                        onChange={event => {
+                        onChange={(event) => {
                           this.setState({ password: event.target.value });
                         }}
                       />
@@ -79,6 +83,7 @@ export default class Login extends Component {
                   </div>
                 </Card.Body>
               </Card>
+              <h3 className="mt-4 text-center text-danger">{error}</h3>
             </Col>
           </Row>
         </Container>
