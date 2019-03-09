@@ -12,13 +12,14 @@ module.exports = function validateProfile(data) {
     errors.description = 'Description is required';
   }
 
-  if (Validator.isEmpty(data.phone_number)) {
+  if (Validator.isEmpty(data.phone_number.toString())) {
     errors.phone_number = 'Phone number is required';
   }
 
   if (!data.skills || data.skills.length === 0) {
     errors.skills = 'Skills are required';
   }
+
 
   // description
   // if (!isEmpty(data.description))

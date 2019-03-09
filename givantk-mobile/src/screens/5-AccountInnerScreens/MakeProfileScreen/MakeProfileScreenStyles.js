@@ -61,10 +61,11 @@ const styles = StyleSheet.create({
   },
   error: {
     color: colors.red.lighten(0.5),
-    marginTop: -16,
+    marginTop: -10,
     fontSize: 14,
     marginBottom: 10,
   },
+
   submitButton: {
     width: 100,
     justifyContent: 'center',
