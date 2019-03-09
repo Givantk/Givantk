@@ -63,8 +63,8 @@ class AccountScreen extends React.Component {
             <Image
               source={{
                 uri: getUserImage(
-                  currentUser.avatar ||
-                    (currentUserProfile && currentUserProfile.avatar),
+                  (currentUserProfile && currentUserProfile.avatar) ||
+                    currentUser.avatar,
                 ),
               }}
               style={styles.image}

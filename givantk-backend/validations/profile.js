@@ -20,6 +20,7 @@ module.exports = function validateProfile(data) {
     errors.skills = 'Skills are required';
   }
 
+
   // description
   // if (!isEmpty(data.description))
   //   if (!Validator.isLength(data.description, { min: 20, max: 600 })) {
