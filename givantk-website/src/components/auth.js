@@ -14,12 +14,18 @@ class auth {
         password,
       })
       .then(function(response) {
-        console.log(response);
-        bake_cookie('LoggedIn', true);
+        const { token, success } = response.data;
+        if (!success)
+          cb('Something wrong happened while signing in,please try again');
+        else {
+          bake_cookie('token', token);
+          bake_cookie('LoggedIn', true);
+        }
       })
       .catch(function(error) {
-        if (error.response.data.incorrectinfo) {
-          errorToBeSent = error.response.data.incorrectinfo;
+        const { incorrectinfo } = error.response.data;
+        if (incorrectinfo) {
+          errorToBeSent = incorrectinfo;
         }
         cb(errorToBeSent);
       });
@@ -29,6 +35,7 @@ class auth {
 
   logOut = (cb) => {
     delete_cookie('LoggedIn');
+    delete_cookie('token');
     cb();
   };
 
@@ -37,5 +44,10 @@ class auth {
   isAuthenticated = () => {
     return read_cookie('LoggedIn');
   };
+
+
+  getToken=()=>{
+    return read_cookie('token');
+  }
 }
 export default new auth();
