@@ -73,13 +73,14 @@ class MakeProfileScreen extends Component {
       this.setState({
         noAvatar: true,
       });
-      //he hasn't uploaded an avatar
-    } else {
-      //If he hasn't signed with facebook
+      
+    }//the user uploaded an avatar or is signed with facebook  
+    else {
 
       const newProfile = new FormData();
-
-      if (!currentUser.avatar) {
+      //if the user is signed with facebook but wants to upload avatar  
+      
+      if (avatar) {
         const uriParts = avatar.split('.');
         const fileType = uriParts[uriParts.length - 1];
         newProfile.append('avatar', {
