@@ -36,7 +36,7 @@ class GivantkPointsScreen extends Component {
 
     return (
       <View style={styles.wrapper}>
-        <Text style={styles.text}>Get free Givantk points</Text>
+        <Text style={styles.text}>Get Free Givantk Points</Text>
           <Image style={styles.image} source={{ uri: givantkPointsLogo }} />
           <View style={{ alignItems: 'center' }}>
             <MainButton onPress={onButtonClicked}>
