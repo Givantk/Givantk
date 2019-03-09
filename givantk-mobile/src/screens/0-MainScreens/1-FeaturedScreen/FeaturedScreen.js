@@ -8,6 +8,7 @@ import { colors } from '../../../assets/styles/base';
 import DefaultTextInput from '../../../components/commons/UI/DefaultTextInput/DefaultTextInput';
 import ServicesList from '../../../components/commons/Service-Related-Components/ServicesList/ServicesList';
 import styles from './FeaturedScreenStyles';
+import * as ServiceActions from '../../../store/actions/serviceActions';
 
 class FeaturedScreen extends React.Component {
   static navigationOptions = () => ({
@@ -22,7 +23,8 @@ class FeaturedScreen extends React.Component {
   });
 
   navigateToSearchScreen = () => {
-    const { navigation } = this.props;
+    const { navigation, getSearchedServices } = this.props;
+    getSearchedServices();
     navigation.navigate('SearchResults');
   };
 
@@ -61,6 +63,7 @@ FeaturedScreen.propTypes = {
   navigation: PropTypes.shape({}),
   allServices: PropTypes.arrayOf(PropTypes.shape({})),
   getAllServicesLoading: PropTypes.bool,
+  getSearchedServices: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
@@ -69,7 +72,11 @@ const mapStateToProps = (state) => ({
   getAllServicesLoading: state.service.getAllServicesLoading,
 });
 
+const mapDispatchToProps={
+  getSearchedServices: ServiceActions.getSearchedServices
+};
+
 export default connect(
   mapStateToProps,
-  null,
+  mapDispatchToProps,
 )(FeaturedScreen);

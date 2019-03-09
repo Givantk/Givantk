@@ -22,14 +22,14 @@ class SearchResultsScreen extends Component {
   });
 
   render() {
-    const { navigation, allServices, getAllServicesLoading } = this.props;
+    const { navigation, searchedServices, getSearchedServicesLoading } = this.props;
     return (
       <View style={styles.wrapper}>
         <Text>Search Results Screen</Text>
-        {allServices && (
+        {searchedServices && (
           <ServicesList
-            services={allServices}
-            loading={getAllServicesLoading}
+            services={searchedServices}
+            loading={getSearchedServicesLoading}
             navigation={navigation}
           />
         )}
@@ -38,20 +38,20 @@ class SearchResultsScreen extends Component {
   }
 }
 
-//SearchResultsScreen.propTypes = {};
 
 
 SearchResultsScreen.propTypes = {
   navigation: PropTypes.shape({}),
-  allServices: PropTypes.arrayOf(PropTypes.shape({})),
-  getAllServicesLoading: PropTypes.bool,
+  searchedServices: PropTypes.arrayOf(PropTypes.shape({})),
+  getSearchedServicesLoading: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
   errors: state.errors,
-  allServices: state.service.allServices,
-  getAllServicesLoading: state.service.getAllServicesLoading,
+  searchedServices: state.service.searchedServices,
+  getSearchedServicesLoading: state.service.getSearchedServicesLoading,
 });
+
 
 export default connect(
   mapStateToProps,

@@ -25,6 +25,31 @@ export const getAllServices = (callback) => (dispatch) => {
     });
 };
 
+export const getSearchedServices = (callback) => (dispatch) => {
+  dispatch({
+    type: actionTypes.GET_SEARCHED_SERVICES_START,
+  });
+  http
+    .get(`https://192.168.1.8:5000/api/service/search/free`)
+    .then((res) => {
+      dispatch({
+        type: actionTypes.GET_SEARCHED_SERVICES_FINISH,
+        payload: res.data,
+      });
+      if (callback) callback();
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: actionTypes.SET_ERRORS,
+        payload: err.response.data,
+      });
+      dispatch({
+        type: actionTypes.GET_SEARCHED_SERVICES_FINISH,
+      });
+    });
+};
+
 export const createService = (service, callback) => (dispatch) => {
   dispatch({
     type: actionTypes.CREATE_SERVICE_START,
