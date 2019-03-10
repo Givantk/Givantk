@@ -113,7 +113,7 @@ class Users extends Component {
                     specialColText="Go to services asked for"
                     navigable
                     navigate={() => this.props.history.push('/asked')}
-                    navigationTitle="services_asked-for"
+                    navigationTitle="services_asked_for"
                     />
             </div>
         );

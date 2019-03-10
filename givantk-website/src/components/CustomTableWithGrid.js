@@ -20,16 +20,16 @@ class CustomTableWithGrid extends Component {
           .get(this.props.url, auth.getTokenHeader())
           .then((res) => {
             //this step is necessary to read nested object in json as using res.data directly will not read them
-            let jsonString = JSON.stringify(res.data);
+            let newUsersData = JSON.parse(JSON.stringify(res.data));
             this.setState({
-              UsersData: JSON.parse(jsonString),
+              UsersData: newUsersData,
               loading: false,
             });
           })
           .catch((err) => {
             console.log(err);
           })
-      : this.setState({ UsersData: this.props.dataArray });
+      : this.setState({ UsersData: this.props.dataArray, loading: false });
   }
 
   render() {
@@ -41,7 +41,12 @@ class CustomTableWithGrid extends Component {
             <Col xl="10" lg="9" md="8" className="ml-auto">
               <Row>
                 <Col xl="12" className="mb-4">
-                  <CustomTable {...this.props} values={UsersData} bg="dark" loading={loading} />
+                  <CustomTable
+                    {...this.props}
+                    values={UsersData}
+                    bg="dark"
+                    loading={loading}
+                  />
                 </Col>
               </Row>
             </Col>

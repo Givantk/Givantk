@@ -119,7 +119,9 @@ class CustomTable extends Component {
 
       for (let key in dataObj) {
         if (Array.isArray(dataObj[key])) {
-          dataObj[key] = dataObj[key].join("\r\n");
+          if (typeof dataObj[key][0] === 'string')
+            dataObj[key] = dataObj[key].join('\r\n');
+          else break;
         }
       }
 
