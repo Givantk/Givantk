@@ -12,6 +12,8 @@ module.exports = getSearchedServices = (req, res) => {
     
   */
   Service.find({ name: { $regex: req.params.searchedKeyword, $options: 'i' } })
+    .populate('asker')
+    .populate('applications.user')
     .sort({ date: -1 })
     .then((services) => {
       if (services.length === 0) {

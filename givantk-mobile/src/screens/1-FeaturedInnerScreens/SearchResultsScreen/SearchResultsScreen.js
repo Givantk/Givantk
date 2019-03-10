@@ -25,7 +25,7 @@ class SearchResultsScreen extends Component {
     const { navigation, searchedServices, getSearchedServicesLoading } = this.props;
     return (
       <View style={styles.wrapper}>
-        <Text>Search Results Screen</Text>
+        <Text>Search Results</Text>
         {searchedServices && (
           <ServicesList
             services={searchedServices}
