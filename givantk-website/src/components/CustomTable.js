@@ -101,8 +101,6 @@ class CustomTable extends Component {
     } else {
       const dataObj = this.props.values[buttonIndex];
       const { navigationTitle } = this.props;
-      console.log('this is');
-      console.log(dataObj[navigationTitle]);
       toBeShowed.setShowed(dataObj[navigationTitle]);
       this.props.navigate();
     }
@@ -119,11 +117,11 @@ class CustomTable extends Component {
     values.map((dataObj, i) => {
       //loop over the keys of the object
 
-      /*  for (let key in dataObj) {
+      for (let key in dataObj) {
         if (Array.isArray(dataObj[key])) {
-          dataObj[key] = dataObj[key].join(', ');
+          dataObj[key] = dataObj[key].join("\r\n");
         }
-      }*/
+      }
 
       // special column type is a column that contains button, if its value is
       // assigned to true then the condition below will be achieved

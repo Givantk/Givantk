@@ -8,6 +8,7 @@ class Users extends Component {
     render() {
         let headers = [
             [
+                "id",
                 "first_name",
                 "last_name",
                 "gender",
@@ -34,6 +35,7 @@ class Users extends Component {
 
         let titles = [
             [
+                "User Id",
                 "First Name",
                 "Last Name",
                 "Gender",
