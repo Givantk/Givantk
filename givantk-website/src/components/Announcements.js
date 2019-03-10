@@ -9,6 +9,7 @@ class Announcements extends Component {
   state = {
     titleVal: '',
     textareaVal: '',
+    displayResponse: '',
   };
 
   postAnnouncements = () => {
@@ -23,17 +24,35 @@ class Announcements extends Component {
         },
         auth.getTokenHeader(),
       )
-      .then(function(response) {
-        console.log(response);
+      .then((response) => {
+        this.setState({
+          displayResponse: 'You have posted an announcement successfully',
+        });
       })
-      .catch(function(error) {
-        console.log(error);
+      .catch((error) => {
+        if (error.response) {
+          const { invalid, unauthorized } = error.response.data;
+          if (invalid) {
+            this.setState({
+              displayResponse: invalid,
+            });
+          } else if (unauthorized) {
+            this.setState({
+              displayResponse: unauthorized,
+            });
+          }
+        } else {
+          this.setState({
+            displayResponse: 'Failed to connect to server',
+          });
+        }
       });
 
-    this.setState({ textareaVal: '' });
+    this.setState({ textareaVal: '', titleVal: '' });
   };
 
   render() {
+    const { titleVal, textareaVal, displayResponse } = this.state;
     return (
       <div>
         <Container fluid={true}>
@@ -67,7 +86,7 @@ class Announcements extends Component {
                     <Form>
                       <Form.Group>
                         <Form.Control
-                          value={this.state.titleVal}
+                          value={titleVal}
                           onChange={(event) => {
                             this.setState({ titleVal: event.target.value });
                           }}
@@ -76,7 +95,7 @@ class Announcements extends Component {
                         />
                         <Form.Control
                           as="textarea"
-                          value={this.state.textareaVal}
+                          value={textareaVal}
                           onChange={(event) => {
                             this.setState({ textareaVal: event.target.value });
                           }}
@@ -92,11 +111,15 @@ class Announcements extends Component {
                       type="submit"
                       block
                       onClick={this.postAnnouncements}
-                      className="py-2 mb-5text-uppercase font-weight-bold"
+                      className="py-2 mb-5 text-uppercase font-weight-bold"
                     >
                       Submit
                     </Button>
                   </Card>
+
+                  <h3 className="mt-3 text-danger text-center ">
+                    {displayResponse}
+                  </h3>
                 </Col>
               </Row>
             </Col>
