@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import CustomTableWithGrid from "../components/CustomTableWithGrid";
 import tableActions from "../functions/tableActions";
 import "../CustomNav.css";
+import {serverUrl} from '../Assets/Constants'
+
 
 class Services extends Component {
     render() {
@@ -52,7 +54,7 @@ class Services extends Component {
         return (
             <div>
                 <CustomTableWithGrid
-                    url="http://localhost:3001/servicesInfo"
+                    url={`${serverUrl}/api/admin/services-info`}
                     name="Services info"
                     headers={headers[0]}
                     titles={titles[0]}
@@ -64,7 +66,7 @@ class Services extends Component {
                     />
 
                 <CustomTableWithGrid
-                    url="http://localhost:3001/servicesInfo"
+                    url={`${serverUrl}/api/admin/services-info`}
                     name="Services and Comments"
                     headers={headers[1]}
                     titles={titles[1]}
