@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import CustomTableWithGrid from "../components/CustomTableWithGrid";
 import tableActions from '../functions/tableActions'
 import "../CustomNav.css";
+import {serverUrl} from '../Assets/Constants'
 
 class Users extends Component {
     render() {
@@ -27,8 +28,8 @@ class Users extends Component {
                 "services_asked_for_finished",
                 "services_helped_in_finished"
             ],
-            ["user_id", "first_name", "last_name", "services_helped_in"],
-            ["user_id","first_name","last_name", "services_asked_for"]
+            ["id", "first_name", "last_name", "services_helped_in"],
+            ["id","first_name","last_name", "services_asked_for"]
         ];
 
         let titles = [
@@ -76,19 +77,19 @@ class Users extends Component {
                     />
 
                 <CustomTableWithGrid
-                    url="https://givantk-backend.herokuapp.com/api/profile/all"
+                    url={`${serverUrl}/api/profile/all`}
                     name="Points and Skills"
                     headers={headers[1]}
                     titles={titles[1]}/>
 
                 <CustomTableWithGrid
-                    url="http://localhost:5000/api/admin/user-services"
+                    url={`${serverUrl}/api/admin/user-services`}
                     name="Users and services statistics"
                     headers={headers[2]}
                     titles={titles[2]}/>
 
                 <CustomTableWithGrid
-                    url="http://localhost:3001/servicesHelpedIn"
+                    url={`${serverUrl}/api/admin/services-helped-in`}
                     name="Users and services helped in"
                     headers={headers[3]}
                     titles={titles[3]}
@@ -101,7 +102,7 @@ class Users extends Component {
                     />
 
                 <CustomTableWithGrid
-                    url="http://localhost:3001/servicesAskedFor"
+                    url={`${serverUrl}/api/admin/services-asked-for`}
                     name="Users and services asked for"
                     headers={headers[4]}
                     titles={titles[4]}
