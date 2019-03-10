@@ -56,10 +56,5 @@ class auth {
     const token = read_cookie('token');
     return token;
   };
-
-  getTokenHeader = () => {
-    const token = this.getToken();
-    return { headers: { Authorization: token }, crossdomain: true };
-  };
 }
 export default new auth();
