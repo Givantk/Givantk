@@ -82,7 +82,7 @@ class Users extends Component {
                     titles={titles[1]}/>
 
                 <CustomTableWithGrid
-                    url="http://localhost:3001/userServices"
+                    url="http://localhost:5000/api/admin/user-services"
                     name="Users and services statistics"
                     headers={headers[2]}
                     titles={titles[2]}/>

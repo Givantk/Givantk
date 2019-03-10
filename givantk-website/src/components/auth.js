@@ -18,14 +18,20 @@ class auth {
         if (!success)
           cb('Something wrong happened while signing in,please try again');
         else {
+          axios.defaults.headers.common.Authorization = token;
           bake_cookie('token', token);
           bake_cookie('LoggedIn', true);
+          cb();
         }
       })
       .catch(function(error) {
-        const { incorrectinfo } = error.response.data;
-        if (incorrectinfo) {
-          errorToBeSent = incorrectinfo;
+        if (error.response) {
+          const { incorrectinfo } = error.response.data;
+          if (incorrectinfo) {
+            errorToBeSent = incorrectinfo;
+          }
+        } else {
+          errorToBeSent = "Sorry, Couldn't Connect to the server";
         }
         cb(errorToBeSent);
       });
@@ -34,6 +40,7 @@ class auth {
   //logout turns isAuthenticated into false again then a callback function will be called after tgat
 
   logOut = (cb) => {
+    delete axios.defaults.headers.common.Authorization;
     delete_cookie('LoggedIn');
     delete_cookie('token');
     cb();
@@ -45,9 +52,14 @@ class auth {
     return read_cookie('LoggedIn');
   };
 
+  getToken = () => {
+    const token = read_cookie('token');
+    return token;
+  };
 
-  getToken=()=>{
-    return read_cookie('token');
-  }
+  getTokenHeader = () => {
+    const token = this.getToken();
+    return { headers: { Authorization: token }, crossdomain: true };
+  };
 }
 export default new auth();

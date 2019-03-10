@@ -34,7 +34,7 @@ router.get(
 router.get(
   '/user-services',
   passport.authenticate('jwt', { session: false }),
-  adminController.userServices
+  (adminController.userServices)
 );
 
 // @route  GET api/admin/services-helped-in
