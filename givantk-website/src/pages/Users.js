@@ -63,7 +63,7 @@ class Users extends Component {
         return (
             <div>
                 <CustomTableWithGrid
-                    url="http://localhost:3001/PersonalInfo"
+                    url={`${serverUrl}/api/admin/personal-info`}
                     name="Personal Information"
                     headers={headers[0]}
                     titles={titles[0]}

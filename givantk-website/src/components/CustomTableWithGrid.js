@@ -17,7 +17,7 @@ class CustomTableWithGrid extends Component {
     console.log(this.props.dataArray);
     !this.props.dataArray
       ? axios
-          .get(this.props.url)
+          .get(this.props.url,auth.getTokenHeader())
           .then((res) => {
             //this step is necessary to read nested object in json as using res.data directly will not read them
             let jsonString = JSON.stringify(res.data);
