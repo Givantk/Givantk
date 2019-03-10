@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { View, ScrollView } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
@@ -12,6 +12,7 @@ import ChatInputText from '../../../components/commons/ChatComponents/chatInputT
 import ChatMessage from '../../../components/commons/ChatComponents/chatMessage';
 import serverPath from '../../../assets/utils/httpService';
 import styles from './ChatScreenStyles';
+
 
 class ChatScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -32,11 +33,12 @@ class ChatScreen extends Component {
         name: this.props.currentUser.first_name,
       },
       user2: {
-        id: this.props.profile._id,
+        id: this.props.profile.user._id || this.props.profile.user,
         name: this.props.profile.first_name,
       },
       chatMessage: '',
       chatMessages: [],
+      chatHistory: [],
     };
   }
 
@@ -48,8 +50,12 @@ class ChatScreen extends Component {
       name2: this.state.user2.name,
     };
     // local server is replace with serverPath from heroku
-    this.socket = io({ serverPath }, { query: users_data });
-
+    this.socket = io('http://192.168.1.8:5000', { query: users_data });
+    
+    this.socket.on('history', (docs) => {
+      this.setState({chatHistory: docs});
+    });
+    
     this.socket.on('chat message', (msg) => {
       this.setState({ chatMessages: [...this.state.chatMessages, msg] });
     });
@@ -60,11 +66,18 @@ class ChatScreen extends Component {
       'chat message',
       this.state.chatMessage,
       this.state.user1.id,
+      this.state.user1.name
     );
     this.setState({ chatMessage: '' });
   }
 
   render() {
+    
+    const chatHistory = this.state.chatHistory.map((msg, i) => (
+      <ChatMessage key={i} name={msg.username}>
+        {msg.content}
+      </ChatMessage>
+    ));
     const chatMessages = this.state.chatMessages.map((msg, i) => (
       <ChatMessage key={i} name={this.state.user1.name}>
         {msg}
@@ -72,7 +85,14 @@ class ChatScreen extends Component {
     ));
     return (
       <View style={styles.wrapper}>
-        <ScrollView style={styles.scrollView}>{chatMessages}</ScrollView>
+        <ScrollView style={styles.scrollView}>
+          <View>
+            {chatHistory}
+          </View>
+          <View>
+            {chatMessages}
+          </View>
+        </ScrollView>
         <ChatInputText
           autoCorrect={false}
           value={this.state.chatMessage}

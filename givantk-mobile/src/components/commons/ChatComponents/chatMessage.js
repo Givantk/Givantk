@@ -15,7 +15,8 @@ const ChatMessage = (props) => {
       borderColor: '#0097e6',
       color: '#f5f6fa',
       fontSize: 16,
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      
     },
     name: {
       marginLeft: 5,  
@@ -27,12 +28,16 @@ const ChatMessage = (props) => {
 
   return (
     <View>
-      <Text style={styles.name}>
-        {props.name}
-      </Text>
-      <Text style={styles.message}>
-        {props.children}
-      </Text>
+      <View>
+        <Text style={styles.name}>
+          {props.name}
+        </Text>
+      </View>
+      <View>
+        <Text style={styles.message}>
+          {props.children}
+        </Text>
+      </View>
     </View>
   );
 };
