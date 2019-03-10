@@ -4,9 +4,10 @@ import { Button } from 'react-bootstrap';
 import { pick, isEqual } from 'lodash';
 import { CustomModal } from './CustomModal';
 import toBeShowed from '../functions/toBeShowed';
+import Loader from 'react-loader-spinner';
+
 class CustomTable extends Component {
   state = {
-
     data: {
       columns: [],
       rows: [],
@@ -191,19 +192,31 @@ class CustomTable extends Component {
           {this.props.name}
         </h3>
 
-        <MDBDataTable
-          btn
-          className="text-center"
-          theadColor="text-muted"
-          hover
-          small
-          searchLabel=""
-          dark={this.props.bg === 'dark' ? true : false}
-          data={this.state.data}
-          searching={true}
-          entriesLabel=""
-          responsive
-        />
+        {!this.props.loading ? (
+          <MDBDataTable
+            btn
+            className="text-center"
+            theadColor="text-muted"
+            hover
+            small
+            searchLabel=""
+            dark={this.props.bg === 'dark' ? true : false}
+            data={this.state.data}
+            searching={true}
+            entriesLabel=""
+            responsive
+          />
+        ) : (
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Loader type="Ball-Triangle" color="red" height="100" width="100" />
+          </div>
+        )}
 
         <CustomModal
           show={this.state.showModal}
