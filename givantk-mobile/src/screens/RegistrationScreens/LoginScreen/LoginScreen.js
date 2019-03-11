@@ -3,6 +3,7 @@ import { Text, View, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { Icon } from 'native-base';
 import { colors } from '../../../assets/styles/base';
 import { styles } from './LoginScreenStyles';
 import * as AuthActions from '../../../store/actions/authActions';
@@ -66,7 +67,12 @@ class LoginScreen extends React.Component {
   };
 
   render() {
-    const { navigation, errors, setCurrentUserLoading } = this.props;
+    const {
+      navigation,
+      errors,
+      setCurrentUserLoading,
+      loginWithFacebookLoading,
+    } = this.props;
     return (
       <AvoidKeyboard
         bottomPadding={0}
@@ -101,8 +107,16 @@ class LoginScreen extends React.Component {
               Sign In
             </DefaultButton>
 
-            <DefaultButton onPress={this.handleSignInWithFacebook}>
-              Sign In With Facebook
+            <DefaultButton
+              onPress={this.handleSignInWithFacebook}
+              loading={loginWithFacebookLoading}
+            >
+              Sign In With{' '}
+              <Icon
+                type="FontAwesome"
+                name="facebook-square"
+                style={styles.facebookButton}
+              />
             </DefaultButton>
           </View>
 
@@ -127,18 +141,22 @@ class LoginScreen extends React.Component {
 
 LoginScreen.propTypes = {
   navigation: PropTypes.shape({}),
+
   loginUser: PropTypes.func,
   loginUserWithFacebook: PropTypes.func,
   checkSavedUserThenLogin: PropTypes.func,
   getAllServices: PropTypes.func,
   getCurrentUserProfile: PropTypes.func,
+
   errors: PropTypes.shape({}),
   setCurrentUserLoading: PropTypes.bool,
+  loginWithFacebookLoading: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
   errors: state.errors,
   setCurrentUserLoading: state.auth.setCurrentUserLoading,
+  loginWithFacebookLoading: state.auth.loginWithFacebookLoading,
 });
 
 const mapDispatchToProps = {
