@@ -4,14 +4,20 @@ const passport = require('passport');
 
 const ChatController = require('../controllers/chatController/index');
 
-// @route  POST api/profile/id1+id2
-// @desc   Open chat between 2 users
+// @route  POST api/chat/userId
+// @desc   Load all chats of a user
 // @access Private
 // @errors noprofiles error
 router.post(
-  '/:id1+:id2',
+  '/user/:userId',
   passport.authenticate('jwt', { session: false }),
-  ChatController.openChat
+  ChatController.loadUserChats
+);
+
+router.post(
+  '/socket/:socketId',
+  passport.authenticate('jwt', { session: false }),
+  ChatController.loadPrivateChat
 );
 
 module.exports = router;

@@ -7,6 +7,7 @@ import { colors } from '../../../assets/styles/base';
 import DefaultTextInput from '../../../components/commons/UI/DefaultTextInput/DefaultTextInput';
 import ServicesList from '../../../components/commons/Service-Related-Components/ServicesList/ServicesList';
 import styles from './FeaturedScreenStyles';
+import * as ServiceActions from '../../../store/actions/serviceActions';
 
 class FeaturedScreen extends React.Component {
   static navigationOptions = () => ({
@@ -20,8 +21,22 @@ class FeaturedScreen extends React.Component {
     ),
   });
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchWord: ''
+    }
+  }
+
+  onChangeText = (name, value) => { // can't update the state
+  this.setState(()=>({[name]:value}),() => {
+    //console.log('state updated:' + this.state.searchWord);
+  })
+  }
+  
   navigateToSearchScreen = () => {
-    const { navigation } = this.props;
+    const { navigation, getSearchedServices } = this.props;
+    getSearchedServices(this.state.searchWord); // need to change this to be variable from the state not fixed value
     navigation.navigate('SearchResults');
   };
 
@@ -38,7 +53,8 @@ class FeaturedScreen extends React.Component {
             placeholder="Find a service"
             placeholderTextColor={colors.gray02}
             style={styles.searchInput}
-            onChangeText={() => {}}
+            name='searchWord'
+            onChangeText={this.onChangeText}
           />
           <TouchableWithoutFeedback onPress={this.navigateToSearchScreen}>
             <Icon type="Feather" name="search" style={styles.searchIcon} />
@@ -61,6 +77,7 @@ FeaturedScreen.propTypes = {
   navigation: PropTypes.shape({}),
   allServices: PropTypes.arrayOf(PropTypes.shape({})),
   getAllServicesLoading: PropTypes.bool,
+  getSearchedServices: PropTypes.func,
   errors: PropTypes.shape({}),
 };
 
@@ -70,7 +87,11 @@ const mapStateToProps = (state) => ({
   getAllServicesLoading: state.service.getAllServicesLoading,
 });
 
+const mapDispatchToProps={
+  getSearchedServices: ServiceActions.getSearchedServices
+};
+
 export default connect(
   mapStateToProps,
-  null,
+  mapDispatchToProps,
 )(FeaturedScreen);

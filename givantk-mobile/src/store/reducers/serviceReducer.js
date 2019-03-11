@@ -2,9 +2,11 @@ import * as actionTypes from '../actions/actionTypes';
 
 const INITIAL_STATE = {
   allServices: [],
+  searchedServices: [],
   selectedService: [],
 
   getAllServicesLoading: false,
+  getSearchedServicesLoading: false,
   createServiceLoading: false,
   proposeToServiceLoading: false,
   getServiceLoading: false,
@@ -27,7 +29,20 @@ export default (state = INITIAL_STATE, action) => {
         getAllServicesLoading: false,
         allServices: action.payload ? action.payload : [...state.allServices],
       };
+// ----------------------------------------------------------------------------------
+    case actionTypes.GET_SEARCHED_SERVICES_START:
+      return {
+        ...state,
+        getSearchedServicesLoading: true,
+      };
 
+    case actionTypes.GET_SEARCHED_SERVICES_FINISH:
+      return {
+        ...state,
+        getSearchedServicesLoading: false,
+        searchedServices: action.payload ? action.payload : [...state.searchedServices],
+      };
+//---------------------------------------------------------------------------------------
     case actionTypes.CREATE_SERVICE_START:
       return {
         ...state,
