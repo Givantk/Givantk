@@ -3,7 +3,7 @@ import { Icon } from 'native-base';
 import { View, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
-
+import registerForPushNotificationsAsync from '../../../assets/utils/registerForPushNotificationsAsync';
 import { colors } from '../../../assets/styles/base';
 import DefaultTextInput from '../../../components/commons/UI/DefaultTextInput/DefaultTextInput';
 import ServicesList from '../../../components/commons/Service-Related-Components/ServicesList/ServicesList';
@@ -25,6 +25,13 @@ class FeaturedScreen extends React.Component {
     const { navigation } = this.props;
     navigation.navigate('SearchResults');
   };
+
+  componentWillMount(){
+   registerForPushNotificationsAsync().then((token)=>{
+     console.log(token)
+   }).catch((error)=>console.log(error))
+   
+  }
 
   render() {
     const { navigation, getAllServicesLoading } = this.props;
