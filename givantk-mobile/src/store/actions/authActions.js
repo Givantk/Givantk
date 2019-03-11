@@ -194,6 +194,7 @@ export const loginUserWithFacebook = (callback) => async (dispatch) => {
             });
         })
         .catch((err) => {
+          console.log(err)
           dispatch({
             type: actionTypes.SET_ERRORS,
             payload: err.response.data,

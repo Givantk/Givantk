@@ -3,10 +3,7 @@ const express = require('express');
 const passport = require('passport');
 //const socket = require('socket.io');
 
-
 const app = express();
-
-
 
 // Models
 require('./models/loadModels');
@@ -25,10 +22,12 @@ require('./config/passport')(passport);
 // Cross Origin Problem
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
   res.header(
     'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
+    'Origin, X-Requested-With, Content-Type, Accept, Authorization',
   );
+
   next();
 });
 
@@ -38,14 +37,14 @@ app.use('/api/profile', require('./routes/profile'));
 app.use('/api/service', require('./routes/service'));
 app.use('/api/chat', require('./routes/chat'));
 app.use('/api/admin', require('./routes/admin'));
-app.use('/api/payment',require('./routes/payment'));
-app.use('/api/points',require('./routes/payment'));
-app.use('/assets/images',express.static('assets/images'));
+app.use('/api/payment', require('./routes/payment'));
+app.use('/api/points', require('./routes/points'));
+app.use('/assets/images', express.static('assets/images'));
 
 const port = process.env.PORT || 5000;
 
 const server = app.listen(port, () =>
-  console.log(`Server started on port ${port}`)
+  console.log(`Server started on port ${port}`),
 );
 
 

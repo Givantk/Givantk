@@ -6,6 +6,7 @@ import serviceReducer from './serviceReducer';
 import profileReducer from './profileReducer';
 import PaymentReducer from './PaymentReducer';
 import chatReducer from './chatReducer';
+import pointsReducer from './pointsReducer';
 
 export default combineReducers({
   auth: authReducer,
@@ -14,4 +15,5 @@ export default combineReducers({
   profile: profileReducer,
   payment: PaymentReducer,
   chat: chatReducer,
+  points: pointsReducer,
 });

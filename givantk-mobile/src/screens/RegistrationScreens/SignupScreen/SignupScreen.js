@@ -1,7 +1,8 @@
-import { connect } from 'react-redux';
-import { View } from 'react-native';
-import PropTypes from 'prop-types';
-import React from 'react';
+import { connect } from "react-redux";
+import { View } from "react-native";
+import PropTypes from "prop-types";
+import React from "react";
+import registerForPushNotificationsAsync from '../../../assets/utils/registerForPushNotificationsAsync';
 
 import { colors } from '../../../assets/styles/base';
 import { styles } from './SignupScreenStyles';
@@ -17,16 +18,24 @@ class SignupScreen extends React.Component {
   static navigationOptions = () => ({
     headerTransparent: true,
     headerStyle: {
-      backgroundColor: colors.transparent,
-    },
+      backgroundColor: colors.transparent
+    }
   });
 
-  handleSignup = (user) => {
+  componentWillMount() {
+    registerForPushNotificationsAsync()
+      .then(token => {
+        console.log(token);
+      })
+      .catch(error => console.log(error));
+  }
+
+  handleSignup = user => {
     const { navigation, signupUser } = this.props;
 
     const callback = () => {
-      QuickNotification('Successfully Signed Up, Please Login');
-      navigation.navigate('Login');
+      QuickNotification("Successfully Signed Up, Please Login");
+      navigation.navigate("Login");
     };
 
     signupUser(user, callback);
@@ -83,7 +92,7 @@ SignupScreen.propTypes = {
   signupWithFacebookLoading: PropTypes.bool,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   errors: state.errors,
   signupLoading: state.auth.signupLoading,
   signupWithFacebookLoading: state.auth.loginWithFacebookLoading,
@@ -98,5 +107,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(SignupScreen);
