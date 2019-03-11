@@ -91,7 +91,10 @@ class MakeProfileScreen extends Component {
       // appending keys and value in the new profile form data
 
       newProfile.append('gender', gender.value);
-      newProfile.append('skills', JSON.stringify(skills.split(',')));
+      newProfile.append(
+        'skills',
+        JSON.stringify(skills.split(',').map((s) => s.trim())),
+      );
       newProfile.append('description', description);
       newProfile.append('phone_number', phone_number);
       newProfile.append('date_Of_birth', date_of_birth);

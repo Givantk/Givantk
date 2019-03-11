@@ -6,6 +6,8 @@ import React from 'react';
 import { colors } from '../../../assets/styles/base';
 import { styles } from './SignupScreenStyles';
 import * as AuthActions from '../../../store/actions/authActions';
+import * as ProfileActions from '../../../store/actions/profileActions';
+import * as ServiceActions from '../../../store/actions/serviceActions';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
 import Header from '../../../components/RegistrationsScreensComponents/SignupScreenComponents/Header/Header';
 import QuickNotification from '../../../components/commons/UI/QuickNotification/QuickNotification';
@@ -31,7 +33,18 @@ class SignupScreen extends React.Component {
   };
 
   handleSignupWithFacebook = () => {
-    alert('Facebook sign up clicked');
+    const { loginUserWithFacebook } = this.props;
+
+    const callback = () => {
+      const { navigation, getAllServices, getCurrentUserProfile } = this.props;
+
+      QuickNotification('Login Successful');
+      navigation.replace('Tab');
+      getAllServices();
+      getCurrentUserProfile();
+    };
+
+    loginUserWithFacebook(callback);
   };
 
   render() {
@@ -58,7 +71,12 @@ class SignupScreen extends React.Component {
 
 SignupScreen.propTypes = {
   navigation: PropTypes.shape({}),
+
   signupUser: PropTypes.func,
+  loginUserWithFacebook: PropTypes.func,
+  getAllServices: PropTypes.func,
+  getCurrentUserProfile: PropTypes.func,
+
   errors: PropTypes.shape({}),
   signupLoading: PropTypes.bool,
 };
@@ -70,6 +88,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   signupUser: AuthActions.signupUser,
+  loginUserWithFacebook: AuthActions.loginUserWithFacebook,
+  getAllServices: ServiceActions.getAllServices,
+  getCurrentUserProfile: ProfileActions.getCurrentUserProfile,
 };
 
 export default connect(

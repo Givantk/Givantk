@@ -1,4 +1,4 @@
-import { Picker } from 'native-base';
+import { Picker, Icon } from 'native-base';
 import { View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
@@ -128,7 +128,12 @@ export default class SignupInputs extends Component {
             Sign Up
           </DefaultButton>
           <DefaultButton onPress={onSignupWithFacebook}>
-            Sign Up With Facebook
+            Sign Up With{' '}
+            <Icon
+              type="FontAwesome"
+              name="facebook-square"
+              style={styles.facebookButton}
+            />
           </DefaultButton>
         </View>
       </View>

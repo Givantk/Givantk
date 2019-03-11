@@ -3,6 +3,7 @@ import { Text, View, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { Icon } from 'native-base';
 import { colors } from '../../../assets/styles/base';
 import { styles } from './LoginScreenStyles';
 import * as AuthActions from '../../../store/actions/authActions';
@@ -102,7 +103,12 @@ class LoginScreen extends React.Component {
             </DefaultButton>
 
             <DefaultButton onPress={this.handleSignInWithFacebook}>
-              Sign In With Facebook
+              Sign In With{' '}
+              <Icon
+                type="FontAwesome"
+                name="facebook-square"
+                style={styles.facebookButton}
+              />
             </DefaultButton>
           </View>
 
