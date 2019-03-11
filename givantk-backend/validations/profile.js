@@ -16,12 +16,10 @@ module.exports = function validateProfile(data) {
     errors.phone_number = 'Phone number is required';
   }
 
-  data.skills = eval(data.skills);
-
   if (
     !data.skills ||
     data.skills.length === 0 ||
-    (data.skills.length === 1 && !data.skills[0])
+    (typeof data.skills === 'string' && data.skills.length <= 4)
   ) {
     errors.skills = 'Skills are required';
   }
