@@ -16,16 +16,15 @@ module.exports = function validateProfile(data) {
     errors.phone_number = 'Phone number is required';
   }
 
-  if (!data.skills || data.skills.length === 0) {
+  data.skills = eval(data.skills);
+
+  if (
+    !data.skills ||
+    data.skills.length === 0 ||
+    (data.skills.length === 1 && !data.skills[0])
+  ) {
     errors.skills = 'Skills are required';
   }
-
-
-  // description
-  // if (!isEmpty(data.description))
-  //   if (!Validator.isLength(data.description, { min: 20, max: 600 })) {
-  //     errors.description = 'Description must be between 20 and 600 characters';
-  //   }
 
   //date_of_birth
   if (data.date_of_birth)
@@ -39,6 +38,6 @@ module.exports = function validateProfile(data) {
 
   return {
     errors,
-    isValid: isEmpty(errors),
+    isValid: isEmpty(errors)
   };
 };
