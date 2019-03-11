@@ -17,6 +17,7 @@ const ServicesList = (props) => {
     loading,
     currentUserProfile,
     getCurrentUserProfile,
+    currentUserHasProfile,
     bookmarkService,
     unbookmarkService,
   } = props;
@@ -40,13 +41,29 @@ const ServicesList = (props) => {
       QuickNotification('Service unbookmarked');
     };
 
+    const onBookmarkService = (id) => {
+      if (!currentUserHasProfile) {
+        QuickNotification('Please make a profile first');
+      } else {
+        bookmarkService(id, bookmarkCallback);
+      }
+    };
+
+    const onUnbookmarkService = (id) => {
+      if (!currentUserHasProfile) {
+        QuickNotification('Please make a profile first');
+      } else {
+        unbookmarkService(id, unbookmarkCallback);
+      }
+    };
+
     return (
       <ServiceCard
         service={service.item}
         navigation={navigation}
         bookmarked={bookmarked}
-        onBookmark={(id) => bookmarkService(id, bookmarkCallback)}
-        onUnbookmark={(id) => unbookmarkService(id, unbookmarkCallback)}
+        onBookmark={(id) => onBookmarkService(id)}
+        onUnbookmark={(id) => onUnbookmarkService(id)}
       />
     );
   };
@@ -84,10 +101,12 @@ ServicesList.propTypes = {
   bookmarkService: PropTypes.func,
   unbookmarkService: PropTypes.func,
   getCurrentUserProfile: PropTypes.func,
+  currentUserHasProfile: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
   currentUserProfile: state.profile.currentUserProfile,
+  currentUserHasProfile: state.profile.currentUserHasProfile,
 });
 
 const mapDispatchToProps = {

@@ -21,6 +21,7 @@ import Announcement from '../../../components/commons/UI/Announcement/Announceme
 import getUserImage from '../../../assets/utils/getUserImage';
 import { colors, fontTypes } from '../../../assets/styles/base';
 import MainButton from '../../../components/commons/UI/MainButton/MainButton';
+import quickModal from '../../../components/commons/UI/QuickModal/QuickModal';
 
 class ServiceScreen extends Component {
   static navigationOptions = () => ({
@@ -127,7 +128,9 @@ class ServiceScreen extends Component {
       QuickNotification('Successfully assigned helper');
     };
 
-    acceptServiceProposal(service._id, proposalId, callback);
+    quickModal('This helper will be assigned to your Service', () =>
+      acceptServiceProposal(service._id, proposalId, callback),
+    );
   };
 
   onPressMaskServiceAsDone = () => {

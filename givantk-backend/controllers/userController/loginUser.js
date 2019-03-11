@@ -13,13 +13,11 @@ const validateLoginUser = require('../../validations/loginUser');
 module.exports = loginUser = (req, res) => {
   const { isFacebookEntry, facebookId } = req.body;
 
-  console.log(isFacebookEntry, facebookId);
   if (isFacebookEntry) {
     const errors = {};
 
     User.findOne({ 'login_credentials.facebook.id': facebookId }).then(
       (user) => {
-        console.log(user);
         if (!user) {
           errors.incorrectinfo = 'Not signed up with facebook';
           return res.status(400).json(errors);

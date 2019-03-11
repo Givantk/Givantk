@@ -21,8 +21,7 @@ const upload = multer({
     s3: s3,
     bucket: 'givantk-profile-pictures',
     acl: 'public-read',
-    key: function(req,file, cb) {
-      console.log(file);
+    key: function(req, file, cb) {
       cb(null, Date.now() + '-' + file.originalname); //use Date.now() for unique file keys
     }
   }),
