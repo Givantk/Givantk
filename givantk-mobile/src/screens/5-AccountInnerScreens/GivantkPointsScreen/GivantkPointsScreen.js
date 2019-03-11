@@ -1,4 +1,4 @@
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, ScrollView } from 'react-native';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -25,7 +25,7 @@ class GivantkPointsScreen extends Component {
     const { clickedOnce } = this.state;
     const { currentUserProfile, getCurrentUserProfile, addPoints } = this.props;
 
-    //set the randomPointsNumber in state to a random number between 1 and 10
+    // set the randomPointsNumber in state to a random number between 1 and 10
     currentUserProfile.givantk_points === 0
       ? !clickedOnce
         ? this.setState(
@@ -38,10 +38,7 @@ class GivantkPointsScreen extends Component {
 
               successfullAddingCallback = () => {
                 this.setState({
-                  text:
-                    'Congratulations \n you successfully added ' +
-                    randomPointsNumber +
-                    ' points to your account',
+                  text: `Congratulations \n you successfully added ${randomPointsNumber} points to your account`,
                 });
                 getCurrentUserProfile();
               };
@@ -53,16 +50,14 @@ class GivantkPointsScreen extends Component {
             },
           )
         : this.setState((prevState) => ({
-            text:
-              'You have already added ' +
-              prevState.randomPointsNumber +
-              '\n points to your account',
+            text: `You have already added ${
+              prevState.randomPointsNumber
+            }\n points to your account`,
           }))
       : this.setState({
-          text:
-            'You already have ' +
-            currentUserProfile.givantk_points +
-            ' points in your account.',
+          text: `You already have ${
+            currentUserProfile.givantk_points
+          } points in your account.`,
         });
   };
 
@@ -83,20 +78,22 @@ class GivantkPointsScreen extends Component {
       return <NoProfileDisclaimer navigation={navigation} />;
 
     return (
-      <View style={styles.wrapper}>
-        <Text style={styles.title}>Get Free Givantk Points</Text>
-        <Image style={styles.image} source={{ uri: givantkPointsLogo }} />
-        {!addPointsLoading ? (
-          <View style={{ alignItems: 'center' }}>
-            <MainButton onPress={onButtonClicked}>
-              Get Random Number of Points
-            </MainButton>
-            <Text style={styles.text}>{text}</Text>
-          </View>
-        ) : (
-          <Loading />
-        )}
-      </View>
+      <ScrollView>
+        <View style={styles.wrapper}>
+          <Text style={styles.title}>Get Free Givantk Points</Text>
+          <Image style={styles.image} source={{ uri: givantkPointsLogo }} />
+          {!addPointsLoading ? (
+            <View style={{ alignItems: 'center' }}>
+              <MainButton onPress={onButtonClicked}>
+                Get Random Number of Points
+              </MainButton>
+              <Text style={styles.text}>{text}</Text>
+            </View>
+          ) : (
+            <Loading />
+          )}
+        </View>
+      </ScrollView>
     );
   }
 }

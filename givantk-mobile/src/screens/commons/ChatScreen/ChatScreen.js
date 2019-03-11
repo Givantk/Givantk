@@ -1,15 +1,16 @@
 import { connect } from 'react-redux';
-import { View, Text, ScrollView } from 'react-native';
+import { View, ScrollView, KeyboardAvoidingView } from 'react-native';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 import io from 'socket.io-client';
 
 import { colors } from '../../../assets/styles/base';
+import { serverPath } from '../../../assets/utils/httpService';
 import * as ProfileActions from '../../../store/actions/profileActions';
 import ChatInputText from '../../../components/commons/ChatComponents/chatInputText';
 import ChatMessage from '../../../components/commons/ChatComponents/chatMessage';
-import serverPath from '../../../assets/utils/httpService';
+
 import styles from './ChatScreenStyles';
 
 class ChatScreen extends Component {
@@ -81,20 +82,28 @@ class ChatScreen extends Component {
       </ChatMessage>
     ));
     return (
-      <View style={styles.wrapper}>
-        <ScrollView style={styles.scrollView}>
-          <View>{chatHistory}</View>
-          <View>{chatMessages}</View>
+      <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={85}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={{ height: '100%' }}
+          contentContainerStyle={{ height: '100%' }}
+        >
+          <View style={styles.wrapper}>
+            <ScrollView style={styles.scrollView}>
+              <View>{chatHistory}</View>
+              <View>{chatMessages}</View>
+            </ScrollView>
+            <ChatInputText
+              autoCorrect={false}
+              value={this.state.chatMessage}
+              onSubmitEditing={() => this.submitChatMessage()}
+              onChangeText={(chatMessage) => {
+                this.setState({ chatMessage });
+              }}
+            />
+          </View>
         </ScrollView>
-        <ChatInputText
-          autoCorrect={false}
-          value={this.state.chatMessage}
-          onSubmitEditing={() => this.submitChatMessage()}
-          onChangeText={(chatMessage) => {
-            this.setState({ chatMessage });
-          }}
-        />
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }

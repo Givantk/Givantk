@@ -4,7 +4,7 @@ import {
   Text,
   StyleSheet,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
 
 const ChatInputText = (props) => {
@@ -12,7 +12,7 @@ const ChatInputText = (props) => {
     container: {
       flex: 1,
       justifyContent: 'flex-end',
-      marginBottom: 0
+      marginBottom: 0,
     },
     textInput: {
       position: 'absolute',
@@ -24,15 +24,15 @@ const ChatInputText = (props) => {
       paddingRight: 20,
       backgroundColor: '#dfe6e9',
       borderColor: '#0984e3',
-      fontSize: 16
-    }
+      fontSize: 16,
+    },
   });
 
   return (
     <View style={styles.container}>
       <TextInput
         style={styles.textInput}
-        placeholder='Type a message...'
+        placeholder="Type a message..."
         autoCorrect={props.autoCorrect}
         value={props.value}
         onSubmitEditing={props.onSubmitEditing}

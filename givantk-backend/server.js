@@ -25,7 +25,7 @@ app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
   res.header(
     'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+    'Origin, X-Requested-With, Content-Type, Accept, Authorization'
   );
 
   next();
@@ -44,36 +44,42 @@ app.use('/assets/images', express.static('assets/images'));
 const port = process.env.PORT || 5000;
 
 const server = app.listen(port, () =>
-  console.log(`Server started on port ${port}`),
+  console.log(`Server started on port ${port}`)
 );
-
-
 
 const io = require('socket.io').listen(server);
 //const ChatController = require('../controllers/chatController/index');
 const Chat = require('./models/Chat');
 io.use((socket, next) => {
-
   // accept the user data given from this.socket = io('http://192.168.1.8:5000', {query: users_data}); in front-end
   socket.id = socket.handshake.query.id1 + '+' + socket.handshake.query.id2; // socket.id is the combination of the 2 ids
   // check first if the socket exists but reversed
-  let socketIDReversed = socket.handshake.query.id2 + '+' + socket.handshake.query.id1;
+  let socketIDReversed =
+    socket.handshake.query.id2 + '+' + socket.handshake.query.id1;
 
-  Chat.countDocuments({socketID: socketIDReversed}, (err, count) => {
-    if(count == 0) { // no socket found
+  Chat.countDocuments({ socketID: socketIDReversed }, (err, count) => {
+    if (count == 0) {
+      // no socket found
       console.log('socket not found, creating new socket...');
       socketIO(socket.id);
-    } 
-    else { // socket found
+    } else {
+      // socket found
       socket.id = socketIDReversed;
       console.log('socket changed to: ' + socket.id);
       socketIO(socket.id);
-    } 
+    }
   });
-  
+
   function socketIO(FinalSocketID) {
-    console.log('A connection is established and socket id is ' + FinalSocketID);
-    console.log(socket.handshake.query.name1 + ' and ' + socket.handshake.query.name2 + ' entered the chat.');
+    console.log(
+      'A connection is established and socket id is ' + FinalSocketID
+    );
+    console.log(
+      socket.handshake.query.name1 +
+        ' and ' +
+        socket.handshake.query.name2 +
+        ' entered the chat.'
+    );
 
     let socketID = FinalSocketID;
     let message = {
@@ -85,50 +91,46 @@ io.use((socket, next) => {
       socketID: socketID,
       $push: { message: message }
     });
-    chat.save((error) => { // check if there is a chat history in our DB or not
-      if(error) {
-
+    chat.save((error) => {
+      // check if there is a chat history in our DB or not
+      if (error) {
         console.log('Chat History Already Exists'); // so we must load the chat history from DB
-        Chat.find({socketID: socketID}, (err, docs) => {
-          if(err)
-            console.log('no messages found.');
+        Chat.find({ socketID: socketID }, (err, docs) => {
+          if (err) console.log('no messages found.');
           else {
             //console.log(docs[0].message); // view all chat history in console
             io.emit('history', docs[0].message); // send chat history to front-end
           }
         });
-
-      }
-        
-      else 
-        console.log('Chat History Created.');
+      } else console.log('Chat History Created.');
     });
-    
 
     // accept the msg entered in the TextInput field from the first user then send it to the other user
     socket.on('chat message', (msg, userid, username) => {
       console.log(username + ': ' + msg);
-      Chat.updateOne({socketID: socketID}, {$push: { // add the new msg to DB
+      Chat.updateOne(
+        { socketID: socketID },
+        {
+          $push: {
+            // add the new msg to DB
             message: {
-              "userid": userid,
-              "username": username,
-              "content": msg
-            } 
+              userid: userid,
+              username: username,
+              content: msg
+            }
           }
-        }, (error) => {
-          if(error)
-            console.log(error);
-          else
-            console.log('Message Stored');
+        },
+        (error) => {
+          if (error) console.log(error);
+          else console.log('Message Stored');
         }
       );
 
       io.emit('chat message', msg); // after storing the msg we send it back to the other user
     });
-    
+
     next();
   }
-  
 });
 
 // To push to heroku, we just do 'git push heroku master' from the backend

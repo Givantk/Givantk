@@ -7,6 +7,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
     marginTop: 24,
+    justifyContent: 'space-between',
+    height: '100%',
   },
   scrollView: {
     marginBottom: 50,
