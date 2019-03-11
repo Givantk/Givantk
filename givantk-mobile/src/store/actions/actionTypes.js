@@ -32,7 +32,9 @@ export const MAKE_PROFILE_FINISH = 'MAKE_PROFILE_FINISH';
 
 
 //payment action types
-
 export const MAKE_PAYMENT_START = 'MAKE_PAYMENT_START';
 export const MAKE_PAYMENT_FINISH = 'MAKE_PAYMENT_FINISH';
 
+// chat action types
+export const LOAD_USER_CHATS_START = 'LOAD_USER_CHATS_START';
+export const LOAD_USER_CHATS_FINISH = 'LOAD_USER_CHATS_FINISH';

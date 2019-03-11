@@ -5,6 +5,7 @@ import errorReducer from './errorReducer';
 import serviceReducer from './serviceReducer';
 import profileReducer from './profileReducer';
 import PaymentReducer from './PaymentReducer';
+import chatReducer from './chatReducer';
 
 export default combineReducers({
   auth: authReducer,
@@ -12,4 +13,5 @@ export default combineReducers({
   service: serviceReducer,
   profile: profileReducer,
   payment: PaymentReducer,
+  chat: chatReducer,
 });
