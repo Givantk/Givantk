@@ -13,7 +13,9 @@ module.exports = addGivantkPoints = (req, res) => {
         return res.status(404).json(errors);
       }
 
-      profile.givank_points += req.body.amount;
+      console.log(req.body.pointsAdded)
+
+      profile.givantk_points += req.body.pointsAdded;
       profile.save().then(() => {
         return res.json({
           success: true,

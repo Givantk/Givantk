@@ -38,17 +38,20 @@ module.exports = markServiceAsDone = (req, res) => {
                 }\" as done`,
                 navigateTo: {
                   kind: 'service',
-                  service: service._id
+                  service: service._id,
                 },
                 is_user_associated: true,
                 user_associated: askerProfile.user,
-                user_profile_associated: askerProfile._id
+                user_profile_associated: askerProfile._id,
               });
+              service.nature === 'free'
+                ? (helperProfile.givantk_points += service.givantk_points)
+                : (helperProfile.money_points += service.money_points);
 
               helperProfile.save();
-            }
+            },
           );
-        }
+        },
       );
 
       // Updating service

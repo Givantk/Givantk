@@ -4,9 +4,10 @@ import { Button } from 'react-bootstrap';
 import { pick, isEqual } from 'lodash';
 import { CustomModal } from './CustomModal';
 import toBeShowed from '../functions/toBeShowed';
+import Loader from 'react-loader-spinner';
+
 class CustomTable extends Component {
   state = {
-
     data: {
       columns: [],
       rows: [],
@@ -100,8 +101,6 @@ class CustomTable extends Component {
     } else {
       const dataObj = this.props.values[buttonIndex];
       const { navigationTitle } = this.props;
-      console.log('this is');
-      console.log(dataObj[navigationTitle]);
       toBeShowed.setShowed(dataObj[navigationTitle]);
       this.props.navigate();
     }
@@ -118,11 +117,13 @@ class CustomTable extends Component {
     values.map((dataObj, i) => {
       //loop over the keys of the object
 
-      /*  for (let key in dataObj) {
+      for (let key in dataObj) {
         if (Array.isArray(dataObj[key])) {
-          dataObj[key] = dataObj[key].join(', ');
+          if (typeof dataObj[key][0] === 'string')
+            dataObj[key] = dataObj[key].join('\r\n');
+          else break;
         }
-      }*/
+      }
 
       // special column type is a column that contains button, if its value is
       // assigned to true then the condition below will be achieved
@@ -191,19 +192,31 @@ class CustomTable extends Component {
           {this.props.name}
         </h3>
 
-        <MDBDataTable
-          btn
-          className="text-center"
-          theadColor="text-muted"
-          hover
-          small
-          searchLabel=""
-          dark={this.props.bg === 'dark' ? true : false}
-          data={this.state.data}
-          searching={true}
-          entriesLabel=""
-          responsive
-        />
+        {!this.props.loading ? (
+          <MDBDataTable
+            btn
+            className="text-center"
+            theadColor="text-muted"
+            hover
+            small
+            searchLabel=""
+            dark={this.props.bg === 'dark' ? true : false}
+            data={this.state.data}
+            searching={true}
+            entriesLabel=""
+            responsive
+          />
+        ) : (
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Loader type="Ball-Triangle" color="red" height="100" width="100" />
+          </div>
+        )}
 
         <CustomModal
           show={this.state.showModal}

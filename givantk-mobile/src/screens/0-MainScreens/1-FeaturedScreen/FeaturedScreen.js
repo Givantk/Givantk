@@ -3,7 +3,6 @@ import { Icon } from 'native-base';
 import { View, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
-
 import { colors } from '../../../assets/styles/base';
 import DefaultTextInput from '../../../components/commons/UI/DefaultTextInput/DefaultTextInput';
 import ServicesList from '../../../components/commons/Service-Related-Components/ServicesList/ServicesList';
@@ -25,6 +24,7 @@ class FeaturedScreen extends React.Component {
     const { navigation } = this.props;
     navigation.navigate('SearchResults');
   };
+
 
   render() {
     const { navigation, getAllServicesLoading } = this.props;

@@ -28,13 +28,14 @@ module.exports = userServices = (req, res) => {
           services_asked_for_finished:
             profile.services_asked_for_finished.length,
           services_helped_in_finished:
-            profile.services_helped_in_finished.length
+            profile.services_helped_in_finished.length,
         });
       });
 
       return res.json(userServicesArray);
     })
     .catch((err) => {
+      console.log(err);
       errors.error = 'Error fetching users from database';
       res.status(500).json({ ...errors, ...err });
     });

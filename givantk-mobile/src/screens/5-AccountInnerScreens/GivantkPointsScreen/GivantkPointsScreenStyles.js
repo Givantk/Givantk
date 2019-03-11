@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
-  text: {
+  title: {
     marginTop:60,  
     fontSize: 30,
     marginBottom: 10,
@@ -20,11 +20,11 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginBottom: 20,
   },
-  warning: {
-    fontSize: 15,
-    color: colors.red,
+  text: {
+    fontSize: 20,
+    color: colors.primary,
     marginTop: 5,
-    alignSelf:'center'
+    textAlign: 'center'
   },
   button:{
     alignSelf:'center'

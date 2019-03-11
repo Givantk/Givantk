@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import CustomTable from './CustomTable';
 import axios from 'axios';
+import auth from './auth';
 
 class CustomTableWithGrid extends Component {
   state = {
     UsersData: [],
+    loading: true,
   };
 
   buttonClicked = (index) => {
@@ -13,25 +15,25 @@ class CustomTableWithGrid extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props.dataArray)
-    !this.props.dataArray?
-      axios
-        .get(this.props.url, { crossdomain: true })
-        .then((res) => {
-          //this step is necessary to read nested object in json as using res.data directly will not read them
-          let jsonString = JSON.stringify(res.data);
-          this.setState({ UsersData: JSON.parse(jsonString) });
-          console.log(JSON.parse(jsonString));
-        })
-        .catch((err) => {
-          console.log(err);
-        }):this.setState({ UsersData: this.props.dataArray });
+    !this.props.dataArray
+      ? axios
+          .get(this.props.url, auth.getTokenHeader())
+          .then((res) => {
+            //this step is necessary to read nested object in json as using res.data directly will not read them
+            let newUsersData = JSON.parse(JSON.stringify(res.data));
+            this.setState({
+              UsersData: newUsersData,
+              loading: false,
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+      : this.setState({ UsersData: this.props.dataArray, loading: false });
   }
 
-  
   render() {
-    var { UsersData } = this.state; // json array
-
+    const { UsersData, loading } = this.state; // json array and loading flag
     return (
       <div>
         <Container fluid={true}>
@@ -39,7 +41,12 @@ class CustomTableWithGrid extends Component {
             <Col xl="10" lg="9" md="8" className="ml-auto">
               <Row>
                 <Col xl="12" className="mb-4">
-                  <CustomTable {...this.props} values={UsersData} bg="dark" />
+                  <CustomTable
+                    {...this.props}
+                    values={UsersData}
+                    bg="dark"
+                    loading={loading}
+                  />
                 </Col>
               </Row>
             </Col>

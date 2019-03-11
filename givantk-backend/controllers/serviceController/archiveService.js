@@ -26,8 +26,12 @@ module.exports = archiveService = (req, res) => {
         (askerProfile) => {
           // Updating user profile
           askerProfile.services_archived.unshift(service._id);
+          service.nature === 'free'
+            ? (askerProfile.givantk_points += service.givantk_points)
+            : (askerProfile.money_points += service.money_points);
+
           askerProfile.save();
-        }
+        },
       );
 
       // Updating service
