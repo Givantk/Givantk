@@ -23,7 +23,7 @@ export const removeAuthToken = () => {
 };
 
 export const serverPath = 'http://10.0.0.11:5000/';
-export const userAPI = 'http://10.0.0.11:5000/api/user';
-export const serviceAPI = 'http://10.0.0.11:5000/api/service';
-export const profileAPI = 'http://10.0.0.11:5000/api/profile';
-export const paymentAPI = 'http://10.0.0.11:5000/api/payment';
+export const userAPI = `${serverPath}/api/user`;
+export const serviceAPI = `${serverPath}/api/service`;
+export const profileAPI = `${serverPath}/api/profile`;
+export const paymentAPI = `${serverPath}/api/payment`;

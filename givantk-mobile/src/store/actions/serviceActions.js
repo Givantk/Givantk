@@ -30,7 +30,7 @@ export const getSearchedServices = (searchedKeyword, callback) => (dispatch) => 
     type: actionTypes.GET_SEARCHED_SERVICES_START,
   });
   http
-    .get(`http://10.0.0.11:5000/api/service/search/${searchedKeyword}`)
+    .get(`${serviceAPI}/search/${searchedKeyword}`)
     .then((res) => {
       dispatch({
         type: actionTypes.GET_SEARCHED_SERVICES_FINISH,
