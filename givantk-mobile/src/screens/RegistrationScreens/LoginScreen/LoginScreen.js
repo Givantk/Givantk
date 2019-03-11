@@ -67,7 +67,12 @@ class LoginScreen extends React.Component {
   };
 
   render() {
-    const { navigation, errors, setCurrentUserLoading } = this.props;
+    const {
+      navigation,
+      errors,
+      setCurrentUserLoading,
+      loginWithFacebookLoading,
+    } = this.props;
     return (
       <AvoidKeyboard
         bottomPadding={0}
@@ -102,7 +107,10 @@ class LoginScreen extends React.Component {
               Sign In
             </DefaultButton>
 
-            <DefaultButton onPress={this.handleSignInWithFacebook}>
+            <DefaultButton
+              onPress={this.handleSignInWithFacebook}
+              loading={loginWithFacebookLoading}
+            >
               Sign In With{' '}
               <Icon
                 type="FontAwesome"
@@ -133,18 +141,22 @@ class LoginScreen extends React.Component {
 
 LoginScreen.propTypes = {
   navigation: PropTypes.shape({}),
+
   loginUser: PropTypes.func,
   loginUserWithFacebook: PropTypes.func,
   checkSavedUserThenLogin: PropTypes.func,
   getAllServices: PropTypes.func,
   getCurrentUserProfile: PropTypes.func,
+
   errors: PropTypes.shape({}),
   setCurrentUserLoading: PropTypes.bool,
+  loginWithFacebookLoading: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
   errors: state.errors,
   setCurrentUserLoading: state.auth.setCurrentUserLoading,
+  loginWithFacebookLoading: state.auth.loginWithFacebookLoading,
 });
 
 const mapDispatchToProps = {

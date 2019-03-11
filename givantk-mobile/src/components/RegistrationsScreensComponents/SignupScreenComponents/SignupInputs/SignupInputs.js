@@ -42,7 +42,12 @@ export default class SignupInputs extends Component {
 
   render() {
     const { location } = this.state;
-    const { onSignupWithFacebook, errors, loading } = this.props;
+    const {
+      errors,
+      loading,
+      onSignupWithFacebook,
+      signupWithFacebookLoading,
+    } = this.props;
     return (
       <View
         style={{
@@ -127,7 +132,10 @@ export default class SignupInputs extends Component {
           <DefaultButton onPress={this.onSignup} loading={loading}>
             Sign Up
           </DefaultButton>
-          <DefaultButton onPress={onSignupWithFacebook}>
+          <DefaultButton
+            onPress={onSignupWithFacebook}
+            loading={signupWithFacebookLoading}
+          >
             Sign Up With{' '}
             <Icon
               type="FontAwesome"
@@ -144,6 +152,9 @@ export default class SignupInputs extends Component {
 SignupInputs.propTypes = {
   onSignup: PropTypes.func,
   onSignupWithFacebook: PropTypes.func,
+
   errors: PropTypes.shape({}),
+
   loading: PropTypes.bool,
+  signupWithFacebookLoading: PropTypes.bool,
 };
