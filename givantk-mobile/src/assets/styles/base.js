@@ -60,6 +60,7 @@ const white = Color('#EAEEFF');
 const trueWhite = Color('#FFFFFF');
 const red = Color('#FF0000');
 const disclaimer = Color('#3385ff');
+const facebook = Color('#3b5998');
 const gray01 = Color('#B3B3B3');
 const gray02 = Color('#959595');
 const gray03 = Color('#627273');
@@ -76,6 +77,7 @@ export const colors = {
   trueWhite,
   red,
   disclaimer,
+  facebook,
   gray01,
   gray02,
   gray03,

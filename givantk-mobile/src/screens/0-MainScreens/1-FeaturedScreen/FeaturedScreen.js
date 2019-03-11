@@ -77,6 +77,7 @@ FeaturedScreen.propTypes = {
   allServices: PropTypes.arrayOf(PropTypes.shape({})),
   getAllServicesLoading: PropTypes.bool,
   getSearchedServices: PropTypes.func,
+  errors: PropTypes.shape({}),
 };
 
 const mapStateToProps = (state) => ({

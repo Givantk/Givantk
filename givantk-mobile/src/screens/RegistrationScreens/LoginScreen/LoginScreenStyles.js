@@ -23,6 +23,9 @@ export const styles = StyleSheet.create({
     color: colors.white,
     fontWeight: 'bold',
   },
+  facebookButton: {
+    color: colors.facebook,
+  },
   signupRedirect: {
     flexDirection: 'row',
     marginBottom: gaps.md,

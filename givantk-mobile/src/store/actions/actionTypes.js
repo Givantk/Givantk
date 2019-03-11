@@ -1,6 +1,7 @@
 export const SET_ERRORS = 'SET_ERRORS';
 
 export const LOGIN_USER_START = 'LOGIN_USER_START';
+export const LOGIN_USER_WITH_FACEBOOK_START = 'LOGIN_USER_WITH_FACEBOOK_START';
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const UNSET_CURRENT_USER = 'UNSET_CURRENT_USER';
 export const SIGN_UP_START = 'SIGN_UP_START';
@@ -31,10 +32,12 @@ export const MAKE_PROFILE_START = 'MAKE_PROFILE_START';
 export const MAKE_PROFILE_FINISH = 'MAKE_PROFILE_FINISH';
 
 
-//payment action types
+// payment action types
+
 export const MAKE_PAYMENT_START = 'MAKE_PAYMENT_START';
 export const MAKE_PAYMENT_FINISH = 'MAKE_PAYMENT_FINISH';
 
 // chat action types
+
 export const LOAD_USER_CHATS_START = 'LOAD_USER_CHATS_START';
 export const LOAD_USER_CHATS_FINISH = 'LOAD_USER_CHATS_FINISH';
