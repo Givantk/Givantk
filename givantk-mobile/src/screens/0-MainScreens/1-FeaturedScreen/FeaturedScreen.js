@@ -29,15 +29,15 @@ class FeaturedScreen extends React.Component {
     }
   }
 
-  onChangeText = (text) => { // can't update the state
-    this.setState({searchWord: text}, () => {
-      console.log('state updated:' + this.state.searchWord);
-    });
+  onChangeText = (name, value) => { // can't update the state
+  this.setState(()=>({[name]:value}),() => {
+    //console.log('state updated:' + this.state.searchWord);
+  })
   }
   
   navigateToSearchScreen = () => {
     const { navigation, getSearchedServices } = this.props;
-    getSearchedServices('laptop'); // need to change this to be variable from the state not fixed value
+    getSearchedServices(this.state.searchWord); // need to change this to be variable from the state not fixed value
     navigation.navigate('SearchResults');
   };
 
@@ -53,6 +53,7 @@ class FeaturedScreen extends React.Component {
             placeholder="Find a service"
             placeholderTextColor={colors.gray02}
             style={styles.searchInput}
+            name='searchWord'
             onChangeText={this.onChangeText}
           />
           <TouchableWithoutFeedback onPress={this.navigateToSearchScreen}>
