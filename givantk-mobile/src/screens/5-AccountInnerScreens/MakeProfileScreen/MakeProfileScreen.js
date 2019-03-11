@@ -41,7 +41,7 @@ class MakeProfileScreen extends Component {
     const { uri } = result;
 
     if (!result.cancelled) {
-      this.setState({ avatar: uri,noAvatar:false });
+      this.setState({ avatar: uri, noAvatar: false });
     }
   };
 
@@ -68,18 +68,16 @@ class MakeProfileScreen extends Component {
       getCurrentUserProfile,
     } = this.props;
 
-    //User didn't provide his avatar and he isn't signed with facebook
+    // User didn't provide his avatar and he isn't signed with facebook
     if (!avatar && !currentUser.avatar) {
       this.setState({
         noAvatar: true,
       });
-      
-    }//the user uploaded an avatar or is signed with facebook  
+    } // the user uploaded an avatar or is signed with facebook
     else {
-
       const newProfile = new FormData();
-      //if the user is signed with facebook but wants to upload avatar  
-      
+      // if the user is signed with facebook but wants to upload avatar
+
       if (avatar) {
         const uriParts = avatar.split('.');
         const fileType = uriParts[uriParts.length - 1];
@@ -110,7 +108,7 @@ class MakeProfileScreen extends Component {
 
   render() {
     const { gender, avatar, noAvatar } = this.state;
-    const { errors } = this.props;
+    const { errors, makeProfileLoading } = this.props;
 
     return (
       <AvoidKeyboard bottomPadding={80}>
@@ -122,7 +120,7 @@ class MakeProfileScreen extends Component {
           <View style={styles.imageView}>
             {avatar && <Image style={styles.image} source={{ uri: avatar }} />}
             {noAvatar && (
-              <Text style={styles.error}>Please provide an avatar</Text>
+              <Text style={styles.error}>Please provide a profile picture</Text>
             )}
           </View>
 
@@ -134,7 +132,6 @@ class MakeProfileScreen extends Component {
             onChange={this.onChangeValue}
             options={genderTypes}
             value={gender}
-            // error={errors.type}
           />
 
           <TextInput
@@ -142,7 +139,6 @@ class MakeProfileScreen extends Component {
             placeholder="Example: 01003947562"
             style={styles.input}
             keyboardType="numeric"
-            // error={errors.name}
             name="phone_number"
             onChange={this.onChangeValue}
           />
@@ -165,8 +161,9 @@ class MakeProfileScreen extends Component {
           <Text style={styles.error}>{errors.description}</Text>
 
           <View style={styles.row}>
-            {false && <Loading />}
-            {false || (
+            {makeProfileLoading ? (
+              <Loading />
+            ) : (
               <Button style={styles.submitButton} onPress={this.onSubmit}>
                 <Text style={styles.submitButtonText}>Save</Text>
               </Button>
@@ -182,6 +179,7 @@ MakeProfileScreen.propTypes = {
   navigation: PropTypes.shape(),
   errors: PropTypes.shape(),
   makeProfile: PropTypes.func,
+  makeProfileLoading: PropTypes.bool,
   getCurrentUserProfile: PropTypes.func,
   currentUser: PropTypes.shape({}),
 };
