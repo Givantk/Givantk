@@ -9,6 +9,10 @@ const ChatSchema = new Schema({
     unique: true,
     dropDups: true
   },
+  title:{
+    type: String,
+    required: true
+  },
   message: [{
     userid: {
       type: mongoose.Schema.Types.ObjectId,
