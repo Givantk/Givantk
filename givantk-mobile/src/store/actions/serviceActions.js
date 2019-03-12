@@ -233,18 +233,23 @@ export const archiveService = (serviceId, callback) => (dispatch) => {
 // action that handles new reviews added when a service is finished 
 
 export const addReview = (review, callback) => (dispatch) => {
+ 
+  console.log('ya rab')
   dispatch({
     type: actionTypes.ADD_REVIEW_START,
   });
-  http
-    .post(`${serviceAPI}/review/${review.serviceId}`)
+  console.log('ya rab2 ');
+
+  http.post(`http://192.168.43.91:5000/api/service/review/${review.serviceId}`,review)
     .then(() => {
+      console.log('hi1')
       dispatch({
         type: actionTypes.ADD_REVIEW_FINISH,
       });
       if (callback) callback();
     })
     .catch((err) => {
+      console.log('hi2')
       dispatch({
         type: actionTypes.SET_ERRORS,
         payload: err.response ? err.response.data : serverErrorMessage,
@@ -253,4 +258,6 @@ export const addReview = (review, callback) => (dispatch) => {
         type: actionTypes.ADD_REVIEW_FINISH,
       });
     });
+
+  console.log('ya rab 3')  
 };

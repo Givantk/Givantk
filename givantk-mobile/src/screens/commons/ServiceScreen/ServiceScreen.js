@@ -38,9 +38,9 @@ class ServiceScreen extends Component {
       appliedBefore: false,
       serviceHelper: false,
     },
-    chosenRating: 0,
+    chosenRating: 3,
     rated: false,
-    writtenReview="",
+    writtenReview: '',
   };
 
   componentDidMount() {
@@ -48,7 +48,6 @@ class ServiceScreen extends Component {
 
     if (navigation.state.params) {
       const { service } = navigation.state.params;
-
       if (service) this.setService(service);
     }
   }
@@ -87,6 +86,7 @@ class ServiceScreen extends Component {
     const { currentUser } = this.props;
 
     const ownService = currentUser._id === service.asker._id;
+    const serviceHelper = currentUser._id === service.helper;
 
     const appliedBefore =
       service.applications.filter(
@@ -99,6 +99,7 @@ class ServiceScreen extends Component {
       loggedInUser: {
         ownService,
         appliedBefore,
+        serviceHelper,
       },
     }));
   };
@@ -169,8 +170,62 @@ class ServiceScreen extends Component {
     archiveService(service._id, callback);
   };
 
+  beforeRatingComponents = (loggedInUser, service) => {
+    return (
+      <View>
+        <View style={{ alignItems: 'center' }}>
+          <Text style={styles.ratingText}>Please add rating</Text>
+          <AirbnbRating
+            isDisabled={false}
+            size={30}
+            onFinishRating={(position) =>
+              this.setState({
+                chosenRating: position,
+              })
+            }
+          />
+          <View style={{ width: dimensions.fullWidth * 0.88 }}>
+            <Textarea
+              placeholder="Please add a review (written review is optional)"
+              style={styles.textarea}
+              onChangeText={(v) =>
+                this.setState({
+                  writtenReview: v,
+                })
+              }
+            />
+          </View>
+
+          <MainButton
+            onPress={() =>
+              loggedInUser.ownService
+                ? this.onRating(service.helper)
+                : this.onRating(service.asker._id)
+            }
+          >
+            add review
+          </MainButton>
+        </View>
+      </View>
+    );
+  };
+
+  afterRatingComponents = () => {
+    return (
+      <View>
+        <AirbnbRating isDisabled={true} size={30} />
+        <View style={{ alignItems: 'center' }}>
+          <Text style={styles.ratingText}>
+            Your review helped us creating a better community {'\n \n'} Thanks
+            :D
+          </Text>
+        </View>
+      </View>
+    );
+  };
+
   onRating = (userToBeRated) => {
-    const { addReview } = this.props;
+    const { addReview, getAllServices } = this.props;
     const { chosenRating, service, writtenReview } = this.state;
     const rating = {
       userToBeRated,
@@ -179,6 +234,7 @@ class ServiceScreen extends Component {
       serviceId: service._id,
     };
     const callback = () => {
+      getAllServices();
       this.setState({
         rated: true,
       });
@@ -219,7 +275,6 @@ class ServiceScreen extends Component {
                 </View>
               </View>
             </TouchableWithoutFeedback>
-
             {service.state === 'done' && (
               <Icon
                 style={{
@@ -231,9 +286,7 @@ class ServiceScreen extends Component {
                 name="done"
               />
             )}
-
             <Text style={styles.serviceTitle}>{service.name}</Text>
-
             {loggedInUser.ownService ||
               loggedInUser.appliedBefore ||
               service.state === 'done' ||
@@ -242,13 +295,11 @@ class ServiceScreen extends Component {
                   <Button title="Offer help" onPress={this.onPressOfferHelp} />
                 </View>
               )}
-
             <View style={styles.content}>
               <Text style={styles.descriptionText}>
                 {service.brief_description || service.description}
               </Text>
             </View>
-
             <Text
               style={{
                 color: colors.gray03,
@@ -259,7 +310,6 @@ class ServiceScreen extends Component {
             >
               Service State: {service.state}
             </Text>
-
             {loggedInUser.ownService &&
               !service.helper &&
               (service.state === 'new' ||
@@ -275,7 +325,6 @@ class ServiceScreen extends Component {
                   </MainButton>
                 </View>
               )}
-
             {loggedInUser.ownService &&
               service.helper &&
               (service.state === 'new' ||
@@ -291,13 +340,11 @@ class ServiceScreen extends Component {
                   </MainButton>
                 </View>
               )}
-
             {loggedInUser.appliedBefore && (
               <Text style={styles.disclaimer}>
                 {'You successfully applied for this service 💪🏻'}
               </Text>
             )}
-
             {service.applications.length === 0 && (
               <View>
                 <View>
@@ -314,7 +361,6 @@ class ServiceScreen extends Component {
                 </View>
               </View>
             )}
-
             {service.applications.map((application) =>
               application.chosen ? (
                 <Proposal
@@ -349,55 +395,19 @@ class ServiceScreen extends Component {
                 </View>
               ) : null,
             )}
-
             {/*diplaying rating stars and text for asker and helper if service is finished */}
 
-            {(loggedInUser.ownService || loggedInUser.serviceHelper) &&
-            service.state === 'done' ? (
-              <View>
-                <AirbnbRating
-                  isDisabled={rated}
-                  size={30}
-                  onFinishRating={(position) =>
-                    this.setState({
-                      chosenRating: position,
-                    })
-                  }
-                />
-                <View style={{ alignItems: 'center' }}>
-                  {!rated ? (
-                    <View style={{ width: dimensions.fullWidth * 0.88 }}>
-                      <Textarea
-                        placeholder="Please add a review (written review is optional)"
-                        style={styles.textarea}
-                        onChangeText={(v) =>
-                          this.setState({
-                            writtenReview: v,
-                          })
-                        }
-                      />
-                    </View>
-                  ) : null}
-
-                  {!rated ? (
-                    <MainButton
-                      onPress={() =>
-                        loggedInUser.ownService
-                          ? this.onRating(loggedInUser.serviceHelper)
-                          : this.onRating(loggedInUser.ownService)
-                      }
-                    >
-                      add review
-                    </MainButton>
-                  ) : null}
-                  {rated ? (
-                    <Text style={styles.ratingText}>
-                      Your rating adds to our community, thank you :D
-                    </Text>
-                  ) : null}
-                </View>
-              </View>
-            ) : null}
+            {service.state === 'done'
+              ? loggedInUser.ownService
+                ? service.rated_by_asker
+                  ? this.afterRatingComponents()
+                  : this.beforeRatingComponents(loggedInUser, service)
+                : loggedInUser.serviceHelper
+                ? service.rated_by_helper
+                  ? this.afterRatingComponents()
+                  : this.beforeRatingComponents(loggedInUser, service)
+                : null
+              : null}
           </View>
         </ScrollView>
       </AvoidKeyboard>

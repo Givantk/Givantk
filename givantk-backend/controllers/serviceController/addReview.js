@@ -5,20 +5,43 @@ const Profile = mongoose.model('profile');
 const Service = mongoose.model('service');
 
 module.exports = addReview = (req, res) => {
+  console.log(req.body);
+
   const errors = {};
 
   const serviceId = req.params.service_id;
 
   Service.findById(serviceId)
     .then((service) => {
-      Profile.findOne({ user: service.asker.toString() }).then(
-        (askerProfile) => {
-          askerProfile.save();
-        },
-      );
+      const userId =
+        req.body.userToBeRated === service.asker
+          ? service.asker.toString()
+          : service.helper.toString();
+
+      Profile.findOne({ user: userId }).then((Profile) => {
+        Profile.average_services_rating +=
+          req.body.chosenRating / (Profile.number_of_ratings + 1);
+
+        Profile.number_of_ratings++;
+        Profile.save();
+      });
 
       // Updating service
-      service.rated = true;
+      if (req.body.userToBeRated.toString() === service.asker.toString()) {
+        service.asker_is_rated = {
+          chosen_rating: req.body.chosenRating,
+          written_review: req.body.writtenReview,
+        };
+
+        service.rated_by_helper = true;
+      } else {
+        service.helper_is_rated = {
+          chosen_rating: req.body.chosenRating,
+          written_review: req.body.writtenReview,
+        };
+
+        service.rated_by_asker = true;
+      }
       service.save().then(() => {
         return res.json({ success: true });
       });
