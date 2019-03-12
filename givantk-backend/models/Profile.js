@@ -85,14 +85,17 @@ const ProfileSchema = new Schema({
   services_archived: [{ type: mongoose.Schema.Types.ObjectId, ref: 'service' }],
 
   average_services_rating: {
-
-    type:Number,
-    default:0
+    type: Number,
+    default: 0,
   },
 
-  number_of_ratings:{
-    type:Number,
-    default:0,
+  sum_of_ratings: {
+    type: Number,
+    default: 0,
+  },
+  number_of_ratings: {
+    type: Number,
+    default: 0,
   },
 
   date: {

@@ -19,8 +19,12 @@ module.exports = addReview = (req, res) => {
           : service.helper.toString();
 
       Profile.findOne({ user: userId }).then((Profile) => {
-        Profile.average_services_rating +=
-          req.body.chosenRating / (Profile.number_of_ratings + 1);
+        //Calculating average rating
+
+        Porfile.sum_of_ratings += req.body.chosenRating;
+
+        Profile.average_services_rating =
+          Profile.sum_of_ratings / (Profile.number_of_ratings + 1);
 
         Profile.number_of_ratings++;
         Profile.save();

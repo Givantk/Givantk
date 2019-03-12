@@ -68,6 +68,16 @@ class ProfileScreen extends React.Component {
           />
         ),
       },
+      {
+        name: `${profile.first_name}'s Ratings`,
+        component: () => (
+          <ServicesList
+            services={profile.services_helped_in}
+            loading={getProfileLoading}
+            navigation={navigation}
+          />
+        ),
+      },
     ];
   };
 
@@ -114,6 +124,15 @@ class ProfileScreen extends React.Component {
             </Text>
           </View>
 
+          <View style={styles.userDescriptionContainer}>
+            <Text style={styles.points}>
+              Average Rating:{' '}
+              {profile.average_services_rating === 0
+                ? '-'
+                : profile.average_services_rating}
+            </Text>
+          </View>
+
           {/* Send a message */}
 
           <TouchableWithoutFeedback onPress={() => navigation.navigate('Chat')}>
@@ -131,7 +150,7 @@ class ProfileScreen extends React.Component {
           <SnakeNavigator
             content={this.getSnakeNavigatorContent()}
             navigation={navigation}
-            snakeWidth={dimensions.fullWidth * 0.7}
+            snakeWidth={dimensions.fullWidth * 0.9}
           />
         </AvoidKeyboard>
       </View>
