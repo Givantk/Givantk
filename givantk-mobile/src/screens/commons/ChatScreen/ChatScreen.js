@@ -29,11 +29,11 @@ class ChatScreen extends Component {
     this.state = {
       user1: {
         id: this.props.currentUser._id,
-        name: this.props.currentUser.first_name,
+        name: this.props.currentUser.first_name+' '+this.props.currentUser.last_name,
       },
       user2: {
         id: this.props.profile.user._id || this.props.profile.user,
-        name: this.props.profile.first_name,
+        name: this.props.profile.first_name+' '+this.props.profile.last_name,
       },
       chatMessage: '',
       chatMessages: [],
