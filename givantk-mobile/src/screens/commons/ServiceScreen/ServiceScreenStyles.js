@@ -131,12 +131,20 @@ const styles = StyleSheet.create({
     fontSize: fontSizes.msm,
     fontFamily: fontTypes.main,
   },
+  callToActionText: {
+    alignSelf: 'center',
+    fontSize: 30,
+    textAlign: 'center',
+    color: colors.black,
+    marginTop: 10,
+    marginBottom: 10,
+  },
   ratingText: {
     alignSelf: 'center',
     fontSize: 20,
     textAlign: 'center',
     color: colors.primary,
-    marginTop:10,
+    marginTop: 10,
     marginBottom: 10,
   },
   textarea: {

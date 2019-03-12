@@ -39,7 +39,6 @@ class ServiceScreen extends Component {
       serviceHelper: false,
     },
     chosenRating: 3,
-    rated: false,
     writtenReview: '',
   };
 
@@ -170,11 +169,12 @@ class ServiceScreen extends Component {
     archiveService(service._id, callback);
   };
 
-  beforeRatingComponents = (loggedInUser, service) => {
+  beforeRatingComponents = () => {
+    const {addReviewLoading,loggedInUser,service}=this.state;
     return (
       <View>
         <View style={{ alignItems: 'center' }}>
-          <Text style={styles.ratingText}>Please add rating</Text>
+          <Text style={styles.callToActionText}>Tap To Rate</Text>
           <AirbnbRating
             isDisabled={false}
             size={30}
@@ -197,6 +197,7 @@ class ServiceScreen extends Component {
           </View>
 
           <MainButton
+            loading={addReviewLoading}
             onPress={() =>
               loggedInUser.ownService
                 ? this.onRating(service.helper)
@@ -235,15 +236,12 @@ class ServiceScreen extends Component {
     };
     const callback = () => {
       getAllServices();
-      this.setState({
-        rated: true,
-      });
     };
     addReview(rating, callback);
   };
 
   render() {
-    const { service, loggedInUser, rated } = this.state;
+    const { service, loggedInUser } = this.state;
 
     const { acceptServiceProposalLoading } = this.props;
 
@@ -401,11 +399,11 @@ class ServiceScreen extends Component {
               ? loggedInUser.ownService
                 ? service.rated_by_asker
                   ? this.afterRatingComponents()
-                  : this.beforeRatingComponents(loggedInUser, service)
+                  : this.beforeRatingComponents()
                 : loggedInUser.serviceHelper
                 ? service.rated_by_helper
                   ? this.afterRatingComponents()
-                  : this.beforeRatingComponents(loggedInUser, service)
+                  : this.beforeRatingComponents()
                 : null
               : null}
           </View>
@@ -422,7 +420,10 @@ ServiceScreen.propTypes = {
   markServiceAsDone: PropTypes.func,
   archiveService: PropTypes.func,
   getAllServices: PropTypes.func,
+  addReview:PropTypes.func,
   acceptServiceProposalLoading: PropTypes.bool,
+  addReviewLoading:PropTypes.bool
+  
 };
 
 const mapStateToProps = (state) => ({
@@ -431,6 +432,7 @@ const mapStateToProps = (state) => ({
   acceptServiceProposalLoading: state.service.acceptServiceProposalLoading,
   markServiceAsDoneLoading: state.service.markServiceAsDoneLoading,
   archiveServiceLoading: state.service.archiveServiceLoading,
+  addReviewLoading:state.service.addReviewLoading,
   errors: state.errors,
 });
 

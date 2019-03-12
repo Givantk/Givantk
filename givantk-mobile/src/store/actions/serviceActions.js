@@ -239,11 +239,10 @@ export const addReview = (review, callback) => (dispatch) => {
 
   http
     .post(
-      `http://192.168.43.91:5000/api/service/review/${review.serviceId}`,
+      `http://192.168.0.5:5000/api/service/review/${review.serviceId}`,
       review,
     )
     .then(() => {
-      console.log('hi1');
       dispatch({
         type: actionTypes.ADD_REVIEW_FINISH,
       });
@@ -259,5 +258,4 @@ export const addReview = (review, callback) => (dispatch) => {
       });
     });
 
-  console.log('ya rab 3');
 };
