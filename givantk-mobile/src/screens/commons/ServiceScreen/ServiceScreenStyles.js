@@ -131,6 +131,24 @@ const styles = StyleSheet.create({
     fontSize: fontSizes.msm,
     fontFamily: fontTypes.main,
   },
+  ratingText: {
+    alignSelf: 'center',
+    fontSize: 20,
+    textAlign: 'center',
+    color: colors.primary,
+    marginTop:10,
+    marginBottom: 10,
+  },
+  textarea: {
+    backgroundColor: colors.trueWhite,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: colors.primary,
+    height: 170,
+    marginTop: 10,
+    marginBottom: 20,
+    padding: 10,
+  },
 });
 
 export default styles;
