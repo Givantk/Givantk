@@ -34,6 +34,7 @@ const MainNavigator = createStackNavigator(
     ArchivedServices: screens.ArchivedServicesScreen,
     Announcement: screens.AnnouncementScreen,
     MakeProfile: screens.MakeProfileScreen,
+    MessagesChat: screens.MessagesChatScreen,
   },
   {
     initialRouteName: 'Login',
