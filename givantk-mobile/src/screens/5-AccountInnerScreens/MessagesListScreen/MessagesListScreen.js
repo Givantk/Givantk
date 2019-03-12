@@ -21,10 +21,36 @@ class MessagesListScreen extends Component {
   });
 
   
-  chatNavigatorHandle = (chatID) => {
-    const { navigation } = this.props;
-    navigation.navigate('Chat', { chatID: chatID }); //we need a new chat screen
-    //console.log('button pressed');
+  chatNavigatorHandle = (chatID, chatTitle) => {
+    const { navigation, currentUser } = this.props;
+
+    // we are going to pass the second user to the chat screen
+    /* we don't need to pass the first user (logged in user) because we get him from 
+    currentUser.first_name and currentUser._id */
+
+    const users = chatTitle.split(' & '); // spliting user1 and user2 names
+    const IDs = chatID.split('+'); // splitiing user1 and user2 IDs
+    
+    let user2 = {
+      id: '',
+      name: ''
+    }
+
+
+    if(users[0] != currentUser.first_name+' '+currentUser.last_name){
+      user2.name = users[0];
+    } else {
+      user2.name = users[1];
+    }
+    
+    if(IDs[0] != currentUser._id) {
+      user2.id = IDs[0];
+    } else {
+      user2.id = IDs[1];
+    }
+  
+    navigation.navigate('MessagesChat', { user2: user2 }); // send user2 to MessagesChatScreen
+    //console.log(user2);
   };
 
   render() {
@@ -32,7 +58,7 @@ class MessagesListScreen extends Component {
       <TouchableOpacity
           key={i}
           style={styles.customBtn}
-          onPress={() => this.chatNavigatorHandle(chat.socketID)}
+          onPress={() => this.chatNavigatorHandle(chat.socketID, chat.title)}
         >
           <View style={styles.customView}>
             <Text style={styles.customText}>{chat.title}</Text>
