@@ -170,7 +170,9 @@ class ServiceScreen extends Component {
   };
 
   beforeRatingComponents = () => {
-    const {addReviewLoading,loggedInUser,service}=this.state;
+    const {loggedInUser,service}=this.state;
+    const {addReviewLoading}=this.props;
+    console.log(addReviewLoading)
     return (
       <View>
         <View style={{ alignItems: 'center' }}>
@@ -196,8 +198,7 @@ class ServiceScreen extends Component {
             />
           </View>
 
-          <MainButton
-            loading={addReviewLoading}
+          {!addReviewLoading?<MainButton
             onPress={() =>
               loggedInUser.ownService
                 ? this.onRating(service.helper)
@@ -205,7 +206,7 @@ class ServiceScreen extends Component {
             }
           >
             add review
-          </MainButton>
+          </MainButton>:<Loading/>}
         </View>
       </View>
     );

@@ -121,7 +121,7 @@ export default (state = INITIAL_STATE, action) => {
         archiveServiceLoading: false,
       };
 
-    case actionTypes.ADD_POINTS_START:
+    case actionTypes.ADD_REVIEW_START:
       return {
         ...state,
         addReviewLoading: true,
