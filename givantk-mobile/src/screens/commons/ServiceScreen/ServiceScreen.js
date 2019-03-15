@@ -172,7 +172,6 @@ class ServiceScreen extends Component {
   beforeRatingComponents = () => {
     const {loggedInUser,service}=this.state;
     const {addReviewLoading}=this.props;
-    console.log(addReviewLoading)
     return (
       <View>
         <View style={{ alignItems: 'center' }}>

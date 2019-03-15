@@ -10,6 +10,13 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     paddingHorizontal: 20,
   },
+  imageView: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  label: {
+    color: colors.gray02,
+  },
   topInputsContainer: { marginTop: 10 },
   text: {
     fontWeight: 'bold',
@@ -80,6 +87,24 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 20,
   },
+  uploadButton: {
+    justifyContent: 'center',
+    alignSelf: 'stretch',
+    borderRadius: 20,
+    backgroundColor: colors.primaryLight,
+    marginBottom: 10,
+    marginTop: 10,
+  },
+  uploadButtonText: {
+    color: colors.trueWhite,
+    fontSize: 15,
+  },
+
+  image:{
+    width: 400,
+    height: 400,
+  }
+ 
 });
 
 export default styles;
