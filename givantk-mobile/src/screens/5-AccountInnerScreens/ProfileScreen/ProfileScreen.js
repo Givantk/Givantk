@@ -49,7 +49,7 @@ class ProfileScreen extends React.Component {
     const { profile, getProfileLoading, navigation } = this.props;
     return [
       {
-        name: `${profile.first_name} asked for`,
+        name: `Asked for`,
         component: () => (
           <ServicesList
             services={profile.services_asked_for}
@@ -59,7 +59,7 @@ class ProfileScreen extends React.Component {
         ),
       },
       {
-        name: `${profile.first_name} helped in`,
+        name: `Helped in`,
         component: () => (
           <ServicesList
             services={profile.services_helped_in}
@@ -69,7 +69,7 @@ class ProfileScreen extends React.Component {
         ),
       },
       {
-        name: `${profile.first_name}'s Ratings`,
+        name: `Reviews`,
         component: () => (
           <ServicesList
             services={profile.services_helped_in}
@@ -126,7 +126,8 @@ class ProfileScreen extends React.Component {
 
           <View style={styles.userDescriptionContainer}>
             <Text style={styles.points}>
-              Average Rating:{' '}
+              Average Rating:
+              {console.log(profile)}
               {profile.average_services_rating === 0
                 ? '-'
                 : profile.average_services_rating}

@@ -14,7 +14,7 @@ module.exports = addReview = (req, res) => {
   Service.findById(serviceId)
     .then((service) => {
       const userId =
-        req.body.userToBeRated === service.asker
+        req.body.userToBeRated.toString() === service.asker.toString()
           ? service.asker.toString()
           : service.helper.toString();
 
@@ -22,12 +22,14 @@ module.exports = addReview = (req, res) => {
         //Calculating average rating
 
         Profile.sum_of_ratings += req.body.chosenRating;
-
+        
         Profile.average_services_rating =
         Profile.sum_of_ratings / (Profile.number_of_ratings + 1);
 
         Profile.number_of_ratings++;
-        Profile.save();
+        Profile.save().then(()=>{
+          console.log('saved successfully')
+        });
       });
 
       // Updating service
