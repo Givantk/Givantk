@@ -239,7 +239,7 @@ export const addReview = (review, callback) => (dispatch) => {
 
   http
     .post(
-      `http://192.168.0.5:5000/api/service/review/${review.serviceId}`,
+      `http://192.168.0.8:5000/api/service/review/${review.serviceId}`,
       review,
     )
     .then(() => {

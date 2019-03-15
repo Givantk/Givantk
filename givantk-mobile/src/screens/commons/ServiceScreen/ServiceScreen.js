@@ -213,7 +213,8 @@ class ServiceScreen extends Component {
 
   afterRatingComponents = () => {
     const {loggedInUser,service}=this.state;
-    const rating=loggedInUser.serviceHelper?service.asker_is_rated.chosenRating:service.helper_is_rated.chosenRating
+    const rating=loggedInUser.serviceHelper?service.asker_is_rated.chosen_rating:service.helper_is_rated.chosen_rating
+ 
     return (
       <View>
         <AirbnbRating isDisabled={true} size={30} defaultRating={rating} />

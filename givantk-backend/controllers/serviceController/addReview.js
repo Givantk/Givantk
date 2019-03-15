@@ -21,10 +21,10 @@ module.exports = addReview = (req, res) => {
       Profile.findOne({ user: userId }).then((Profile) => {
         //Calculating average rating
 
-        Porfile.sum_of_ratings += req.body.chosenRating;
+        Profile.sum_of_ratings += req.body.chosenRating;
 
         Profile.average_services_rating =
-          Profile.sum_of_ratings / (Profile.number_of_ratings + 1);
+        Profile.sum_of_ratings / (Profile.number_of_ratings + 1);
 
         Profile.number_of_ratings++;
         Profile.save();
