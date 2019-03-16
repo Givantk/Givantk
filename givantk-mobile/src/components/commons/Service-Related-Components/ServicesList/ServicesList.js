@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { FlatList } from 'react-native';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Component } from 'react';
 
 import * as ProfileActions from '../../../../store/actions/profileActions';
 import * as ServiceActions from '../../../../store/actions/serviceActions';
@@ -10,19 +10,21 @@ import Loading from '../../UI/Loading/Loading';
 import QuickNotification from '../../UI/QuickNotification/QuickNotification';
 import ServiceCard from '../ServiceCard/ServiceCard';
 
-const ServicesList = (props) => {
-  const {
-    navigation,
-    services,
-    loading,
-    currentUserProfile,
-    getCurrentUserProfile,
-    currentUserHasProfile,
-    bookmarkService,
-    unbookmarkService,
-  } = props;
+class ServicesList extends Component {
+  state = {
+    refreshing: false,
+  };
 
-  const renderItem = (service) => {
+  renderItem = (service) => {
+    const {
+      navigation,
+      currentUserProfile,
+      getCurrentUserProfile,
+      currentUserHasProfile,
+      bookmarkService,
+      unbookmarkService,
+    } = this.props;
+
     let bookmarked = false;
     if (currentUserProfile && currentUserProfile.services_bookmarked) {
       bookmarked =
@@ -68,19 +70,43 @@ const ServicesList = (props) => {
     );
   };
 
-  if (loading) return <Loading />;
-  if (services.length === 0) return <Announcement text="No services yet" />;
+  handleRefresh = () => {
+    const { onRefresh } = this.props;
+    if (!onRefresh) return;
+    this.setState(
+      () => ({
+        refreshing: true,
+      }),
+      () => {
+        onRefresh(
+          this.setState({ refreshing: false }),
+          this.setState({ refreshing: false }),
+        );
+      },
+    );
+  };
 
-  return (
-    <FlatList
-      style={{ height: '100%' }}
-      data={services}
-      keyExtractor={(item) => item._id}
-      showsVerticalScrollIndicator={false}
-      renderItem={renderItem}
-    />
-  );
-};
+  render() {
+    const { services, loading } = this.props;
+
+    const { refreshing } = this.state;
+
+    if (loading) return <Loading />;
+    if (services.length === 0) return <Announcement text="No services yet" />;
+
+    return (
+      <FlatList
+        style={{ height: '100%' }}
+        data={services}
+        keyExtractor={(item) => item._id}
+        showsVerticalScrollIndicator={false}
+        renderItem={this.renderItem}
+        refreshing={refreshing}
+        onRefresh={this.handleRefresh}
+      />
+    );
+  }
+}
 
 ServicesList.defaultProps = {
   services: [],
@@ -94,10 +120,12 @@ ServicesList.propTypes = {
 };
 
 ServicesList.propTypes = {
-  currentUserProfile: PropTypes.shape({}),
   navigation: PropTypes.shape({}),
   services: PropTypes.arrayOf(PropTypes.shape({})),
   loading: PropTypes.bool,
+  onRefresh: PropTypes.func,
+
+  currentUserProfile: PropTypes.shape({}),
   bookmarkService: PropTypes.func,
   unbookmarkService: PropTypes.func,
   getCurrentUserProfile: PropTypes.func,

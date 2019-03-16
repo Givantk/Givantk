@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import { colors } from '../../../assets/styles/base';
+import * as ServiceActions from '../../../store/actions/serviceActions';
 import DefaultTextInput from '../../../components/commons/UI/DefaultTextInput/DefaultTextInput';
 import ServicesList from '../../../components/commons/Service-Related-Components/ServicesList/ServicesList';
 import styles from './FeaturedScreenStyles';
@@ -29,6 +30,8 @@ class FeaturedScreen extends React.Component {
   render() {
     const { navigation, getAllServicesLoading } = this.props;
     let { allServices } = this.props;
+    const { getAllServices } = this.props;
+
     allServices = allServices.filter((s) => s.state !== 'archived');
 
     return (
@@ -50,6 +53,7 @@ class FeaturedScreen extends React.Component {
             services={allServices}
             loading={getAllServicesLoading}
             navigation={navigation}
+            onRefresh={getAllServices}
           />
         )}
       </View>
@@ -61,6 +65,7 @@ FeaturedScreen.propTypes = {
   navigation: PropTypes.shape({}),
   allServices: PropTypes.arrayOf(PropTypes.shape({})),
   getAllServicesLoading: PropTypes.bool,
+  getAllServices: PropTypes.func,
   errors: PropTypes.shape({}),
 };
 
@@ -70,7 +75,11 @@ const mapStateToProps = (state) => ({
   getAllServicesLoading: state.service.getAllServicesLoading,
 });
 
+const mapDispatchToProps = {
+  getAllServices: ServiceActions.getAllServices,
+};
+
 export default connect(
   mapStateToProps,
-  null,
+  mapDispatchToProps,
 )(FeaturedScreen);

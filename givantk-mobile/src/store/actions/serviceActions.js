@@ -1,7 +1,9 @@
 import * as actionTypes from './actionTypes';
 import http, { serviceAPI } from '../../assets/utils/httpService';
 
-export const getAllServices = (callback) => (dispatch) => {
+export const getAllServices = (callbackOnSuccess, callbackOnFail) => (
+  dispatch,
+) => {
   dispatch({
     type: actionTypes.GET_ALL_SERVICES_START,
   });
@@ -12,7 +14,7 @@ export const getAllServices = (callback) => (dispatch) => {
         type: actionTypes.GET_ALL_SERVICES_FINISH,
         payload: res.data,
       });
-      if (callback) callback();
+      if (callbackOnSuccess) callbackOnSuccess();
     })
     .catch((err) => {
       dispatch({
@@ -22,6 +24,7 @@ export const getAllServices = (callback) => (dispatch) => {
       dispatch({
         type: actionTypes.GET_ALL_SERVICES_FINISH,
       });
+      if (callbackOnFail) callbackOnFail();
     });
 };
 
