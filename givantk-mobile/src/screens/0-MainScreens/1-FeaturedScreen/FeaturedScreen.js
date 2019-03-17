@@ -36,8 +36,10 @@ class FeaturedScreen extends React.Component {
   
   navigateToSearchScreen = () => {
     const { navigation, getSearchedServices } = this.props;
-    getSearchedServices(this.state.searchWord); // need to change this to be variable from the state not fixed value
-    navigation.navigate('SearchResults');
+    if(this.state.searchWord) {
+      getSearchedServices(this.state.searchWord);
+      navigation.navigate('SearchResults');
+    } 
   };
 
 
