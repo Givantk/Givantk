@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
-
+    paddingHorizontal: 20,
+    marginBottom:0
   },
   userImage: {
     width: 40,
