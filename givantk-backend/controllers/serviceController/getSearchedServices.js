@@ -11,7 +11,10 @@ module.exports = getSearchedServices = (req, res) => {
     - wake + any continuation of the word, like wakes..etc
     
   */
-  Service.find({ name: { $regex: req.params.searchedKeyword, $options: 'i' } })
+
+  let query = ''+req.params.searchedKeyword+'';
+
+  Service.find({ name: { $regex: query, $options: 'i' } })
     .populate('asker')
     .populate('applications.user')
     .sort({ date: -1 })
