@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import getUserImage from '../../../../assets/utils/getUserImage';
-import styles from '../../Service-Related-Components/ServiceCard/ServiceCardStyles';
+import styles from './RatingCardStyles';
+import { headerHeight } from '../../../../assets/styles/base';
 
 class RatingCard extends React.PureComponent {
   onPressCard = () => {
@@ -31,39 +32,60 @@ class RatingCard extends React.PureComponent {
           <View style={styles.header}>
             <TouchableWithoutFeedback onPress={this.navigateToAskerProfile}>
               <View>
-                <Image
-                  source={{
-                    uri: service.asker && getUserImage(service.asker.avatar),
-                  }}
-                  style={styles.userImage}
-                />
+                {service.askedByUser ? (
+                  <Image
+                    source={{
+                      uri: service.asker && getUserImage(service.helper.avatar),
+                    }}
+                    style={styles.userImage}
+                  />
+                ) : (
+                  <Image
+                    source={{
+                      uri: service.asker && getUserImage(service.asker.avatar),
+                    }}
+                    style={styles.userImage}
+                  />
+                )}
               </View>
             </TouchableWithoutFeedback>
-            <View style={styles.headerRight}>
+         
               <TouchableWithoutFeedback onPress={this.onPressAskerAvatar}>
                 <View>
                   {service.askedByUser ? (
-                    <Text style={styles.userName}>
-                      {`${service.helper.first_name} reviewed ${
-                        service.asker.first_name
-                      }`}
+                    <Text style={styles.reviewer}>
+                      {`Helper: ${service.helper.first_name}`}
                     </Text>
                   ) : (
-                    <Text style={styles.userName}>
-                      {`${service.asker.first_name} reviewed ${
-                        service.helper.first_name
-                      }`}
+                    <Text style={styles.reviewer}>
+                      {`Asker: ${service.asker.first_name} `}
                     </Text>
                   )}
                 </View>
               </TouchableWithoutFeedback>
-              <Text style={styles.serviceTitle}>{service.name}</Text>
+              </View>
+
+              <View style={styles.headerCenter}>
+              {service.askedByUser ? (
+                <Text style={styles.reviewHeader}>{`\n reviewed ${
+                  service.asker.first_name
+                } in the service:\n ${
+                  service.name
+                } `}</Text>
+              ) : (
+                <Text style={styles.reviewHeader}>{`\n reviewed ${
+                  service.helper.first_name
+                } in the service:\n ${
+                  service.name
+                } `}</Text>
+              )}
+          
             </View>
-          </View>
+     
 
           <View style={styles.content}>
             <Text style={styles.descriptionText}>
-              {service.brief_description || service.description}
+              {service.brief_description || service.written}
             </Text>
           </View>
         </View>

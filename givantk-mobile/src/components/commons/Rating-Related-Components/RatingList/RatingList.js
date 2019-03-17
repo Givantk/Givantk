@@ -27,22 +27,7 @@ const RatingList = (props) => {
     this.isItAskedService(service)
       ? (service.askedByUser = true)
       : (service.helpedByUser = true);
-
-
-    //Pick the chosen application
-    chosenApplication = service.applications.filter(
-      (application) => application.chosen
-    );
-
-    //extract user from it an append it to service
-
-    console.log(chosenApplication[0]);
-
-    service.helperInfo = chosenApplication[0].user;
-
-    console.log(service.helperInfo);
-
-    return service;
+       return service;
   };
 
   const renderItem = (service) => {
