@@ -11,6 +11,7 @@ import getUserImage from '../../../assets/utils/getUserImage';
 import Loading from '../../../components/commons/UI/Loading/Loading';
 import NoProfileDisclaimer from '../../../components/commons/NoProfileDisclaimer/NoProfileDisclaimer';
 import ServicesList from '../../../components/commons/Service-Related-Components/ServicesList/ServicesList';
+import RatingList from '../../../components/commons/Rating-Related-Components/RatingList/RatingList';
 import SnakeNavigator from '../../../components/commons/UI/SnakeNavigator/SnakeNavigator';
 import styles from './ProfileScreenStyles';
 
@@ -45,8 +46,26 @@ class ProfileScreen extends React.Component {
     }
   }
 
+  filterService = (services, type) => {
+    const filtered = services.filter(
+      (service) =>
+        (type === 'asked' && service.asker_is_rated) ||
+        (type === 'helped' && service.helper_is_rated)
+    );
+
+    return filtered;
+  };
+
   getSnakeNavigatorContent = () => {
     const { profile, getProfileLoading, navigation } = this.props;
+    const { services_asked_for, services_helped_in } = profile;
+
+    const RatedServicesArray = [
+      ...this.filterService(services_asked_for, 'asked'),
+      ...this.filterService(services_helped_in, 'helped'),
+    ];
+
+
     return [
       {
         name: `Asked for`,
@@ -71,8 +90,8 @@ class ProfileScreen extends React.Component {
       {
         name: `Reviews`,
         component: () => (
-          <ServicesList
-            services={profile.services_helped_in}
+          <RatingList
+            services={RatedServicesArray}
             loading={getProfileLoading}
             navigation={navigation}
           />
@@ -127,7 +146,6 @@ class ProfileScreen extends React.Component {
           <View style={styles.userDescriptionContainer}>
             <Text style={styles.points}>
               Average Rating:
-              {console.log(profile)}
               {profile.average_services_rating === 0
                 ? '-'
                 : profile.average_services_rating}
@@ -180,5 +198,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(ProfileScreen);
