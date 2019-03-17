@@ -11,7 +11,7 @@ import MessagesListItem from '../../../components/5-AccountInnerScreensComponent
 
 class MessagesListScreen extends Component {
   static navigationOptions = () => ({
-    headerTitle: 'Messages List Screen',
+    headerTitle: 'Messages Lists',
     headerStyle: {
       backgroundColor: colors.primary
     },

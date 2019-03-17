@@ -14,7 +14,7 @@ import styles from './MessagesChatScreenStyles';
 
 class MessagesChatScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
-    headerTitle: 'Messages Chat Screen',
+    headerTitle: 'Chat Messages',
     headerStyle: {
       backgroundColor: colors.primary,
     },

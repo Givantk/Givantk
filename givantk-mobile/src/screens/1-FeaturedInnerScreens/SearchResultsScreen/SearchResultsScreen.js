@@ -12,7 +12,7 @@ import ServicesList from '../../../components/commons/Service-Related-Components
 
 class SearchResultsScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
-    headerTitle: 'Search Results Screen',
+    headerTitle: 'Search Results',
     headerStyle: {
       backgroundColor: colors.primary,
     },
@@ -25,7 +25,6 @@ class SearchResultsScreen extends Component {
     const { navigation, searchedServices, getSearchedServicesLoading } = this.props;
     return (
       <View style={styles.wrapper}>
-        <Text>Search Results</Text>
         {searchedServices && (
           <ServicesList
             services={searchedServices}
