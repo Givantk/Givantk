@@ -11,7 +11,7 @@ import MessagesListItem from '../../../components/5-AccountInnerScreensComponent
 
 class MessagesListScreen extends Component {
   static navigationOptions = () => ({
-    headerTitle: 'Messages List Screen',
+    headerTitle: 'Messages Lists',
     headerStyle: {
       backgroundColor: colors.primary
     },
@@ -20,28 +20,48 @@ class MessagesListScreen extends Component {
     }
   });
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      chats: this.props.chats
-    };
-  }
+  
+  chatNavigatorHandle = (chatID, chatTitle) => {
+    const { navigation, currentUser } = this.props;
 
-  chatNavigatorHandle = (chatID) => {
-    const { navigation } = this.props;
-    navigation.navigate('Chat', { chatID: chatID }); //we need a new chat screen
-    //console.log('button pressed');
+    // we are going to pass the second user to the chat screen
+    /* we don't need to pass the first user (logged in user) because we get him from 
+    currentUser.first_name and currentUser._id */
+
+    const users = chatTitle.split(' & '); // spliting user1 and user2 names
+    const IDs = chatID.split('+'); // splitiing user1 and user2 IDs
+    
+    let user2 = {
+      id: '',
+      name: ''
+    }
+
+
+    if(users[0] != currentUser.first_name+' '+currentUser.last_name){
+      user2.name = users[0];
+    } else {
+      user2.name = users[1];
+    }
+    
+    if(IDs[0] != currentUser._id) {
+      user2.id = IDs[0];
+    } else {
+      user2.id = IDs[1];
+    }
+  
+    navigation.navigate('MessagesChat', { user2: user2 }); // send user2 to MessagesChatScreen
+    //console.log(user2);
   };
 
   render() {
-    const chats = this.state.chats.map((chat, i) => (
+    const chats = this.props.chats.map((chat, i) => (
       <TouchableOpacity
           key={i}
           style={styles.customBtn}
-          onPress={() => this.chatNavigatorHandle(chat.socketID)}
+          onPress={() => this.chatNavigatorHandle(chat.socketID, chat.title)}
         >
           <View style={styles.customView}>
-            <Text style={styles.customText}>{chat._id}</Text>
+            <Text style={styles.customText}>{chat.title}</Text>
           </View>
         </TouchableOpacity>
     ));
@@ -49,29 +69,7 @@ class MessagesListScreen extends Component {
     return (
       <View style={styles.wrapper}>
         <Text style={styles.header}>{this.props.currentUser.first_name}'s Messages</Text>
-        
         {chats}
-        {/* 
-        <TouchableOpacity
-          style={styles.customBtn}
-          onPress={() => this.chatNavigatorHandle('654')}
-        >
-          <View style={styles.customView}>
-            <Text style={styles.customText}>Logged in user 1 and user 2</Text>
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.customBtn}
-          onPress={() => this.chatNavigatorHandle('654')}
-        >
-          <View style={styles.customView}>
-            <Text style={styles.customText}>Logged in user 1 and user 2</Text>
-          </View>
-        </TouchableOpacity> */}
-
-        {/*<Text>Messages List Screen</Text>
-        <Button title="Chat" onPress={() => navigation.navigate('Chat')} />*/}
       </View>
     );
   }
@@ -81,14 +79,13 @@ MessagesListScreen.propTypes = {
   navigation: PropTypes.shape(),
   chats: PropTypes.arrayOf(PropTypes.shape({})),
   loadUserChatsLoading: PropTypes.bool
-  
 };
 
 const mapStateToProps = (state) => ({
   currentUser: state.auth.user,
   errors: state.errors,
   chats: state.chat.chats,
-  getSearchedServicesLoading: state.chat.loadUserChatsLoading
+  loadUserChatsLoading: state.chat.loadUserChatsLoading
 });
 
 export default connect(mapStateToProps)(MessagesListScreen);

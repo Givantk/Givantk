@@ -22,6 +22,8 @@ module.exports = servicesHelpedIn = (req, res) => {
     })
     .then((profiles) => {
       profiles.forEach((profile) => {
+        console.log(profile)
+
         servicesHelpedInArray.unshift({
           id: profile.user._id,
           first_name: profile.first_name,

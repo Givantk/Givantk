@@ -5,6 +5,7 @@ import React from 'react';
 
 import getUserImage from '../../../../assets/utils/getUserImage';
 import styles from './ServiceCardStyles';
+import Loading from '../../UI/Loading/Loading';
 
 class ServiceCard extends React.PureComponent {
   onPressCard = () => {
@@ -36,11 +37,25 @@ class ServiceCard extends React.PureComponent {
   render() {
     const { service, bookmarked } = this.props;
 
+    if (!service) {
+      return <Loading />;
+    }
+
+    const serviceDescription = service.brief_description
+      ? service.brief_description.length > 200
+        ? `${service.brief_description.slice(0, 210)}...`
+        : service.brief_description
+      : service.description
+      ? service.description.length > 200
+        ? `${service.description.slice(0, 210)}...`
+        : service.description
+      : null;
+
     return (
       <TouchableWithoutFeedback onPress={this.onPressCard}>
         <View style={styles.serviceCard}>
           <View style={styles.header}>
-            <TouchableWithoutFeedback onPress={this.navigateToAskerProfile}>
+            <TouchableWithoutFeedback onPress={this.onPressAskerAvatar}>
               <View>
                 <Image
                   source={{
@@ -63,9 +78,7 @@ class ServiceCard extends React.PureComponent {
           </View>
 
           <View style={styles.content}>
-            <Text style={styles.descriptionText}>
-              {service.brief_description || service.description}
-            </Text>
+            <Text style={styles.descriptionText}>{serviceDescription}</Text>
           </View>
 
           <View style={styles.footer}>
@@ -81,9 +94,13 @@ class ServiceCard extends React.PureComponent {
             </View>
           </View>
           {service.money_points ? (
-            <Text style={styles.points}>Money score: {service.money_points} EGP</Text>
+            <Text style={styles.points}>
+              Money score: {service.money_points} EGP
+            </Text>
           ) : (
-            <Text style={styles.points}>Givantk points: {service.givantk_points} </Text>
+            <Text style={styles.points}>
+              Givantk points: {service.givantk_points}{' '}
+            </Text>
           )}
         </View>
       </TouchableWithoutFeedback>

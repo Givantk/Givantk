@@ -11,6 +11,7 @@ import getUserImage from '../../../assets/utils/getUserImage';
 import Loading from '../../../components/commons/UI/Loading/Loading';
 import NoProfileDisclaimer from '../../../components/commons/NoProfileDisclaimer/NoProfileDisclaimer';
 import ServicesList from '../../../components/commons/Service-Related-Components/ServicesList/ServicesList';
+import RatingList from '../../../components/commons/Rating-Related-Components/RatingList/RatingList';
 import SnakeNavigator from '../../../components/commons/UI/SnakeNavigator/SnakeNavigator';
 import styles from './ProfileScreenStyles';
 
@@ -45,11 +46,28 @@ class ProfileScreen extends React.Component {
     }
   }
 
+  filterService = (services, type) => {
+    const filtered = services.filter(
+      (service) =>
+        (type === 'asked' && service.asker_is_rated) ||
+        (type === 'helped' && service.helper_is_rated),
+    );
+
+    return filtered;
+  };
+
   getSnakeNavigatorContent = () => {
     const { profile, getProfileLoading, navigation } = this.props;
+    const { services_asked_for, services_helped_in } = profile;
+
+    const RatedServicesArray = [
+      ...this.filterService(services_asked_for, 'asked'),
+      ...this.filterService(services_helped_in, 'helped'),
+    ];
+
     return [
       {
-        name: `${profile.first_name} asked for`,
+        name: 'Asked for',
         component: () => (
           <ServicesList
             services={profile.services_asked_for}
@@ -59,12 +77,23 @@ class ProfileScreen extends React.Component {
         ),
       },
       {
-        name: `${profile.first_name} helped in`,
+        name: 'Helped in',
         component: () => (
           <ServicesList
             services={profile.services_helped_in}
             loading={getProfileLoading}
             navigation={navigation}
+          />
+        ),
+      },
+      {
+        name: 'Reviews',
+        component: () => (
+          <RatingList
+            services={RatedServicesArray}
+            loading={getProfileLoading}
+            navigation={navigation}
+            openedProfile={profile}
           />
         ),
       },
@@ -114,6 +143,15 @@ class ProfileScreen extends React.Component {
             </Text>
           </View>
 
+          <View style={styles.userDescriptionContainer}>
+            <Text style={styles.points}>
+              Average Rating:
+              {profile.average_services_rating === 0
+                ? ' Not Yet'
+                : profile.average_services_rating}
+            </Text>
+          </View>
+
           {/* Send a message */}
 
           <TouchableWithoutFeedback onPress={() => navigation.navigate('Chat')}>
@@ -131,7 +169,7 @@ class ProfileScreen extends React.Component {
           <SnakeNavigator
             content={this.getSnakeNavigatorContent()}
             navigation={navigation}
-            snakeWidth={dimensions.fullWidth * 0.7}
+            snakeWidth={dimensions.fullWidth * 0.9}
           />
         </AvoidKeyboard>
       </View>

@@ -1,8 +1,8 @@
-import { connect } from "react-redux";
-import { View } from "react-native";
-import PropTypes from "prop-types";
-import React from "react";
-import registerForPushNotificationsAsync from '../../../assets/utils/registerForPushNotificationsAsync';
+import { connect } from 'react-redux';
+import { Notifications } from 'expo';
+import { View } from 'react-native';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 import { colors } from '../../../assets/styles/base';
 import { styles } from './SignupScreenStyles';
@@ -12,33 +12,40 @@ import * as ServiceActions from '../../../store/actions/serviceActions';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
 import Header from '../../../components/RegistrationsScreensComponents/SignupScreenComponents/Header/Header';
 import QuickNotification from '../../../components/commons/UI/QuickNotification/QuickNotification';
+import registerForPushNotificationsAsync from '../../../assets/utils/registerForPushNotificationsAsync';
 import SignupInputs from '../../../components/RegistrationsScreensComponents/SignupScreenComponents/SignupInputs/SignupInputs';
 
 class SignupScreen extends React.Component {
   static navigationOptions = () => ({
     headerTransparent: true,
     headerStyle: {
-      backgroundColor: colors.transparent
-    }
+      backgroundColor: colors.transparent,
+    },
   });
 
   componentWillMount() {
     registerForPushNotificationsAsync()
-      .then(token => {
+      .then((token) => {
         console.log(token);
       })
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
   }
 
-  handleSignup = user => {
+  handleSignup = (user) => {
     const { navigation, signupUser } = this.props;
 
     const callback = () => {
-      QuickNotification("Successfully Signed Up, Please Login");
-      navigation.navigate("Login");
+      QuickNotification('Successfully Signed Up, Please Login');
+      navigation.navigate('Login');
     };
 
     signupUser(user, callback);
+
+    AuthActions.getPushNotificationToken();
+    this._notificationSubscription = Notifications.addListener((n) => {
+      if (n.origin === 'selected') navigation.navigate('Notifications');
+      else navigation.navigate('Tab');
+    });
   };
 
   handleSignupWithFacebook = () => {
@@ -51,6 +58,12 @@ class SignupScreen extends React.Component {
       navigation.replace('Tab');
       getAllServices();
       getCurrentUserProfile();
+
+      AuthActions.getPushNotificationToken();
+      this._notificationSubscription = Notifications.addListener((n) => {
+        if (n.origin === 'selected') navigation.navigate('Notifications');
+        else navigation.navigate('Tab');
+      });
     };
 
     loginUserWithFacebook(callback);
@@ -92,7 +105,7 @@ SignupScreen.propTypes = {
   signupWithFacebookLoading: PropTypes.bool,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   errors: state.errors,
   signupLoading: state.auth.signupLoading,
   signupWithFacebookLoading: state.auth.loginWithFacebookLoading,
@@ -107,5 +120,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(SignupScreen);

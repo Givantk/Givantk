@@ -10,6 +10,15 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     paddingHorizontal: 20,
   },
+  attachementView: {
+    marginTop: 10,
+    flexDirection: 'row',
+    textAlign: 'left',
+    justifyContent:'center'
+  },
+  label: {
+    color: colors.gray02,
+  },
   topInputsContainer: { marginTop: 10 },
   text: {
     fontWeight: 'bold',
@@ -79,6 +88,25 @@ const styles = StyleSheet.create({
     color: colors.trueWhite,
     fontWeight: 'bold',
     fontSize: 20,
+  },
+  uploadButton: {
+    justifyContent: 'center',
+    alignSelf: 'stretch',
+    borderRadius: 20,
+    backgroundColor: colors.primaryLight,
+    marginBottom: 10,
+    marginTop: 10,
+  },
+  uploadButtonText: {
+    color: colors.trueWhite,
+    fontSize: 15,
+  },
+
+  image: {
+    marginLeft:9,
+    alignSelf: 'center',
+    width: 40,
+    height: 40,
   },
 });
 

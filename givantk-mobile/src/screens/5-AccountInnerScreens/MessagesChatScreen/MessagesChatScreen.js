@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { View, ScrollView, KeyboardAvoidingView } from 'react-native';
+import { View, ScrollView, KeyboardAvoidingView, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
@@ -7,13 +7,12 @@ import io from 'socket.io-client';
 
 import { colors } from '../../../assets/styles/base';
 import { serverPath } from '../../../assets/utils/httpService';
-import * as ProfileActions from '../../../store/actions/profileActions';
 import ChatInputText from '../../../components/commons/ChatComponents/chatInputText';
 import ChatMessage from '../../../components/commons/ChatComponents/chatMessage';
 
-import styles from './ChatScreenStyles';
+import styles from './MessagesChatScreenStyles';
 
-class ChatScreen extends Component {
+class MessagesChatScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     headerTitle: 'Chat Messages',
     headerStyle: {
@@ -29,11 +28,14 @@ class ChatScreen extends Component {
     this.state = {
       user1: {
         id: this.props.currentUser._id,
-        name: this.props.currentUser.first_name+' '+this.props.currentUser.last_name,
+        name:
+          `${this.props.currentUser.first_name 
+          } ${ 
+          this.props.currentUser.last_name}`,
       },
       user2: {
-        id: this.props.profile.user._id || this.props.profile.user,
-        name: this.props.profile.first_name+' '+this.props.profile.last_name,
+        id: this.props.navigation.state.params.user2.id,
+        name: this.props.navigation.state.params.user2.name,
       },
       chatMessage: '',
       chatMessages: [],
@@ -108,22 +110,16 @@ class ChatScreen extends Component {
   }
 }
 
-ChatScreen.propTypes = {
-  getProfileByUserId: PropTypes.func,
+MessagesChatScreen.propTypes = {
+  navigation: PropTypes.shape({}),
 };
 
 const mapStateToProps = (state) => ({
-  profile: state.profile.selectedProfile,
   currentUser: state.auth.user,
-  currentUserProfile: state.profile.currentUserProfile,
   errors: state.errors,
 });
 
-const mapDispatchToProps = {
-  getProfileByUserId: ProfileActions.getProfileByUserId,
-};
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
-)(ChatScreen);
+  null,
+)(MessagesChatScreen);

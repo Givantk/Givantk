@@ -13,6 +13,7 @@ const INITIAL_STATE = {
   acceptServiceProposalLoading: false,
   markServiceAsDoneLoading: false,
   archiveServiceLoading: false,
+  addReviewLoading: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -29,7 +30,7 @@ export default (state = INITIAL_STATE, action) => {
         getAllServicesLoading: false,
         allServices: action.payload ? action.payload : [...state.allServices],
       };
-// ----------------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------------
     case actionTypes.GET_SEARCHED_SERVICES_START:
       return {
         ...state,
@@ -40,9 +41,11 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         getSearchedServicesLoading: false,
-        searchedServices: action.payload ? action.payload : [...state.searchedServices],
+        searchedServices: action.payload
+          ? action.payload
+          : [...state.searchedServices],
       };
-//---------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------
     case actionTypes.CREATE_SERVICE_START:
       return {
         ...state,
@@ -116,6 +119,18 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         archiveServiceLoading: false,
+      };
+
+    case actionTypes.ADD_REVIEW_START:
+      return {
+        ...state,
+        addReviewLoading: true,
+      };
+
+    case actionTypes.ADD_REVIEW_FINISH:
+      return {
+        ...state,
+        addReviewLoading: false,
       };
 
     default:

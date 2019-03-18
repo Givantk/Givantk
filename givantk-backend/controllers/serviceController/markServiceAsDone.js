@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const sendNotifications = require('../../assets/utils/sendNotifications');
+
 // Models
 const Profile = mongoose.model('profile');
 const Service = mongoose.model('service');
@@ -24,8 +26,9 @@ module.exports = markServiceAsDone = (req, res) => {
 
       Profile.findOne({ user: service.asker.toString() }).then(
         (askerProfile) => {
-          Profile.findOne({ user: service.helper.toString() }).then(
-            (helperProfile) => {
+          Profile.findOne({ user: service.helper.toString() })
+            .populate('user')
+            .then((helperProfile) => {
               // Updating asker profile
               askerProfile.services_asked_for_finished.unshift(service._id);
               askerProfile.save();
@@ -38,20 +41,32 @@ module.exports = markServiceAsDone = (req, res) => {
                 }\" as done`,
                 navigateTo: {
                   kind: 'service',
-                  service: service._id,
+                  service: service._id
                 },
                 is_user_associated: true,
                 user_associated: askerProfile.user,
-                user_profile_associated: askerProfile._id,
+                user_profile_associated: askerProfile._id
               });
               service.nature === 'free'
                 ? (helperProfile.givantk_points += service.givantk_points)
                 : (helperProfile.money_points += service.money_points);
 
               helperProfile.save();
-            },
-          );
-        },
+
+              if (helperProfile.user.pushNotificationToken) {
+                sendNotifications([
+                  {
+                    to: helperProfile.user.pushNotificationToken,
+                    title: 'Service Marked As Done',
+                    body: `${askerProfile.first_name} marked the service \"${
+                      service.name
+                    }\" as done`,
+                    sound: 'default'
+                  }
+                ]);
+              }
+            });
+        }
       );
 
       // Updating service

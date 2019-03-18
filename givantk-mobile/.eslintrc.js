@@ -32,6 +32,7 @@ module.exports = {
     ],
     'comma-dangle': 2,
     'react/no-array-index-key': 'off',
+    'no-param-reassign': 'off',
     'no-nested-ternary': 'off',
     'import/prefer-default-export': 'off',
     'react-native/no-unused-styles': 2,

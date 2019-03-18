@@ -1,5 +1,5 @@
 import { AsyncStorage, Alert } from 'react-native';
-import { Facebook } from 'expo';
+import { Facebook, Permissions, Notifications } from 'expo';
 import jwtDecode from 'jwt-decode';
 
 import * as actionTypes from './actionTypes';
@@ -81,6 +81,11 @@ export const loginUser = (userData, callback) => (dispatch) => {
 export const logoutUser = () => (dispatch) => {
   dispatch({
     type: actionTypes.LOGIN_USER_START,
+  });
+
+  // Delete pushNotificationToken for this user from backend
+  http.post(`${userAPI}/remove-push-token`).catch((err) => {
+    console.log('Error removing push notification', err);
   });
 
   // Remove token from storage
@@ -194,7 +199,7 @@ export const loginUserWithFacebook = (callback) => async (dispatch) => {
             });
         })
         .catch((err) => {
-          console.log(err)
+          console.log(err);
           dispatch({
             type: actionTypes.SET_ERRORS,
             payload: err.response.data,
@@ -209,4 +214,32 @@ export const loginUserWithFacebook = (callback) => async (dispatch) => {
   } catch ({ message }) {
     Alert.alert(`Facebook Login Error: ${message}`);
   }
+};
+
+export const getPushNotificationToken = async (callback) => {
+  const { status: existingStatus } = await Permissions.getAsync(
+    Permissions.NOTIFICATIONS,
+  );
+  let finalStatus = existingStatus;
+
+  if (existingStatus !== 'granted') {
+    const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+    finalStatus = status;
+  }
+
+  if (finalStatus !== 'granted') {
+    return;
+  }
+
+  const token = await Notifications.getExpoPushTokenAsync();
+
+  http
+    .post(`${userAPI}/set-push-token`, { token })
+    .then(() => {
+      if (callback) callback();
+      console.log('Successfully saved token');
+    })
+    .catch((err) => {
+      console.log('Error saving push notification', err);
+    });
 };

@@ -1,5 +1,6 @@
 import { bake_cookie, read_cookie, delete_cookie } from 'sfcookies';
 import axios from 'axios';
+import {serverUrl} from '../Assets/Constants';
 
 class auth {
   // login turns the user to be authenticated by setting cookie into true
@@ -9,7 +10,7 @@ class auth {
   login = (cb, email, password) => {
     let errorToBeSent = null;
     axios
-      .post('http://localhost:5000/api/admin/login', {
+      .post(`${serverUrl}/api/admin/login`, {
         email,
         password,
       })

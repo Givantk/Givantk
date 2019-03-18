@@ -14,11 +14,18 @@ module.exports = getProfile = (req, res) => {
     })
     .populate({
       path: 'services_asked_for',
-      populate: { path: 'asker' }
+      populate: { path: 'asker' },
+    })
+    .populate({
+      path: 'services_asked_for',
+      populate: { path: 'helper' },
     })
     .populate({
       path: 'services_helped_in',
-      populate: { path: 'asker' }
+      populate: { path: 'asker' },
+    }).populate({
+      path:'services_helped_in',
+      populate:{path:'helper'},
     })
     .populate({
       path: 'services_bookmarked',

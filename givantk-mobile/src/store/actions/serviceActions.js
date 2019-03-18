@@ -1,7 +1,10 @@
 import * as actionTypes from './actionTypes';
-import http, { serviceAPI } from '../../assets/utils/httpService';
+import http, { serviceAPI} from '../../assets/utils/httpService';
+import { serverErrorMessage } from '../../assets/constants/index';
 
-export const getAllServices = (callback) => (dispatch) => {
+export const getAllServices = (callbackOnSuccess, callbackOnFail) => (
+  dispatch,
+) => {
   dispatch({
     type: actionTypes.GET_ALL_SERVICES_START,
   });
@@ -12,7 +15,7 @@ export const getAllServices = (callback) => (dispatch) => {
         type: actionTypes.GET_ALL_SERVICES_FINISH,
         payload: res.data,
       });
-      if (callback) callback();
+      if (callbackOnSuccess) callbackOnSuccess();
     })
     .catch((err) => {
       dispatch({
@@ -22,10 +25,13 @@ export const getAllServices = (callback) => (dispatch) => {
       dispatch({
         type: actionTypes.GET_ALL_SERVICES_FINISH,
       });
+      if (callbackOnFail) callbackOnFail();
     });
 };
 
-export const getSearchedServices = (searchedKeyword, callback) => (dispatch) => {
+export const getSearchedServices = (searchedKeyword, callback) => (
+  dispatch,
+) => {
   dispatch({
     type: actionTypes.GET_SEARCHED_SERVICES_START,
   });
@@ -226,4 +232,33 @@ export const archiveService = (serviceId, callback) => (dispatch) => {
         type: actionTypes.ARCHIVE_SERVICE_FINISH,
       });
     });
+};
+// action that handles new reviews added when a service is finished
+
+export const addReview = (review, callback) => (dispatch) => {
+  dispatch({
+    type: actionTypes.ADD_REVIEW_START,
+  });
+
+  http
+    .post(
+      `${serviceAPI}/review/${review.serviceId}`,
+      review,
+    )
+    .then(() => {
+      dispatch({
+        type: actionTypes.ADD_REVIEW_FINISH,
+      });
+      if (callback) callback();
+    })
+    .catch((err) => {
+      dispatch({
+        type: actionTypes.SET_ERRORS,
+        payload: err.response ? err.response.data : serverErrorMessage,
+      });
+      dispatch({
+        type: actionTypes.ADD_REVIEW_FINISH,
+      });
+    });
+
 };

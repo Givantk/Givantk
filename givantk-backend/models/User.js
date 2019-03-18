@@ -27,7 +27,8 @@ const UserSchema = new Schema({
         type: Boolean
       }
     }
-  }
+  },
+  pushNotificationToken: String
 });
 
 module.exports = User = mongoose.model('user', UserSchema);

@@ -3,11 +3,12 @@ import { Icon } from 'native-base';
 import { View, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
+
 import { colors } from '../../../assets/styles/base';
+import * as ServiceActions from '../../../store/actions/serviceActions';
 import DefaultTextInput from '../../../components/commons/UI/DefaultTextInput/DefaultTextInput';
 import ServicesList from '../../../components/commons/Service-Related-Components/ServicesList/ServicesList';
 import styles from './FeaturedScreenStyles';
-import * as ServiceActions from '../../../store/actions/serviceActions';
 
 class FeaturedScreen extends React.Component {
   static navigationOptions = () => ({
@@ -24,26 +25,34 @@ class FeaturedScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchWord: ''
-    }
+      searchWord: '',
+    };
   }
 
-  onChangeText = (name, value) => { // can't update the state
-  this.setState(()=>({[name]:value}),() => {
-    //console.log('state updated:' + this.state.searchWord);
-  })
-  }
-  
-  navigateToSearchScreen = () => {
-    const { navigation, getSearchedServices } = this.props;
-    getSearchedServices(this.state.searchWord); // need to change this to be variable from the state not fixed value
-    navigation.navigate('SearchResults');
+  onChangeText = (name, value) => {
+    // can't update the state
+    this.setState(
+      () => ({ [name]: value }),
+      () => {
+        // console.log('state updated:' + this.state.searchWord);
+      },
+    );
   };
 
+  navigateToSearchScreen = () => {
+    const { searchWord } = this.state;
+    const { navigation, getSearchedServices } = this.props;
+    if (searchWord) {
+      getSearchedServices(searchWord);
+      navigation.navigate('SearchResults');
+    }
+  };
 
   render() {
     const { navigation, getAllServicesLoading } = this.props;
     let { allServices } = this.props;
+    const { getAllServices } = this.props;
+
     allServices = allServices.filter((s) => s.state !== 'archived');
 
     return (
@@ -53,7 +62,7 @@ class FeaturedScreen extends React.Component {
             placeholder="Find a service"
             placeholderTextColor={colors.gray02}
             style={styles.searchInput}
-            name='searchWord'
+            name="searchWord"
             onChangeText={this.onChangeText}
           />
           <TouchableWithoutFeedback onPress={this.navigateToSearchScreen}>
@@ -66,6 +75,7 @@ class FeaturedScreen extends React.Component {
             services={allServices}
             loading={getAllServicesLoading}
             navigation={navigation}
+            onRefresh={getAllServices}
           />
         )}
       </View>
@@ -77,6 +87,7 @@ FeaturedScreen.propTypes = {
   navigation: PropTypes.shape({}),
   allServices: PropTypes.arrayOf(PropTypes.shape({})),
   getAllServicesLoading: PropTypes.bool,
+  getAllServices: PropTypes.func,
   getSearchedServices: PropTypes.func,
   errors: PropTypes.shape({}),
 };
@@ -87,8 +98,9 @@ const mapStateToProps = (state) => ({
   getAllServicesLoading: state.service.getAllServicesLoading,
 });
 
-const mapDispatchToProps={
-  getSearchedServices: ServiceActions.getSearchedServices
+const mapDispatchToProps = {
+  getAllServices: ServiceActions.getAllServices,
+  getSearchedServices: ServiceActions.getSearchedServices,
 };
 
 export default connect(

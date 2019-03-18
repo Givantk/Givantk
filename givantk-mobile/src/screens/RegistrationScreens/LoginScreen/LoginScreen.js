@@ -1,9 +1,10 @@
 import { connect } from 'react-redux';
+import { Icon } from 'native-base';
+import { Notifications } from 'expo';
 import { Text, View, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { Icon } from 'native-base';
 import { colors } from '../../../assets/styles/base';
 import { styles } from './LoginScreenStyles';
 import * as AuthActions from '../../../store/actions/authActions';
@@ -13,7 +14,6 @@ import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKey
 import DefaultButton from '../../../components/commons/UI/DefaultButton/DefaultButton';
 import DefaultTextInput from '../../../components/commons/UI/DefaultTextInput/DefaultTextInput';
 import Header from '../../../components/RegistrationsScreensComponents/SignupScreenComponents/Header/Header';
-import quickNotification from '../../../components/commons/UI/QuickNotification/QuickNotification';
 
 class LoginScreen extends React.Component {
   static navigationOptions = () => ({
@@ -38,10 +38,15 @@ class LoginScreen extends React.Component {
   callbackAfterLogin = () => {
     const { navigation, getAllServices, getCurrentUserProfile } = this.props;
 
-    quickNotification('Login Successful');
     navigation.replace('Tab');
     getAllServices();
     getCurrentUserProfile();
+
+    AuthActions.getPushNotificationToken();
+    this._notificationSubscription = Notifications.addListener((n) => {
+      if (n.origin === 'selected') navigation.navigate('Notifications');
+      else navigation.navigate('Tab');
+    });
   };
 
   handleLogin = () => {

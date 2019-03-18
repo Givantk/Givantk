@@ -7,13 +7,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
     alignItems: 'center',
-    paddingTop: 10,
   },
   upperRow: {
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
+    paddingTop: 20,
   },
   upperRowText: {
     color: colors.primary,
@@ -26,29 +26,27 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     alignItems: 'center',
-    marginVertical: 20,
+    marginVertical: 10,
   },
   image: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
+    width: 70,
+    height: 70,
+    borderRadius: 35,
     borderWidth: 2,
     borderColor: colors.secondary,
     marginRight: 10,
   },
   userName: {
     fontFamily: fontTypes.main,
-    fontSize: 20,
+    fontSize: 18,
     color: colors.black,
     marginTop: 5,
   },
-  points:{
-
-    color:colors.primary,
-    marginTop:5,
-    fontSize:15
-
-  }
+  points: {
+    color: colors.primary,
+    marginTop: 5,
+    fontSize: 12,
+  },
 });
 
 export default styles;

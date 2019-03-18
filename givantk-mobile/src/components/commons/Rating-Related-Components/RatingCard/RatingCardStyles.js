@@ -9,8 +9,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderColor: colors.primary,
     width: dimensions.fullWidth * 0.88,
-    minHeight: 220,
-    maxHeight: 250,
     flexDirection: 'column',
     justifyContent: 'space-between',
     backgroundColor: colors.tertiary,
@@ -29,49 +27,33 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: colors.secondary,
   },
-  headerRight: {
-    flexDirection: 'column',
-    marginLeft: 10,
+  headerCenter: {
+    marginTop: 0,
     justifyContent: 'center',
-    alignItems: 'flex-start',
+    alignItems: 'center',
   },
-  userName: {
+  reviewHeader: {
+    marginTop: -7,
     color: colors.black,
+    textAlign: 'center',
+    marginBottom: 15,
+    fontWeight:'500'
   },
-  serviceTitle: {
+  reviewer: {
     color: colors.primary,
+    paddingLeft: 10,
+    paddingTop: 7,
   },
   content: {
     backgroundColor: colors.white,
-    minHeight: '30%',
-    padding: 5,
     width: '98%',
     alignSelf: 'center',
     alignItems: 'center',
+    paddingBottom: 15,
   },
-  descriptionText: {
-    color: colors.black,
-    padding: 10,
-    fontFamily: fontTypes.main,
-  },
-  footer: {
-    flexDirection: 'row',
-    paddingHorizontal: 20,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  cost: { color: colors.primary },
-  footerLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  favoriteIcon: {
-    fontSize: 35,
-    color: colors.primary,
-  },
-  points: {
-    marginLeft: 10,
-    color: colors.primary,
+  writtenReview:{
+    marginTop:10,
+    fontStyle:'italic'
   },
 });
 

@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const sendNotifications = require('../../assets/utils/sendNotifications');
+
 // Models
 const Profile = mongoose.model('profile');
 const Service = mongoose.model('service');
@@ -49,21 +51,38 @@ module.exports = proposeToService = (req, res) => {
           applicantProfile.services_helped_in.unshift(service._id);
 
           service.save().then((service) => {
-            Profile.findOne({ user: req.user._id }).then((askerProfile) => {
-              applicantProfile.notifications.unshift({
-                title: `${
-                  askerProfile.first_name
+            Profile.findOne({ user: req.user._id })
+              .populate('user')
+              .then((askerProfile) => {
+                applicantProfile.notifications.unshift({
+                  title: `${
+                    askerProfile.first_name
                   } accepted your proposal to the service \"${service.name}\"`,
-                navigateTo: {
-                  kind: 'service',
-                  service: service._id
-                },
-                is_user_associated: true,
-                user_associated: askerProfile.user,
-                user_profile_associated: askerProfile._id
+                  navigateTo: {
+                    kind: 'service',
+                    service: service._id
+                  },
+                  is_user_associated: true,
+                  user_associated: askerProfile.user,
+                  user_profile_associated: askerProfile._id
+                });
+                applicantProfile.save();
+
+                if (applicantProfile.user.pushNotificationToken) {
+                  sendNotifications([
+                    {
+                      to: applicantProfile.user.pushNotificationToken,
+                      title: 'Your Proposal is Accepted!',
+                      body: `${
+                        askerProfile.first_name
+                      } accepted your proposal to the service \"${
+                        service.name
+                      }\"`,
+                      sound: 'default'
+                    }
+                  ]);
+                }
               });
-              applicantProfile.save();
-            });
           });
           return res.json({ service, success: true });
         }

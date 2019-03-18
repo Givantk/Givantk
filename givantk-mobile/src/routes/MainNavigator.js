@@ -1,13 +1,11 @@
-import { Badge } from 'react-native-ui-lib';
 import { createStackNavigator } from 'react-navigation';
-import { Icon } from 'native-base';
 import { View, TouchableWithoutFeedback } from 'react-native';
 import React from 'react';
 
 import { colors, headerHeight } from '../assets/styles/base';
 import * as actionTypes from '../store/actions/actionTypes';
 import BottomTabNavigator from './BottomTabNavigator';
-import getNotificationsNumber from './helpers/getNotificationsNumber';
+import NotificationsIndicator from '../components/0-MainScreensComponents/4-NotificationsScreenComponents/NotificationsIndicator';
 import screens from '../screens';
 import store from '../store/createStore';
 
@@ -21,8 +19,8 @@ const MainNavigator = createStackNavigator(
     Service: screens.ServiceScreen,
     PersonalInfo: screens.PersonalInfoScreen,
     ChargeMoneyScore: screens.ChargeMoneyScoreScreen,
-    PayWithStripe:screens.PayWithStripeScreen,
-    GivantkPoints:screens.GivantkPointsScreen,
+    PayWithStripe: screens.PayWithStripeScreen,
+    GivantkPoints: screens.GivantkPointsScreen,
     InviteFriends: screens.InviteFriendsScreen,
     Chat: screens.ChatScreen,
     SearchResults: screens.SearchResultsScreen,
@@ -34,6 +32,7 @@ const MainNavigator = createStackNavigator(
     ArchivedServices: screens.ArchivedServicesScreen,
     Announcement: screens.AnnouncementScreen,
     MakeProfile: screens.MakeProfileScreen,
+    MessagesChat: screens.MessagesChatScreen,
   },
   {
     initialRouteName: 'Login',
@@ -60,26 +59,12 @@ const MainNavigator = createStackNavigator(
         color: colors.white,
       };
 
-      const notificationsNumber = getNotificationsNumber();
-
       const headerRight = (
         <TouchableWithoutFeedback
           onPress={() => navigation.navigate('Notifications')}
         >
-          <View style={{ width: 39 }}>
-            <Icon
-              type="Ionicons"
-              name="md-notifications"
-              style={{ color: colors.white, fontSize: 33 }}
-            />
-            {notificationsNumber ? (
-              <View style={{ position: 'absolute' }}>
-                <Badge
-                  backgroundColor={colors.secondary.toString()}
-                  label={notificationsNumber.toString()}
-                />
-              </View>
-            ) : null}
+          <View>
+            <NotificationsIndicator />
           </View>
         </TouchableWithoutFeedback>
       );

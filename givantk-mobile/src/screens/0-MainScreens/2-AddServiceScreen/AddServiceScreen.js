@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
-import { Icon, Label, Textarea } from 'native-base';
-import { View, Text } from 'react-native';
+import { Icon, Label, Textarea,Button } from 'native-base';
+import { View, Text,Image } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { dimensions } from '../../../assets/styles/base';
+import { dimensions,colors } from '../../../assets/styles/base';
 import * as ProfileActions from '../../../store/actions/profileActions';
 import * as ServiceActions from '../../../store/actions/serviceActions';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
@@ -18,6 +18,7 @@ import servicesTypes from '../../../assets/data/servicesTypes';
 import currencies from '../../../assets/data/Currencies';
 import styles from './AddServiceScreenStyles';
 import TextInput from '../../../components/commons/UI/TextInput/TextInput';
+import { ImagePicker } from 'expo';
 
 class AddServiceScreen extends React.Component {
   static navigationOptions = () => ({
@@ -40,6 +41,17 @@ class AddServiceScreen extends React.Component {
     free: false,
     moneyPoints: 0,
     givantkPoints: 0,
+    optionalPicture:null
+  };
+
+  pickImage = async () => {
+    const result = await ImagePicker.launchImageLibraryAsync({allowsEditing:true});
+
+    const { uri } = result;
+
+    if (!result.cancelled) {
+      this.setState({ optionalPicture: uri });
+    }
   };
 
   onChangeValue = (name, value) => {
@@ -103,7 +115,7 @@ class AddServiceScreen extends React.Component {
   };
 
   render() {
-    const { type, nature, currency, paid, free } = this.state;
+    const { type, nature, currency, paid, free,optionalPicture } = this.state;
     const {
       errors,
       createServiceLoading,
@@ -189,6 +201,15 @@ class AddServiceScreen extends React.Component {
             )}
           </View>
 
+          <Text style={styles.label}>Add photo (optional)</Text>
+          <Button style={styles.uploadButton} onPress={this.pickImage}>
+            <Text style={styles.uploadButtonText}>Pick from gallery </Text>
+          </Button>
+          <View style={styles.attachementView}>
+             {optionalPicture&&<Text style={{marginTop:6,color:colors.primary,fontWeight:'400'}}>Image Attachement is added</Text>} 
+            {optionalPicture && <Image style={styles.image} source={{ uri: optionalPicture }} />}
+          </View>
+
           <View style={styles.left}>
             <Label style={styles.text}>Description </Label>
           </View>
@@ -203,6 +224,8 @@ class AddServiceScreen extends React.Component {
             />
             <Text style={styles.error}>{errors.description}</Text>
           </View>
+
+        
 
           <View style={styles.row}>
             <MainButton
