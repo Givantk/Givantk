@@ -46,7 +46,7 @@ router.get(
 router.get(
   '/services-helped-in',
   passport.authenticate('jwt', { session: false }),
-  adminController.servicesHelpedIn
+  (adminController.servicesHelpedIn)
 );
 
 // @route  GET api/admin/services-asked-for

@@ -10,15 +10,22 @@ module.exports = getAllProfiles = (req, res) => {
     .populate('services_helped_in')
     .populate({
       path: 'services_asked_for',
-      populate: { path: 'asker' }
+      populate: { path: 'asker' },
+    })
+    .populate({
+      path: 'services_asked_for',
+      populate: { path: 'helper' },
     })
     .populate({
       path: 'services_helped_in',
-      populate: { path: 'asker' }
+      populate: { path: 'asker' },
+    }).populate({
+      path:'services_helped_in',
+      populate:{path:'helper'},
     })
     .populate({
       path: 'services_archived',
-      populate: { path: 'asker' }
+      populate: { path: 'asker' },
     })
     .sort({ date: -1 })
     .then((profiles) => {

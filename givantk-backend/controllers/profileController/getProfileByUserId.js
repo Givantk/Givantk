@@ -8,23 +8,31 @@ module.exports = getProfileById = (req, res) => {
   Profile.findOne({ user: req.params.user_id })
     .populate({
       path: 'services_asked_for',
-      populate: { path: 'asker' }
+      populate: { path: 'asker' },
+    })
+    .populate({
+      path: 'services_asked_for',
+      populate: { path: 'helper' },
     })
     .populate({
       path: 'services_helped_in',
-      populate: { path: 'asker' }
+      populate: { path: 'asker' },
+    })
+    .populate({
+      path: 'services_helped_in',
+      populate: { path: 'helper' },
     })
     .populate({
       path: 'services_bookmarked',
-      populate: { path: 'asker' }
+      populate: { path: 'asker' },
     })
     .populate({
       path: 'services_proposed_for',
-      populate: { path: 'asker' }
+      populate: { path: 'asker' },
     })
     .populate({
       path: 'services_archived',
-      populate: { path: 'asker' }
+      populate: { path: 'asker' },
     })
     .then((profile) => {
       if (!profile) {
@@ -34,7 +42,7 @@ module.exports = getProfileById = (req, res) => {
 
       return res.json({
         profile,
-        success: true
+        success: true,
       });
     })
     .catch((err) => {

@@ -12,21 +12,17 @@ module.exports = addGivantkPoints = (req, res) => {
         errors.noprofile = 'You have no profile';
         return res.status(404).json(errors);
       }
-
-      console.log(req.body.pointsAdded)
-
-      profile.givantk_points += req.body.pointsAdded;
+      if (profile.givantk_points === 0)
+        profile.givantk_points += req.body.pointsAdded;
       profile.save().then(() => {
         return res.json({
           success: true,
         });
       });
-
-      
-   
     })
     .catch((err) => {
-      errors.error = 'Something wrong hapened while adding points , please try again';
+      errors.error =
+        'Something wrong hapened while adding points , please try again';
       res.status(500).json({ ...errors, ...err });
     });
 };

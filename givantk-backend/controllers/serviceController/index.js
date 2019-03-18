@@ -13,6 +13,7 @@ const acceptServiceProposal = require('./acceptServiceProposal');
 const markServiceAsDone = require('./markServiceAsDone');
 const archiveService = require('./archiveService');
 const getSearchedServices = require('./getSearchedServices');
+const addReview = require('./addReview');
 
 module.exports = {
   getAllServices,
@@ -29,5 +30,6 @@ module.exports = {
   acceptServiceProposal,
   markServiceAsDone,
   archiveService,
-  getSearchedServices
+  getSearchedServices,
+  addReview,
 };
