@@ -147,7 +147,7 @@ class ProfileScreen extends React.Component {
             <Text style={styles.points}>
               Average Rating:
               {profile.average_services_rating === 0
-                ? '-'
+                ? ' Not Yet'
                 : profile.average_services_rating}
             </Text>
           </View>

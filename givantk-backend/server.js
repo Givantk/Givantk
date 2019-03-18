@@ -81,8 +81,9 @@ io.use((socket, next) => {
     );
 
     let socketID = FinalSocketID;
-    let title = socket.handshake.query.name1 + ' & ' + socket.handshake.query.name2;
-    console.log('title: '+ title);
+    let title =
+      socket.handshake.query.name1 + ' & ' + socket.handshake.query.name2;
+    console.log('title: ' + title);
     let message = {
       userid: '',
       username: '',
