@@ -32,7 +32,8 @@
       "bundleIdentifier": "com.team.givantk"
     },
     "android": {
-      "package": "com.team.givantk"
+      "package": "com.team.givantk",
+      "googleServicesFile": "./google-services.ignore.json"
     }
   }
 }

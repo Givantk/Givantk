@@ -1,9 +1,10 @@
 import { connect } from 'react-redux';
+import { Icon } from 'native-base';
+import { Notifications } from 'expo';
 import { Text, View, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { Icon } from 'native-base';
 import { colors } from '../../../assets/styles/base';
 import { styles } from './LoginScreenStyles';
 import * as AuthActions from '../../../store/actions/authActions';
@@ -42,6 +43,9 @@ class LoginScreen extends React.Component {
     navigation.replace('Tab');
     getAllServices();
     getCurrentUserProfile();
+
+    AuthActions.getPushNotificationToken();
+    this._notificationSubscription = Notifications.addListener(() => {});
   };
 
   handleLogin = () => {
