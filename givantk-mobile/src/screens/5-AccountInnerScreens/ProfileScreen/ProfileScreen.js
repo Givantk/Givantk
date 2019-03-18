@@ -50,7 +50,7 @@ class ProfileScreen extends React.Component {
     const filtered = services.filter(
       (service) =>
         (type === 'asked' && service.asker_is_rated) ||
-        (type === 'helped' && service.helper_is_rated)
+        (type === 'helped' && service.helper_is_rated),
     );
 
     return filtered;
@@ -65,10 +65,9 @@ class ProfileScreen extends React.Component {
       ...this.filterService(services_helped_in, 'helped'),
     ];
 
-
     return [
       {
-        name: `Asked for`,
+        name: 'Asked for',
         component: () => (
           <ServicesList
             services={profile.services_asked_for}
@@ -78,7 +77,7 @@ class ProfileScreen extends React.Component {
         ),
       },
       {
-        name: `Helped in`,
+        name: 'Helped in',
         component: () => (
           <ServicesList
             services={profile.services_helped_in}
@@ -88,12 +87,13 @@ class ProfileScreen extends React.Component {
         ),
       },
       {
-        name: `Reviews`,
+        name: 'Reviews',
         component: () => (
           <RatingList
             services={RatedServicesArray}
             loading={getProfileLoading}
             navigation={navigation}
+            openedProfile={profile}
           />
         ),
       },
@@ -198,5 +198,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(ProfileScreen);

@@ -1,8 +1,6 @@
+import { AirbnbRating } from 'react-native-ratings';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { AirbnbRating } from 'react-native-ratings';
-import { dimensions } from '../../../assets/styles/base';
-import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
 
 import {
   View,
@@ -12,9 +10,10 @@ import {
   ScrollView,
   TouchableWithoutFeedback,
 } from 'react-native';
-import { Textarea } from 'native-base';
+import { Textarea, Icon } from 'native-base';
 import React, { Component } from 'react';
-import { Icon } from 'native-base';
+
+import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
 import styles from './ServiceScreenStyles';
 import Loading from '../../../components/commons/UI/Loading/Loading';
 import Proposal from './Proposal/Proposal';
@@ -22,7 +21,7 @@ import * as ServiceActions from '../../../store/actions/serviceActions';
 import QuickNotification from '../../../components/commons/UI/QuickNotification/QuickNotification';
 import Announcement from '../../../components/commons/UI/Announcement/Announcement';
 import getUserImage from '../../../assets/utils/getUserImage';
-import { colors, fontTypes } from '../../../assets/styles/base';
+import { colors, fontTypes, dimensions } from '../../../assets/styles/base';
 import MainButton from '../../../components/commons/UI/MainButton/MainButton';
 import quickModal from '../../../components/commons/UI/QuickModal/QuickModal';
 
@@ -149,12 +148,11 @@ class ServiceScreen extends Component {
     const callback = () => {
       getAllServices();
       QuickNotification('Service successfully marked as done');
-      this.setState({
-        appearRating: true,
-      });
     };
 
-    markServiceAsDone(service._id, callback);
+    quickModal('You will martk this service as finished', () =>
+      markServiceAsDone(service._id, callback),
+    );
   };
 
   onPressArchiveService = () => {
@@ -166,12 +164,14 @@ class ServiceScreen extends Component {
       QuickNotification('Service successfully archived');
     };
 
-    archiveService(service._id, callback);
+    quickModal('You will archive this service', () =>
+      archiveService(service._id, callback),
+    );
   };
 
   beforeRatingComponents = () => {
-    const {loggedInUser,service}=this.state;
-    const {addReviewLoading}=this.props;
+    const { loggedInUser, service } = this.state;
+    const { addReviewLoading } = this.props;
     return (
       <View>
         <View style={{ alignItems: 'center' }}>
@@ -197,27 +197,33 @@ class ServiceScreen extends Component {
             />
           </View>
 
-          {!addReviewLoading?<MainButton
-            onPress={() =>
-              loggedInUser.ownService
-                ? this.onRating(service.helper)
-                : this.onRating(service.asker._id)
-            }
-          >
-            add review
-          </MainButton>:<Loading/>}
+          {!addReviewLoading ? (
+            <MainButton
+              onPress={() =>
+                loggedInUser.ownService
+                  ? this.onRating(service.helper)
+                  : this.onRating(service.asker._id)
+              }
+            >
+              add review
+            </MainButton>
+          ) : (
+            <Loading />
+          )}
         </View>
       </View>
     );
   };
 
   afterRatingComponents = () => {
-    const {loggedInUser,service}=this.state;
-    const rating=loggedInUser.serviceHelper?service.asker_is_rated.chosen_rating:service.helper_is_rated.chosen_rating
- 
+    const { loggedInUser, service } = this.state;
+    const rating = loggedInUser.serviceHelper
+      ? service.asker_is_rated.chosen_rating
+      : service.helper_is_rated.chosen_rating;
+
     return (
       <View>
-        <AirbnbRating isDisabled={true} size={30} defaultRating={rating} />
+        <AirbnbRating isDisabled size={30} defaultRating={rating} />
         <View style={{ alignItems: 'center' }}>
           <Text style={styles.ratingText}>
             Your review helped us creating a better community {'\n \n'} Thanks
@@ -249,6 +255,9 @@ class ServiceScreen extends Component {
     const { acceptServiceProposalLoading } = this.props;
 
     if (!service) return <Loading />;
+
+    const serviceIsArchived = service.state === 'archived';
+    const serviceIsDone = service.state === 'done';
 
     return (
       <AvoidKeyboard>
@@ -372,6 +381,7 @@ class ServiceScreen extends Component {
                   ownService={loggedInUser.ownService}
                   hasHelper={!!service.helper}
                   acceptServiceProposalLoading={acceptServiceProposalLoading}
+                  disabled={serviceIsArchived || serviceIsDone}
                 />
               ) : null,
             )}
@@ -392,11 +402,12 @@ class ServiceScreen extends Component {
                     ownService={loggedInUser.ownService}
                     hasHelper={!!service.helper}
                     acceptServiceProposalLoading={acceptServiceProposalLoading}
+                    disabled={serviceIsArchived || serviceIsDone}
                   />
                 </View>
               ) : null,
             )}
-            {/*diplaying rating stars and text for asker and helper if service is finished */}
+            {/* diplaying rating stars and text for asker and helper if service is finished */}
 
             {service.state === 'done'
               ? loggedInUser.ownService
@@ -423,10 +434,9 @@ ServiceScreen.propTypes = {
   markServiceAsDone: PropTypes.func,
   archiveService: PropTypes.func,
   getAllServices: PropTypes.func,
-  addReview:PropTypes.func,
+  addReview: PropTypes.func,
   acceptServiceProposalLoading: PropTypes.bool,
-  addReviewLoading:PropTypes.bool
-  
+  addReviewLoading: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
@@ -435,7 +445,7 @@ const mapStateToProps = (state) => ({
   acceptServiceProposalLoading: state.service.acceptServiceProposalLoading,
   markServiceAsDoneLoading: state.service.markServiceAsDoneLoading,
   archiveServiceLoading: state.service.archiveServiceLoading,
-  addReviewLoading:state.service.addReviewLoading,
+  addReviewLoading: state.service.addReviewLoading,
   errors: state.errors,
 });
 

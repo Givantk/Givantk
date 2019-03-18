@@ -146,6 +146,7 @@ const styles = StyleSheet.create({
     color: colors.primary,
     marginTop: 10,
     marginBottom: 10,
+    fontFamily: fontTypes.main,
   },
   textarea: {
     backgroundColor: colors.trueWhite,

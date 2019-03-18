@@ -15,9 +15,8 @@ class RatingCard extends React.PureComponent {
   };
 
   onPressAvatar = (id) => {
-    console.log(id)
-    const { navigation} = this.props;
-    navigation.navigate("Profile", {
+    const { navigation } = this.props;
+    navigation.replace('Profile', {
       userId: id,
     });
   };
@@ -31,7 +30,9 @@ class RatingCard extends React.PureComponent {
           <View style={styles.header}>
             <View>
               {service.askedByUser ? (
-                <TouchableWithoutFeedback onPress={() => this.onPressAvatar(service.helper._id)}>
+                <TouchableWithoutFeedback
+                  onPress={() => this.onPressAvatar(service.helper._id)}
+                >
                   <Image
                     source={{
                       uri: service.asker && getUserImage(service.helper.avatar),
@@ -40,7 +41,9 @@ class RatingCard extends React.PureComponent {
                   />
                 </TouchableWithoutFeedback>
               ) : (
-                <TouchableWithoutFeedback onPress={() => this.onPressAvatar(service.asker._id)} >
+                <TouchableWithoutFeedback
+                  onPress={() => this.onPressAvatar(service.asker._id)}
+                >
                   <Image
                     source={{
                       uri: service.asker && getUserImage(service.asker.avatar),
@@ -87,13 +90,13 @@ class RatingCard extends React.PureComponent {
           <View style={styles.content}>
             {service.askedByUser ? (
               <AirbnbRating
-                isDisabled={true}
+                isDisabled
                 size={30}
                 defaultRating={service.asker_is_rated.chosen_rating}
               />
             ) : (
               <AirbnbRating
-                isDisabled={true}
+                isDisabled
                 size={30}
                 defaultRating={service.helper_is_rated.chosen_rating}
               />

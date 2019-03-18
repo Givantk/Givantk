@@ -15,74 +15,77 @@ const Proposal = ({
   ownService,
   hasHelper,
   acceptServiceProposalLoading,
+  disabled,
 }) => (
-  <View
-    style={[
-      styles.proposalsContainer,
-      application.chosen && { borderWidth: 8 },
-    ]}
-    key={application._id}
-  >
-    <TouchableWithoutFeedback
-      onPress={() => onPressApplicant(application.user._id)}
-    >
-      <View style={styles.proposalHeader}>
-        <View style={styles.helperIdentityContainer}>
-          <Image
-            source={{
-              uri: application.user && getUserImage(application.user.avatar),
-            }}
-            style={styles.proposalUserImage}
-          />
-          <View style={styles.proposalUserNameContainer}>
-            <Text style={styles.proposalUserName}>
-              {`${application.user.first_name} ${application.user.last_name}`}
-            </Text>
-          </View>
-        </View>
-        {application.chosen && (
-          <Badge danger>
-            <View>
-              <Text style={{ color: colors.trueWhite, lineHeight: 85 }}>
-                Helper{' '}
-                <Icon
-                  name="star"
-                  style={{
-                    fontSize: 25,
-                    color: colors.trueWhite,
-                    lineHeight: 50,
-                  }}
-                />
-              </Text>
-            </View>
-          </Badge>
-        )}
-      </View>
-    </TouchableWithoutFeedback>
-    <View style={styles.proposalTextContainer}>
-      <Text style={styles.proposalText}>{application.proposal}</Text>
-    </View>
     <View
       style={[
-        styles.buttonsContainer,
-        (!ownService || hasHelper) && { display: 'none' },
+        styles.proposalsContainer,
+        application.chosen && { borderWidth: 8 },
       ]}
+      key={application._id}
     >
-      <MainButton
-        onPress={() => onPressAcceptProposal(application._id)}
-        loading={acceptServiceProposalLoading}
-      >
-        Accept
-      </MainButton>
-      <MainButton
+      <TouchableWithoutFeedback
         onPress={() => onPressApplicant(application.user._id)}
-        backgroundColor={colors.primaryLight}
       >
-        Ask More
-      </MainButton>
+        <View style={styles.proposalHeader}>
+          <View style={styles.helperIdentityContainer}>
+            <Image
+              source={{
+                uri: application.user && getUserImage(application.user.avatar),
+              }}
+              style={styles.proposalUserImage}
+            />
+            <View style={styles.proposalUserNameContainer}>
+              <Text style={styles.proposalUserName}>
+                {`${application.user.first_name} ${application.user.last_name}`}
+              </Text>
+            </View>
+          </View>
+          {application.chosen && (
+            <Badge danger>
+              <View>
+                <Text style={{ color: colors.trueWhite, lineHeight: 85 }}>
+                  Helper{' '}
+                  <Icon
+                    name="star"
+                    style={{
+                      fontSize: 25,
+                      color: colors.trueWhite,
+                      lineHeight: 50,
+                    }}
+                  />
+                </Text>
+              </View>
+            </Badge>
+          )}
+        </View>
+      </TouchableWithoutFeedback>
+      <View style={styles.proposalTextContainer}>
+        <Text style={styles.proposalText}>{application.proposal}</Text>
+      </View>
+      <View
+        style={[
+          styles.buttonsContainer,
+          (!ownService || hasHelper) && { display: 'none' },
+        ]}
+      >
+        <MainButton
+          onPress={() => onPressAcceptProposal(application._id)}
+          loading={acceptServiceProposalLoading}
+          disabled={disabled}
+        >
+          Accept
+        </MainButton>
+        <MainButton
+          onPress={() => onPressApplicant(application.user._id)}
+          backgroundColor={colors.primaryLight}
+          disabled={disabled}
+        >
+          Ask More
+        </MainButton>
+      </View>
     </View>
-  </View>
-);
+  );
 
 Proposal.propTypes = {
   application: PropTypes.shape({}),
@@ -91,6 +94,7 @@ Proposal.propTypes = {
   ownService: PropTypes.bool,
   hasHelper: PropTypes.bool,
   acceptServiceProposalLoading: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 export default Proposal;

@@ -13,6 +13,7 @@ const MainButton = ({
   big,
   small,
   loading,
+  disabled,
 }) => (
   <View>
     {loading ? (
@@ -21,10 +22,10 @@ const MainButton = ({
       <Button
         style={[
           styles.button,
-          { backgroundColor },
+          { backgroundColor: disabled ? colors.gray02 : backgroundColor },
           small && styles.buttonSmall,
         ]}
-        onPress={onPress}
+        onPress={disabled ? () => null : onPress}
       >
         <Text
           style={[
@@ -42,6 +43,7 @@ const MainButton = ({
 
 MainButton.defaultProps = {
   backgroundColor: colors.secondary,
+  disabled: false,
 };
 
 MainButton.propTypes = {
@@ -51,6 +53,7 @@ MainButton.propTypes = {
   big: PropTypes.bool,
   small: PropTypes.bool,
   loading: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 export default MainButton;
