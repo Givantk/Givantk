@@ -17,6 +17,7 @@ class RatingCard extends React.PureComponent {
 
   onPressAskerAvatar = () => {
     const { navigation, service } = this.props;
+    console.log(service.asker._id)
     navigation.navigate('Profile', {
       userId: service.asker._id,
     });
@@ -77,19 +78,26 @@ class RatingCard extends React.PureComponent {
           </View>
 
           <View style={styles.content}>
-            { service.askedByUser?
+            {service.askedByUser ? (
               <AirbnbRating
-                style={styles.starRating}
                 isDisabled={true}
                 size={30}
                 defaultRating={service.asker_is_rated.chosen_rating}
-              />:<AirbnbRating
-              style={styles.starRating}
-              isDisabled={true}
-              size={30}
-              defaultRating={service.helper_is_rated.chosen_rating}
-            />
-            }
+              />
+            ) : (
+              <AirbnbRating
+                isDisabled={true}
+                size={30}
+                defaultRating={service.helper_is_rated.chosen_rating}
+              />
+            )}
+            {service.askedByUser ? (
+              service.asker_is_rated.written_review ? (
+                <Text style={styles.writtenReview}>{` "${service.asker_is_rated.written_review}"`}</Text>
+              ) : null
+            ) : service.helper_is_rated.written_review ? (
+              <Text style={styles.writtenReview}>{` "${service.helper_is_rated.written_review}"`}</Text>
+            ) : null}
           </View>
         </View>
       </TouchableWithoutFeedback>

@@ -33,10 +33,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   reviewHeader: {
-    marginTop:-7,
+    marginTop: -7,
     color: colors.black,
     textAlign: 'center',
-    marginBottom:15
+    marginBottom: 15,
   },
   reviewer: {
     color: colors.primary,
@@ -48,11 +48,11 @@ const styles = StyleSheet.create({
     width: '98%',
     alignSelf: 'center',
     alignItems: 'center',
-    paddingBottom:15
+    paddingBottom: 15,
   },
-  starRating: {
-    padding: 10,
-  }
+  writtenReview:{
+    marginTop:10
+  },
 });
 
 export default styles;
