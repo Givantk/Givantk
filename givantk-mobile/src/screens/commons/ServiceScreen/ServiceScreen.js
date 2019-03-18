@@ -185,16 +185,6 @@ class ServiceScreen extends Component {
                   {`${service.asker.first_name} ${service.asker.last_name}`}
                 </Text>
               </View>
-              <Text
-                style={{
-                  color: colors.gray03,
-                  fontSize: 10,
-                  fontFamily: fontTypes.mainBold,
-                  marginLeft: 10,
-                }}
-              >
-                Service State: {service.state}
-              </Text>
             </View>
           </TouchableWithoutFeedback>
 
@@ -226,6 +216,17 @@ class ServiceScreen extends Component {
               {service.brief_description || service.description}
             </Text>
           </View>
+
+          <Text
+            style={{
+              color: colors.gray03,
+              fontSize: 10,
+              fontFamily: fontTypes.mainBold,
+              marginLeft: 10,
+            }}
+          >
+            Service State: {service.state}
+          </Text>
 
           {loggedInUser.ownService &&
             !service.helper &&

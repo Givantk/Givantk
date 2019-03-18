@@ -15,6 +15,10 @@ const ChatSchema = new Schema({
       ref: 'user',
       required: true
     },
+    username: {
+      type: String,
+      require: true
+    },
     content: {
       type: String,
       require: true

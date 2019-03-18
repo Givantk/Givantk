@@ -11,6 +11,7 @@ import Loading from '../../../../components/commons/UI/Loading/Loading';
 import QuickNotification from '../../../../components/commons/UI/QuickNotification/QuickNotification';
 import styles from './AddProposalScreenStyles';
 import NoProfileDisclaimer from '../../../../components/commons/NoProfileDisclaimer/NoProfileDisclaimer';
+import AvoidKeyboard from '../../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
 
 class AddProposalScreen extends Component {
   static navigationOptions = () => ({
@@ -71,28 +72,30 @@ class AddProposalScreen extends Component {
     if (!service) return <Loading />;
 
     return (
-      <View style={styles.wrapper}>
-        <Text style={styles.serviceName}>{service.name}</Text>
-        <Text style={styles.header}>My Proposal:</Text>
-        <View style={{ width: dimensions.fullWidth * 0.88 }}>
-          <Textarea
-            onChangeText={(t) => this.setState(() => ({ proposal: t }))}
-            style={styles.textarea}
-          />
-          <Text style={styles.error}>
-            {errors.proposal ||
-              errors.alreadyproposed ||
-              errors.unauthorized ||
-              errors.unauthorized}
-          </Text>
+      <AvoidKeyboard bigHeight>
+        <View style={styles.wrapper}>
+          <Text style={styles.serviceName}>{service.name}</Text>
+          <Text style={styles.header}>My Proposal:</Text>
+          <View style={{ width: dimensions.fullWidth * 0.88 }}>
+            <Textarea
+              onChangeText={(t) => this.setState(() => ({ proposal: t }))}
+              style={styles.textarea}
+            />
+            <Text style={styles.error}>
+              {errors.proposal ||
+                errors.alreadyproposed ||
+                errors.unauthorized ||
+                errors.unauthorized}
+            </Text>
+          </View>
+          <View style={styles.submitContainer}>
+            {proposeToServiceLoading && <Loading />}
+            {proposeToServiceLoading || (
+              <Button title="Submit Proposal" onPress={this.onSubmitProposal} />
+            )}
+          </View>
         </View>
-        <View style={styles.submitContainer}>
-          {proposeToServiceLoading && <Loading />}
-          {proposeToServiceLoading || (
-            <Button title="Submit Proposal" onPress={this.onSubmitProposal} />
-          )}
-        </View>
-      </View>
+      </AvoidKeyboard>
     );
   }
 }

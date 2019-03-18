@@ -1,16 +1,16 @@
 import { connect } from 'react-redux';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, KeyboardAvoidingView } from 'react-native';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 import io from 'socket.io-client';
 
 import { colors } from '../../../assets/styles/base';
-import * as AuthActions from '../../../store/actions/authActions';
+import { serverPath } from '../../../assets/utils/httpService';
 import * as ProfileActions from '../../../store/actions/profileActions';
 import ChatInputText from '../../../components/commons/ChatComponents/chatInputText';
 import ChatMessage from '../../../components/commons/ChatComponents/chatMessage';
-import serverPath from '../../../assets/utils/httpService';
+
 import styles from './ChatScreenStyles';
 
 class ChatScreen extends Component {
@@ -32,11 +32,12 @@ class ChatScreen extends Component {
         name: this.props.currentUser.first_name,
       },
       user2: {
-        id: this.props.profile._id,
+        id: this.props.profile.user._id || this.props.profile.user,
         name: this.props.profile.first_name,
       },
       chatMessage: '',
       chatMessages: [],
+      chatHistory: [],
     };
   }
 
@@ -48,7 +49,11 @@ class ChatScreen extends Component {
       name2: this.state.user2.name,
     };
     // local server is replace with serverPath from heroku
-    this.socket = io({ serverPath }, { query: users_data });
+    this.socket = io(serverPath, { query: users_data });
+
+    this.socket.on('history', (docs) => {
+      this.setState({ chatHistory: docs });
+    });
 
     this.socket.on('chat message', (msg) => {
       this.setState({ chatMessages: [...this.state.chatMessages, msg] });
@@ -60,28 +65,45 @@ class ChatScreen extends Component {
       'chat message',
       this.state.chatMessage,
       this.state.user1.id,
+      this.state.user1.name,
     );
     this.setState({ chatMessage: '' });
   }
 
   render() {
+    const chatHistory = this.state.chatHistory.map((msg, i) => (
+      <ChatMessage key={i} name={msg.username}>
+        {msg.content}
+      </ChatMessage>
+    ));
     const chatMessages = this.state.chatMessages.map((msg, i) => (
       <ChatMessage key={i} name={this.state.user1.name}>
         {msg}
       </ChatMessage>
     ));
     return (
-      <View style={styles.wrapper}>
-        <ScrollView style={styles.scrollView}>{chatMessages}</ScrollView>
-        <ChatInputText
-          autoCorrect={false}
-          value={this.state.chatMessage}
-          onSubmitEditing={() => this.submitChatMessage()}
-          onChangeText={(chatMessage) => {
-            this.setState({ chatMessage });
-          }}
-        />
-      </View>
+      <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={85}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={{ height: '100%' }}
+          contentContainerStyle={{ height: '100%' }}
+        >
+          <View style={styles.wrapper}>
+            <ScrollView style={styles.scrollView}>
+              <View>{chatHistory}</View>
+              <View>{chatMessages}</View>
+            </ScrollView>
+            <ChatInputText
+              autoCorrect={false}
+              value={this.state.chatMessage}
+              onSubmitEditing={() => this.submitChatMessage()}
+              onChangeText={(chatMessage) => {
+                this.setState({ chatMessage });
+              }}
+            />
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     );
   }
 }

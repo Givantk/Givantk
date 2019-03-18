@@ -12,7 +12,7 @@ const unproposeToService = require('./unproposeToService');
 const acceptServiceProposal = require('./acceptServiceProposal');
 const markServiceAsDone = require('./markServiceAsDone');
 const archiveService = require('./archiveService');
-const search = require('./search');
+const getSearchedServices = require('./getSearchedServices');
 
 module.exports = {
   getAllServices,
@@ -29,5 +29,5 @@ module.exports = {
   acceptServiceProposal,
   markServiceAsDone,
   archiveService,
-  search
+  getSearchedServices
 };

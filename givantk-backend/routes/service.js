@@ -134,9 +134,9 @@ router.post(
 // @access Private
 // @errors noservice error
 router.get(
-  '/search/:name',
+  '/search/:searchedKeyword',
   passport.authenticate('jwt', { session: false }),
-  serviceController.search
+  serviceController.getSearchedServices
 );
 
 module.exports = router;

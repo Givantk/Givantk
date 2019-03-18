@@ -27,3 +27,6 @@ export const userAPI = `${serverPath}/api/user`;
 export const serviceAPI = `${serverPath}/api/service`;
 export const profileAPI = `${serverPath}/api/profile`;
 export const paymentAPI = `${serverPath}/api/payment`;
+export const pointsAPI = `${serverPath}/api/points`;
+// Not added to the backend yet
+export const NotificationsAPI = `${serverPath}/api/notifications`;

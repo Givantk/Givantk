@@ -1,5 +1,7 @@
-const openChat = require('./openChat');
+const loadUserChats = require('./loadUserChats');
+const loadPrivateChat = require('./loadPrivateChat');
 
 module.exports = {
-  openChat
+  loadUserChats,
+  loadPrivateChat
 };

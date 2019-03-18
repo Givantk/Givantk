@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 // Models
 const Service = mongoose.model('service');
 
-module.exports = search = (req, res) => {
+module.exports = getSearchedServices = (req, res) => {
   const errors = {};
   /* if the given search word is e.g.(wake) it will search for
     - wake (case INSENSITIVE)
@@ -11,7 +11,9 @@ module.exports = search = (req, res) => {
     - wake + any continuation of the word, like wakes..etc
     
   */
-  Service.find({ name: { $regex: req.params.name, $options: 'i' } })
+  Service.find({ name: { $regex: req.params.searchedKeyword, $options: 'i' } })
+    .populate('asker')
+    .populate('applications.user')
     .sort({ date: -1 })
     .then((services) => {
       if (services.length === 0) {
