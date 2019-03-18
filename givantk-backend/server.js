@@ -81,6 +81,8 @@ io.use((socket, next) => {
     );
 
     let socketID = FinalSocketID;
+    let title = socket.handshake.query.name1 + ' & ' + socket.handshake.query.name2;
+    console.log('title: '+ title);
     let message = {
       userid: '',
       username: '',
@@ -88,6 +90,7 @@ io.use((socket, next) => {
     };
     let chat = new Chat({
       socketID: socketID,
+      title: title,
       $push: { message: message }
     });
     chat.save((error) => {
