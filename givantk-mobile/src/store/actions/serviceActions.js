@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import http, { serviceAPI } from '../../assets/utils/httpService';
+import http, { serviceAPI,reviewApi } from '../../assets/utils/httpService';
 import { serverErrorMessage } from '../../assets/constants/index';
 
 export const getAllServices = (callback) => (dispatch) => {
@@ -239,7 +239,7 @@ export const addReview = (review, callback) => (dispatch) => {
 
   http
     .post(
-      `http://192.168.0.8:5000/api/service/review/${review.serviceId}`,
+      `${serviceAPI}/review/${review.serviceId}`,
       review,
     )
     .then(() => {

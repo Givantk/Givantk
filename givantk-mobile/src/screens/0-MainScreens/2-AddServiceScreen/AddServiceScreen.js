@@ -4,7 +4,7 @@ import { View, Text,Image } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { dimensions } from '../../../assets/styles/base';
+import { dimensions,colors } from '../../../assets/styles/base';
 import * as ProfileActions from '../../../store/actions/profileActions';
 import * as ServiceActions from '../../../store/actions/serviceActions';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
@@ -45,7 +45,7 @@ class AddServiceScreen extends React.Component {
   };
 
   pickImage = async () => {
-    const result = await ImagePicker.launchImageLibraryAsync({});
+    const result = await ImagePicker.launchImageLibraryAsync({allowsEditing:true});
 
     const { uri } = result;
 
@@ -205,7 +205,8 @@ class AddServiceScreen extends React.Component {
           <Button style={styles.uploadButton} onPress={this.pickImage}>
             <Text style={styles.uploadButtonText}>Pick from gallery </Text>
           </Button>
-          <View style={styles.imageView}>
+          <View style={styles.attachementView}>
+             {optionalPicture&&<Text style={{marginTop:6,color:colors.primary,fontWeight:'400'}}>Image Attachement is added</Text>} 
             {optionalPicture && <Image style={styles.image} source={{ uri: optionalPicture }} />}
           </View>
 

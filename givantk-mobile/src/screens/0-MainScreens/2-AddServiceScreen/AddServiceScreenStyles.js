@@ -10,9 +10,11 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     paddingHorizontal: 20,
   },
-  imageView: {
-    justifyContent: 'center',
-    alignItems: 'center',
+  attachementView: {
+    marginTop: 10,
+    flexDirection: 'row',
+    textAlign: 'left',
+    justifyContent:'center'
   },
   label: {
     color: colors.gray02,
@@ -100,11 +102,12 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
 
-  image:{
-    width: 400,
-    height: 400,
-  }
- 
+  image: {
+    marginLeft:9,
+    alignSelf: 'center',
+    width: 40,
+    height: 40,
+  },
 });
 
 export default styles;

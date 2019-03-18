@@ -15,8 +15,9 @@ class RatingCard extends React.PureComponent {
   };
 
   onPressAvatar = (id) => {
+    console.log(id)
     const { navigation} = this.props;
-    navigation.navigate('Profile', {
+    navigation.navigate("Profile", {
       userId: id,
     });
   };
@@ -28,25 +29,27 @@ class RatingCard extends React.PureComponent {
       <TouchableWithoutFeedback onPress={this.onPressCard}>
         <View style={styles.serviceCard}>
           <View style={styles.header}>
-            <TouchableWithoutFeedback onPress={this.navigateToAskerProfile}>
-              <View>
-                {service.askedByUser ? (
+            <View>
+              {service.askedByUser ? (
+                <TouchableWithoutFeedback onPress={() => this.onPressAvatar(service.helper._id)}>
                   <Image
                     source={{
                       uri: service.asker && getUserImage(service.helper.avatar),
                     }}
                     style={styles.userImage}
                   />
-                ) : (
+                </TouchableWithoutFeedback>
+              ) : (
+                <TouchableWithoutFeedback onPress={() => this.onPressAvatar(service.asker._id)} >
                   <Image
                     source={{
                       uri: service.asker && getUserImage(service.asker.avatar),
                     }}
                     style={styles.userImage}
                   />
-                )}
-              </View>
-            </TouchableWithoutFeedback>
+                </TouchableWithoutFeedback>
+              )}
+            </View>
 
             <TouchableWithoutFeedback
               onPress={
