@@ -6,6 +6,7 @@ const deleteUser = require('./deleteUser');
 const getUser = require('./getUser');
 const getUserById = require('./getUserById');
 const setUserNotificationToken = require('./setUserNotificationToken');
+const removePushNotificationToken = require('./removePushNotificationToken');
 
 module.exports = {
   getAllUsers,
@@ -15,5 +16,6 @@ module.exports = {
   deleteUser,
   getUser,
   getUserById,
-  setUserNotificationToken
+  setUserNotificationToken,
+  removePushNotificationToken
 };

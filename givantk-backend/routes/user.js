@@ -72,4 +72,14 @@ router.post(
   userController.setUserNotificationToken
 );
 
+// @route  POST api/user/remove-push-token
+// @desc   Remove the push token for the current user (usually when logging out)
+// @access Private
+// @errors error
+router.post(
+  '/remove-push-token',
+  passport.authenticate('jwt', { session: false }),
+  userController.removePushNotificationToken
+);
+
 module.exports = router;
