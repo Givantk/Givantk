@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import http, { serviceAPI,reviewApi } from '../../assets/utils/httpService';
+import http, { serviceAPI} from '../../assets/utils/httpService';
 import { serverErrorMessage } from '../../assets/constants/index';
 
 export const getAllServices = (callback) => (dispatch) => {
