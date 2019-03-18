@@ -1,7 +1,6 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const passport = require('passport');
-//const socket = require('socket.io');
 
 const app = express();
 

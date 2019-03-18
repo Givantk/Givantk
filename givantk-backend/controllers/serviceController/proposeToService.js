@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const sendNotifications = require('../../assets/utils/sendNotifications');
+
 // Models
 const Profile = mongoose.model('profile');
 const Service = mongoose.model('service');
@@ -48,21 +50,36 @@ module.exports = proposeToService = (req, res) => {
 
         service.save().then((service) => {
           applicantProfile.save().then(() => {
-            Profile.findOne({ user: service.asker }).then((askerProfile) => {
-              askerProfile.notifications.unshift({
-                title: `${
-                  applicantProfile.first_name
-                } proposed to your service \"${service.name}\"`,
-                navigateTo: {
-                  kind: 'service',
-                  service: service._id
-                },
-                is_user_associated: true,
-                user_associated: applicantProfile.user,
-                user_profile_associated: applicantProfile._id
+            Profile.findOne({ user: service.asker })
+              .populate('user')
+              .then((askerProfile) => {
+                askerProfile.notifications.unshift({
+                  title: `${
+                    applicantProfile.first_name
+                  } proposed to your service \"${service.name}\"`,
+                  navigateTo: {
+                    kind: 'service',
+                    service: service._id
+                  },
+                  is_user_associated: true,
+                  user_associated: applicantProfile.user,
+                  user_profile_associated: applicantProfile._id
+                });
+                askerProfile.save();
+
+                if (askerProfile.user.pushNotificationToken) {
+                  sendNotifications([
+                    {
+                      to: askerProfile.user.pushNotificationToken,
+                      title: 'New Service Proposal!',
+                      body: `${
+                        applicantProfile.first_name
+                      } proposed to your service \"${service.name}\"`,
+                      sound: 'default'
+                    }
+                  ]);
+                }
               });
-              askerProfile.save();
-            });
           });
         });
         return res.json({ service, success: true });

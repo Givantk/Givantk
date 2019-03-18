@@ -14,7 +14,6 @@ import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKey
 import DefaultButton from '../../../components/commons/UI/DefaultButton/DefaultButton';
 import DefaultTextInput from '../../../components/commons/UI/DefaultTextInput/DefaultTextInput';
 import Header from '../../../components/RegistrationsScreensComponents/SignupScreenComponents/Header/Header';
-import quickNotification from '../../../components/commons/UI/QuickNotification/QuickNotification';
 
 class LoginScreen extends React.Component {
   static navigationOptions = () => ({
@@ -39,13 +38,15 @@ class LoginScreen extends React.Component {
   callbackAfterLogin = () => {
     const { navigation, getAllServices, getCurrentUserProfile } = this.props;
 
-    quickNotification('Login Successful');
     navigation.replace('Tab');
     getAllServices();
     getCurrentUserProfile();
 
     AuthActions.getPushNotificationToken();
-    this._notificationSubscription = Notifications.addListener(() => {});
+    this._notificationSubscription = Notifications.addListener((n) => {
+      if (n.origin === 'selected') navigation.navigate('Notifications');
+      else navigation.navigate('Tab');
+    });
   };
 
   handleLogin = () => {
