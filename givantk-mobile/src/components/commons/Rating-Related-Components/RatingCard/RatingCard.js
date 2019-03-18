@@ -7,19 +7,17 @@ import styles from './RatingCardStyles';
 
 class RatingCard extends React.PureComponent {
   onPressCard = () => {
-    const { service } = this.props;
+    const { service, navigation } = this.props;
 
-    const { navigation } = this.props;
     navigation.navigate('Service', {
       service,
     });
   };
 
-  onPressAskerAvatar = () => {
-    const { navigation, service } = this.props;
-    console.log(service.asker._id)
+  onPressAvatar = (id) => {
+    const { navigation} = this.props;
     navigation.navigate('Profile', {
-      userId: service.asker._id,
+      userId: id,
     });
   };
 
@@ -50,7 +48,13 @@ class RatingCard extends React.PureComponent {
               </View>
             </TouchableWithoutFeedback>
 
-            <TouchableWithoutFeedback onPress={this.onPressAskerAvatar}>
+            <TouchableWithoutFeedback
+              onPress={
+                service.askedByUser
+                  ? () => this.onPressAvatar(service.helper._id)
+                  : () => this.onPressAvatar(service.asker._id)
+              }
+            >
               <View>
                 {service.askedByUser ? (
                   <Text style={styles.reviewer}>
@@ -93,10 +97,14 @@ class RatingCard extends React.PureComponent {
             )}
             {service.askedByUser ? (
               service.asker_is_rated.written_review ? (
-                <Text style={styles.writtenReview}>{` "${service.asker_is_rated.written_review}"`}</Text>
+                <Text style={styles.writtenReview}>{` "${
+                  service.asker_is_rated.written_review
+                }"`}</Text>
               ) : null
             ) : service.helper_is_rated.written_review ? (
-              <Text style={styles.writtenReview}>{` "${service.helper_is_rated.written_review}"`}</Text>
+              <Text style={styles.writtenReview}>{` "${
+                service.helper_is_rated.written_review
+              }"`}</Text>
             ) : null}
           </View>
         </View>

@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
     color: colors.black,
     textAlign: 'center',
     marginBottom: 15,
+    fontWeight:'500'
   },
   reviewer: {
     color: colors.primary,
@@ -51,7 +52,8 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
   },
   writtenReview:{
-    marginTop:10
+    marginTop:10,
+    fontStyle:'italic'
   },
 });
 
