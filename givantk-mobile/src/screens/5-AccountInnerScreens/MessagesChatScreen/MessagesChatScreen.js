@@ -28,7 +28,10 @@ class MessagesChatScreen extends Component {
     this.state = {
       user1: {
         id: this.props.currentUser._id,
-        name: this.props.currentUser.first_name+' '+this.props.currentUser.last_name,
+        name:
+          `${this.props.currentUser.first_name 
+          } ${ 
+          this.props.currentUser.last_name}`,
       },
       user2: {
         id: this.props.navigation.state.params.user2.id,
@@ -58,7 +61,7 @@ class MessagesChatScreen extends Component {
       this.setState({ chatMessages: [...this.state.chatMessages, msg] });
     });
   }
-  
+
   submitChatMessage() {
     this.socket.emit(
       'chat message',
@@ -71,53 +74,52 @@ class MessagesChatScreen extends Component {
 
   render() {
     const chatHistory = this.state.chatHistory.map((msg, i) => (
-        <ChatMessage key={i} name={msg.username}>
-          {msg.content}
-        </ChatMessage>
-      ));
-      const chatMessages = this.state.chatMessages.map((msg, i) => (
-        <ChatMessage key={i} name={this.state.user1.name}>
-          {msg}
-        </ChatMessage>
-      ));
-      return (
-        <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={85}>
-          <ScrollView
-            showsVerticalScrollIndicator={false}
-            style={{ height: '100%' }}
-            contentContainerStyle={{ height: '100%' }}
-          >
-            <View style={styles.wrapper}>
-              <ScrollView style={styles.scrollView}>
-                <View>{chatHistory}</View>
-                <View>{chatMessages}</View>
-              </ScrollView>
-              <ChatInputText
-                autoCorrect={false}
-                value={this.state.chatMessage}
-                onSubmitEditing={() => this.submitChatMessage()}
-                onChangeText={(chatMessage) => {
-                  this.setState({ chatMessage });
-                }}
-              />
-            </View>
-          </ScrollView>
-        </KeyboardAvoidingView>
-      );
+      <ChatMessage key={i} name={msg.username}>
+        {msg.content}
+      </ChatMessage>
+    ));
+    const chatMessages = this.state.chatMessages.map((msg, i) => (
+      <ChatMessage key={i} name={this.state.user1.name}>
+        {msg}
+      </ChatMessage>
+    ));
+    return (
+      <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={85}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={{ height: '100%' }}
+          contentContainerStyle={{ height: '100%' }}
+        >
+          <View style={styles.wrapper}>
+            <ScrollView style={styles.scrollView}>
+              <View>{chatHistory}</View>
+              <View>{chatMessages}</View>
+            </ScrollView>
+            <ChatInputText
+              autoCorrect={false}
+              value={this.state.chatMessage}
+              onSubmitEditing={() => this.submitChatMessage()}
+              onChangeText={(chatMessage) => {
+                this.setState({ chatMessage });
+              }}
+            />
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    );
   }
 }
 
 MessagesChatScreen.propTypes = {
-    navigation: PropTypes.shape({}),
+  navigation: PropTypes.shape({}),
 };
 
 const mapStateToProps = (state) => ({
-    currentUser: state.auth.user,
-    errors: state.errors,
+  currentUser: state.auth.user,
+  errors: state.errors,
 });
 
 export default connect(
-    mapStateToProps,
-    null,
+  mapStateToProps,
+  null,
 )(MessagesChatScreen);
-

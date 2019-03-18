@@ -22,7 +22,7 @@ export const removeAuthToken = () => {
   delete axios.defaults.headers.common.Authorization;
 };
 
-export const serverPath = 'https://givantk-backend.herokuapp.com';
+export const serverPath = 'http://10.0.0.141:5000';
 export const userAPI = `${serverPath}/api/user`;
 export const serviceAPI = `${serverPath}/api/service`;
 export const profileAPI = `${serverPath}/api/profile`;
