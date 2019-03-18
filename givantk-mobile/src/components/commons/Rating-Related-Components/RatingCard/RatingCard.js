@@ -1,10 +1,9 @@
 import { View, Text, Image, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
-
+import { AirbnbRating } from 'react-native-ratings';
 import getUserImage from '../../../../assets/utils/getUserImage';
 import styles from './RatingCardStyles';
-import { headerHeight } from '../../../../assets/styles/base';
 
 class RatingCard extends React.PureComponent {
   onPressCard = () => {
@@ -49,44 +48,48 @@ class RatingCard extends React.PureComponent {
                 )}
               </View>
             </TouchableWithoutFeedback>
-         
-              <TouchableWithoutFeedback onPress={this.onPressAskerAvatar}>
-                <View>
-                  {service.askedByUser ? (
-                    <Text style={styles.reviewer}>
-                      {`Helper: ${service.helper.first_name}`}
-                    </Text>
-                  ) : (
-                    <Text style={styles.reviewer}>
-                      {`Asker: ${service.asker.first_name} `}
-                    </Text>
-                  )}
-                </View>
-              </TouchableWithoutFeedback>
-              </View>
 
-              <View style={styles.headerCenter}>
-              {service.askedByUser ? (
-                <Text style={styles.reviewHeader}>{`\n reviewed ${
-                  service.asker.first_name
-                } in the service:\n ${
-                  service.name
-                } `}</Text>
-              ) : (
-                <Text style={styles.reviewHeader}>{`\n reviewed ${
-                  service.helper.first_name
-                } in the service:\n ${
-                  service.name
-                } `}</Text>
-              )}
-          
-            </View>
-     
+            <TouchableWithoutFeedback onPress={this.onPressAskerAvatar}>
+              <View>
+                {service.askedByUser ? (
+                  <Text style={styles.reviewer}>
+                    {`Helper: ${service.helper.first_name}`}
+                  </Text>
+                ) : (
+                  <Text style={styles.reviewer}>
+                    {`Asker: ${service.asker.first_name} `}
+                  </Text>
+                )}
+              </View>
+            </TouchableWithoutFeedback>
+          </View>
+
+          <View style={styles.headerCenter}>
+            {service.askedByUser ? (
+              <Text style={styles.reviewHeader}>{`\r\n Reviewed ${
+                service.asker.first_name
+              } in the service:\n "${service.name}"`}</Text>
+            ) : (
+              <Text style={styles.reviewHeader}>{`\r\n Reviewed ${
+                service.helper.first_name
+              } in the service:\n "${service.name}" `}</Text>
+            )}
+          </View>
 
           <View style={styles.content}>
-            <Text style={styles.descriptionText}>
-              {service.brief_description || service.written}
-            </Text>
+            { service.askedByUser?
+              <AirbnbRating
+                style={styles.starRating}
+                isDisabled={true}
+                size={30}
+                defaultRating={service.asker_is_rated.chosen_rating}
+              />:<AirbnbRating
+              style={styles.starRating}
+              isDisabled={true}
+              size={30}
+              defaultRating={service.helper_is_rated.chosen_rating}
+            />
+            }
           </View>
         </View>
       </TouchableWithoutFeedback>

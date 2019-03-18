@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderColor: colors.primary,
     width: dimensions.fullWidth * 0.88,
-    height: 220,
     flexDirection: 'column',
     justifyContent: 'space-between',
     backgroundColor: colors.tertiary,
@@ -20,7 +19,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     paddingHorizontal: 20,
-    marginBottom:0
   },
   userImage: {
     width: 40,
@@ -30,32 +28,31 @@ const styles = StyleSheet.create({
     borderColor: colors.secondary,
   },
   headerCenter: {
-    marginTop:0,  
+    marginTop: 0,
     justifyContent: 'center',
     alignItems: 'center',
   },
   reviewHeader: {
+    marginTop:-7,
     color: colors.black,
-    textAlign:'center'
+    textAlign: 'center',
+    marginBottom:15
   },
   reviewer: {
     color: colors.primary,
-    paddingLeft:10,
-    paddingTop:7
+    paddingLeft: 10,
+    paddingTop: 7,
   },
   content: {
     backgroundColor: colors.white,
-    height: '40%',
     width: '98%',
     alignSelf: 'center',
     alignItems: 'center',
+    paddingBottom:15
   },
-  descriptionText: {
-    color: colors.black,
+  starRating: {
     padding: 10,
-    fontFamily: fontTypes.main,
-  },
-
+  }
 });
 
 export default styles;
