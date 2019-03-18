@@ -34,12 +34,18 @@ const ServiceSchema = new Schema({
   start_time: Date,
   end_time: Date,
   reveal_asker: Boolean,
-  state: String, // 'new' or 'pending' or 'progressing' or 'done'
+  state: String, // 'new' or 'pending' or 'progressing' or 'done' or 'archived'
   applications: [
     {
       user: { type: mongoose.Schema.Types.ObjectId, ref: 'user' },
       proposal: String,
       chosen: Boolean
+    }
+  ],
+  comments: [
+    {
+      user: { type: mongoose.Schema.Types.ObjectId, ref: 'user' },
+      body: String
     }
   ],
   asker: { type: mongoose.Schema.Types.ObjectId, ref: 'user', required: true },

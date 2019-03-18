@@ -7,7 +7,7 @@ import React from 'react';
 import { colors, dimensions } from '../../../assets/styles/base';
 import * as ProfileActions from '../../../store/actions/profileActions';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
-import fakeProfile from '../../../assets/data/fakeProfile';
+import getUserImage from '../../../assets/utils/getUserImage';
 import Loading from '../../../components/commons/UI/Loading/Loading';
 import NoProfileDisclaimer from '../../../components/commons/NoProfileDisclaimer/NoProfileDisclaimer';
 import ServicesList from '../../../components/commons/Service-Related-Components/ServicesList/ServicesList';
@@ -89,10 +89,15 @@ class ProfileScreen extends React.Component {
     return (
       <View style={styles.container}>
         <AvoidKeyboard>
-          {/* Imagne and name */}
+          {/* Image and name */}
 
           <View style={styles.imageContainer}>
-            <Image source={{ uri: fakeProfile.avatar }} style={styles.image} />
+            <Image
+              source={{
+                uri: profile && getUserImage(profile.avatar),
+              }}
+              style={styles.image}
+            />
             <Text style={styles.userName}>
               {profile.first_name} {profile.last_name}
             </Text>
@@ -101,6 +106,12 @@ class ProfileScreen extends React.Component {
 
           <View style={styles.userDescriptionContainer}>
             <Text style={styles.userDescription}>{profile.description}</Text>
+          </View>
+
+          <View style={styles.userDescriptionContainer}>
+            <Text style={styles.points}>
+              Givantk points: {profile.givantk_points}
+            </Text>
           </View>
 
           {/* Send a message */}

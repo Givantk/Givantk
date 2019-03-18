@@ -16,6 +16,10 @@ module.exports = getAllProfiles = (req, res) => {
       path: 'services_helped_in',
       populate: { path: 'asker' }
     })
+    .populate({
+      path: 'services_archived',
+      populate: { path: 'asker' }
+    })
     .sort({ date: -1 })
     .then((profiles) => {
       if (profiles.length === 0) {

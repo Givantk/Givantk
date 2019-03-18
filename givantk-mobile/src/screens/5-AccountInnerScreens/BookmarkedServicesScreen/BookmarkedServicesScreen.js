@@ -27,7 +27,10 @@ class BookmarkedServicesScreen extends Component {
 
     return (
       <View>
-        <ServicesList services={currentUserProfile.services_bookmarked} />
+        <ServicesList
+          services={currentUserProfile.services_bookmarked}
+          navigation={navigation}
+        />
       </View>
     );
   }

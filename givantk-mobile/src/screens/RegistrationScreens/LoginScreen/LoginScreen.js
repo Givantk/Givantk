@@ -3,6 +3,7 @@ import { Text, View, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { Icon } from 'native-base';
 import { colors } from '../../../assets/styles/base';
 import { styles } from './LoginScreenStyles';
 import * as AuthActions from '../../../store/actions/authActions';
@@ -12,6 +13,7 @@ import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKey
 import DefaultButton from '../../../components/commons/UI/DefaultButton/DefaultButton';
 import DefaultTextInput from '../../../components/commons/UI/DefaultTextInput/DefaultTextInput';
 import Header from '../../../components/RegistrationsScreensComponents/SignupScreenComponents/Header/Header';
+import quickNotification from '../../../components/commons/UI/QuickNotification/QuickNotification';
 
 class LoginScreen extends React.Component {
   static navigationOptions = () => ({
@@ -35,6 +37,8 @@ class LoginScreen extends React.Component {
 
   callbackAfterLogin = () => {
     const { navigation, getAllServices, getCurrentUserProfile } = this.props;
+
+    quickNotification('Login Successful');
     navigation.replace('Tab');
     getAllServices();
     getCurrentUserProfile();
@@ -49,18 +53,26 @@ class LoginScreen extends React.Component {
   };
 
   onChangeTextValue = (name, value) => {
+    // \s* means any numbers of white space and $ means at the end of the string
+
     this.setState({
-      [name]: value,
+      [name]: value.replace(/\s*$/, ''),
     });
   };
 
   handleSignInWithFacebook = () => {
-    alert('Facebook login clicked');
+    const { loginUserWithFacebook } = this.props;
+
+    loginUserWithFacebook(this.callbackAfterLogin);
   };
 
   render() {
-    const { navigation, errors, setCurrentUserLoading } = this.props;
-
+    const {
+      navigation,
+      errors,
+      setCurrentUserLoading,
+      loginWithFacebookLoading,
+    } = this.props;
     return (
       <AvoidKeyboard
         bottomPadding={0}
@@ -75,7 +87,8 @@ class LoginScreen extends React.Component {
               style={styles.textInput}
               onChangeText={this.onChangeTextValue}
               name="email"
-              errorText={errors.email}
+              autoCapitalize="none"
+              errorText={errors.email || errors.incorrectinfo}
             />
             <DefaultTextInput
               password
@@ -83,6 +96,7 @@ class LoginScreen extends React.Component {
               style={styles.textInput}
               onChangeText={this.onChangeTextValue}
               name="password"
+              autoCapitalize="none"
               errorText={errors.password}
             />
 
@@ -93,8 +107,16 @@ class LoginScreen extends React.Component {
               Sign In
             </DefaultButton>
 
-            <DefaultButton onPress={this.handleSignInWithFacebook}>
-              Sign In With Facebook
+            <DefaultButton
+              onPress={this.handleSignInWithFacebook}
+              loading={loginWithFacebookLoading}
+            >
+              Sign In With{' '}
+              <Icon
+                type="FontAwesome"
+                name="facebook-square"
+                style={styles.facebookButton}
+              />
             </DefaultButton>
           </View>
 
@@ -119,21 +141,27 @@ class LoginScreen extends React.Component {
 
 LoginScreen.propTypes = {
   navigation: PropTypes.shape({}),
+
   loginUser: PropTypes.func,
+  loginUserWithFacebook: PropTypes.func,
   checkSavedUserThenLogin: PropTypes.func,
   getAllServices: PropTypes.func,
   getCurrentUserProfile: PropTypes.func,
+
   errors: PropTypes.shape({}),
   setCurrentUserLoading: PropTypes.bool,
+  loginWithFacebookLoading: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
   errors: state.errors,
   setCurrentUserLoading: state.auth.setCurrentUserLoading,
+  loginWithFacebookLoading: state.auth.loginWithFacebookLoading,
 });
 
 const mapDispatchToProps = {
   loginUser: AuthActions.loginUser,
+  loginUserWithFacebook: AuthActions.loginUserWithFacebook,
   checkSavedUserThenLogin: AuthActions.checkSavedUserThenLogin,
   getAllServices: ServiceActions.getAllServices,
   getCurrentUserProfile: ProfileActions.getCurrentUserProfile,

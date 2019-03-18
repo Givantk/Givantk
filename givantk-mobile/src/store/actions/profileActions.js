@@ -56,8 +56,14 @@ export const makeProfile = (profile, callback) => (dispatch) => {
     type: actionTypes.MAKE_PROFILE_START,
   });
 
+  const config = {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  };
+
   http
-    .post(`${profileAPI}`, profile)
+    .post(`${profileAPI}`, profile, config)
     .then(() => {
       dispatch({
         type: actionTypes.MAKE_PROFILE_FINISH,
@@ -75,11 +81,16 @@ export const makeProfile = (profile, callback) => (dispatch) => {
     });
 };
 
-export const setNotificationsSeen = () => (dispatch) => {
-  http.post(`${profileAPI}/set-notifications-seen`).catch((err) => {
-    dispatch({
-      type: actionTypes.SET_ERRORS,
-      payload: err.response.data,
+export const setNotificationsSeen = (callback) => (dispatch) => {
+  http
+    .post(`${profileAPI}/set-notifications-seen`)
+    .then(() => {
+      if (callback) callback();
+    })
+    .catch((err) => {
+      dispatch({
+        type: actionTypes.SET_ERRORS,
+        payload: err.response.data,
+      });
     });
-  });
 };

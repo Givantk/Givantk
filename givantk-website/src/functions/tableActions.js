@@ -1,6 +1,8 @@
 import axios from 'axios';
 const tableActions = {
 
+    ActivitiesAskedFor:[],
+
     banUser: (obj) => {
 
         console.log(obj)
@@ -42,6 +44,13 @@ const tableActions = {
                 console.log(error);
             });
     },
+    setActivitiesAskedfor:(arr)=>{
+
+        tableActions.ActivitiesAskedFor=arr
+    },
+    getActivitiesAskedFor:()=>{
+        return tableActions.ActivitiesAskedFor
+    }
 }
 
 export default tableActions;

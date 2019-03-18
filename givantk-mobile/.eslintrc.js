@@ -20,6 +20,7 @@ module.exports = {
     'max-len': 'off',
     'no-alert': 'off',
     'global-require': 'off',
+    camelcase: 'off',
     'no-underscore-dangle': [
       'off',
       {

@@ -25,12 +25,38 @@ export const getAllServices = (callback) => (dispatch) => {
     });
 };
 
+export const getSearchedServices = (searchedKeyword, callback) => (dispatch) => {
+  dispatch({
+    type: actionTypes.GET_SEARCHED_SERVICES_START,
+  });
+  http
+    .get(`${serviceAPI}/search/${searchedKeyword}`)
+    .then((res) => {
+      dispatch({
+        type: actionTypes.GET_SEARCHED_SERVICES_FINISH,
+        payload: res.data,
+      });
+      if (callback) callback();
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: actionTypes.SET_ERRORS,
+        payload: err.response.data,
+      });
+      dispatch({
+        type: actionTypes.GET_SEARCHED_SERVICES_FINISH,
+      });
+    });
+};
+
 export const createService = (service, callback) => (dispatch) => {
   dispatch({
     type: actionTypes.CREATE_SERVICE_START,
   });
+
   http
-    .post(serviceAPI, service)
+    .post(`${serviceAPI}`, service)
     .then(() => {
       dispatch({
         type: actionTypes.CREATE_SERVICE_FINISH,
@@ -150,6 +176,54 @@ export const unbookmarkService = (serviceId, callback) => (dispatch) => {
       dispatch({
         type: actionTypes.SET_ERRORS,
         payload: err.response.data,
+      });
+    });
+};
+
+export const markServiceAsDone = (serviceId, callback) => (dispatch) => {
+  dispatch({
+    type: actionTypes.MARK_SERVICE_DONE_START,
+  });
+
+  http
+    .post(`${serviceAPI}/mark-as-done/${serviceId}`)
+    .then(() => {
+      dispatch({
+        type: actionTypes.MARK_SERVICE_DONE_FINISH,
+      });
+      if (callback) callback();
+    })
+    .catch((err) => {
+      dispatch({
+        type: actionTypes.SET_ERRORS,
+        payload: err.response.data,
+      });
+      dispatch({
+        type: actionTypes.MARK_SERVICE_DONE_FINISH,
+      });
+    });
+};
+
+export const archiveService = (serviceId, callback) => (dispatch) => {
+  dispatch({
+    type: actionTypes.ARCHIVE_SERVICE_START,
+  });
+
+  http
+    .post(`${serviceAPI}/archive/${serviceId}`)
+    .then(() => {
+      dispatch({
+        type: actionTypes.ARCHIVE_SERVICE_FINISH,
+      });
+      if (callback) callback();
+    })
+    .catch((err) => {
+      dispatch({
+        type: actionTypes.SET_ERRORS,
+        payload: err.response.data,
+      });
+      dispatch({
+        type: actionTypes.ARCHIVE_SERVICE_FINISH,
       });
     });
 };

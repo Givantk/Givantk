@@ -22,6 +22,10 @@ module.exports = getProfileById = (req, res) => {
       path: 'services_proposed_for',
       populate: { path: 'asker' }
     })
+    .populate({
+      path: 'services_archived',
+      populate: { path: 'asker' }
+    })
     .then((profile) => {
       if (!profile) {
         errors.noprofile = 'No profile';

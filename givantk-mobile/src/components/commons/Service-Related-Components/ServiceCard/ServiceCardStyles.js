@@ -67,6 +67,10 @@ const styles = StyleSheet.create({
     fontSize: 35,
     color: colors.primary,
   },
+  points: {
+    marginLeft: 10,
+    color: colors.primary,
+  },
 });
 
 export default styles;

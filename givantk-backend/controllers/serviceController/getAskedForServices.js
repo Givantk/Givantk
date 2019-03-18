@@ -16,6 +16,6 @@ module.exports = getAskedForServices = (req, res) => {
     })
     .catch((err) => {
       errors.error = 'Error getting services';
-      res.status(500).json({ ...errors, ...err });
+      return res.status(500).json({ ...errors, ...err });
     });
 };

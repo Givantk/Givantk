@@ -12,12 +12,15 @@ import styles from './NotificationsScreenStyles';
 
 class NotificationsScreen extends React.Component {
   static navigationOptions = () => ({
-    headerTitle: 'Notifications',
+    headerTitle: 'Your Notifications',
   });
 
   componentDidMount() {
-    const { setNotificationsSeen } = this.props;
-    setNotificationsSeen();
+    const { setNotificationsSeen, getCurrentUserProfile } = this.props;
+    const callback = () => {
+      getCurrentUserProfile();
+    }
+    setNotificationsSeen(callback);
   }
 
   renderItem = (notification) => {
@@ -38,7 +41,7 @@ class NotificationsScreen extends React.Component {
       navigation,
     } = this.props;
 
-    if (getCurrentProfileLoading) return <Loading />;
+    if (!currentUserProfile && getCurrentProfileLoading) return <Loading />;
 
     if (!currentUserHasProfile)
       return <NoProfileDisclaimer navigation={navigation} />;
@@ -65,6 +68,7 @@ NotificationsScreen.propTypes = {
   getCurrentProfileLoading: PropTypes.bool,
   currentUserHasProfile: PropTypes.bool,
   setNotificationsSeen: PropTypes.func,
+  getCurrentUserProfile: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
@@ -75,6 +79,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   setNotificationsSeen: ProfileActions.setNotificationsSeen,
+  getCurrentUserProfile: ProfileActions.getCurrentUserProfile,
 };
 
 export default connect(

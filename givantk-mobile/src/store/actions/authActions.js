@@ -1,4 +1,5 @@
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, Alert } from 'react-native';
+import { Facebook } from 'expo';
 import jwtDecode from 'jwt-decode';
 
 import * as actionTypes from './actionTypes';
@@ -9,7 +10,7 @@ import http, {
   removeAuthToken,
 } from '../../assets/utils/httpService';
 
-import storedJWTname from '../../assets/constants/storedJWTname';
+import { storedJWTname } from '../../assets/constants';
 import QuickNotification from '../../components/commons/UI/QuickNotification/QuickNotification';
 
 export const signupUser = (userData, callback) => (dispatch) => {
@@ -119,4 +120,93 @@ export const checkSavedUserThenLogin = (callback) => (dispatch) => {
       }
     }
   });
+};
+
+export const loginUserWithFacebook = (callback) => async (dispatch) => {
+  try {
+    const { type, token } = await Facebook.logInWithReadPermissionsAsync(
+      '2132958976794441',
+      {
+        permissions: ['public_profile'],
+      },
+    );
+    if (type === 'success') {
+      // Get the user's info using Facebook's Graph API
+      const response = await fetch(
+        `https://graph.facebook.com/me?access_token=${token}&fields=id,name,email,picture.type(large)`,
+      );
+      const fbUserInfo = await response.json();
+
+      const userSignupData = {
+        first_name: fbUserInfo.name.split(' ')[0],
+        last_name: fbUserInfo.name.split(' ')[1],
+        email: fbUserInfo.email,
+        avatar: fbUserInfo.picture.data.url,
+        isFacebookEntry: true,
+        facebookId: fbUserInfo.id,
+      };
+
+      dispatch({
+        type: actionTypes.LOGIN_USER_WITH_FACEBOOK_START,
+      });
+
+      http
+        .post(userAPI, userSignupData)
+        .then(() => {
+          const userLoginData = {
+            email: fbUserInfo.email,
+            isFacebookEntry: true,
+            facebookId: fbUserInfo.id,
+          };
+
+          http
+            .post(`${userAPI}/login`, userLoginData)
+            .then((res) => {
+              const { token: loginToken } = res.data;
+
+              // Save toke:loginTokenn to storage
+              AsyncStorage.setItem(storedJWTname, loginToken).catch(() => {
+                QuickNotification('Could not save your credentials');
+              });
+
+              // Set Authorization header
+              setAuthToken(loginToken);
+
+              // Decode token to get user data
+              const decodedToken = jwtDecode(loginToken);
+
+              // Set user in auth reducer
+              dispatch({
+                type: actionTypes.SET_CURRENT_USER,
+                payload: decodedToken,
+              });
+
+              if (callback) callback();
+            })
+            .catch((err) => {
+              dispatch({
+                type: actionTypes.SET_ERRORS,
+                payload: err.response.data,
+              });
+              dispatch({
+                type: actionTypes.SET_CURRENT_USER,
+              });
+            });
+        })
+        .catch((err) => {
+          console.log(err)
+          dispatch({
+            type: actionTypes.SET_ERRORS,
+            payload: err.response.data,
+          });
+          dispatch({
+            type: actionTypes.SET_CURRENT_USER,
+          });
+        });
+    } else {
+      Alert.alert('Couldn\'t Login Using Facebook');
+    }
+  } catch ({ message }) {
+    Alert.alert(`Facebook Login Error: ${message}`);
+  }
 };

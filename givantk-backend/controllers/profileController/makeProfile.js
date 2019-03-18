@@ -1,8 +1,11 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 
+const rules = require('../../assets/rules');
+
 // Models
 const Profile = mongoose.model('profile');
+const User = mongoose.model('user');
 
 // Validations
 const validateProfile = require('../../validations/profile');
@@ -23,14 +26,12 @@ module.exports = makeProfile = (req, res) => {
         first_name: req.user.first_name,
         last_name: req.user.last_name,
         gender: req.body.gender,
-        avatar: req.body.avatar,
-        description: req.body.description,
         phone_number: req.body.phone_number,
         date_of_birth: req.body.date_of_birth,
-        skills: req.body.skills,
+        skills: JSON.parse(req.body.skills),
         description: req.body.description,
-        givantk_points: 0,
-        money_points: 0,
+        givantk_points: rules.numberOfGivantkPointsOnSignup,
+        money_points: rules.numberOfMoneyPointsOnSignup,
         notifications: [],
         services_asked_for: [],
         services_helped_in: [],
@@ -42,15 +43,24 @@ module.exports = makeProfile = (req, res) => {
         newProfile.date_of_birth = validator.toDate(req.body.date_of_birth);
       }
 
-      new Profile(newProfile)
-        .save()
-        .then((profile) => {
-          res.json({ profile, success: true });
-        })
-        .catch((err) => {
-          errors.error = 'Error saving profile into the database';
-          res.status(500).json({ ...errors, ...err });
+      User.findById(req.user._id).then((user) => {
+        // Check if the user object itself already has an image
+        if (req.file) {
+          user.avatar = req.file.location;
+          newProfile.avatar = req.file.location;
+        } else {
+          newProfile.avatar = user.avatar;
+        }
+        user.save().then(() => {
+          new Profile(newProfile)
+            .save()
+            .then((profile) => res.json({ profile, success: true }))
+            .catch((err) => {
+              errors.error = 'Error saving profile into the database';
+              res.status(500).json({ ...errors, ...err });
+            });
         });
+      });
     } else if (profile) {
       // Update profile
 

@@ -2,11 +2,13 @@ import React, {Component} from "react";
 import CustomTableWithGrid from "../components/CustomTableWithGrid";
 import tableActions from '../functions/tableActions'
 import "../CustomNav.css";
+import {serverUrl} from '../Assets/Constants'
 
 class Users extends Component {
     render() {
         let headers = [
             [
+                "id",
                 "first_name",
                 "last_name",
                 "gender",
@@ -27,12 +29,13 @@ class Users extends Component {
                 "services_asked_for_finished",
                 "services_helped_in_finished"
             ],
-            ["user_id", "first_name", "last_name", "services_helped_in"],
-            ["user_id","first_name","last_name", "services_asked_for"]
+            ["id", "first_name", "last_name", "services_helped_in"],
+            ["id","first_name","last_name", "services_asked_for"]
         ];
 
         let titles = [
             [
+                "User Id",
                 "First Name",
                 "Last Name",
                 "Gender",
@@ -62,7 +65,7 @@ class Users extends Component {
         return (
             <div>
                 <CustomTableWithGrid
-                    url="http://localhost:3001/PersonalInfo"
+                    url={`${serverUrl}/api/admin/personal-info`}
                     name="Personal Information"
                     headers={headers[0]}
                     titles={titles[0]}
@@ -76,19 +79,19 @@ class Users extends Component {
                     />
 
                 <CustomTableWithGrid
-                    url="https://givantk-backend.herokuapp.com/api/profile/all"
+                    url={`${serverUrl}/api/profile/all`}
                     name="Points and Skills"
                     headers={headers[1]}
                     titles={titles[1]}/>
 
                 <CustomTableWithGrid
-                    url="http://localhost:3001/userServices"
+                    url={`${serverUrl}/api/admin/user-services`}
                     name="Users and services statistics"
                     headers={headers[2]}
                     titles={titles[2]}/>
 
                 <CustomTableWithGrid
-                    url="http://localhost:3001/servicesHelpedIn"
+                    url={`${serverUrl}/api/admin/services-helped-in`}
                     name="Users and services helped in"
                     headers={headers[3]}
                     titles={titles[3]}
@@ -96,10 +99,12 @@ class Users extends Component {
                     specialColColor="success"
                     specialColText="Go to services helped in"
                     navigable
-                    navigate={() => this.props.history.push('/')}/>
+                    navigate={() => this.props.history.push('/helped')}
+                    navigationTitle="services_helped_in"
+                    />
 
                 <CustomTableWithGrid
-                    url="http://localhost:3001/servicesAskedFor"
+                    url={`${serverUrl}/api/admin/services-asked-for`}
                     name="Users and services asked for"
                     headers={headers[4]}
                     titles={titles[4]}
@@ -107,7 +112,9 @@ class Users extends Component {
                     specialColColor="success"
                     specialColText="Go to services asked for"
                     navigable
-                    navigate={() => this.props.history.push('/')}/>
+                    navigate={() => this.props.history.push('/asked')}
+                    navigationTitle="services_asked_for"
+                    />
             </div>
         );
     }

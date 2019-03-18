@@ -1,27 +1,39 @@
-import React, { Component } from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import CustomTable from "./CustomTable";
-import axios from "axios";
+import React, { Component } from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+import CustomTable from './CustomTable';
+import axios from 'axios';
+import auth from './auth';
 
 class CustomTableWithGrid extends Component {
   state = {
-    UsersData: []
+    UsersData: [],
+    loading: true,
   };
 
-  buttonClicked = index => {
+  buttonClicked = (index) => {
     console.log(index);
   };
 
   componentDidMount() {
-
-    axios.get(this.props.url, { crossdomain: true }).then(res => {
-      this.setState({ UsersData: res.data });
-    });
+    !this.props.dataArray
+      ? axios
+          .get(this.props.url, auth.getTokenHeader())
+          .then((res) => {
+            //this step is necessary to read nested object in json as using res.data directly will not read them
+            let newUsersData = JSON.parse(JSON.stringify(res.data));
+            this.setState({
+              UsersData: newUsersData,
+              loading: false,
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+      : this.setState({ UsersData: this.props.dataArray, loading: false });
   }
 
   render() {
-    var { UsersData } = this.state; // json array
-
+    const { UsersData, loading } = this.state; // json array and loading flag
     return (
       <div>
         <Container fluid={true}>
@@ -30,20 +42,10 @@ class CustomTableWithGrid extends Component {
               <Row>
                 <Col xl="12" className="mb-4">
                   <CustomTable
-                    name={this.props.name}
-                    headers={this.props.headers}
-                    titles={this.props.titles}
+                    {...this.props}
                     values={UsersData}
                     bg="dark"
-                    specialColType={this.props.specialColType}
-                    specialColColor={this.props.specialColColor}
-                    specialColText={this.props.specialColText}
-                    action={this.props.action}
-                    alterButtonText={this.props.alterButtonText}
-                    alterButtonColor={this.props.alterButtonColor}
-                    alterable={this.props.alterable}
-                    navigable={this.props.navigable}
-                    navigate={this.props.navigate}
+                    loading={loading}
                   />
                 </Col>
               </Row>

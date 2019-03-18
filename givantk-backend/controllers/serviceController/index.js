@@ -10,7 +10,9 @@ const deleteService = require('./deleteService');
 const proposeToService = require('./proposeToService');
 const unproposeToService = require('./unproposeToService');
 const acceptServiceProposal = require('./acceptServiceProposal');
-const search = require('./search');
+const markServiceAsDone = require('./markServiceAsDone');
+const archiveService = require('./archiveService');
+const getSearchedServices = require('./getSearchedServices');
 
 module.exports = {
   getAllServices,
@@ -25,5 +27,7 @@ module.exports = {
   proposeToService,
   unproposeToService,
   acceptServiceProposal,
-  search
+  markServiceAsDone,
+  archiveService,
+  getSearchedServices
 };

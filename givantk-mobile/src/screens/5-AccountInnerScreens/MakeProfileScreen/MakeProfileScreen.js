@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import { Textarea, Button } from 'native-base';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
+import { ImagePicker } from 'expo';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-
 import { colors } from '../../../assets/styles/base';
 import * as ProfileActions from '../../../store/actions/profileActions';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
@@ -31,6 +31,18 @@ class MakeProfileScreen extends Component {
     phone_number: '',
     date_of_birth: '',
     skills: '',
+    avatar: null,
+    noAvatar: false,
+  };
+
+  pickImage = async () => {
+    const result = await ImagePicker.launchImageLibraryAsync({});
+
+    const { uri } = result;
+
+    if (!result.cancelled) {
+      this.setState({ avatar: uri, noAvatar: false });
+    }
   };
 
   onChangeValue = (name, value) => {
@@ -40,30 +52,81 @@ class MakeProfileScreen extends Component {
   };
 
   onSubmit = () => {
-    const { gender, skills } = this.state;
-    const { navigation, makeProfile, getCurrentUserProfile } = this.props;
+    const {
+      gender,
+      skills,
+      avatar,
+      description,
+      phone_number,
+      date_of_birth,
+    } = this.state;
 
-    const newProfile = {
-      ...this.state,
-      gender: gender.value,
-      skills: skills.split(','),
-    };
+    const {
+      navigation,
+      makeProfile,
+      currentUser,
+      getCurrentUserProfile,
+    } = this.props;
 
-    const callback = () => {
-      getCurrentUserProfile();
-      navigation.goBack();
-      QuickNotification('Profile Successfully created');
-    };
+    // User didn't provide his avatar and he isn't signed with facebook
+    if (!avatar && !currentUser.avatar) {
+      this.setState({
+        noAvatar: true,
+      });
+    } // the user uploaded an avatar or is signed with facebook
+    else {
+      const newProfile = new FormData();
+      // if the user is signed with facebook but wants to upload avatar
 
-    makeProfile(newProfile, callback);
+      if (avatar) {
+        const uriParts = avatar.split('.');
+        const fileType = uriParts[uriParts.length - 1];
+        newProfile.append('avatar', {
+          uri: avatar,
+          name: avatar.split('/').pop(),
+          type: `image/${fileType}`,
+        });
+      }
+
+      // appending keys and value in the new profile form data
+
+      newProfile.append('gender', gender.value);
+      newProfile.append(
+        'skills',
+        JSON.stringify(skills.split(',').map((s) => s.trim())),
+      );
+      newProfile.append('description', description);
+      newProfile.append('phone_number', phone_number);
+      newProfile.append('date_Of_birth', date_of_birth);
+
+      const callback = () => {
+        getCurrentUserProfile();
+        navigation.goBack();
+        QuickNotification('Profile Successfully created');
+      };
+
+      makeProfile(newProfile, callback);
+    }
   };
 
   render() {
-    const { gender } = this.state;
-    const { errors } = this.props;
+    const { gender, avatar, noAvatar } = this.state;
+    const { errors, makeProfileLoading } = this.props;
+
     return (
       <AvoidKeyboard bottomPadding={80}>
         <View style={styles.container}>
+          <Text style={styles.label}>Profile picture</Text>
+          <Button style={styles.uploadButton} onPress={this.pickImage}>
+            <Text style={styles.uploadButtonText}>Pick from gallery </Text>
+          </Button>
+          <View style={styles.imageView}>
+            {avatar && <Image style={styles.image} source={{ uri: avatar }} />}
+            {noAvatar && (
+              <Text style={styles.error}>Please provide a profile picture</Text>
+            )}
+          </View>
+
           <Picker
             title="Gender"
             placeholder="Male / Female"
@@ -72,7 +135,6 @@ class MakeProfileScreen extends Component {
             onChange={this.onChangeValue}
             options={genderTypes}
             value={gender}
-            // error={errors.type}
           />
 
           <TextInput
@@ -80,7 +142,6 @@ class MakeProfileScreen extends Component {
             placeholder="Example: 01003947562"
             style={styles.input}
             keyboardType="numeric"
-            // error={errors.name}
             name="phone_number"
             onChange={this.onChangeValue}
           />
@@ -103,8 +164,9 @@ class MakeProfileScreen extends Component {
           <Text style={styles.error}>{errors.description}</Text>
 
           <View style={styles.row}>
-            {false && <Loading />}
-            {false || (
+            {makeProfileLoading ? (
+              <Loading />
+            ) : (
               <Button style={styles.submitButton} onPress={this.onSubmit}>
                 <Text style={styles.submitButtonText}>Save</Text>
               </Button>
@@ -120,12 +182,15 @@ MakeProfileScreen.propTypes = {
   navigation: PropTypes.shape(),
   errors: PropTypes.shape(),
   makeProfile: PropTypes.func,
+  makeProfileLoading: PropTypes.bool,
   getCurrentUserProfile: PropTypes.func,
+  currentUser: PropTypes.shape({}),
 };
 
 const mapStateToProps = (state) => ({
   errors: state.errors,
   makeProfileLoading: state.profile.makeProfileLoading,
+  currentUser: state.auth.user,
 });
 
 const mapDispatchToProps = {

@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 
-export default class CommentsPage extends Component {
+class ServicesProposals extends Component {
     render() {
         return (
             <div>
-                
+
             </div>
         )
     }
 }
+export default ServicesProposals;

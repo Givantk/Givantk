@@ -15,12 +15,14 @@ router.get('/all', userController.getAllUsers);
 // @desc   User Signup - Create new user
 // @access Public
 // @errors first_name last_name email password password2 location error
+// @body   isFacebookEntry(optional) facebookId(optional)
 router.post('/', userController.signupUser);
 
 // @route  POST api/user/login
 // @desc   User Login - Return jwt token
 // @access Public
 // @errors incorrectinfo email password error
+// @body   isFacebookEntry(optional) facebookId(optional)
 router.post('/login', userController.loginUser);
 
 // @route  PATCH api/user

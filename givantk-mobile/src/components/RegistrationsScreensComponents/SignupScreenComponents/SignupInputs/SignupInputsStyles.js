@@ -30,6 +30,9 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0,
     width: '70%',
   },
+  facebookButton: {
+    color: colors.facebook,
+  },
   buttonsContainer: { width: '100%', marginVertical: '10%' },
 });
 

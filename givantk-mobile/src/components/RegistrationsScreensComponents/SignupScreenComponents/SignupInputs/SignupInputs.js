@@ -1,4 +1,4 @@
-import { Picker } from 'native-base';
+import { Picker, Icon } from 'native-base';
 import { View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
@@ -42,7 +42,12 @@ export default class SignupInputs extends Component {
 
   render() {
     const { location } = this.state;
-    const { onSignupWithFacebook, errors, loading } = this.props;
+    const {
+      errors,
+      loading,
+      onSignupWithFacebook,
+      signupWithFacebookLoading,
+    } = this.props;
     return (
       <View
         style={{
@@ -80,6 +85,7 @@ export default class SignupInputs extends Component {
           style={styles.textInput}
           onChangeText={this.onChangeTextValue}
           name="email"
+          autoCapitalize="none"
           errorText={errors.email}
         />
         <DefaultTextInput
@@ -88,6 +94,7 @@ export default class SignupInputs extends Component {
           style={styles.textInput}
           onChangeText={this.onChangeTextValue}
           name="password"
+          autoCapitalize="none"
           errorText={errors.password}
         />
         <DefaultTextInput
@@ -96,6 +103,7 @@ export default class SignupInputs extends Component {
           style={styles.textInput}
           onChangeText={this.onChangeTextValue}
           name="password2"
+          autoCapitalize="none"
           errorText={errors.password2}
         />
         <View style={styles.viewInput}>
@@ -124,8 +132,16 @@ export default class SignupInputs extends Component {
           <DefaultButton onPress={this.onSignup} loading={loading}>
             Sign Up
           </DefaultButton>
-          <DefaultButton onPress={onSignupWithFacebook}>
-            Sign Up With Facebook
+          <DefaultButton
+            onPress={onSignupWithFacebook}
+            loading={signupWithFacebookLoading}
+          >
+            Sign Up With{' '}
+            <Icon
+              type="FontAwesome"
+              name="facebook-square"
+              style={styles.facebookButton}
+            />
           </DefaultButton>
         </View>
       </View>
@@ -136,6 +152,9 @@ export default class SignupInputs extends Component {
 SignupInputs.propTypes = {
   onSignup: PropTypes.func,
   onSignupWithFacebook: PropTypes.func,
+
   errors: PropTypes.shape({}),
+
   loading: PropTypes.bool,
+  signupWithFacebookLoading: PropTypes.bool,
 };

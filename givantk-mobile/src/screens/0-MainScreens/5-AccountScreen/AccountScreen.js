@@ -7,8 +7,9 @@ import React from 'react';
 import * as AuthActions from '../../../store/actions/authActions';
 import accountListItems from '../../../components/0-MainScreensComponents/5-AccountScreenComponents/data/AccountListItems';
 import CardList from '../../../components/commons/UI/CardList/CardList';
-import profile from '../../../assets/data/fakeProfile';
+import getUserImage from '../../../assets/utils/getUserImage';
 import styles from './AccountScreenStyles';
+import * as ChatActions from '../../../store/actions/chatActions';
 
 class AccountScreen extends React.Component {
   static navigationOptions = () => ({
@@ -28,6 +29,12 @@ class AccountScreen extends React.Component {
     logoutUser();
   };
 
+  navigateToMessagesList = () => {
+    const { navigation, loadUserChats, currentUser } = this.props;
+    loadUserChats(currentUser._id);
+    navigation.navigate('MessagesList');
+  };
+
   render() {
     const { navigation, currentUser, currentUserProfile } = this.props;
 
@@ -42,7 +49,7 @@ class AccountScreen extends React.Component {
             </View>
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback
-            onPress={() => navigation.navigate('MessagesList')}
+            onPress={this.navigateToMessagesList}
           >
             <Icon
               type="FontAwesome"
@@ -60,9 +67,28 @@ class AccountScreen extends React.Component {
           }
         >
           <View style={styles.imageContainer}>
-            <Image source={{ uri: profile.avatar }} style={styles.image} />
+            <Image
+              source={{
+                uri: getUserImage(
+                  (currentUserProfile && currentUserProfile.avatar) ||
+                    currentUser.avatar,
+                ),
+              }}
+              style={styles.image}
+            />
+
             <Text style={styles.userName}>
               {currentUser.first_name} {currentUser.last_name}
+            </Text>
+
+            <Text style={styles.points}>
+              Money Score:{' '}
+              {currentUserProfile ? currentUserProfile.money_points : '0'}
+            </Text>
+
+            <Text style={styles.points}>
+              Givantk Points:{' '}
+              {currentUserProfile ? currentUserProfile.givantk_points : '0'}
             </Text>
           </View>
         </TouchableWithoutFeedback>
@@ -85,6 +111,7 @@ AccountScreen.propTypes = {
   currentUser: PropTypes.shape({}),
   currentUserProfile: PropTypes.shape({}),
   logoutUser: PropTypes.func,
+  loadUserChats: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
@@ -95,6 +122,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   logoutUser: AuthActions.logoutUser,
+  loadUserChats: ChatActions.loadUserChats,
 };
 
 export default connect(
