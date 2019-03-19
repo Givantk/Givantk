@@ -4,6 +4,16 @@ import { View, Text, StyleSheet } from 'react-native';
 const ChatMessage = (props) => {
   const styles = StyleSheet.create({
     message: {
+      color: '#242824',
+      fontSize: 16,
+    },
+    name: {
+      color: '#242824',
+      fontSize: 16,
+      fontWeight: 'bold',
+    },
+    container: {
+      alignSelf: 'flex-start',
       padding: 10,
       marginTop: 5,
       marginBottom: 5,
@@ -11,29 +21,16 @@ const ChatMessage = (props) => {
       marginRight: 15,
       borderWidth: 2,
       borderRadius: 10,
-      backgroundColor: '#273c75',
-      borderColor: '#0097e6',
-      color: '#f5f6fa',
-      fontSize: 16,
-      fontWeight: 'bold',
-      alignSelf: 'flex-start',
-    },
-    name: {
-      marginLeft: 5,
-      color: '#353b48',
-      fontStyle: 'italic',
-      fontSize: 18,
-    },
+      backgroundColor: '#7BE16B',
+      borderColor: '#7BE16B',
+      
+    }
   });
 
   return (
-    <View>
-      <View>
-        <Text style={styles.name}>{props.name}</Text>
-      </View>
-      <View>
-        <Text style={styles.message}>{props.children}</Text>
-      </View>
+    <View style={styles.container}>
+      <Text style={styles.name}>{props.name}</Text>
+      <Text style={styles.message}>{props.children}</Text>
     </View>
   );
 };
