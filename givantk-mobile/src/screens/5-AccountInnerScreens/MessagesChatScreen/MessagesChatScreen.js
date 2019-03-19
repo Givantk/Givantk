@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { View, ScrollView, KeyboardAvoidingView, Text } from 'react-native';
+import { View, ScrollView, KeyboardAvoidingView } from 'react-native';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
@@ -8,6 +8,7 @@ import io from 'socket.io-client';
 import { colors } from '../../../assets/styles/base';
 import { serverPath } from '../../../assets/utils/httpService';
 import ChatInputText from '../../../components/commons/ChatComponents/chatInputText';
+import ChatInputItem from '../../../components/commons/ChatComponents/chatInputItem';
 import ChatMessage from '../../../components/commons/ChatComponents/chatMessage';
 
 import styles from './MessagesChatScreenStyles';
@@ -28,10 +29,7 @@ class MessagesChatScreen extends Component {
     this.state = {
       user1: {
         id: this.props.currentUser._id,
-        name:
-          `${this.props.currentUser.first_name 
-          } ${ 
-          this.props.currentUser.last_name}`,
+        name: this.props.currentUser.first_name+' '+this.props.currentUser.last_name,
       },
       user2: {
         id: this.props.navigation.state.params.user2.id,
@@ -83,29 +81,32 @@ class MessagesChatScreen extends Component {
         {msg}
       </ChatMessage>
     ));
+    console.log(this.state.chatMessages);
     return (
-      <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={85}>
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          style={{ height: '100%' }}
-          contentContainerStyle={{ height: '100%' }}
+
+      <View style={styles.wrapper}>
+        
+        <ScrollView ref={ref => this.scrollView = ref}
+          onContentSizeChange={(contentWidth, contentHeight)=>{        
+              this.scrollView.scrollToEnd({animated: true});
+          }}
         >
-          <View style={styles.wrapper}>
-            <ScrollView style={styles.scrollView}>
-              <View>{chatHistory}</View>
-              <View>{chatMessages}</View>
-            </ScrollView>
-            <ChatInputText
-              autoCorrect={false}
-              value={this.state.chatMessage}
-              onSubmitEditing={() => this.submitChatMessage()}
-              onChangeText={(chatMessage) => {
-                this.setState({ chatMessage });
-              }}
-            />
-          </View>
+          <View>{chatHistory}</View>
+          <View>{chatMessages}</View>
         </ScrollView>
-      </KeyboardAvoidingView>
+
+        <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={85}>
+          <ChatInputItem
+            autoCorrect={false}
+            value={this.state.chatMessage}
+            onPress={() => this.submitChatMessage()}
+            onChangeText={(chatMessage) => {
+              this.setState({ chatMessage });
+            }}
+          />
+        </KeyboardAvoidingView>
+
+      </View>
     );
   }
 }
