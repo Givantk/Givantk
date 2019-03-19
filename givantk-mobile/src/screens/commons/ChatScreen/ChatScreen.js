@@ -72,16 +72,37 @@ class ChatScreen extends Component {
   }
 
   render() {
-    const chatHistory = this.state.chatHistory.map((msg, i) => (
-      <ChatMessage key={i} name={msg.username}>
-        {msg.content}
-      </ChatMessage>
-    ));
-    const chatMessages = this.state.chatMessages.map((msg, i) => (
-      <ChatMessage key={i} name={this.state.user1.name}>
-        {msg}
-      </ChatMessage>
-    ));
+    const chatHistory = this.state.chatHistory.map((msg, i) => {
+      let customMsg = {
+        msgDir: '',
+        msgColor: ''
+      };
+      if(msg.username == this.state.user1.name) {
+        customMsg.msgDir = 'flex-end';
+        customMsg.msgColor = '#7BE16B'
+      }
+      else {
+        customMsg.msgDir = 'flex-start';
+        customMsg.msgColor = '#BBC5BB'
+      }
+
+      return (
+        <ChatMessage key={i} name={msg.username} customMsg={customMsg}>
+          {msg.content}
+        </ChatMessage>
+      );
+    });
+    const chatMessages = this.state.chatMessages.map((msg, i) => {
+      let customMsg = {
+        msgDir: 'flex-end',
+        msgColor: '#7BE16B'
+      }; 
+      return (
+        <ChatMessage key={i} name={this.state.user1.name} customMsg={customMsg}>
+          {msg}
+        </ChatMessage>
+      );
+    });
     console.log(this.state.chatMessages);
     return (
 

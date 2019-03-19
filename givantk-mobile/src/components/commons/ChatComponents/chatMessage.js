@@ -13,7 +13,7 @@ const ChatMessage = (props) => {
       fontWeight: 'bold',
     },
     container: {
-      alignSelf: 'flex-start',
+      alignSelf: props.customMsg.msgDir,
       padding: 10,
       marginTop: 5,
       marginBottom: 5,
@@ -21,8 +21,8 @@ const ChatMessage = (props) => {
       marginRight: 15,
       borderWidth: 2,
       borderRadius: 10,
-      backgroundColor: '#7BE16B',
-      borderColor: '#7BE16B',
+      backgroundColor: props.customMsg.msgColor,
+      borderColor: props.customMsg.msgColor,
       
     }
   });
