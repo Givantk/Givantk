@@ -1,10 +1,11 @@
 import { connect } from 'react-redux';
-import { Icon, Label, Textarea,Button } from 'native-base';
-import { View, Text,Image } from 'react-native';
+import { Icon, Label, Textarea, Button } from 'native-base';
+import { View, Text, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { dimensions,colors } from '../../../assets/styles/base';
+import CheckBox from 'react-native-check-box';
+import { dimensions, colors } from '../../../assets/styles/base';
 import * as ProfileActions from '../../../store/actions/profileActions';
 import * as ServiceActions from '../../../store/actions/serviceActions';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
@@ -41,11 +42,14 @@ class AddServiceScreen extends React.Component {
     free: false,
     moneyPoints: 0,
     givantkPoints: 0,
-    optionalPicture:null
+    optionalPicture: null,
+    isAnonymous: false,
   };
 
   pickImage = async () => {
-    const result = await ImagePicker.launchImageLibraryAsync({allowsEditing:true});
+    const result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+    });
 
     const { uri } = result;
 
@@ -94,6 +98,7 @@ class AddServiceScreen extends React.Component {
       paid,
       free,
       givantkPoints,
+      isAnonymous
     } = this.state;
     const service = {
       name,
@@ -104,6 +109,7 @@ class AddServiceScreen extends React.Component {
       givantkPoints: givantkPoints,
       paid,
       free,
+      isAnonymous
     };
     const callback = () => {
       QuickNotification('Service posted successfully');
@@ -115,7 +121,15 @@ class AddServiceScreen extends React.Component {
   };
 
   render() {
-    const { type, nature, currency, paid, free,optionalPicture } = this.state;
+    const {
+      type,
+      nature,
+      currency,
+      paid,
+      free,
+      optionalPicture,
+      isAnonymous,
+    } = this.state;
     const {
       errors,
       createServiceLoading,
@@ -189,7 +203,7 @@ class AddServiceScreen extends React.Component {
             {free && (
               <View>
                 <TextInput
-                  title="Points you wanna give"
+                  title="Points you want to give"
                   keyboardType="numeric"
                   maxLength={10}
                   placeholder="Amount in numbers"
@@ -206,8 +220,20 @@ class AddServiceScreen extends React.Component {
             <Text style={styles.uploadButtonText}>Pick from gallery </Text>
           </Button>
           <View style={styles.attachementView}>
-             {optionalPicture&&<Text style={{marginTop:6,color:colors.primary,fontWeight:'400'}}>Image Attachement is added</Text>} 
-            {optionalPicture && <Image style={styles.image} source={{ uri: optionalPicture }} />}
+            {optionalPicture && (
+              <Text
+                style={{
+                  marginTop: 6,
+                  color: colors.primary,
+                  fontWeight: '400',
+                }}
+              >
+                Image Attachement is added
+              </Text>
+            )}
+            {optionalPicture && (
+              <Image style={styles.image} source={{ uri: optionalPicture }} />
+            )}
           </View>
 
           <View style={styles.left}>
@@ -225,7 +251,21 @@ class AddServiceScreen extends React.Component {
             <Text style={styles.error}>{errors.description}</Text>
           </View>
 
-        
+          {
+            free&&( <CheckBox
+
+              style={{marginBottom: 10}}
+              onClick={() => {
+                this.setState({
+                  isAnonymous: !isAnonymous,
+                });
+              }}
+              isChecked={isAnonymous}
+              rightText={'Hide your identity'}
+              rightTextStyle={styles.checkBoxLabel}
+              checkedCheckBoxColor={colors.primary}
+            />)
+          }
 
           <View style={styles.row}>
             <MainButton
@@ -270,5 +310,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(AddServiceScreen);

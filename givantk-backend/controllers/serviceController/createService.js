@@ -29,7 +29,7 @@ module.exports = createService = (req, res) => {
       givantk_points: req.body.givantkPoints,
       money_points: rules.AppShareEquation(req.body.moneyPoints),
       type: req.body.type,
-      reveal_asker: req.body.reveal_asker,
+      reveal_asker: !req.body.isAnonymous,
       state: 'new',
     };
 
