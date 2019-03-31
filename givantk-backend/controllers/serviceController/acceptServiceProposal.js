@@ -55,7 +55,7 @@ module.exports = proposeToService = (req, res) => {
               .populate('user')
               .then((askerProfile) => {
                 applicantProfile.notifications.unshift({
-                  title: `${
+                  title: `${service.reveal_asker===false?'Anonymous':
                     askerProfile.first_name
                   } accepted your proposal to the service \"${service.name}\"`,
                   navigateTo: {
@@ -63,8 +63,8 @@ module.exports = proposeToService = (req, res) => {
                     service: service._id
                   },
                   is_user_associated: true,
-                  user_associated: askerProfile.user,
-                  user_profile_associated: askerProfile._id
+                  user_associated: service.reveal_asker===false?null:askerProfile.user,
+                  user_profile_associated: service.reveal_asker===false?null:askerProfile._id
                 });
                 applicantProfile.save();
 

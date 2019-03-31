@@ -9,6 +9,7 @@ import getUserImage from '../../../../assets/utils/getUserImage';
 class NotificationCard extends React.PureComponent {
   onPressAvatar = () => {
     const { navigation, notification } = this.props;
+    if (!notification.user_associated) return ;
     if (notification.is_user_associated) {
       navigation.navigate('Profile', {
         userId:
@@ -50,7 +51,7 @@ class NotificationCard extends React.PureComponent {
             <Image
               source={{
                 uri: notification.is_user_associated
-                  ? getUserImage(notification.user_associated.avatar)
+                  ? getUserImage(notification.user_associated?notification.user_associated.avatar:null)
                   : appLogo,
               }}
               style={styles.image}
