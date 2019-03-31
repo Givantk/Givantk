@@ -17,8 +17,10 @@ const styles = StyleSheet.create({
     justifyContent:'center'
   },
   label: {
-    color: colors.gray02,
+    color: 'gray',
+    marginTop:10,
   },
+  
   topInputsContainer: { marginTop: 10 },
   text: {
     fontWeight: 'bold',
