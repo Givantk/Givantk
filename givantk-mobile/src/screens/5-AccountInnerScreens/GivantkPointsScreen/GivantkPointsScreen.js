@@ -16,38 +16,33 @@ class GivantkPointsScreen extends Component {
   });
 
   state = {
-    randomPointsNumber: null,
     text: '',
     clickedOnce: false,
   };
 
   onButtonClicked = () => {
     const { clickedOnce } = this.state;
-    const { currentUserProfile, getCurrentUserProfile, addPoints } = this.props;
+    const { currentUserProfile, getCurrentUserProfile, addPoints} = this.props;
 
     // set the randomPointsNumber in state to a random number between 1 and 10
     currentUserProfile.givantk_points === 0
       ? !clickedOnce
         ? this.setState(
             {
-              randomPointsNumber: Math.floor(Math.random() * 10) + 1,
               clickedOnce: true,
             },
             () => {
-              const { randomPointsNumber } = this.state;
 
               successfullAddingCallback = () => {
+                const {pointsValue}=this.props;
                 this.setState({
-                  text: `Congratulations \n you successfully added ${randomPointsNumber} points to your account`,
+                  text: `Congratulations \n you successfully added ${pointsValue} points to your account`,
                 });
                 getCurrentUserProfile();
               };
 
-              addPoints(
-                { pointsAdded: randomPointsNumber },
-                successfullAddingCallback,
-              );
-            },
+              addPoints(successfullAddingCallback);
+            }
           )
         : this.setState((prevState) => ({
             text: `You have already added ${
@@ -70,6 +65,7 @@ class GivantkPointsScreen extends Component {
       currentUserHasProfile,
       navigation,
       addPointsLoading,
+      errors
     } = this.props;
 
     if (getCurrentProfileLoading) return <Loading />;
@@ -88,6 +84,10 @@ class GivantkPointsScreen extends Component {
                 Get Random Number of Points
               </MainButton>
               <Text style={styles.text}>{text}</Text>
+              <Text>{errors.serverErrorMessage}</Text>
+              <Text>{errors.error}</Text>
+
+              
             </View>
           ) : (
             <Loading />
@@ -114,6 +114,7 @@ const mapStateToProps = (state) => ({
   currentUserHasProfile: state.profile.currentUserHasProfile,
   currentUserProfile: state.profile.currentUserProfile,
   addPointsLoading: state.points.addPointsLoading,
+  pointsValue: state.points.pointsValue,
 });
 
 const mapDispatchToProps = {
@@ -123,5 +124,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(GivantkPointsScreen);
