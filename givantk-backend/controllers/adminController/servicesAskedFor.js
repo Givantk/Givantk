@@ -40,7 +40,8 @@ module.exports = servicesAskedFor = (req, res) => {
             service_name: service.name,
             service_nature: service.nature,
             service_type: service.type,
-            service_state: service.state
+            service_state: service.state,
+            reveal_asker:service.reveal_asker
           });
         });
       });

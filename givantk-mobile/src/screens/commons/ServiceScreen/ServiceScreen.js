@@ -197,6 +197,8 @@ class ServiceScreen extends Component {
             />
           </View>
 
+          {console.log(addReviewLoading)}
+
           {!addReviewLoading ? (
             <MainButton
               onPress={() =>
@@ -270,17 +272,17 @@ class ServiceScreen extends Component {
               },
             ]}
           >
-            <TouchableWithoutFeedback onPress={this.onPressOnAsker}>
+            <TouchableWithoutFeedback onPress={service.reveal_asker===false?null:this.onPressAskerAvatar}>
               <View style={styles.header}>
                 <Image
                   source={{
-                    uri: service.asker && getUserImage(service.asker.avatar),
+                    uri: service.asker && getUserImage(service.reveal_asker===false?null:service.asker.avatar),
                   }}
                   style={styles.userImage}
                 />
                 <View style={styles.headerRight}>
                   <Text style={styles.userName}>
-                    {`${service.asker.first_name} ${service.asker.last_name}`}
+                    {service.reveal_asker===false?'Anonymous':`${service.asker.first_name} ${service.asker.last_name}`}
                   </Text>
                 </View>
               </View>

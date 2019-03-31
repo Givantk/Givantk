@@ -263,7 +263,7 @@ class AddServiceScreen extends React.Component {
               isChecked={isAnonymous}
               rightText={'Hide your identity'}
               rightTextStyle={styles.checkBoxLabel}
-              checkedCheckBoxColor={colors.primary}
+              checkedCheckBoxColor={colors.primary.toString()}
             />)
           }
 
