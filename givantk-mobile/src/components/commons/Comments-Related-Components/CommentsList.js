@@ -56,10 +56,12 @@ export default class CommentsList extends Component {
   };
   render() {
     const { data, topMargin, serviceAskerid,disableInput } = this.props;
+    console.log(disableInput)
 
     return (
       <View style={commentListStyling.mainContainer}>
-        {false?<KeyboardAvoidingView behavior="padding" style={{ flex: 1 }} enabled>
+        {
+          !disableInput?<KeyboardAvoidingView behavior="padding" style={{ flex: 1 }} enabled>
           <Text style={{ marginLeft: 8, fontSize: 18, marginBottom: 10 }}>
             Add Comment:
           </Text>

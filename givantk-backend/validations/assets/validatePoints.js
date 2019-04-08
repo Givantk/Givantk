@@ -27,7 +27,7 @@ module.exports = async function validatePoints(points, type, id) {
             ? `You only have ${
                 profile.givantk_points
               } points, do free services to get more :D `
-            : `You ran out of points. Get 5 more from your Account tab :D `;
+            : `You ran out of points. Get more from your Account tab :D `;
       }
     }
   }
