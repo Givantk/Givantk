@@ -14,6 +14,7 @@ const INITIAL_STATE = {
   markServiceAsDoneLoading: false,
   archiveServiceLoading: false,
   addReviewLoading: false,
+  addCommentLoading: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -131,6 +132,18 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         addReviewLoading: false,
+      };
+
+      case actionTypes.ADD_COMMENT_START:
+      return {
+        ...state,
+        addCommentLoading: true,
+      };
+
+    case actionTypes.ADD_COMMENT_FINISH:
+      return {
+        ...state,
+        addCommentLoading: false,
       };
 
     default:

@@ -98,7 +98,7 @@ class AddServiceScreen extends React.Component {
       paid,
       free,
       givantkPoints,
-      isAnonymous
+      isAnonymous,
     } = this.state;
     const service = {
       name,
@@ -109,7 +109,7 @@ class AddServiceScreen extends React.Component {
       givantkPoints: givantkPoints,
       paid,
       free,
-      isAnonymous
+      isAnonymous,
     };
     const callback = () => {
       QuickNotification('Service posted successfully');
@@ -251,10 +251,9 @@ class AddServiceScreen extends React.Component {
             <Text style={styles.error}>{errors.description}</Text>
           </View>
 
-          {
-            free&&( <CheckBox
-
-              style={{marginBottom: 10}}
+          {type.value==="KE" && (
+            <CheckBox
+              style={{ marginBottom: 10 }}
               onClick={() => {
                 this.setState({
                   isAnonymous: !isAnonymous,
@@ -264,8 +263,8 @@ class AddServiceScreen extends React.Component {
               rightText={'Hide your identity'}
               rightTextStyle={styles.checkBoxLabel}
               checkedCheckBoxColor={colors.primary.toString()}
-            />)
-          }
+            />
+          )}
 
           <View style={styles.row}>
             <MainButton

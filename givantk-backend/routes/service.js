@@ -1,4 +1,4 @@
-const express =require('express');
+const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 
@@ -17,7 +17,7 @@ router.get('/all', serviceController.getAllServices);
 router.post(
   '/',
   passport.authenticate('jwt', { session: false }),
-  serviceController.createService,
+  serviceController.createService
 );
 
 // @route  GET api/service/:id
@@ -33,7 +33,7 @@ router.get('/:id', serviceController.getServiceById);
 router.patch(
   '/:id',
   passport.authenticate('jwt', { session: false }),
-  serviceController.updateService,
+  serviceController.updateService
 );
 
 // @route  DELETE api/service/:id
@@ -43,7 +43,7 @@ router.patch(
 router.delete(
   '/:id',
   passport.authenticate('jwt', { session: false }),
-  serviceController.deleteService,
+  serviceController.deleteService
 );
 
 // @route  GET api/service/asked-for/:user_id
@@ -65,7 +65,7 @@ router.get('/helped-in/:user_id', serviceController.getHelpedInServices);
 router.get(
   '/bookmark/:id',
   passport.authenticate('jwt', { session: false }),
-  serviceController.bookmarkService,
+  serviceController.bookmarkService
 );
 
 // @route  GET api/service/unbookmark/:id
@@ -75,7 +75,7 @@ router.get(
 router.get(
   '/unbookmark/:id',
   passport.authenticate('jwt', { session: false }),
-  serviceController.unbookmarkService,
+  serviceController.unbookmarkService
 );
 
 // @route  POST api/service/propose/:id
@@ -85,7 +85,7 @@ router.get(
 router.post(
   '/propose/:id',
   passport.authenticate('jwt', { session: false }),
-  serviceController.proposeToService,
+  serviceController.proposeToService
 );
 
 // @route  GET api/service/unpropose/:id
@@ -95,7 +95,7 @@ router.post(
 router.get(
   '/unpropose/:id',
   passport.authenticate('jwt', { session: false }),
-  serviceController.unproposeToService,
+  serviceController.unproposeToService
 );
 
 // @route  POST api/service/accept-service-proposal/:service_id/:proposal_id
@@ -105,7 +105,7 @@ router.get(
 router.post(
   '/accept-service-proposal/:service_id/:proposal_id',
   passport.authenticate('jwt', { session: false }),
-  serviceController.acceptServiceProposal,
+  serviceController.acceptServiceProposal
 );
 
 // @route  POST api/service/mark-as-done/:service_id
@@ -115,7 +115,7 @@ router.post(
 router.post(
   '/mark-as-done/:service_id',
   passport.authenticate('jwt', { session: false }),
-  serviceController.markServiceAsDone,
+  serviceController.markServiceAsDone
 );
 
 // @route  POST api/service/archive/:service_id
@@ -125,7 +125,7 @@ router.post(
 router.post(
   '/archive/:service_id',
   passport.authenticate('jwt', { session: false }),
-  serviceController.archiveService,
+  serviceController.archiveService
 );
 
 //@route  POST api/service/review/:service_id
@@ -136,7 +136,13 @@ router.post(
 router.post(
   '/review/:service_id',
   passport.authenticate('jwt', { session: false }),
-  serviceController.addReview,
+  serviceController.addReview
+);
+
+router.post(
+  '/comment/:service_id',
+  passport.authenticate('jwt', { session: false }),
+  serviceController.addComment
 );
 
 // @route  GET api/service/search/:name
@@ -146,7 +152,7 @@ router.post(
 router.get(
   '/search/:searchedKeyword',
   passport.authenticate('jwt', { session: false }),
-  serviceController.getSearchedServices,
+  serviceController.getSearchedServices
 );
 
 module.exports = router;

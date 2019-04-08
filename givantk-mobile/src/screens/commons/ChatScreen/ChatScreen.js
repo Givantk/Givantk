@@ -8,7 +8,6 @@ import io from 'socket.io-client';
 import { colors } from '../../../assets/styles/base';
 import { serverPath } from '../../../assets/utils/httpService';
 import * as ProfileActions from '../../../store/actions/profileActions';
-import ChatInputText from '../../../components/commons/ChatComponents/chatInputText';
 import ChatMessage from '../../../components/commons/ChatComponents/chatMessage';
 import ChatInputItem from '../../../components/commons/ChatComponents/chatInputItem';
 

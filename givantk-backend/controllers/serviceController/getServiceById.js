@@ -9,7 +9,7 @@ module.exports = getServiceById = (req, res) => {
     .then((service) => {
       res.json({
         service,
-        success: true
+        success: true,
       });
     })
     .catch((err) => {

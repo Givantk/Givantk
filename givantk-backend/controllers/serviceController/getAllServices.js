@@ -8,6 +8,7 @@ module.exports = getAllServices = (req, res) => {
   Service.find()
     .populate('asker')
     .populate('applications.user')
+    .populate('comments.user')
     .sort({ date: -1 })
     .then((services) => {
       if (services.length === 0) {

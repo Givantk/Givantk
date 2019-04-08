@@ -55,7 +55,12 @@ const ServiceSchema = new Schema({
   comments: [
     {
       user: { type: mongoose.Schema.Types.ObjectId, ref: 'user' },
-      body: String,
+      content:String,
+      date:{
+        type:Date,
+        default:Date.now,
+      }
+
     },
   ],
   asker: { type: mongoose.Schema.Types.ObjectId, ref: 'user', required: true },
