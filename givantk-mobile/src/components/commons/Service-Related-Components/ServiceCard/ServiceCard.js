@@ -55,22 +55,42 @@ class ServiceCard extends React.PureComponent {
       <TouchableWithoutFeedback onPress={this.onPressCard}>
         <View style={styles.serviceCard}>
           <View style={styles.header}>
-            <TouchableWithoutFeedback onPress={this.onPressAskerAvatar}>
+            <TouchableWithoutFeedback
+              onPress={
+                service.reveal_asker === false ? null : this.onPressAskerAvatar
+              }
+            >
               <View>
                 <Image
                   source={{
-                    uri: service.asker && getUserImage(service.asker.avatar),
+                    uri:
+                      service.asker &&
+                      getUserImage(
+                        service.reveal_asker === false
+                          ? null
+                          : service.asker.avatar
+                      ),
                   }}
                   style={styles.userImage}
                 />
               </View>
             </TouchableWithoutFeedback>
             <View style={styles.headerRight}>
-              <TouchableWithoutFeedback onPress={this.onPressAskerAvatar}>
+              <TouchableWithoutFeedback
+                onPress={
+                  service.reveal_asker === false
+                    ? null
+                    : this.onPressAskerAvatar
+                }
+              >
                 <View>
-                  <Text style={styles.userName}>
-                    {`${service.asker.first_name} ${service.asker.last_name}`}
-                  </Text>
+                  {service.reveal_asker === false ? (
+                    <Text style={styles.userName}>Anonymous</Text>
+                  ) : (
+                    <Text style={styles.userName}>
+                      {`${service.asker.first_name} ${service.asker.last_name}`}
+                    </Text>
+                  )}
                 </View>
               </TouchableWithoutFeedback>
               <Text style={styles.serviceTitle}>{service.name}</Text>

@@ -14,6 +14,7 @@ const markServiceAsDone = require('./markServiceAsDone');
 const archiveService = require('./archiveService');
 const getSearchedServices = require('./getSearchedServices');
 const addReview = require('./addReview');
+const addComment = require('./addComment');
 
 module.exports = {
   getAllServices,
@@ -32,4 +33,5 @@ module.exports = {
   archiveService,
   getSearchedServices,
   addReview,
+  addComment,
 };

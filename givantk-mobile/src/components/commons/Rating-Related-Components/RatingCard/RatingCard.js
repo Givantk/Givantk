@@ -15,6 +15,7 @@ class RatingCard extends React.PureComponent {
   };
 
   onPressAvatar = (id) => {
+    if(id===null) return
     const { navigation } = this.props;
     navigation.replace('Profile', {
       userId: id,
@@ -42,11 +43,11 @@ class RatingCard extends React.PureComponent {
                 </TouchableWithoutFeedback>
               ) : (
                 <TouchableWithoutFeedback
-                  onPress={() => this.onPressAvatar(service.asker._id)}
+                  onPress={() => this.onPressAvatar(service.reveal_asker===false?null:service.asker._id)}
                 >
                   <Image
                     source={{
-                      uri: service.asker && getUserImage(service.asker.avatar),
+                      uri: service.asker && getUserImage(service.reveal_asker===false?null:service.asker.avatar),
                     }}
                     style={styles.userImage}
                   />
@@ -58,7 +59,7 @@ class RatingCard extends React.PureComponent {
               onPress={
                 service.askedByUser
                   ? () => this.onPressAvatar(service.helper._id)
-                  : () => this.onPressAvatar(service.asker._id)
+                  : () => this.onPressAvatar(service.reveal_asker===false?null:service.asker._id)
               }
             >
               <View>
@@ -68,7 +69,7 @@ class RatingCard extends React.PureComponent {
                   </Text>
                 ) : (
                   <Text style={styles.reviewer}>
-                    {`Asker: ${service.asker.first_name} `}
+                    {`Asker: ${service.reveal_asker===false?'Anonymous':service.asker.first_name} `}
                   </Text>
                 )}
               </View>

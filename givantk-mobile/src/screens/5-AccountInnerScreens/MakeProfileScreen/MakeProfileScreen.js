@@ -13,6 +13,7 @@ import Picker from '../../../components/commons/UI/Picker/Picker';
 import styles from './MakeProfileScreenStyles';
 import TextInput from '../../../components/commons/UI/TextInput/TextInput';
 import QuickNotification from '../../../components/commons/UI/QuickNotification/QuickNotification';
+import { FileSystem } from 'expo';
 
 class MakeProfileScreen extends Component {
   static navigationOptions = () => ({
@@ -33,6 +34,7 @@ class MakeProfileScreen extends Component {
     skills: '',
     avatar: null,
     noAvatar: false,
+    sizeAlert: false,
   };
 
   pickImage = async () => {
@@ -41,8 +43,19 @@ class MakeProfileScreen extends Component {
     const { uri } = result;
 
     if (!result.cancelled) {
-      this.setState({ avatar: uri, noAvatar: false });
+      this.getFileSize(uri).then((size) => {
+        if (size > 5000000) this.setState({ avatar:null, noAvatar:false, sizeAlert: true });
+        else {
+          this.setState({ avatar: uri, noAvatar: false,sizeAlert:false });
+        }
+      });
     }
+  };
+
+  getFileSize = async (fileUri) => {
+    let fileInfo = await FileSystem.getInfoAsync(fileUri);
+    console.log(fileInfo.size);
+    return fileInfo.size;
   };
 
   onChangeValue = (name, value) => {
@@ -93,7 +106,7 @@ class MakeProfileScreen extends Component {
       newProfile.append('gender', gender.value);
       newProfile.append(
         'skills',
-        JSON.stringify(skills.split(',').map((s) => s.trim())),
+        JSON.stringify(skills.split(',').map((s) => s.trim()))
       );
       newProfile.append('description', description);
       newProfile.append('phone_number', phone_number);
@@ -110,7 +123,7 @@ class MakeProfileScreen extends Component {
   };
 
   render() {
-    const { gender, avatar, noAvatar } = this.state;
+    const { gender, avatar, noAvatar, sizeAlert } = this.state;
     const { errors, makeProfileLoading } = this.props;
 
     return (
@@ -122,9 +135,16 @@ class MakeProfileScreen extends Component {
           </Button>
           <View style={styles.imageView}>
             {avatar && <Image style={styles.image} source={{ uri: avatar }} />}
-            {noAvatar && (
+            {noAvatar &&(
               <Text style={styles.error}>Please provide a profile picture</Text>
             )}
+            {sizeAlert && (
+              <Text style={styles.sizeError}>
+                Image is bigger than 5 MB, please choose another image
+              </Text>
+            )}
+
+            {console.log(sizeAlert)}
           </View>
 
           <Picker
@@ -200,5 +220,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(MakeProfileScreen);

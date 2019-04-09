@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     fontFamily: fontTypes.main,
     fontSize: 14,
     color: colors.black,
-    textAlign: 'left',
+    textAlign: 'center',
   },
   points: {
     color: colors.primary,

@@ -14,13 +14,17 @@ const styles = StyleSheet.create({
     marginTop: 10,
     flexDirection: 'row',
     textAlign: 'left',
-    justifyContent:'center'
+    justifyContent: 'center',
   },
   label: {
     color: 'gray',
-    marginTop:10,
+    marginTop: 10,
   },
-  
+  checkBoxlabel: {
+    color: 'gray',
+    marginTop: 10,
+  },
+
   topInputsContainer: { marginTop: 10 },
   text: {
     fontWeight: 'bold',
@@ -105,7 +109,7 @@ const styles = StyleSheet.create({
   },
 
   image: {
-    marginLeft:9,
+    marginLeft: 9,
     alignSelf: 'center',
     width: 40,
     height: 40,

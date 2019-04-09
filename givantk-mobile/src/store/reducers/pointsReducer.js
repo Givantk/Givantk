@@ -1,6 +1,7 @@
 import * as actionTypes from '../actions/actionTypes';
 const INITIAL_STATE = {
   addPointsLoading: false,
+  pointsValue:0,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -14,7 +15,8 @@ export default (state = INITIAL_STATE, action) => {
     case actionTypes.ADD_POINTS_FINISH:
       return {
         ...state,
-        addPointsLoading: action.payload ? false : true,
+        addPointsLoading: action.payload.success ? false : true,
+        pointsValue: action.payload.value,
       };
 
     default:

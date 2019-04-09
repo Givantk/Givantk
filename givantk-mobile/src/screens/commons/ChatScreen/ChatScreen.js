@@ -8,8 +8,8 @@ import io from 'socket.io-client';
 import { colors } from '../../../assets/styles/base';
 import { serverPath } from '../../../assets/utils/httpService';
 import * as ProfileActions from '../../../store/actions/profileActions';
-import ChatInputText from '../../../components/commons/ChatComponents/chatInputText';
 import ChatMessage from '../../../components/commons/ChatComponents/chatMessage';
+import ChatInputItem from '../../../components/commons/ChatComponents/chatInputItem';
 
 import styles from './ChatScreenStyles';
 
@@ -71,39 +71,63 @@ class ChatScreen extends Component {
   }
 
   render() {
-    const chatHistory = this.state.chatHistory.map((msg, i) => (
-      <ChatMessage key={i} name={msg.username}>
-        {msg.content}
-      </ChatMessage>
-    ));
-    const chatMessages = this.state.chatMessages.map((msg, i) => (
-      <ChatMessage key={i} name={this.state.user1.name}>
-        {msg}
-      </ChatMessage>
-    ));
+    const chatHistory = this.state.chatHistory.map((msg, i) => {
+      let customMsg = {
+        msgDir: '',
+        msgColor: ''
+      };
+      if(msg.username == this.state.user1.name) {
+        customMsg.msgDir = 'flex-end';
+        customMsg.msgColor = '#7BE16B'
+      }
+      else {
+        customMsg.msgDir = 'flex-start';
+        customMsg.msgColor = '#BBC5BB'
+      }
+
+      return (
+        <ChatMessage key={i} name={msg.username} customMsg={customMsg}>
+          {msg.content}
+        </ChatMessage>
+      );
+    });
+    const chatMessages = this.state.chatMessages.map((msg, i) => {
+      let customMsg = {
+        msgDir: 'flex-end',
+        msgColor: '#7BE16B'
+      }; 
+      return (
+        <ChatMessage key={i} name={this.state.user1.name} customMsg={customMsg}>
+          {msg}
+        </ChatMessage>
+      );
+    });
+    console.log(this.state.chatMessages);
     return (
-      <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={85}>
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          style={{ height: '100%' }}
-          contentContainerStyle={{ height: '100%' }}
+
+      <View style={styles.wrapper}>
+        
+        <ScrollView ref={ref => this.scrollView = ref}
+          onContentSizeChange={(contentWidth, contentHeight)=>{        
+              this.scrollView.scrollToEnd({animated: true});
+          }}
         >
-          <View style={styles.wrapper}>
-            <ScrollView style={styles.scrollView}>
-              <View>{chatHistory}</View>
-              <View>{chatMessages}</View>
-            </ScrollView>
-            <ChatInputText
-              autoCorrect={false}
-              value={this.state.chatMessage}
-              onSubmitEditing={() => this.submitChatMessage()}
-              onChangeText={(chatMessage) => {
-                this.setState({ chatMessage });
-              }}
-            />
-          </View>
+          <View>{chatHistory}</View>
+          <View>{chatMessages}</View>
         </ScrollView>
-      </KeyboardAvoidingView>
+
+        <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={85}>
+          <ChatInputItem
+            autoCorrect={false}
+            value={this.state.chatMessage}
+            onPress={() => this.submitChatMessage()}
+            onChangeText={(chatMessage) => {
+              this.setState({ chatMessage });
+            }}
+          />
+        </KeyboardAvoidingView>
+
+      </View>
     );
   }
 }

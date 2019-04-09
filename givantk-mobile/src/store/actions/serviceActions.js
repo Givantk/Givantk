@@ -262,3 +262,31 @@ export const addReview = (review, callback) => (dispatch) => {
     });
 
 };
+
+export const addComment = (comment,serviceId,callback) => (dispatch) => {
+  dispatch({
+    type: actionTypes.ADD_COMMENT_START,
+  });
+
+  http
+    .post(
+      `${serviceAPI}/comment/${serviceId}`,
+      comment,
+    )
+    .then(() => {
+      dispatch({
+        type: actionTypes.ADD_COMMENT_FINISH,
+      });
+      if (callback) callback();
+    })
+    .catch((err) => {
+      dispatch({
+        type: actionTypes.SET_ERRORS,
+        payload: err.response ? err.response.data : serverErrorMessage,
+      });
+      dispatch({
+        type: actionTypes.ADD_COMMENT_FINISH,
+      });
+    });
+
+};
