@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import * as ProfileActions from '../../../store/actions/profileActions';
+import * as ServiceActions from '../../../store/actions/serviceActions';
 import Announcement from '../../../components/commons/UI/Announcement/Announcement';
 import Loading from '../../../components/commons/UI/Loading/Loading';
 import NoProfileDisclaimer from '../../../components/commons/NoProfileDisclaimer/NoProfileDisclaimer';
@@ -16,11 +17,12 @@ class NotificationsScreen extends React.Component {
   });
 
   componentDidMount() {
-    const { setNotificationsSeen, getCurrentUserProfile } = this.props;
+    const { setNotificationsSeen, getCurrentUserProfile, getAllServices } = this.props;
     const callback = () => {
       getCurrentUserProfile();
     }
     setNotificationsSeen(callback);
+    getAllServices();
   }
 
   renderItem = (notification) => {
@@ -69,6 +71,8 @@ NotificationsScreen.propTypes = {
   currentUserHasProfile: PropTypes.bool,
   setNotificationsSeen: PropTypes.func,
   getCurrentUserProfile: PropTypes.func,
+
+  getAllServices: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
@@ -80,6 +84,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   setNotificationsSeen: ProfileActions.setNotificationsSeen,
   getCurrentUserProfile: ProfileActions.getCurrentUserProfile,
+  getAllServices: ServiceActions.getAllServices,
 };
 
 export default connect(

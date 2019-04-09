@@ -8,13 +8,10 @@ module.exports = addReview = (req, res) => {
 
   const serviceId = req.params.service_id;
 
-  console.log(req.body.comment);
-  console.log(req.body)
-
   Service.findById(serviceId)
     .then((service) => {
       // Updating service comments
-      service.comments.unshift(req.body) 
+      service.comments.unshift(req.body)
 
       service.save().then(() => {
         return res.json({ success: true });

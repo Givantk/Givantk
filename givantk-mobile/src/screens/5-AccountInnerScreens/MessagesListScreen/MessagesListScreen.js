@@ -1,26 +1,30 @@
 import { connect } from 'react-redux';
-import io from 'socket.io-client';
-import { View, Text, Button, TouchableOpacity } from 'react-native';
-import React, { Component } from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 
 import { colors } from '../../../assets/styles/base';
+import * as ChatActions from '../../../store/actions/chatActions';
 import styles from './MessagesListScreenStyles';
-import * as AuthActions from '../../../store/actions/authActions';
-import MessagesListItem from '../../../components/5-AccountInnerScreensComponents/MessagesListComponents/MessagesListItem';
+import Loading from '../../../components/commons/UI/Loading/Loading';
 
 class MessagesListScreen extends Component {
   static navigationOptions = () => ({
-    headerTitle: 'Messages Lists',
+    headerTitle: 'My Messages ✉️',
     headerStyle: {
-      backgroundColor: colors.primary
+      backgroundColor: colors.primary,
     },
     headerTitleStyle: {
-      color: colors.white
-    }
+      color: colors.white,
+    },
   });
 
-  
+  componentDidMount() {
+    const { currentUser, loadUserChats } = this.props;
+    loadUserChats(currentUser._id);
+  }
+
+
   chatNavigatorHandle = (chatID, chatTitle) => {
     const { navigation, currentUser } = this.props;
 
@@ -30,32 +34,34 @@ class MessagesListScreen extends Component {
 
     const users = chatTitle.split(' & '); // spliting user1 and user2 names
     const IDs = chatID.split('+'); // splitiing user1 and user2 IDs
-    
-    let user2 = {
+
+    const user2 = {
       id: '',
-      name: ''
+      name: '',
     }
 
 
-    if(users[0] != currentUser.first_name+' '+currentUser.last_name){
+    if (users[0] != `${currentUser.first_name} ${currentUser.last_name}`) {
       user2.name = users[0];
     } else {
       user2.name = users[1];
     }
-    
-    if(IDs[0] != currentUser._id) {
+
+    if (IDs[0] != currentUser._id) {
       user2.id = IDs[0];
     } else {
       user2.id = IDs[1];
     }
-  
-    navigation.navigate('MessagesChat', { user2: user2 }); // send user2 to MessagesChatScreen
-    //console.log(user2);
+
+    navigation.navigate('MessagesChat', { user2 }); // send user2 to MessagesChatScreen
+    // console.log(user2);
   };
 
   render() {
-    const chats = this.props.chats.map((chat, i) => (
-      <TouchableOpacity
+    const { chats } = this.props;
+    const chatsLists = chats.length === 0 ? <Loading /> :
+      chats.map((chat, i) => (
+        <TouchableOpacity
           key={i}
           style={styles.customBtn}
           onPress={() => this.chatNavigatorHandle(chat.socketID, chat.title)}
@@ -64,12 +70,11 @@ class MessagesListScreen extends Component {
             <Text style={styles.customText}>{chat.title}</Text>
           </View>
         </TouchableOpacity>
-    ));
+      ));
 
     return (
       <View style={styles.wrapper}>
-        <Text style={styles.header}>{this.props.currentUser.first_name}'s Messages</Text>
-        {chats}
+        {chatsLists}
       </View>
     );
   }
@@ -78,14 +83,18 @@ class MessagesListScreen extends Component {
 MessagesListScreen.propTypes = {
   navigation: PropTypes.shape(),
   chats: PropTypes.arrayOf(PropTypes.shape({})),
-  loadUserChatsLoading: PropTypes.bool
+  loadUserChatsLoading: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
   currentUser: state.auth.user,
   errors: state.errors,
   chats: state.chat.chats,
-  loadUserChatsLoading: state.chat.loadUserChatsLoading
+  loadUserChatsLoading: state.chat.loadUserChatsLoading,
 });
 
-export default connect(mapStateToProps)(MessagesListScreen);
+const mapDispatchToProps = {
+  loadUserChats: ChatActions.loadUserChats,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MessagesListScreen);

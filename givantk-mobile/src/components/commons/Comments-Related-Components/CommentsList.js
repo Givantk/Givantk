@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import {
   FlatList,
   View,
@@ -8,16 +9,16 @@ import {
   Keyboard,
   Text,
 } from 'react-native';
-import Comment from './Comment';
-import commentListStyling from './commentListStyling';
 import propTypes from 'prop-types';
 import { Icon } from 'native-base';
+import Comment from './Comment';
+import commentListStyling from './commentListStyling';
 
 export default class CommentsList extends Component {
   state = { text: '' };
 
   addComment = () => {
-    let { data, onAddComment, currentUser } = this.props;
+    const { data, onAddComment, currentUser } = this.props;
     const { text } = this.state;
     const newComment = {
       user: currentUser._id,
@@ -54,42 +55,42 @@ export default class CommentsList extends Component {
     // if (founded.length) return true;
     // else return false;
   };
+
   render() {
-    const { data, topMargin, serviceAskerid,disableInput } = this.props;
-    console.log(disableInput)
+    const { data, topMargin, serviceAskerid, disableInput } = this.props;
 
     return (
       <View style={commentListStyling.mainContainer}>
         {
-          !disableInput?<KeyboardAvoidingView behavior="padding" style={{ flex: 1 }} enabled>
-          <Text style={{ marginLeft: 8, fontSize: 18, marginBottom: 10 }}>
-            Add Comment:
+          !disableInput ? <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }} enabled>
+            <Text style={{ marginLeft: 8, fontSize: 18, marginBottom: 10 }}>
+              Add Comment:
           </Text>
 
-          <View style={commentListStyling.textInputContainer}>
-            <TextInput
-              ref="TextInput"
-              onChangeText={(text) => {
-                this.setState({ text });
-              }}
-              placeholderTextColor="#C3C5C8"
-              style={commentListStyling.textInput}
-              multiline={true}
-              placeholder="Write a comment.."
-            />
-
-            <TouchableOpacity onPress={this.addComment}>
-              <Icon
-                type="MaterialIcons"
-                style={commentListStyling.icon}
-                name="send"
-                size={30}
+            <View style={commentListStyling.textInputContainer}>
+              <TextInput
+                ref="TextInput"
+                onChangeText={(text) => {
+                  this.setState({ text });
+                }}
+                placeholderTextColor="#C3C5C8"
+                style={commentListStyling.textInput}
+                multiline
+                placeholder="Write a comment.."
               />
-            </TouchableOpacity>
-          </View>
-        </KeyboardAvoidingView>:null}
 
-        <Text style={{ marginLeft: 8, fontSize: 18 }}>Comments:</Text>
+              <TouchableOpacity onPress={this.addComment}>
+                <Icon
+                  type="MaterialIcons"
+                  style={commentListStyling.icon}
+                  name="send"
+                  size={30}
+                />
+              </TouchableOpacity>
+            </View>
+          </KeyboardAvoidingView> : null}
+
+        {data.length > 0 && <Text style={{ marginLeft: 8, fontSize: 18 }}>Comments:</Text>}
 
         <FlatList
           keyboardShouldPersistTaps="always"
@@ -120,7 +121,7 @@ CommentsList.propTypes = {
         ownerAvatar: propTypes.string,
         content: propTypes.string.isRequired,
         date: propTypes.string,
-      })
+      }),
     ),
   }),
   onAddComment: propTypes.func,

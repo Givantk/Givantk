@@ -33,7 +33,7 @@ module.exports = proposeToService = (req, res) => {
         return res.status(400).json(errors);
       }
 
-      Profile.findOne({ user: application.user._id.toString() }).then(
+      Profile.findOne({ user: application.user._id.toString() }).populate('user').then(
         (applicantProfile) => {
           // Updating service
           const proposalIndex = service.applications.findIndex(
