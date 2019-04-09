@@ -55,16 +55,16 @@ module.exports = proposeToService = (req, res) => {
               .populate('user')
               .then((askerProfile) => {
                 applicantProfile.notifications.unshift({
-                  title: `${service.reveal_asker===false?'Anonymous':
+                  title: `${service.reveal_asker === false ? 'Anonymous' :
                     askerProfile.first_name
-                  } accepted your proposal to the service \"${service.name}\"`,
+                    } accepted your proposal to the service \"${service.name}\"`,
                   navigateTo: {
                     kind: 'service',
                     service: service._id
                   },
                   is_user_associated: true,
-                  user_associated: service.reveal_asker===false?null:askerProfile.user,
-                  user_profile_associated: service.reveal_asker===false?null:askerProfile._id
+                  user_associated: service.reveal_asker === false ? null : askerProfile.user,
+                  user_profile_associated: service.reveal_asker === false ? null : askerProfile._id
                 });
                 applicantProfile.save();
 
@@ -74,10 +74,10 @@ module.exports = proposeToService = (req, res) => {
                       to: applicantProfile.user.pushNotificationToken,
                       title: 'Your Proposal is Accepted!',
                       body: `${
-                        askerProfile.first_name
-                      } accepted your proposal to the service \"${
+                        service.reveal_asker === false ? 'Anonymous' : askerProfile.first_name
+                        } accepted your proposal to the service \"${
                         service.name
-                      }\"`,
+                        }\"`,
                       sound: 'default'
                     }
                   ]);
