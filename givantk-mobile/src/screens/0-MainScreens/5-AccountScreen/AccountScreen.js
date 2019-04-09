@@ -9,7 +9,6 @@ import accountListItems from '../../../components/0-MainScreensComponents/5-Acco
 import CardList from '../../../components/commons/UI/CardList/CardList';
 import getUserImage from '../../../assets/utils/getUserImage';
 import styles from './AccountScreenStyles';
-import * as ChatActions from '../../../store/actions/chatActions';
 
 class AccountScreen extends React.Component {
   static navigationOptions = () => ({
@@ -30,8 +29,7 @@ class AccountScreen extends React.Component {
   };
 
   navigateToMessagesList = () => {
-    const { navigation, loadUserChats, currentUser } = this.props;
-    loadUserChats(currentUser._id);
+    const { navigation } = this.props;
     navigation.navigate('MessagesList');
   };
 
@@ -71,7 +69,7 @@ class AccountScreen extends React.Component {
               source={{
                 uri: getUserImage(
                   (currentUserProfile && currentUserProfile.avatar) ||
-                    currentUser.avatar,
+                  currentUser.avatar,
                 ),
               }}
               style={styles.image}
@@ -111,7 +109,6 @@ AccountScreen.propTypes = {
   currentUser: PropTypes.shape({}),
   currentUserProfile: PropTypes.shape({}),
   logoutUser: PropTypes.func,
-  loadUserChats: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
@@ -122,7 +119,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   logoutUser: AuthActions.logoutUser,
-  loadUserChats: ChatActions.loadUserChats,
 };
 
 export default connect(

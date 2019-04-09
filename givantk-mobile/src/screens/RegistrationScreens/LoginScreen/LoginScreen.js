@@ -44,8 +44,13 @@ class LoginScreen extends React.Component {
 
     AuthActions.getPushNotificationToken();
     this._notificationSubscription = Notifications.addListener((n) => {
-      if (n.origin === 'selected') navigation.navigate('Notifications');
-      else navigation.navigate('Tab');
+      if (n.origin === 'selected') {
+        if (n.data && n.data.type === 'message') navigation.navigate('MessagesList')
+        else navigation.navigate('Notifications');
+      } else {
+        navigation.navigate('Tab');
+      }
+
     });
   };
 

@@ -1,6 +1,9 @@
 const bodyParser = require('body-parser');
 const express = require('express');
+const mongoose = require('mongoose');
 const passport = require('passport');
+
+const sendNotifications = require('./assets/utils/sendNotifications');
 
 const app = express();
 
@@ -19,7 +22,7 @@ app.use(passport.initialize());
 require('./config/passport')(passport);
 
 // Cross Origin Problem
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
   res.header(
@@ -75,9 +78,9 @@ io.use((socket, next) => {
     );
     console.log(
       socket.handshake.query.name1 +
-        ' and ' +
-        socket.handshake.query.name2 +
-        ' entered the chat.'
+      ' and ' +
+      socket.handshake.query.name2 +
+      ' entered the chat.'
     );
 
     let socketID = FinalSocketID;
@@ -110,6 +113,32 @@ io.use((socket, next) => {
 
     // accept the msg entered in the TextInput field from the first user then send it to the other user
     socket.on('chat message', (msg, userid, username) => {
+      console.log("socketIDsocketIDsocketID", socketID);
+      console.log("useriduseriduseriduserid", userid);
+      const receiverIdIndex = (socketID.split('+').findIndex((e) => e === userid.toString()) + 1) % 2;
+      const receiverId = socketID.split('+')[receiverIdIndex];
+
+      const User = mongoose.model('user');
+
+      User.findById(receiverId.toString()).then(receiver => {
+
+        if (receiver.pushNotificationToken) {
+          sendNotifications([
+            {
+              to: receiver.pushNotificationToken,
+              title: 'New Message',
+              body: `${username} sent you a message`,
+              sound: 'default',
+              data: {
+                type: 'message'
+              }
+            }
+          ]);
+        }
+
+      });
+
+      User.findOne
       console.log(username + ': ' + msg);
       Chat.updateOne(
         { socketID: socketID },
