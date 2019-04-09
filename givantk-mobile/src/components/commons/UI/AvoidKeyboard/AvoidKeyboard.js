@@ -14,8 +14,7 @@ const AvoidKeyboard = (props) => {
     <KeyboardAvoidingView
       behavior="padding"
       keyboardVerticalOffset={bottomPadding}
-      style={backgroundColor ? { backgroundColor,flex:1 } : {flex:1}}
-      
+      style={backgroundColor ? { backgroundColor } : {}}
     >
       {persistTaps ? (
         <ScrollView
@@ -27,14 +26,14 @@ const AvoidKeyboard = (props) => {
           {children}
         </ScrollView>
       ) : (
-        <ScrollView
-          style={bigHeight && { height: '100%' }}
-          contentContainerStyle={bigHeight && { height: '100%' }}
-          showsVerticalScrollIndicator={false}
-        >
-          {children}
-        </ScrollView>
-      )}
+          <ScrollView
+            style={bigHeight && { height: '100%' }}
+            contentContainerStyle={bigHeight && { height: '100%' }}
+            showsVerticalScrollIndicator={false}
+          >
+            {children}
+          </ScrollView>
+        )}
     </KeyboardAvoidingView>
   );
 };

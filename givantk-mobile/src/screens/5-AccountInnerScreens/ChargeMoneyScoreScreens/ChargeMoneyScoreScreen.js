@@ -27,6 +27,8 @@ class ChargeMoneyScoreScreen extends Component {
   };
 
   onButtonClicked = (amount) => {
+    const { navigation } = this.props;
+
     if (amount < 0 || isNaN(amount)) {
       this.setState({
         warning: 'Kindly, enter a valid English Number.',
@@ -35,7 +37,7 @@ class ChargeMoneyScoreScreen extends Component {
       this.setState({
         warning: '',
       });
-      this.props.navigation.navigate('PayWithStripe', {
+      navigation.navigate('PayWithStripe', {
         amount,
       });
     }

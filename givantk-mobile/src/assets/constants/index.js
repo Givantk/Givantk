@@ -5,5 +5,5 @@ export const moneyScoreLogo = 'https://i.imgur.com/10gnmIe.png';
 export const givantkPointsLogo = 'https://i.imgur.com/QbBhnPG.png';
 export const givantkLogo = 'https://i.imgur.com/LWvjCYj.png';
 export const serverErrorMessage = {
-  serverError: "Can't connect to the server, please try again later",
+  serverError: 'Can\'t connect to the server, please try again later',
 };
