@@ -26,6 +26,9 @@ class ChatScreen extends Component {
 
   constructor(props) {
     super(props);
+
+    const {serviceId}=props.navigation.state.params;
+
     this.state = {
       user1: {
         id: this.props.currentUser._id,
@@ -35,6 +38,7 @@ class ChatScreen extends Component {
         id: this.props.profile.user._id || this.props.profile.user,
         name: this.props.profile.first_name+' '+this.props.profile.last_name,
       },
+      serviceId,
       chatMessage: '',
       chatMessages: [],
       chatHistory: [],
@@ -47,6 +51,7 @@ class ChatScreen extends Component {
       name1: this.state.user1.name,
       id2: this.state.user2.id,
       name2: this.state.user2.name,
+      service:this.state.serviceId
     };
     // local server is replace with serverPath from heroku
     this.socket = io(serverPath, { query: users_data });
