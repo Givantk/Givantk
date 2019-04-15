@@ -330,7 +330,9 @@ class ServiceScreen extends Component {
             {loggedInUser.ownService ||
               loggedInUser.appliedBefore ||
               service.state === 'done' ||
-              service.state === 'archived' || (
+              service.state === 'archived' ||
+              service.state === 'progressing'||
+              (
                 <View style={styles.addProposalButton}>
                   <Button title="Offer help" onPress={this.onPressOfferHelp} />
                 </View>
@@ -393,7 +395,9 @@ class ServiceScreen extends Component {
                 <View>
                   {!loggedInUser.ownService &&
                     !service.state === 'done' &&
-                    !service.state === 'archived' && (
+                    !service.state === 'archived' && 
+                    !service.state=== 'pro'
+                    (
                       <Text style={styles.noProposalsDisclaimer}>
                         Be the first one to apply {'💪'}
                       </Text>
