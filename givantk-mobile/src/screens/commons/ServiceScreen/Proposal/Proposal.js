@@ -22,6 +22,7 @@ const Proposal = ({
   serviceAsker,
   serviceState,
   ProposalIsChosen,
+  revealAsker
 }) => (
   <View
     style={[
@@ -87,16 +88,7 @@ const Proposal = ({
         }
       >
       <View>
-        {!ProposalIsChosen && serviceState === 'pending' ? (
-          <View style={styles.sendMessageContainer}>
-            <Text style={styles.sendMessageText}>Interview</Text>
-            <Icon
-              type="FontAwesome"
-              name="envelope"
-              style={styles.sendMessageIcon}
-            />
-          </View>
-        ) : ownService && ProposalIsChosen ? (
+        { ownService && ProposalIsChosen && serviceState!=='done'&&serviceState!=='archived'&&revealAsker!==false ? (
           <View style={styles.sendMessageContainer}>
             <Text style={styles.sendMessageText}>Chat with your helper</Text>
             <Icon
@@ -105,7 +97,7 @@ const Proposal = ({
               style={styles.sendMessageIcon}
             />
           </View>
-        ) : ProposalIsChosen ? (
+        ) : ProposalIsChosen&&serviceState!=='done'&&serviceState!=='archived'&&revealAsker!==false ? (
           <View style={styles.sendMessageContainer}>
             <Text style={styles.sendMessageText}>Chat with your asker</Text>
             <Icon
@@ -132,13 +124,16 @@ const Proposal = ({
       >
         Accept
       </MainButton>
-      <MainButton
-        onPress={() => onPressApplicant(application.user._id)}
+     { revealAsker!==false?<MainButton
+        onPress={()=> navigation.navigate('Chat', {
+          serviceId,
+          secondUser: serviceAsker,
+        })}
         backgroundColor={colors.primaryLight}
         disabled={disabled}
       >
-        Ask More
-      </MainButton>
+        Interview
+      </MainButton>:null}
     </View>
   </View>
 );

@@ -274,16 +274,14 @@ class ServiceScreen extends Component {
 
     const serviceIsArchived = service.state === 'archived';
     const serviceIsDone = service.state === 'done';
-    const serviceIsProgressing = service.state === 'progressing';
-    const serviceIsPending = service.state === 'pending';
 
     return (
       <AvoidKeyboard
         keyboardVerticalOffset={85}
-        style={{ flex: 1, position: 'absolute' }}
+        flex
         persistTaps
       >
-        <ScrollView style={{ flex: 1 }} keyboardShouldPersistTaps="always">
+        <ScrollView keyboardShouldPersistTaps="always">
           <View
             style={[
               styles.wrapper,
@@ -425,20 +423,26 @@ class ServiceScreen extends Component {
                   serviceId={service._id}
                   serviceAsker={service.asker}
                   serviceState={service.state}
+                  revealAsker={service.reveal_asker}
                   ProposalIsChosen={true}
                 />
               ) : null
             )}
-            {service.applications.map((application, i) =>
+            {service.applications.map((application) =>
               !application.chosen ? (
                 <View key={application._id}>
-                  {i === 0 && (
-                    <View style={styles.proposalsHeadingContainer}>
+                  <View style={styles.proposalsHeadingContainer}>
+                    {service.state !== 'pending' ? (
+                      <Text style={styles.proposalsHeadingText}>
+                        Unaccepted Proposals:
+                      </Text>
+                    ) : (
                       <Text style={styles.proposalsHeadingText}>
                         Proposals:
                       </Text>
-                    </View>
-                  )}
+                    )}
+                  </View>
+
                   <Proposal
                     application={application}
                     onPressApplicant={this.onPressApplicant}
@@ -452,6 +456,7 @@ class ServiceScreen extends Component {
                     serviceId={service._id}
                     serviceAsker={service.asker}
                     serviceState={service.state}
+                    revealAsker={service.reveal_asker}
                   />
                 </View>
               ) : null
