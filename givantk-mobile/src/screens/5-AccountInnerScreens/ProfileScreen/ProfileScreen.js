@@ -49,7 +49,7 @@ class ProfileScreen extends React.Component {
   filterService = (services, type) => {
     const filtered = services.filter(
       (service) =>
-        (type === 'asked' && service.asker_is_rated && service.reveal_asker) ||
+        (type === 'asked' && service.asker_is_rated && service.reveal_asker!==false) ||
         (type === 'helped' && service.helper_is_rated),
     );
 
