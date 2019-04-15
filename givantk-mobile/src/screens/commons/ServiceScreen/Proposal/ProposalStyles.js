@@ -55,6 +55,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
   },
+  sendMessageContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginBottom:5
+  },
+  sendMessageText: {
+    color: colors.primary,
+    fontSize: 18,
+    fontFamily: fontTypes.mainBold,
+  },
+  sendMessageIcon: {
+    color: colors.primary,
+    fontSize: 25,
+    marginLeft: 10,
+  },
 });
 
 export default styles;

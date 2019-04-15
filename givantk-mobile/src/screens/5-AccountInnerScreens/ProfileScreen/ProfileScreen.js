@@ -152,18 +152,7 @@ class ProfileScreen extends React.Component {
             </Text>
           </View>
 
-          {/* Send a message */}
 
-          <TouchableWithoutFeedback onPress={() => navigation.navigate('Chat')}>
-            <View style={styles.sendMessageContainer}>
-              <Text style={styles.sendMessageText}>Send a Message</Text>
-              <Icon
-                type="FontAwesome"
-                name="envelope"
-                style={styles.sendMessageIcon}
-              />
-            </View>
-          </TouchableWithoutFeedback>
 
           {/* Services */}
           <SnakeNavigator
