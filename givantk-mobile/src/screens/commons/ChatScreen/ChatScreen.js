@@ -27,7 +27,7 @@ class ChatScreen extends Component {
   constructor(props) {
     super(props);
 
-    const {serviceId, user:proposalMaker}=props.navigation.state.params;
+    const {serviceId, secondUser:proposalMaker}=props.navigation.state.params;
 
     this.state = {
       user1: {

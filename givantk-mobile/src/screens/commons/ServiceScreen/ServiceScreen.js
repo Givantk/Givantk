@@ -417,11 +417,14 @@ class ServiceScreen extends Component {
                   onPressApplicant={this.onPressApplicant}
                   onPressAcceptProposal={this.onPressAcceptProposal}
                   ownService={loggedInUser.ownService}
+                  serviceHelper={loggedInUser.serviceHelper}
                   hasHelper={!!service.helper}
                   acceptServiceProposalLoading={acceptServiceProposalLoading}
                   disabled={serviceIsArchived || serviceIsDone}
                   navigation={navigation}
                   serviceId={service._id}
+                  serviceAsker={service.asker}
+                  serviceState={service.state}
                   ProposalIsChosen={true}
                 />
               ) : null
@@ -441,11 +444,14 @@ class ServiceScreen extends Component {
                     onPressApplicant={this.onPressApplicant}
                     onPressAcceptProposal={this.onPressAcceptProposal}
                     ownService={loggedInUser.ownService}
+                    serviceHelper={loggedInUser.serviceHelper}
                     hasHelper={!!service.helper}
                     acceptServiceProposalLoading={acceptServiceProposalLoading}
                     disabled={serviceIsArchived || serviceIsDone}
                     navigation={navigation}
                     serviceId={service._id}
+                    serviceAsker={service.asker}
+                    serviceState={service.state}
                   />
                 </View>
               ) : null

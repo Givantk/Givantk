@@ -13,11 +13,14 @@ const Proposal = ({
   onPressApplicant,
   onPressAcceptProposal,
   ownService,
+  serviceHelper,
   hasHelper,
   acceptServiceProposalLoading,
   disabled,
   navigation,
   serviceId,
+  serviceAsker,
+  serviceState,
   ProposalIsChosen,
 }) => (
   <View
@@ -44,6 +47,7 @@ const Proposal = ({
             </Text>
           </View>
         </View>
+
         {application.chosen && (
           <Badge danger>
             <View>
@@ -68,24 +72,53 @@ const Proposal = ({
     </View>
     {/* Interview or chat with helpers */}
 
-    <TouchableWithoutFeedback
-      onPress={() =>
-        navigation.navigate('Chat', { serviceId, user: application.user })
-      }
-    >
-      <View style={styles.sendMessageContainer}>
-        {!ProposalIsChosen ? (
-          <Text style={styles.sendMessageText}>Interview</Text>
-        ) : (
-          <Text style={styles.sendMessageText}>Chat with your helper</Text>
-        )}
-        <Icon
-          type="FontAwesome"
-          name="envelope"
-          style={styles.sendMessageIcon}
-        />
-      </View>
-    </TouchableWithoutFeedback>
+    {ownService || serviceHelper ? (
+      <TouchableWithoutFeedback
+        onPress={() =>
+          ownService
+            ? navigation.navigate('Chat', {
+                serviceId,
+                secondUser: application.user,
+              })
+            : navigation.navigate('Chat', {
+                serviceId,
+                secondUser: serviceAsker,
+              })
+        }
+      >
+      <View>
+        {!ProposalIsChosen && serviceState === 'pending' ? (
+          <View style={styles.sendMessageContainer}>
+            <Text style={styles.sendMessageText}>Interview</Text>
+            <Icon
+              type="FontAwesome"
+              name="envelope"
+              style={styles.sendMessageIcon}
+            />
+          </View>
+        ) : ownService && ProposalIsChosen ? (
+          <View style={styles.sendMessageContainer}>
+            <Text style={styles.sendMessageText}>Chat with your helper</Text>
+            <Icon
+              type="FontAwesome"
+              name="envelope"
+              style={styles.sendMessageIcon}
+            />
+          </View>
+        ) : ProposalIsChosen ? (
+          <View style={styles.sendMessageContainer}>
+            <Text style={styles.sendMessageText}>Chat with your asker</Text>
+            <Icon
+              type="FontAwesome"
+              name="envelope"
+              style={styles.sendMessageIcon}
+            />
+          </View>
+        ) : null}
+        </View>
+      </TouchableWithoutFeedback>
+    ) : null}
+
     <View
       style={[
         styles.buttonsContainer,
