@@ -16,6 +16,9 @@ const Proposal = ({
   hasHelper,
   acceptServiceProposalLoading,
   disabled,
+  navigation,
+  serviceId,
+  ProposalIsChosen,
 }) => (
   <View
     style={[
@@ -63,11 +66,19 @@ const Proposal = ({
     <View style={styles.proposalTextContainer}>
       <Text style={styles.proposalText}>{application.proposal}</Text>
     </View>
-    {/* Send a message */}
+    {/* Interview or chat with helpers */}
 
-    <TouchableWithoutFeedback onPress={() => navigation.navigate('Chat')}>
+    <TouchableWithoutFeedback
+      onPress={() =>
+        navigation.navigate('Chat', { serviceId, user: application.user })
+      }
+    >
       <View style={styles.sendMessageContainer}>
-        <Text style={styles.sendMessageText}>Interview</Text>
+        {!ProposalIsChosen ? (
+          <Text style={styles.sendMessageText}>Interview</Text>
+        ) : (
+          <Text style={styles.sendMessageText}>Chat with your helper</Text>
+        )}
         <Icon
           type="FontAwesome"
           name="envelope"

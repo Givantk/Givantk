@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
-import { Icon } from 'native-base';
-import { Text, View, Image, TouchableWithoutFeedback } from 'react-native';
+import { Text, View, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 

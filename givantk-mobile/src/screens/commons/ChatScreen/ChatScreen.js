@@ -27,7 +27,7 @@ class ChatScreen extends Component {
   constructor(props) {
     super(props);
 
-    const {serviceId}=props.navigation.state.params;
+    const {serviceId, user:proposalMaker}=props.navigation.state.params;
 
     this.state = {
       user1: {
@@ -35,8 +35,8 @@ class ChatScreen extends Component {
         name: this.props.currentUser.first_name+' '+this.props.currentUser.last_name,
       },
       user2: {
-        id: this.props.profile.user._id || this.props.profile.user,
-        name: this.props.profile.first_name+' '+this.props.profile.last_name,
+        id: proposalMaker._id,
+        name: proposalMaker.first_name+' '+proposalMaker.last_name,
       },
       serviceId,
       chatMessage: '',

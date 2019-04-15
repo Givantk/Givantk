@@ -264,12 +264,18 @@ class ServiceScreen extends Component {
   render() {
     const { service, loggedInUser } = this.state;
 
-    const { acceptServiceProposalLoading, currentUser } = this.props;
+    const {
+      acceptServiceProposalLoading,
+      currentUser,
+      navigation,
+    } = this.props;
 
     if (!service) return <Loading />;
 
     const serviceIsArchived = service.state === 'archived';
     const serviceIsDone = service.state === 'done';
+    const serviceIsProgressing = service.state === 'progressing';
+    const serviceIsPending = service.state === 'pending';
 
     return (
       <AvoidKeyboard
@@ -402,6 +408,7 @@ class ServiceScreen extends Component {
                 </View>
               </View>
             )}
+
             {service.applications.map((application) =>
               application.chosen ? (
                 <Proposal
@@ -413,6 +420,9 @@ class ServiceScreen extends Component {
                   hasHelper={!!service.helper}
                   acceptServiceProposalLoading={acceptServiceProposalLoading}
                   disabled={serviceIsArchived || serviceIsDone}
+                  navigation={navigation}
+                  serviceId={service._id}
+                  ProposalIsChosen={true}
                 />
               ) : null
             )}
@@ -434,6 +444,8 @@ class ServiceScreen extends Component {
                     hasHelper={!!service.helper}
                     acceptServiceProposalLoading={acceptServiceProposalLoading}
                     disabled={serviceIsArchived || serviceIsDone}
+                    navigation={navigation}
+                    serviceId={service._id}
                   />
                 </View>
               ) : null
