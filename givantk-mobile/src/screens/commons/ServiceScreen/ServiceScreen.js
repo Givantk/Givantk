@@ -2,7 +2,6 @@ import { AirbnbRating } from 'react-native-ratings';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-
 import {
   View,
   Text,
@@ -25,7 +24,7 @@ import getUserImage from '../../../assets/utils/getUserImage';
 import { colors, fontTypes, dimensions } from '../../../assets/styles/base';
 import MainButton from '../../../components/commons/UI/MainButton/MainButton';
 import quickModal from '../../../components/commons/UI/QuickModal/QuickModal';
-import CommentsList from '../../../components/commons/Comments-Related-Components/CommentsList'
+import CommentsList from '../../../components/commons/Comments-Related-Components/CommentsList';
 
 class ServiceScreen extends Component {
   static navigationOptions = () => ({
@@ -60,7 +59,7 @@ class ServiceScreen extends Component {
 
     // Updating service in local state through allServices passed through Redux store
     const currentService = nextProps.allServices.find(
-      (s) => s._id === prevState.service._id,
+      (s) => s._id === prevState.service._id
     );
 
     const ownService = currentUser._id === currentService.asker._id;
@@ -69,7 +68,7 @@ class ServiceScreen extends Component {
     const appliedBefore =
       currentService.applications.filter(
         (applicant) =>
-          (applicant.user._id || applicant.user) !== currentUser._id,
+          (applicant.user._id || applicant.user) !== currentUser._id
       ).length < currentService.applications.length;
 
     return {
@@ -91,7 +90,7 @@ class ServiceScreen extends Component {
     const appliedBefore =
       service.applications.filter(
         (applicant) =>
-          (applicant.user._id || applicant.user) !== currentUser._id,
+          (applicant.user._id || applicant.user) !== currentUser._id
       ).length < service.applications.length;
 
     this.setState(() => ({
@@ -139,7 +138,7 @@ class ServiceScreen extends Component {
     };
 
     quickModal('This helper will be assigned to your Service', () =>
-      acceptServiceProposal(service._id, proposalId, callback),
+      acceptServiceProposal(service._id, proposalId, callback)
     );
   };
 
@@ -153,7 +152,7 @@ class ServiceScreen extends Component {
     };
 
     quickModal('You will martk this service as finished', () =>
-      markServiceAsDone(service._id, callback),
+      markServiceAsDone(service._id, callback)
     );
   };
 
@@ -167,7 +166,7 @@ class ServiceScreen extends Component {
     };
 
     quickModal('You will archive this service', () =>
-      archiveService(service._id, callback),
+      archiveService(service._id, callback)
     );
   };
 
@@ -210,8 +209,8 @@ class ServiceScreen extends Component {
               Add Review
             </MainButton>
           ) : (
-              <Loading />
-            )}
+            <Loading />
+          )}
         </View>
       </View>
     );
@@ -252,17 +251,15 @@ class ServiceScreen extends Component {
   };
 
   onAddComment = (Comment) => {
-
     const { addComment } = this.props;
     const { service } = this.state;
 
     const callback = () => {
-      console.log('comment added successfully')
-    }
+      console.log('comment added successfully');
+    };
 
     addComment(Comment, service._id, callback);
-
-  }
+  };
 
   render() {
     const { service, loggedInUser } = this.state;
@@ -275,15 +272,18 @@ class ServiceScreen extends Component {
     const serviceIsDone = service.state === 'done';
 
     return (
-      <AvoidKeyboard keyboardVerticalOffset={85} style={{ flex: 1, position: 'absolute' }} persistTaps >
-        <ScrollView style={{ flex: 1 }} keyboardShouldPersistTaps='always'>
+      <AvoidKeyboard
+        keyboardVerticalOffset={85}
+        style={{ flex: 1, position: 'absolute' }}
+        persistTaps
+      >
+        <ScrollView style={{ flex: 1 }} keyboardShouldPersistTaps="always">
           <View
             style={[
               styles.wrapper,
               service.state === 'archived' && {
                 backgroundColor: colors.gray01,
               },
-
             ]}
           >
             <TouchableWithoutFeedback
@@ -299,7 +299,7 @@ class ServiceScreen extends Component {
                       getUserImage(
                         service.reveal_asker === false
                           ? null
-                          : service.asker.avatar,
+                          : service.asker.avatar
                       ),
                   }}
                   style={styles.userImage}
@@ -309,8 +309,8 @@ class ServiceScreen extends Component {
                     {service.reveal_asker === false
                       ? 'Anonymous'
                       : `${service.asker.first_name} ${
-                      service.asker.last_name
-                      }`}
+                          service.asker.last_name
+                        }`}
                   </Text>
                 </View>
               </View>
@@ -331,8 +331,7 @@ class ServiceScreen extends Component {
               loggedInUser.appliedBefore ||
               service.state === 'done' ||
               service.state === 'archived' ||
-              service.state === 'progressing'||
-              (
+              service.state === 'progressing' || (
                 <View style={styles.addProposalButton}>
                   <Button title="Offer help" onPress={this.onPressOfferHelp} />
                 </View>
@@ -395,9 +394,7 @@ class ServiceScreen extends Component {
                 <View>
                   {!loggedInUser.ownService &&
                     !service.state === 'done' &&
-                    !service.state === 'archived' && 
-                    !service.state=== 'pro'
-                    (
+                    !service.state === 'archived' && (
                       <Text style={styles.noProposalsDisclaimer}>
                         Be the first one to apply {'💪'}
                       </Text>
@@ -417,7 +414,7 @@ class ServiceScreen extends Component {
                   acceptServiceProposalLoading={acceptServiceProposalLoading}
                   disabled={serviceIsArchived || serviceIsDone}
                 />
-              ) : null,
+              ) : null
             )}
             {service.applications.map((application, i) =>
               !application.chosen ? (
@@ -439,7 +436,7 @@ class ServiceScreen extends Component {
                     disabled={serviceIsArchived || serviceIsDone}
                   />
                 </View>
-              ) : null,
+              ) : null
             )}
             {/* diplaying rating stars and text for asker and helper if service is finished */}
 
@@ -449,14 +446,15 @@ class ServiceScreen extends Component {
                   ? this.afterRatingComponents()
                   : this.beforeRatingComponents()
                 : loggedInUser.serviceHelper
-                  ? service.rated_by_helper
-                    ? this.afterRatingComponents()
-                    : this.beforeRatingComponents()
-                  : null
+                ? service.rated_by_helper
+                  ? this.afterRatingComponents()
+                  : this.beforeRatingComponents()
+                : null
               : null}
 
-            {service.reveal_asker === false && (service.state === 'progressing' || service.state === 'done') && (loggedInUser.serviceHelper || loggedInUser.ownService) ?
-
+            {service.reveal_asker === false &&
+            (service.state === 'progressing' || service.state === 'done') &&
+            (loggedInUser.serviceHelper || loggedInUser.ownService) ? (
               <CommentsList
                 topMargin={20}
                 data={service.comments}
@@ -464,8 +462,8 @@ class ServiceScreen extends Component {
                 currentUser={currentUser}
                 serviceAskerid={service.asker._id}
                 disableInput={service.state === 'done'}
-              /> : null}
-
+              />
+            ) : null}
           </View>
         </ScrollView>
       </AvoidKeyboard>
@@ -509,5 +507,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(ServiceScreen);
