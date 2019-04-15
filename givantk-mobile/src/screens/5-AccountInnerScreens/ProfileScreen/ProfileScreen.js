@@ -70,7 +70,7 @@ class ProfileScreen extends React.Component {
         name: 'Asked for',
         component: () => (
           <ServicesList
-            services={profile.services_asked_for.filter((service)=>service.reveal_asker)}
+            services={profile.services_asked_for.filter((service)=>service.reveal_asker!==false)}
             loading={getProfileLoading}
             navigation={navigation}
           />
