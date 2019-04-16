@@ -106,13 +106,21 @@ class MessagesChatScreen extends Component {
         msgDir: 'flex-end',
         msgColor: '#7BE16B'
       };
-      console.log(this.props.service)
-      return (
-        this.props.service.reveal_asker!==false?<ChatMessage key={i} name={this.state.user1.name} customMsg={customMsg}>
-        {msg}
-      </ChatMessage>:<ChatMessage key={i} name='Anonymous' customMsg={customMsg}>
-        {msg}
-      </ChatMessage>
+
+      // edtiting displaying name for anonymous services 
+
+
+      return this.props.service.reveal_asker !== false ||
+        (this.props.service.asker.toString() !==
+          this.state.user1.id.toString() &&
+          this.props.service.reveal_asker === false) ? (
+        <ChatMessage key={i} name={this.state.user1.name} customMsg={customMsg}>
+          {msg}
+        </ChatMessage>
+      ) : (
+        <ChatMessage key={i} name="Anonymous" customMsg={customMsg}>
+          {msg}
+        </ChatMessage>
       );
     });
     return (

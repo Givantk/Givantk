@@ -124,7 +124,6 @@ class ChatScreen extends Component {
         </ChatMessage>
       );
     });
-    console.log(this.state.chatMessages);
     return (
       <View style={styles.wrapper}>
         <ScrollView
