@@ -109,7 +109,7 @@ class ChatScreen extends Component {
         msgColor: '#7BE16B',
       };
 
-      // edtiting displaying name condition for anonymous services 
+      // edtiting displaying name for anonymous services 
 
       return this.props.service.reveal_asker !== false ||
         (this.props.service.asker.toString() !==
