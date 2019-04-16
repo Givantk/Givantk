@@ -250,16 +250,16 @@ class ServiceScreen extends Component {
     addReview(rating, callback);
   };
 
-  onAddComment = (Comment) => {
-    const { addComment } = this.props;
-    const { service } = this.state;
+  // onAddComment = (Comment) => {
+  //   const { addComment } = this.props;
+  //   const { service } = this.state;
 
-    const callback = () => {
-      console.log('comment added successfully');
-    };
+  //   const callback = () => {
+  //     console.log('comment added successfully');
+  //   };
 
-    addComment(Comment, service._id, callback);
-  };
+  //   addComment(Comment, service._id, callback);
+  // };
 
   render() {
     const { service, loggedInUser } = this.state;
@@ -276,11 +276,7 @@ class ServiceScreen extends Component {
     const serviceIsDone = service.state === 'done';
 
     return (
-      <AvoidKeyboard
-        keyboardVerticalOffset={85}
-        flex
-        persistTaps
-      >
+      <AvoidKeyboard keyboardVerticalOffset={85} flex persistTaps>
         <ScrollView keyboardShouldPersistTaps="always">
           <View
             style={[
@@ -420,10 +416,7 @@ class ServiceScreen extends Component {
                   acceptServiceProposalLoading={acceptServiceProposalLoading}
                   disabled={serviceIsArchived || serviceIsDone}
                   navigation={navigation}
-                  serviceId={service._id}
-                  serviceAsker={service.asker}
-                  serviceState={service.state}
-                  revealAsker={service.reveal_asker}
+                  service={service}
                   ProposalIsChosen={true}
                 />
               ) : null
@@ -453,10 +446,7 @@ class ServiceScreen extends Component {
                     acceptServiceProposalLoading={acceptServiceProposalLoading}
                     disabled={serviceIsArchived || serviceIsDone}
                     navigation={navigation}
-                    serviceId={service._id}
-                    serviceAsker={service.asker}
-                    serviceState={service.state}
-                    revealAsker={service.reveal_asker}
+                    service={service}
                   />
                 </View>
               ) : null
@@ -475,7 +465,10 @@ class ServiceScreen extends Component {
                 : null
               : null}
 
-            {service.reveal_asker === false &&
+
+            {/*disabling comments temporarily*/}          
+
+            {/* {service.reveal_asker === false &&
             (service.state === 'progressing' || service.state === 'done') &&
             (loggedInUser.serviceHelper || loggedInUser.ownService) ? (
               <CommentsList
@@ -486,7 +479,7 @@ class ServiceScreen extends Component {
                 serviceAskerid={service.asker._id}
                 disableInput={service.state === 'done'}
               />
-            ) : null}
+            ) : null} */}
           </View>
         </ScrollView>
       </AvoidKeyboard>

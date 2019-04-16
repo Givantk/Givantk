@@ -8,6 +8,7 @@ import io from 'socket.io-client';
 import { colors } from '../../../assets/styles/base';
 import { serverPath } from '../../../assets/utils/httpService';
 import * as ProfileActions from '../../../store/actions/profileActions';
+import * as ServiceActions from '../../../store/actions/serviceActions';
 import ChatMessage from '../../../components/commons/ChatComponents/chatMessage';
 import ChatInputItem from '../../../components/commons/ChatComponents/chatInputItem';
 
@@ -27,16 +28,19 @@ class ChatScreen extends Component {
   constructor(props) {
     super(props);
 
-    const {serviceId, secondUser:proposalMaker}=props.navigation.state.params;
+    const { serviceId, secondUser } = props.navigation.state.params;
 
     this.state = {
       user1: {
         id: this.props.currentUser._id,
-        name: this.props.currentUser.first_name+' '+this.props.currentUser.last_name,
+        name:
+          this.props.currentUser.first_name +
+          ' ' +
+          this.props.currentUser.last_name,
       },
       user2: {
-        id: proposalMaker._id,
-        name: proposalMaker.first_name+' '+proposalMaker.last_name,
+        id: secondUser._id,
+        name: secondUser.first_name + ' ' + secondUser.last_name,
       },
       serviceId,
       chatMessage: '',
@@ -46,12 +50,15 @@ class ChatScreen extends Component {
   }
 
   componentDidMount() {
+    const { getServiceById } = this.props;
+    getServiceById(this.state.serviceId);
+
     const users_data = {
       id1: this.state.user1.id,
       name1: this.state.user1.name,
       id2: this.state.user2.id,
       name2: this.state.user2.name,
-      service:this.state.serviceId
+      serviceId: this.state.serviceId,
     };
     // local server is replace with serverPath from heroku
     this.socket = io(serverPath, { query: users_data });
@@ -70,7 +77,7 @@ class ChatScreen extends Component {
       'chat message',
       this.state.chatMessage,
       this.state.user1.id,
-      this.state.user1.name,
+      this.state.user1.name
     );
     this.setState({ chatMessage: '' });
   }
@@ -79,15 +86,15 @@ class ChatScreen extends Component {
     const chatHistory = this.state.chatHistory.map((msg, i) => {
       let customMsg = {
         msgDir: '',
-        msgColor: ''
+        msgColor: '',
       };
-      if(msg.username == this.state.user1.name) {
+
+      if (msg.userid.toString() == this.state.user1.id.toString()) {
         customMsg.msgDir = 'flex-end';
-        customMsg.msgColor = '#7BE16B'
-      }
-      else {
+        customMsg.msgColor = '#7BE16B';
+      } else {
         customMsg.msgDir = 'flex-start';
-        customMsg.msgColor = '#BBC5BB'
+        customMsg.msgColor = '#BBC5BB';
       }
 
       return (
@@ -99,22 +106,31 @@ class ChatScreen extends Component {
     const chatMessages = this.state.chatMessages.map((msg, i) => {
       let customMsg = {
         msgDir: 'flex-end',
-        msgColor: '#7BE16B'
-      }; 
-      return (
+        msgColor: '#7BE16B',
+      };
+
+      // edtiting displaying name condition for anonymous services 
+
+      return this.props.service.reveal_asker !== false ||
+        (this.props.service.asker.toString() !==
+          this.state.user1.id.toString() &&
+          this.props.service.reveal_asker === false) ? (
         <ChatMessage key={i} name={this.state.user1.name} customMsg={customMsg}>
+          {msg}
+        </ChatMessage>
+      ) : (
+        <ChatMessage key={i} name="Anonymous" customMsg={customMsg}>
           {msg}
         </ChatMessage>
       );
     });
     console.log(this.state.chatMessages);
     return (
-
       <View style={styles.wrapper}>
-        
-        <ScrollView ref={ref => this.scrollView = ref}
-          onContentSizeChange={(contentWidth, contentHeight)=>{        
-              this.scrollView.scrollToEnd({animated: true});
+        <ScrollView
+          ref={(ref) => (this.scrollView = ref)}
+          onContentSizeChange={(contentWidth, contentHeight) => {
+            this.scrollView.scrollToEnd({ animated: true });
           }}
         >
           <View>{chatHistory}</View>
@@ -131,7 +147,6 @@ class ChatScreen extends Component {
             }}
           />
         </KeyboardAvoidingView>
-
       </View>
     );
   }
@@ -139,6 +154,7 @@ class ChatScreen extends Component {
 
 ChatScreen.propTypes = {
   getProfileByUserId: PropTypes.func,
+  getServiceById: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
@@ -146,13 +162,15 @@ const mapStateToProps = (state) => ({
   currentUser: state.auth.user,
   currentUserProfile: state.profile.currentUserProfile,
   errors: state.errors,
+  service: state.service.selectedService.service,
 });
 
 const mapDispatchToProps = {
   getProfileByUserId: ProfileActions.getProfileByUserId,
+  getServiceById: ServiceActions.getServiceById,
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(ChatScreen);

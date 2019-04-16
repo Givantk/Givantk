@@ -10,6 +10,8 @@ import { serverPath } from '../../../assets/utils/httpService';
 import ChatInputText from '../../../components/commons/ChatComponents/chatInputText';
 import ChatInputItem from '../../../components/commons/ChatComponents/chatInputItem';
 import ChatMessage from '../../../components/commons/ChatComponents/chatMessage';
+import * as ServiceActions from '../../../store/actions/serviceActions';
+
 
 import styles from './MessagesChatScreenStyles';
 
@@ -35,6 +37,7 @@ class MessagesChatScreen extends Component {
         id: this.props.navigation.state.params.user2.id,
         name: this.props.navigation.state.params.user2.name,
       },
+      serviceId:this.props.navigation.state.params.serviceId,
       chatMessage: '',
       chatMessages: [],
       chatHistory: [],
@@ -42,11 +45,17 @@ class MessagesChatScreen extends Component {
   }
 
   componentDidMount() {
+
+    const {getServiceById}=this.props;
+    getServiceById(this.state.serviceId);
+
+
     const users_data = {
       id1: this.state.user1.id,
       name1: this.state.user1.name,
       id2: this.state.user2.id,
       name2: this.state.user2.name,
+      serviceId:this.props.navigation.state.params.serviceId
     };
     // local server is replace with serverPath from heroku
     this.socket = io(serverPath, { query: users_data });
@@ -76,7 +85,8 @@ class MessagesChatScreen extends Component {
         msgDir: '',
         msgColor: ''
       };
-      if(msg.username == this.state.user1.name) {
+   
+      if(msg.userid.toString() == this.state.user1.id.toString()) {
         customMsg.msgDir = 'flex-end';
         customMsg.msgColor = '#7BE16B'
       }
@@ -96,10 +106,13 @@ class MessagesChatScreen extends Component {
         msgDir: 'flex-end',
         msgColor: '#7BE16B'
       };
+      console.log(this.props.service)
       return (
-        <ChatMessage key={i} name={this.state.user1.name} customMsg={customMsg}>
-          {msg}
-        </ChatMessage>
+        this.props.service.reveal_asker!==false?<ChatMessage key={i} name={this.state.user1.name} customMsg={customMsg}>
+        {msg}
+      </ChatMessage>:<ChatMessage key={i} name='Anonymous' customMsg={customMsg}>
+        {msg}
+      </ChatMessage>
       );
     });
     return (
@@ -133,14 +146,21 @@ class MessagesChatScreen extends Component {
 
 MessagesChatScreen.propTypes = {
   navigation: PropTypes.shape({}),
+  getServiceById:PropTypes.func,
+
 };
 
 const mapStateToProps = (state) => ({
   currentUser: state.auth.user,
   errors: state.errors,
+  service:state.service.selectedService.service,
+
 });
 
+const mapDispatchToProps = {
+  getServiceById:ServiceActions.getServiceById,
+};
 export default connect(
   mapStateToProps,
-  null,
+  mapDispatchToProps,
 )(MessagesChatScreen);

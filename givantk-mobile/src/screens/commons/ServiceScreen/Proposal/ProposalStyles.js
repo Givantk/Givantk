@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   sendMessageContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop:16
+    marginBottom:10
   },
   sendMessageText: {
     color: colors.primary,

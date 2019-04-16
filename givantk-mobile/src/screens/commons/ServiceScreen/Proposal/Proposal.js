@@ -18,11 +18,8 @@ const Proposal = ({
   acceptServiceProposalLoading,
   disabled,
   navigation,
-  serviceId,
-  serviceAsker,
-  serviceState,
+  service,
   ProposalIsChosen,
-  revealAsker
 }) => (
   <View
     style={[
@@ -78,35 +75,40 @@ const Proposal = ({
         onPress={() =>
           ownService
             ? navigation.navigate('Chat', {
-                serviceId,
+                serviceId: service._id,
                 secondUser: application.user,
               })
             : navigation.navigate('Chat', {
-                serviceId,
-                secondUser: serviceAsker,
+                serviceId: service._id,
+                secondUser: service.asker,
               })
         }
       >
-      <View>
-        { ownService && ProposalIsChosen && serviceState!=='done'&&serviceState!=='archived'&&revealAsker!==false ? (
-          <View style={styles.sendMessageContainer}>
-            <Text style={styles.sendMessageText}>Chat with your helper</Text>
-            <Icon
-              type="FontAwesome"
-              name="envelope"
-              style={styles.sendMessageIcon}
-            />
-          </View>
-        ) : ProposalIsChosen&&serviceState!=='done'&&serviceState!=='archived'&&revealAsker!==false ? (
-          <View style={styles.sendMessageContainer}>
-            <Text style={styles.sendMessageText}>Chat with your asker</Text>
-            <Icon
-              type="FontAwesome"
-              name="envelope"
-              style={styles.sendMessageIcon}
-            />
-          </View>
-        ) : null}
+        <View>
+          {ownService &&
+          ProposalIsChosen &&
+          service.state !== 'done' &&
+          service.state !== 'archived'? (
+            <View style={styles.sendMessageContainer}>
+              <Text style={styles.sendMessageText}>Chat with your helper</Text>
+              <Icon
+                type="FontAwesome"
+                name="envelope"
+                style={styles.sendMessageIcon}
+              />
+            </View>
+          ) : ProposalIsChosen &&
+            service.state !== 'done' &&
+            service.state !== 'archived' ? (
+            <View style={styles.sendMessageContainer}>
+              <Text style={styles.sendMessageText}>Chat with your asker</Text>
+              <Icon
+                type="FontAwesome"
+                name="envelope"
+                style={styles.sendMessageIcon}
+              />
+            </View>
+          ) : null}
         </View>
       </TouchableWithoutFeedback>
     ) : null}
@@ -124,16 +126,18 @@ const Proposal = ({
       >
         Accept
       </MainButton>
-     { revealAsker!==false?<MainButton
-        onPress={()=> navigation.navigate('Chat', {
-          serviceId,
-          secondUser: serviceAsker,
-        })}
+      <MainButton
+        onPress={() =>
+          navigation.navigate('Chat', {
+            serviceId: service._id,
+            secondUser: application.user,
+          })
+        }
         backgroundColor={colors.primaryLight}
         disabled={disabled}
       >
         Interview
-      </MainButton>:null}
+      </MainButton>
     </View>
   </View>
 );
