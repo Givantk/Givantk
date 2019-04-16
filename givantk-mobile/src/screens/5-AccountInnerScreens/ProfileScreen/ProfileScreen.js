@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
-import { Icon } from 'native-base';
-import { Text, View, Image, TouchableWithoutFeedback } from 'react-native';
+import { Text, View, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -49,7 +48,7 @@ class ProfileScreen extends React.Component {
   filterService = (services, type) => {
     const filtered = services.filter(
       (service) =>
-        (type === 'asked' && service.asker_is_rated && service.reveal_asker) ||
+        (type === 'asked' && service.asker_is_rated && service.reveal_asker!==false) ||
         (type === 'helped' && service.helper_is_rated),
     );
 
@@ -70,7 +69,7 @@ class ProfileScreen extends React.Component {
         name: 'Asked for',
         component: () => (
           <ServicesList
-            services={profile.services_asked_for.filter((service)=>service.reveal_asker)}
+            services={profile.services_asked_for.filter((service)=>service.reveal_asker!==false)}
             loading={getProfileLoading}
             navigation={navigation}
           />
@@ -152,18 +151,7 @@ class ProfileScreen extends React.Component {
             </Text>
           </View>
 
-          {/* Send a message */}
 
-          <TouchableWithoutFeedback onPress={() => navigation.navigate('Chat')}>
-            <View style={styles.sendMessageContainer}>
-              <Text style={styles.sendMessageText}>Send a Message</Text>
-              <Icon
-                type="FontAwesome"
-                name="envelope"
-                style={styles.sendMessageIcon}
-              />
-            </View>
-          </TouchableWithoutFeedback>
 
           {/* Services */}
           <SnakeNavigator

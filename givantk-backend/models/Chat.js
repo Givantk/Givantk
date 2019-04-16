@@ -9,6 +9,10 @@ const ChatSchema = new Schema({
     unique: true,
     dropDups: true
   },
+  serviceID:{
+    type:String,
+    required:true,
+  },
   title:{
     type: String,
     required: true

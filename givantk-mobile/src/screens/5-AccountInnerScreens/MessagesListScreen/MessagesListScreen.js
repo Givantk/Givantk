@@ -25,7 +25,7 @@ class MessagesListScreen extends Component {
   }
 
 
-  chatNavigatorHandle = (chatID, chatTitle) => {
+  chatNavigatorHandle = (chatID, chatTitle,serviceId) => {
     const { navigation, currentUser } = this.props;
 
     // we are going to pass the second user to the chat screen
@@ -53,7 +53,7 @@ class MessagesListScreen extends Component {
       user2.id = IDs[1];
     }
 
-    navigation.navigate('MessagesChat', { user2 }); // send user2 to MessagesChatScreen
+    navigation.navigate('MessagesChat', { user2,serviceId}); // send user2 to MessagesChatScreen
     // console.log(user2);
   };
 
@@ -64,7 +64,7 @@ class MessagesListScreen extends Component {
         <TouchableOpacity
           key={i}
           style={styles.customBtn}
-          onPress={() => this.chatNavigatorHandle(chat.socketID, chat.title)}
+          onPress={() => this.chatNavigatorHandle(chat.socketID, chat.title,chat.serviceID)}
         >
           <View style={styles.customView}>
             <Text style={styles.customText}>{chat.title}</Text>
@@ -91,6 +91,7 @@ const mapStateToProps = (state) => ({
   errors: state.errors,
   chats: state.chat.chats,
   loadUserChatsLoading: state.chat.loadUserChatsLoading,
+
 });
 
 const mapDispatchToProps = {

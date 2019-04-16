@@ -61,12 +61,12 @@ export default class CommentsList extends Component {
 
     return (
       <View style={commentListStyling.mainContainer}>
-        {
-          !disableInput ? <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }} enabled>
+        {!disableInput ? (
+          <View>
+           
             <Text style={{ marginLeft: 8, fontSize: 18, marginBottom: 10 }}>
               Add Comment:
-          </Text>
-
+            </Text>
             <View style={commentListStyling.textInputContainer}>
               <TextInput
                 ref="TextInput"
@@ -88,9 +88,23 @@ export default class CommentsList extends Component {
                 />
               </TouchableOpacity>
             </View>
-          </KeyboardAvoidingView> : null}
+          </View>
+        ) : null}
 
-        {data.length > 0 && <Text style={{ marginLeft: 8, fontSize: 18 }}>Comments:</Text>}
+        {data.length > 0 ? (
+          <Text style={{ marginLeft: 8, fontSize: 18 }}>Comments:</Text>
+        ) : (
+          <Text
+            style={{
+              marginTop: 20,
+              alignSelf: 'center',
+              fontSize: 18,
+              marginBottom: 10,
+            }}
+          >
+            No comments Yet!
+          </Text>
+        )}
 
         <FlatList
           keyboardShouldPersistTaps="always"
@@ -121,7 +135,7 @@ CommentsList.propTypes = {
         ownerAvatar: propTypes.string,
         content: propTypes.string.isRequired,
         date: propTypes.string,
-      }),
+      })
     ),
   }),
   onAddComment: propTypes.func,

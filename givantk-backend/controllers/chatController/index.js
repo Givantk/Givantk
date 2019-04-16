@@ -3,5 +3,5 @@ const loadPrivateChat = require('./loadPrivateChat');
 
 module.exports = {
   loadUserChats,
-  loadPrivateChat
+  loadPrivateChat,
 };
