@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   },
   buttonSmall: {
     margin: 5,
-    height: 18,
+    height: 25,
   },
   buttonText: {
     color: colors.trueWhite,

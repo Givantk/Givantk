@@ -72,7 +72,7 @@ class AddProposalScreen extends Component {
     if (!service) return <Loading />;
 
     return (
-      <AvoidKeyboard bigHeight>
+      <AvoidKeyboard bottomPadding={20}>
         <View style={styles.wrapper}>
           <Text style={styles.serviceName}>{service.name}</Text>
           <Text style={styles.header}>My Proposal:</Text>

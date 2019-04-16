@@ -9,7 +9,7 @@ const quickNotification = (notification) =>
       fontWeight: 'bold',
       textAlign: 'center',
     },
-    duration: 3000, 
+    duration: 2000,
   });
 
 export default quickNotification;

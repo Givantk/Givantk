@@ -1,19 +1,20 @@
 import { connect } from 'react-redux';
+import { FileSystem, ImagePicker } from 'expo';
 import { Textarea, Button } from 'native-base';
 import { View, Text, Image } from 'react-native';
-import { ImagePicker } from 'expo';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+
 import { colors } from '../../../assets/styles/base';
+import * as AuthActions from '../../../store/actions/authActions';
 import * as ProfileActions from '../../../store/actions/profileActions';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
 import genderTypes from '../../../assets/data/genderTypes';
 import Loading from '../../../components/commons/UI/Loading/Loading';
 import Picker from '../../../components/commons/UI/Picker/Picker';
+import QuickNotification from '../../../components/commons/UI/QuickNotification/QuickNotification';
 import styles from './MakeProfileScreenStyles';
 import TextInput from '../../../components/commons/UI/TextInput/TextInput';
-import QuickNotification from '../../../components/commons/UI/QuickNotification/QuickNotification';
-import { FileSystem } from 'expo';
 
 class MakeProfileScreen extends Component {
   static navigationOptions = () => ({
@@ -44,17 +45,16 @@ class MakeProfileScreen extends Component {
 
     if (!result.cancelled) {
       this.getFileSize(uri).then((size) => {
-        if (size > 5000000) this.setState({ avatar:null, noAvatar:false, sizeAlert: true });
+        if (size > 5000000) this.setState({ avatar: null, noAvatar: false, sizeAlert: true });
         else {
-          this.setState({ avatar: uri, noAvatar: false,sizeAlert:false });
+          this.setState({ avatar: uri, noAvatar: false, sizeAlert: false });
         }
       });
     }
   };
 
   getFileSize = async (fileUri) => {
-    let fileInfo = await FileSystem.getInfoAsync(fileUri);
-    console.log(fileInfo.size);
+    const fileInfo = await FileSystem.getInfoAsync(fileUri);
     return fileInfo.size;
   };
 
@@ -106,7 +106,7 @@ class MakeProfileScreen extends Component {
       newProfile.append('gender', gender.value);
       newProfile.append(
         'skills',
-        JSON.stringify(skills.split(',').map((s) => s.trim()))
+        JSON.stringify(skills.split(',').map((s) => s.trim())),
       );
       newProfile.append('description', description);
       newProfile.append('phone_number', phone_number);
@@ -127,15 +127,15 @@ class MakeProfileScreen extends Component {
     const { errors, makeProfileLoading } = this.props;
 
     return (
-      <AvoidKeyboard bottomPadding={80}>
+      <AvoidKeyboard bottomPadding={0}>
         <View style={styles.container}>
           <Text style={styles.label}>Profile picture</Text>
-          <Button style={styles.uploadButton} onPress={this.pickImage}>
+          <Button style={styles.uploadButton} onPress={() => AuthActions.ensureCameraRollPermission(this.pickImage)}>
             <Text style={styles.uploadButtonText}>Pick from gallery </Text>
           </Button>
           <View style={styles.imageView}>
             {avatar && <Image style={styles.image} source={{ uri: avatar }} />}
-            {noAvatar &&(
+            {noAvatar && (
               <Text style={styles.error}>Please provide a profile picture</Text>
             )}
             {sizeAlert && (
@@ -144,7 +144,6 @@ class MakeProfileScreen extends Component {
               </Text>
             )}
 
-            {console.log(sizeAlert)}
           </View>
 
           <Picker
@@ -187,10 +186,10 @@ class MakeProfileScreen extends Component {
             {makeProfileLoading ? (
               <Loading />
             ) : (
-              <Button style={styles.submitButton} onPress={this.onSubmit}>
-                <Text style={styles.submitButtonText}>Save</Text>
-              </Button>
-            )}
+                <Button style={styles.submitButton} onPress={this.onSubmit}>
+                  <Text style={styles.submitButtonText}>Save</Text>
+                </Button>
+              )}
           </View>
         </View>
       </AvoidKeyboard>
@@ -220,5 +219,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(MakeProfileScreen);

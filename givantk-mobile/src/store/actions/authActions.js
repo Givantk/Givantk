@@ -243,3 +243,17 @@ export const getPushNotificationToken = async (callback) => {
       console.log('Error saving push notification', err);
     });
 };
+
+
+
+export const ensureCameraRollPermission = async (callback) => {
+  const { status: existingStatus } = await Permissions.getAsync(
+    Permissions.CAMERA_ROLL,
+  );
+
+  if (existingStatus !== 'granted') {
+    await Permissions.askAsync(Permissions.CAMERA_ROLL);
+  }
+
+  if (callback) callback();
+};

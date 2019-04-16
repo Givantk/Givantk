@@ -15,7 +15,7 @@ const AvoidKeyboard = (props) => {
     <KeyboardAvoidingView
       behavior="padding"
       keyboardVerticalOffset={bottomPadding}
-      style={flex? backgroundColor ? { backgroundColor,flex:1 } : {flex:1}: backgroundColor ? { backgroundColor} : {}}
+      style={flex ? backgroundColor ? { backgroundColor, flex: 1 } : { flex: 1 } : backgroundColor ? { backgroundColor } : {}}
     >
       {persistTaps ? (
         <ScrollView

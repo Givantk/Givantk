@@ -1,14 +1,17 @@
 import { connect } from 'react-redux';
 import { Icon, Label, Textarea, Button } from 'native-base';
+import { ImagePicker } from 'expo';
 import { View, Text, Image } from 'react-native';
+import CheckBox from 'react-native-check-box';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import CheckBox from 'react-native-check-box';
 import { dimensions, colors } from '../../../assets/styles/base';
+import * as AuthActions from '../../../store/actions/authActions';
 import * as ProfileActions from '../../../store/actions/profileActions';
 import * as ServiceActions from '../../../store/actions/serviceActions';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
+import currencies from '../../../assets/data/Currencies';
 import Loading from '../../../components/commons/UI/Loading/Loading';
 import MainButton from '../../../components/commons/UI/MainButton/MainButton';
 import NoProfileDisclaimer from '../../../components/commons/NoProfileDisclaimer/NoProfileDisclaimer';
@@ -16,10 +19,8 @@ import Picker from '../../../components/commons/UI/Picker/Picker';
 import QuickNotification from '../../../components/commons/UI/QuickNotification/QuickNotification';
 import servicesNatures from '../../../assets/data/servicesNatures';
 import servicesTypes from '../../../assets/data/servicesTypes';
-import currencies from '../../../assets/data/Currencies';
 import styles from './AddServiceScreenStyles';
 import TextInput from '../../../components/commons/UI/TextInput/TextInput';
-import { ImagePicker } from 'expo';
 
 class AddServiceScreen extends React.Component {
   static navigationOptions = () => ({
@@ -105,8 +106,8 @@ class AddServiceScreen extends React.Component {
       description,
       type: type.value,
       nature: nature.value,
-      moneyPoints: moneyPoints,
-      givantkPoints: givantkPoints,
+      moneyPoints,
+      givantkPoints,
       paid,
       free,
       isAnonymous,
@@ -146,7 +147,7 @@ class AddServiceScreen extends React.Component {
 
     return (
       <View style={styles.container}>
-        <AvoidKeyboard bottomPadding={120}>
+        <AvoidKeyboard bottomPadding={80}>
           <View style={styles.topInputsContainer}>
             <TextInput
               title="Service Name"
@@ -216,7 +217,7 @@ class AddServiceScreen extends React.Component {
           </View>
 
           <Text style={styles.label}>Add photo (optional)</Text>
-          <Button style={styles.uploadButton} onPress={this.pickImage}>
+          <Button style={styles.uploadButton} onPress={() => AuthActions.ensureCameraRollPermission(this.pickImage)}>
             <Text style={styles.uploadButtonText}>Pick from gallery </Text>
           </Button>
           <View style={styles.attachementView}>
@@ -251,7 +252,7 @@ class AddServiceScreen extends React.Component {
             <Text style={styles.error}>{errors.description}</Text>
           </View>
 
-          {type.value==="KE" && (
+          {type.value === 'KE' && (
             <CheckBox
               style={{ marginBottom: 10 }}
               onClick={() => {
@@ -260,7 +261,7 @@ class AddServiceScreen extends React.Component {
                 });
               }}
               isChecked={isAnonymous}
-              rightText={'Hide your identity'}
+              rightText="Hide your identity"
               rightTextStyle={styles.checkBoxLabel}
               checkedCheckBoxColor={colors.primary.toString()}
             />
@@ -309,5 +310,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(AddServiceScreen);

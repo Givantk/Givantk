@@ -12,7 +12,6 @@ import * as ServiceActions from '../../../store/actions/serviceActions';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
 import Header from '../../../components/RegistrationsScreensComponents/SignupScreenComponents/Header/Header';
 import QuickNotification from '../../../components/commons/UI/QuickNotification/QuickNotification';
-import registerForPushNotificationsAsync from '../../../assets/utils/registerForPushNotificationsAsync';
 import SignupInputs from '../../../components/RegistrationsScreensComponents/SignupScreenComponents/SignupInputs/SignupInputs';
 
 class SignupScreen extends React.Component {
@@ -23,13 +22,6 @@ class SignupScreen extends React.Component {
     },
   });
 
-  componentWillMount() {
-    registerForPushNotificationsAsync()
-      .then((token) => {
-        console.log(token);
-      })
-      .catch((error) => console.log(error));
-  }
 
   handleSignup = (user) => {
     const { navigation, signupUser } = this.props;

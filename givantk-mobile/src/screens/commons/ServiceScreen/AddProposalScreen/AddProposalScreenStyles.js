@@ -8,6 +8,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     alignItems: 'center',
     justifyContent: 'center',
+    paddingTop: 30,
+    paddingBottom: 100,
   },
   serviceName: {
     fontWeight: 'bold',

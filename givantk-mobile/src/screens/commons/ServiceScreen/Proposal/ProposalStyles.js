@@ -41,7 +41,8 @@ const styles = StyleSheet.create({
   },
   proposalUserName: {
     color: colors.black,
-    fontSize: fontSizes.msm,
+    fontSize: fontSizes.sm,
+    fontWeight: 'bold',
   },
   proposalTextContainer: {
     marginVertical: 20,
@@ -58,11 +59,11 @@ const styles = StyleSheet.create({
   sendMessageContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginBottom:10
+    marginBottom: 10,
   },
   sendMessageText: {
     color: colors.primary,
-    fontSize: 18,
+    fontSize: 14,
     fontFamily: fontTypes.mainBold,
   },
   sendMessageIcon: {
