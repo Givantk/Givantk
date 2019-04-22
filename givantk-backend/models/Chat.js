@@ -9,29 +9,35 @@ const ChatSchema = new Schema({
     unique: true,
     dropDups: true
   },
-  serviceID:{
-    type:String,
-    required:true,
-  },
-  title:{
+  serviceID: {
     type: String,
     required: true
   },
-  message: [{
-    userid: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'user',
-      required: true
-    },
-    username: {
-      type: String,
-      require: true
-    },
-    content: {
-      type: String,
-      require: true
-    } 
-  }]
+  title: {
+    type: String,
+    required: true
+  },
+  message: [
+    {
+      userid: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user',
+        required: true
+      },
+      username: {
+        type: String,
+        require: true
+      },
+      content: {
+        type: String,
+        require: true
+      },
+      date: {
+        type: Date,
+        default: Date.now
+      }
+    }
+  ]
 });
 
 const Chat = mongoose.model('Chat', ChatSchema);

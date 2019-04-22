@@ -1,30 +1,36 @@
 import React from 'react';
+
 import {
   View,
   Text,
   StyleSheet,
   TextInput,
-  TouchableHighlight
+  TouchableHighlight,
 } from 'react-native';
+import { Icon } from 'native-base';
+import { colors } from '../../../assets/styles/base';
 
-const ChatInputItem = (props) => {
-  return (
-    <View style={styles.inputBar}>
-      <TextInput
-        style={styles.textBox}
-        multiline
-        defaultHight={30}
-        placeholder='Type a message...'
-        autoCorrect={props.autoCorrect}
-        value={props.value}
-        onChangeText={props.onChangeText}
+const ChatInputItem = (props) => (
+  <View style={styles.inputBar}>
+    <TextInput
+      style={styles.textBox}
+      multiline
+      defaultHight={30}
+      placeholder="Type a message..."
+      autoCorrect={props.autoCorrect}
+      value={props.value}
+      onChangeText={props.onChangeText}
+    />
+    <TouchableHighlight onPress={props.onPress}>
+      <Icon
+        type="MaterialIcons"
+        style={styles.sendIcon}
+        name="send"
+        size={30}
       />
-      <TouchableHighlight style={styles.sendBtn} onPress={props.onPress}>
-        <Text style={styles.sendText}>Send</Text>
-      </TouchableHighlight>
-    </View>
-  );
-};
+    </TouchableHighlight>
+  </View>
+);
 
 const styles = StyleSheet.create({
   inputBar: {
@@ -32,7 +38,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 5,
     paddingVertical: 10,
-    backgroundColor: '#dadfea'
+    backgroundColor: '#dadfea',
   },
   textBox: {
     borderRadius: 5,
@@ -43,22 +49,14 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: 10,
     marginLeft: 5,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
-  sendBtn: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingLeft: 15,
-    paddingRight: 15,
-    borderRadius: 5,
-    marginLeft: 5,
-    backgroundColor: '#41B6B0'
+  sendIcon: {
+    marginTop: 14,
+    marginLeft: 7,
+    marginRight: 7,
+    color: colors.secondary,
   },
-  sendText: {
-    color: 'white',
-    fontSize: 20,
-    fontStyle: 'italic'
-  }
 });
 
 export default ChatInputItem;

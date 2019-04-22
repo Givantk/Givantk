@@ -122,13 +122,14 @@ io.use((socket, next) => {
         let message = {
           userid: '',
           username: '',
-          content: '',
+          content: ''
         };
         let chat = new Chat({
           socketID: socketID,
           serviceID: serviceId,
           title: title,
-          $push: { message: message },
+          date: new Date(),
+          $push: { message: message }
         });
         console.log(chat);
         chat.save((error) => {
@@ -147,11 +148,11 @@ io.use((socket, next) => {
 
         // accept the msg entered in the TextInput field from the first user then send it to the other user
         socket.on('chat message', (msg, userid, username) => {
-          console.log('socketIDsocketIDsocketID', socketID);
-          console.log('useriduseriduseriduserid', userid);
-          if(userid===service.asker._id.toString()&&service.reveal_asker===false)
-          {
-            username='Anonymous'
+          if (
+            userid === service.asker._id.toString() &&
+            service.reveal_asker === false
+          ) {
+            username = 'Anonymous';
           }
           const receiverIdIndex =
             (socketID.split('+').findIndex((e) => e === userid.toString()) +
@@ -170,9 +171,9 @@ io.use((socket, next) => {
                   body: `${username} sent you a message`,
                   sound: 'default',
                   data: {
-                    type: 'message',
-                  },
-                },
+                    type: 'message'
+                  }
+                }
               ]);
             }
           });
@@ -187,9 +188,9 @@ io.use((socket, next) => {
                 message: {
                   userid: userid,
                   username: username,
-                  content: msg,
-                },
-              },
+                  content: msg
+                }
+              }
             },
             (error) => {
               if (error) console.log(error);

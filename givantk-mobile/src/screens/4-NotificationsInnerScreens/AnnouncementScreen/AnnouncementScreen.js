@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import styles from './AnnouncementScreenStyles';
 
-
-
 export default class AnnouncementScreen extends Component {
   static navigationOptions = () => ({
     headerTitle: 'Announcement',
@@ -13,7 +11,7 @@ export default class AnnouncementScreen extends Component {
   state = {
     title: '',
     content: '',
-  }
+  };
 
   componentDidMount() {
     const { navigation } = this.props;
@@ -21,13 +19,13 @@ export default class AnnouncementScreen extends Component {
       const { title, content } = navigation.state.params;
 
       this.setState(() => ({
-        title, content,
+        title,
+        content,
       }));
     }
   }
 
   render() {
-
     const { title, content } = this.state;
     return (
       <View style={styles.wrapper}>

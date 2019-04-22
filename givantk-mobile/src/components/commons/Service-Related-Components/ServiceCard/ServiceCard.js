@@ -8,6 +8,17 @@ import styles from './ServiceCardStyles';
 import Loading from '../../UI/Loading/Loading';
 
 class ServiceCard extends React.PureComponent {
+  state = {
+    bookmarked: false,
+  };
+
+  componentWillReceiveProps(nextProps) {
+    const { bookmarked } = this.props;
+    if (nextProps.bookmarked !== bookmarked) {
+      this.setState({ bookmarked: nextProps.bookmarked });
+    }
+  }
+
   onPressCard = () => {
     const { service } = this.props;
 
@@ -28,14 +39,17 @@ class ServiceCard extends React.PureComponent {
     const { service, onBookmark, onUnbookmark, bookmarked } = this.props;
 
     if (bookmarked) {
+      this.setState({ bookmarked: false });
       onUnbookmark(service._id);
     } else {
+      this.setState({ bookmarked: true });
       onBookmark(service._id);
     }
   };
 
   render() {
-    const { service, bookmarked } = this.props;
+    const { service } = this.props;
+    const { bookmarked } = this.state;
 
     if (!service) {
       return <Loading />;
@@ -68,7 +82,7 @@ class ServiceCard extends React.PureComponent {
                       getUserImage(
                         service.reveal_asker === false
                           ? null
-                          : service.asker.avatar
+                          : service.asker.avatar,
                       ),
                   }}
                   style={styles.userImage}

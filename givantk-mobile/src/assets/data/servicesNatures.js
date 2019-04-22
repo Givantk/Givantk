@@ -1,11 +1,12 @@
 const servicesNatures = [
   {
-    label: 'Free',
+    label: 'Free (givantk points)',
     value: 'free',
   },
   {
-    label: 'Paid',
+    label: 'Paid (money points - currently unavailable)',
     value: 'paid',
+    disabled: true,
   },
 ];
 

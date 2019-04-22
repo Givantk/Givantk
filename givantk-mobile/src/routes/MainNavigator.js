@@ -8,6 +8,8 @@ import BottomTabNavigator from './BottomTabNavigator';
 import NotificationsIndicator from '../components/0-MainScreensComponents/4-NotificationsScreenComponents/NotificationsIndicator';
 import screens from '../screens';
 import store from '../store/createStore';
+import ServiceTypeInfoScreen from '../screens/commons/InfoScreens/ServiceTypeInfoScreen';
+import ServiceNatureInfoScreen from '../screens/commons/InfoScreens/ServiceNatureInfoScreen';
 
 const MainNavigator = createStackNavigator(
   {
@@ -33,6 +35,8 @@ const MainNavigator = createStackNavigator(
     Announcement: screens.AnnouncementScreen,
     MakeProfile: screens.MakeProfileScreen,
     MessagesChat: screens.MessagesChatScreen,
+    ServiceTypeInfo: ServiceTypeInfoScreen,
+    ServiceNatureInfo: ServiceNatureInfoScreen,
   },
   {
     initialRouteName: 'Login',
@@ -80,7 +84,7 @@ const MainNavigator = createStackNavigator(
             break;
 
           case 'AddService':
-            headerTitle = 'Add Service';
+            headerTitle = 'Request Service';
             break;
 
           case 'MyServices':

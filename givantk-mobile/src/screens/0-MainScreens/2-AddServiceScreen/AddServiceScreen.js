@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { Icon, Label, Textarea, Button } from 'native-base';
 import { ImagePicker } from 'expo';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, TouchableWithoutFeedback } from 'react-native';
 import CheckBox from 'react-native-check-box';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -24,7 +24,7 @@ import TextInput from '../../../components/commons/UI/TextInput/TextInput';
 
 class AddServiceScreen extends React.Component {
   static navigationOptions = () => ({
-    tabBarLabel: 'Add Service',
+    tabBarLabel: 'Request Service',
     tabBarIcon: ({ tintColor }) => (
       <Icon
         type="Ionicons"
@@ -47,16 +47,26 @@ class AddServiceScreen extends React.Component {
     isAnonymous: false,
   };
 
-  pickImage = async () => {
-    const result = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: true,
-    });
+  // pickImage = async () => {
+  //   const result = await ImagePicker.launchImageLibraryAsync({
+  //     allowsEditing: true,
+  //   });
 
-    const { uri } = result;
+  //   const { uri } = result;
 
-    if (!result.cancelled) {
-      this.setState({ optionalPicture: uri });
-    }
+  //   if (!result.cancelled) {
+  //     this.setState({ optionalPicture: uri });
+  //   }
+  // };
+
+  onPressServiceTypeInfo = () => {
+    const { navigation } = this.props;
+    navigation.navigate('ServiceTypeInfo');
+  };
+
+  onPressServiceNatureInfo = () => {
+    const { navigation } = this.props;
+    navigation.navigate('ServiceNatureInfo');
   };
 
   onChangeValue = (name, value) => {
@@ -168,6 +178,14 @@ class AddServiceScreen extends React.Component {
               error={errors.type}
             />
 
+            <TouchableWithoutFeedback onPress={this.onPressServiceTypeInfo}>
+              <Icon
+                type="FontAwesome"
+                name="question-circle"
+                style={styles.questionIcon}
+              />
+            </TouchableWithoutFeedback>
+
             <Picker
               title="Service Nature"
               placeholder="Pick a nature"
@@ -178,6 +196,15 @@ class AddServiceScreen extends React.Component {
               value={nature}
               error={errors.nature}
             />
+
+            <TouchableWithoutFeedback onPress={this.onPressServiceNatureInfo}>
+              <Icon
+                type="FontAwesome"
+                name="question-circle"
+                style={styles.questionIcon}
+              />
+            </TouchableWithoutFeedback>
+
             {paid && (
               <View>
                 <Picker
@@ -216,7 +243,7 @@ class AddServiceScreen extends React.Component {
             )}
           </View>
 
-          <Text style={styles.label}>Add photo (optional)</Text>
+          {/* <Text style={styles.label}>Add photo (optional)</Text>
           <Button style={styles.uploadButton} onPress={() => AuthActions.ensureCameraRollPermission(this.pickImage)}>
             <Text style={styles.uploadButtonText}>Pick from gallery </Text>
           </Button>
@@ -235,7 +262,7 @@ class AddServiceScreen extends React.Component {
             {optionalPicture && (
               <Image style={styles.image} source={{ uri: optionalPicture }} />
             )}
-          </View>
+          </View> */}
 
           <View style={styles.left}>
             <Label style={styles.text}>Description </Label>

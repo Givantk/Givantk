@@ -12,7 +12,6 @@ import ChatInputItem from '../../../components/commons/ChatComponents/chatInputI
 import ChatMessage from '../../../components/commons/ChatComponents/chatMessage';
 import * as ServiceActions from '../../../store/actions/serviceActions';
 
-
 import styles from './MessagesChatScreenStyles';
 
 class MessagesChatScreen extends Component {
@@ -31,13 +30,15 @@ class MessagesChatScreen extends Component {
     this.state = {
       user1: {
         id: this.props.currentUser._id,
-        name: this.props.currentUser.first_name+' '+this.props.currentUser.last_name,
+        name: `${this.props.currentUser.first_name} ${
+          this.props.currentUser.last_name
+        }`,
       },
       user2: {
         id: this.props.navigation.state.params.user2.id,
         name: this.props.navigation.state.params.user2.name,
       },
-      serviceId:this.props.navigation.state.params.serviceId,
+      serviceId: this.props.navigation.state.params.serviceId,
       chatMessage: '',
       chatMessages: [],
       chatHistory: [],
@@ -45,17 +46,15 @@ class MessagesChatScreen extends Component {
   }
 
   componentDidMount() {
-
-    const {getServiceById}=this.props;
+    const { getServiceById } = this.props;
     getServiceById(this.state.serviceId);
-
 
     const users_data = {
       id1: this.state.user1.id,
       name1: this.state.user1.name,
       id2: this.state.user2.id,
       name2: this.state.user2.name,
-      serviceId:this.props.navigation.state.params.serviceId
+      serviceId: this.props.navigation.state.params.serviceId,
     };
     // local server is replace with serverPath from heroku
     this.socket = io(serverPath, { query: users_data });
@@ -81,18 +80,17 @@ class MessagesChatScreen extends Component {
 
   render() {
     const chatHistory = this.state.chatHistory.map((msg, i) => {
-      let customMsg = {
+      const customMsg = {
         msgDir: '',
-        msgColor: ''
+        msgColor: '',
       };
-   
-      if(msg.userid.toString() == this.state.user1.id.toString()) {
+
+      if (msg.userid.toString() == this.state.user1.id.toString()) {
         customMsg.msgDir = 'flex-end';
-        customMsg.msgColor = '#7BE16B'
-      }
-      else {
+        customMsg.msgColor = '#7BE16B';
+      } else {
         customMsg.msgDir = 'flex-start';
-        customMsg.msgColor = '#BBC5BB'
+        customMsg.msgColor = '#BBC5BB';
       }
 
       return (
@@ -102,13 +100,12 @@ class MessagesChatScreen extends Component {
       );
     });
     const chatMessages = this.state.chatMessages.map((msg, i) => {
-      let customMsg = {
+      const customMsg = {
         msgDir: 'flex-end',
-        msgColor: '#7BE16B'
+        msgColor: '#7BE16B',
       };
 
-      // edtiting displaying name for anonymous services 
-
+      // edtiting displaying name for anonymous services
 
       return this.props.service.reveal_asker !== false ||
         (this.props.service.asker.toString() !==
@@ -124,12 +121,11 @@ class MessagesChatScreen extends Component {
       );
     });
     return (
-
       <View style={styles.wrapper}>
-        
-        <ScrollView ref={ref => this.scrollView = ref}
-          onContentSizeChange={(contentWidth, contentHeight)=>{        
-              this.scrollView.scrollToEnd({animated: true});
+        <ScrollView
+          ref={(ref) => (this.scrollView = ref)}
+          onContentSizeChange={(contentWidth, contentHeight) => {
+            this.scrollView.scrollToEnd({ animated: true });
           }}
         >
           <View>{chatHistory}</View>
@@ -146,7 +142,6 @@ class MessagesChatScreen extends Component {
             }}
           />
         </KeyboardAvoidingView>
-
       </View>
     );
   }
@@ -154,19 +149,17 @@ class MessagesChatScreen extends Component {
 
 MessagesChatScreen.propTypes = {
   navigation: PropTypes.shape({}),
-  getServiceById:PropTypes.func,
-
+  getServiceById: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
   currentUser: state.auth.user,
   errors: state.errors,
-  service:state.service.selectedService.service,
-
+  service: state.service.selectedService.service,
 });
 
 const mapDispatchToProps = {
-  getServiceById:ServiceActions.getServiceById,
+  getServiceById: ServiceActions.getServiceById,
 };
 export default connect(
   mapStateToProps,
