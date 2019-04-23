@@ -32,6 +32,7 @@ class ServiceCard extends React.PureComponent {
 
   onPressAskerAvatar = () => {
     const { navigation, service } = this.props;
+    if (!service.reveal_asker) return;
     navigation.navigate('Profile', {
       userId: service.asker._id,
     });
@@ -82,11 +83,7 @@ class ServiceCard extends React.PureComponent {
       <TouchableWithoutFeedback onPress={this.onPressCard}>
         <View style={styles.serviceCard}>
           <View style={styles.header}>
-            <TouchableWithoutFeedback
-              onPress={
-                service.reveal_asker === false ? null : this.onPressAskerAvatar
-              }
-            >
+            <TouchableWithoutFeedback onPress={this.onPressAskerAvatar}>
               <View>
                 <Image
                   source={{

@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
   userName: {
     color: colors.black,
     fontSize: fontSizes.md,
+    fontWeight: 'bold',
   },
   serviceTitle: {
     color: colors.primary,
