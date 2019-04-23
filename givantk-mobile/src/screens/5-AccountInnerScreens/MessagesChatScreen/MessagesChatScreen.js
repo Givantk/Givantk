@@ -91,7 +91,12 @@ class MessagesChatScreen extends Component {
       }
 
       return (
-        <ChatMessage key={i} name={msg.username} customMsg={customMsg}>
+        <ChatMessage
+          key={i}
+          name={msg.username}
+          customMsg={customMsg}
+          date={msg.date}
+        >
           {msg.content}
         </ChatMessage>
       );
@@ -108,11 +113,21 @@ class MessagesChatScreen extends Component {
         (this.props.service.asker.toString() !==
           this.state.user1.id.toString() &&
           this.props.service.reveal_asker === false) ? (
-        <ChatMessage key={i} name={this.state.user1.name} customMsg={customMsg}>
+        <ChatMessage
+          key={i}
+          name={this.state.user1.name}
+          customMsg={customMsg}
+          date={msg.date}
+        >
           {msg}
         </ChatMessage>
       ) : (
-        <ChatMessage key={i} name="Anonymous" customMsg={customMsg}>
+        <ChatMessage
+          key={i}
+          name="Anonymous"
+          customMsg={customMsg}
+          date={msg.date}
+        >
           {msg}
         </ChatMessage>
       );
