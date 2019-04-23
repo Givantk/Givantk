@@ -2,10 +2,12 @@ import { Icon } from 'native-base';
 import { View, Text, Image, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
 
 import getUserImage from '../../../../assets/utils/getUserImage';
 import styles from './ServiceCardStyles';
 import Loading from '../../UI/Loading/Loading';
+import QuickNotification from '../../UI/QuickNotification/QuickNotification';
 
 class ServiceCard extends React.PureComponent {
   state = {
@@ -36,7 +38,18 @@ class ServiceCard extends React.PureComponent {
   };
 
   onPressStar = () => {
-    const { service, onBookmark, onUnbookmark, bookmarked } = this.props;
+    const {
+      service,
+      onBookmark,
+      onUnbookmark,
+      bookmarked,
+      currentUserHasProfile,
+    } = this.props;
+
+    if (!currentUserHasProfile) {
+      QuickNotification('Please make a profile first');
+      return;
+    }
 
     if (bookmarked) {
       this.setState({ bookmarked: false });
@@ -116,7 +129,16 @@ class ServiceCard extends React.PureComponent {
           </View>
 
           <View style={styles.footer}>
-            <Text style={styles.cost}>{service.cost}</Text>
+            {/* <Text style={styles.cost}>{service.cost}</Text> */}
+            {service.money_points ? (
+              <Text style={styles.points}>
+                Money score: {service.money_points} EGP
+              </Text>
+            ) : (
+              <Text style={styles.points}>
+                Givantk points: {service.givantk_points}{' '}
+              </Text>
+            )}
             <View style={styles.footerLeft}>
               <TouchableWithoutFeedback onPress={this.onPressStar}>
                 <Icon
@@ -127,22 +149,11 @@ class ServiceCard extends React.PureComponent {
               </TouchableWithoutFeedback>
             </View>
           </View>
-          {service.money_points ? (
-            <Text style={styles.points}>
-              Money score: {service.money_points} EGP
-            </Text>
-          ) : (
-            <Text style={styles.points}>
-              Givantk points: {service.givantk_points}{' '}
-            </Text>
-          )}
         </View>
       </TouchableWithoutFeedback>
     );
   }
 }
-
-export default ServiceCard;
 
 ServiceCard.defaultProps = {
   onBookmark: () => null,
@@ -161,4 +172,11 @@ ServiceCard.propTypes = {
   onBookmark: PropTypes.func,
   onUnbookmark: PropTypes.func,
   bookmarked: PropTypes.bool,
+  currentUserHasProfile: PropTypes.bool,
 };
+
+const mapStateToProps = (state) => ({
+  currentUserHasProfile: state.profile.currentUserHasProfile,
+});
+
+export default connect(mapStateToProps)(ServiceCard);
