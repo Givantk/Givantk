@@ -14,6 +14,7 @@ import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKey
 import DefaultButton from '../../../components/commons/UI/DefaultButton/DefaultButton';
 import DefaultTextInput from '../../../components/commons/UI/DefaultTextInput/DefaultTextInput';
 import Header from '../../../components/RegistrationsScreensComponents/SignupScreenComponents/Header/Header';
+import { userAPI } from '../../../assets/utils/httpService';
 
 class LoginScreen extends React.Component {
   static navigationOptions = () => ({
@@ -36,21 +37,27 @@ class LoginScreen extends React.Component {
   }
 
   callbackAfterLogin = () => {
-    const { navigation, getAllServices, getCurrentUserProfile } = this.props;
+    const { navigation, getAllServices, getCurrentUserProfile,currentUser } = this.props;
 
-    navigation.replace('Tab');
+    if (currentUser.passedIntro) navigation.replace('Tab');
+    else {
+      console.log('I am here');
+      navigation.navigate('IntroScreen',{
+        currentUser,
+      });
+    }
     getAllServices();
     getCurrentUserProfile();
 
     AuthActions.getPushNotificationToken();
     this._notificationSubscription = Notifications.addListener((n) => {
       if (n.origin === 'selected') {
-        if (n.data && n.data.type === 'message') navigation.navigate('MessagesList')
+        if (n.data && n.data.type === 'message')
+          navigation.navigate('MessagesList');
         else navigation.navigate('Notifications');
       } else {
         navigation.navigate('Tab');
       }
-
     });
   };
 
@@ -167,6 +174,7 @@ const mapStateToProps = (state) => ({
   errors: state.errors,
   setCurrentUserLoading: state.auth.setCurrentUserLoading,
   loginWithFacebookLoading: state.auth.loginWithFacebookLoading,
+  currentUser: state.auth.user,
 });
 
 const mapDispatchToProps = {
@@ -179,5 +187,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(LoginScreen);

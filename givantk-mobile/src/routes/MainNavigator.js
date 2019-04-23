@@ -33,6 +33,7 @@ const MainNavigator = createStackNavigator(
     Announcement: screens.AnnouncementScreen,
     MakeProfile: screens.MakeProfileScreen,
     MessagesChat: screens.MessagesChatScreen,
+    IntroScreen: screens.IntroScreen,
   },
   {
     initialRouteName: 'Login',
@@ -107,7 +108,7 @@ const MainNavigator = createStackNavigator(
       // return this if not tab screen
       return { headerStyle, headerTitleStyle, headerTintColor };
     }, // end of navigationOptions
-  },
+  }
 );
 
 export default MainNavigator;
