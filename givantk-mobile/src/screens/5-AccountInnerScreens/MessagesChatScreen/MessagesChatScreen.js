@@ -7,7 +7,7 @@ import io from 'socket.io-client';
 
 import { colors } from '../../../assets/styles/base';
 import { serverPath } from '../../../assets/utils/httpService';
-import ChatInputText from '../../../components/commons/ChatComponents/chatInputText';
+// import ChatInputText from '../../../components/commons/ChatComponents/chatInputText';
 import ChatInputItem from '../../../components/commons/ChatComponents/chatInputItem';
 import ChatMessage from '../../../components/commons/ChatComponents/chatMessage';
 import * as ServiceActions from '../../../store/actions/serviceActions';
@@ -15,7 +15,7 @@ import * as ServiceActions from '../../../store/actions/serviceActions';
 import styles from './MessagesChatScreenStyles';
 
 class MessagesChatScreen extends Component {
-  static navigationOptions = ({ navigation }) => ({
+  static navigationOptions = () => ({
     headerTitle: 'Chat Messages',
     headerStyle: {
       backgroundColor: colors.primary,
@@ -69,12 +69,9 @@ class MessagesChatScreen extends Component {
   }
 
   submitChatMessage() {
-    this.socket.emit(
-      'chat message',
-      this.state.chatMessage,
-      this.state.user1.id,
-      this.state.user1.name,
-    );
+    const { chatMessage, user1 } = this.state;
+    if (chatMessage.trim() !== '')
+      this.socket.emit('chat message', chatMessage, user1.id, user1.name);
     this.setState({ chatMessage: '' });
   }
 

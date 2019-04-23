@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     marginTop: 14,
     marginLeft: 7,
     marginRight: 7,
-    color: colors.secondary,
+    color: colors.primaryLight,
   },
 });
 
