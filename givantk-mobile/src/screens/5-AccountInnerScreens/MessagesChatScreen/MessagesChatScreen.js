@@ -101,6 +101,7 @@ class MessagesChatScreen extends Component {
         </ChatMessage>
       );
     });
+
     const chatMessages = this.state.chatMessages.map((msg, i) => {
       const customMsg = {
         msgDir: 'flex-end',

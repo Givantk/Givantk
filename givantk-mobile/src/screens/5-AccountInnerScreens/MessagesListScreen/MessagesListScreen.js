@@ -52,11 +52,20 @@ class MessagesListScreen extends Component {
     }
 
     navigation.navigate('MessagesChat', { user2, serviceId }); // send user2 to MessagesChatScreen
-    // console.log(user2);
   };
 
   render() {
     const { chats, loadUserChatsLoading } = this.props;
+
+    chats.sort((chat1, chat2) => {
+      const lastDateInChat1 = chat1.message[chat1.message.length - 1].date;
+      const lastDateInChat2 = chat2.message[chat2.message.length - 1].date;
+      const jsDate1 = new Date(lastDateInChat1);
+      const jsDate2 = new Date(lastDateInChat2);
+
+      return jsDate2 - jsDate1;
+    });
+
     const chatsLists = loadUserChatsLoading ? (
       <Loading />
     ) : chats.length === 0 ? (

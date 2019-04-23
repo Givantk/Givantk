@@ -36,7 +36,7 @@ const ChatMessage = ({ customMsg, name, date, children }) => {
     },
   });
 
-  const jsDate = new Date(date);
+  const jsDate = date ? new Date(date) : new Date();
   const readableDate = `${jsDate.getDate()}-${jsDate.getMonth() +
     1}-${jsDate.getFullYear()} ${jsDate.getHours()}:${jsDate.getMinutes()}`;
 

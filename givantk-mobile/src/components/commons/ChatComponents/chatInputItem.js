@@ -1,12 +1,6 @@
 import React from 'react';
 
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  TouchableHighlight,
-} from 'react-native';
+import { View, StyleSheet, TextInput, TouchableHighlight } from 'react-native';
 import { Icon } from 'native-base';
 import { colors } from '../../../assets/styles/base';
 
@@ -38,18 +32,18 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 5,
     paddingVertical: 10,
-    backgroundColor: '#dadfea',
+    backgroundColor: colors.white,
   },
   textBox: {
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: '#41B6B0',
+    borderColor: colors.primaryLight,
     fontSize: 14,
     paddingHorizontal: 10,
     flex: 1,
     paddingVertical: 10,
     marginLeft: 5,
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
   },
   sendIcon: {
     marginTop: 14,
