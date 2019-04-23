@@ -17,7 +17,7 @@ export default class ServiceTypeInfoScreen extends Component {
           <Text style={styles.content}>There are four types of services.</Text>
           <Text style={styles.content}>
             <Text style={[styles.content, { fontWeight: 'bold' }]}>
-              1-Knowledge exchange:
+              1-Knowledge exchange: 🤓 {'\n'}
             </Text>{' '}
             When you want to ask about something you want to know from others,
             you can choose this type of service. You can also ask for this type
@@ -25,23 +25,23 @@ export default class ServiceTypeInfoScreen extends Component {
           </Text>
           <Text style={styles.content}>
             <Text style={[styles.content, { fontWeight: 'bold' }]}>
-              2-EveryDay services:{' '}
-            </Text>
+              2-EveryDay services: 📅 {'\n'}
+            </Text>{' '}
             If you want to interact with someone in real world to help you in
             services like transporting something or buying something for you.{' '}
           </Text>
           <Text style={styles.content}>
             <Text style={[styles.content, { fontWeight: 'bold' }]}>
-              3-Reach the community:{' '}
-            </Text>
+              3-Reach the community: 🛰️ {'\n'}
+            </Text>{' '}
             If you want to reach someone, e.g: you want to make a startup and
             you want someone with technical knowledge you can choose this
             option, and write the qualifications of the person you need.
           </Text>
           <Text style={styles.content}>
             <Text style={[styles.content, { fontWeight: 'bold' }]}>
-              4-Others:
-            </Text>
+              4-Others: 🙋‍♂️ {'\n'}
+            </Text>{' '}
             If your service is not related to any of the above types, you can
             choose this option.
           </Text>

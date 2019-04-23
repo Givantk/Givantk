@@ -22,7 +22,7 @@ class GivantkPointsScreen extends Component {
 
   onButtonClicked = () => {
     const { clickedOnce } = this.state;
-    const { currentUserProfile, getCurrentUserProfile, addPoints} = this.props;
+    const { currentUserProfile, getCurrentUserProfile, addPoints } = this.props;
 
     // set the randomPointsNumber in state to a random number between 1 and 10
     currentUserProfile.givantk_points === 0
@@ -32,9 +32,8 @@ class GivantkPointsScreen extends Component {
               clickedOnce: true,
             },
             () => {
-
               successfullAddingCallback = () => {
-                const {pointsValue}=this.props;
+                const { pointsValue } = this.props;
                 this.setState({
                   text: `Congratulations \n you successfully added ${pointsValue} points to your account`,
                 });
@@ -42,7 +41,7 @@ class GivantkPointsScreen extends Component {
               };
 
               addPoints(successfullAddingCallback);
-            }
+            },
           )
         : this.setState((prevState) => ({
             text: `You have already added ${
@@ -65,7 +64,7 @@ class GivantkPointsScreen extends Component {
       currentUserHasProfile,
       navigation,
       addPointsLoading,
-      errors
+      errors,
     } = this.props;
 
     if (getCurrentProfileLoading) return <Loading />;
@@ -86,8 +85,6 @@ class GivantkPointsScreen extends Component {
               <Text style={styles.text}>{text}</Text>
               <Text>{errors.serverErrorMessage}</Text>
               <Text>{errors.error}</Text>
-
-              
             </View>
           ) : (
             <Loading />
@@ -124,5 +121,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(GivantkPointsScreen);

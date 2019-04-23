@@ -8,11 +8,11 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   title: {
-    marginTop:60,  
+    marginTop: 60,
     fontSize: 30,
     marginBottom: 10,
     color: colors.gray03,
-    alignSelf:'center'
+    alignSelf: 'center',
   },
   image: {
     width: 300,
@@ -23,12 +23,12 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     color: colors.primary,
-    marginTop: 5,
-    textAlign: 'center'
+    margin: 5,
+    textAlign: 'center',
   },
-  button:{
-    alignSelf:'center'
-  }
+  button: {
+    alignSelf: 'center',
+  },
 });
 
 export default styles;

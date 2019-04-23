@@ -19,10 +19,14 @@ export default class ServiceNatureInfoScreen extends Component {
               Service Nature
             </Text>{' '}
             indicates whether the service is{' '}
-            <Text style={[styles.content, { fontWeight: 'bold' }]}>free </Text>{' '}
+            <Text style={[styles.content, { fontWeight: 'bold' }]}>
+              free ✨
+            </Text>{' '}
             or{' '}
-            <Text style={[styles.content, { fontWeight: 'bold' }]}>paid</Text>,
-            our app currently supports free services, and will support paid
+            <Text style={[styles.content, { fontWeight: 'bold' }]}>
+              paid 💰
+            </Text>
+            , our app currently supports free services, and will support paid
             services soon.
           </Text>
           <Text style={styles.content}>
