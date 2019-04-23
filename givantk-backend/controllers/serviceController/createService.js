@@ -13,8 +13,8 @@ const rules = require('../../assets/rules');
 
 module.exports = createService = (req, res) => {
   // Validate
-  validateService(req.body, req.user._id).then((valitdation) => {
-    const { errors, isValid } = valitdation;
+  validateService(req.body, req.user._id).then((validation) => {
+    const { errors, isValid } = validation;
     if (!isValid) {
       return res.status(400).json(errors);
     }
@@ -30,7 +30,7 @@ module.exports = createService = (req, res) => {
       money_points: rules.AppShareEquation(req.body.moneyPoints),
       type: req.body.type,
       reveal_asker: !req.body.isAnonymous,
-      state: 'new',
+      state: 'new'
     };
 
     if (typeof req.body.start_time === 'string') {
@@ -44,7 +44,7 @@ module.exports = createService = (req, res) => {
     if (req.body.applicant_requirment) {
       newService.applicant_requirment = {
         location: req.body.applicant_requirment,
-        helped_before: req.body.helped_before,
+        helped_before: req.body.helped_before
       };
     }
 
@@ -62,9 +62,9 @@ module.exports = createService = (req, res) => {
           //check if the service is paid, if it's then subtract its points from user's money points
           if (req.body.paid) {
             profile.money_points = profile.money_points - req.body.moneyPoints;
-          }
-          else if(req.body.free){
-            profile.givantk_points=profile.givantk_points-req.body.givantkPoints;
+          } else if (req.body.free) {
+            profile.givantk_points =
+              profile.givantk_points - req.body.givantkPoints;
           }
           profile
             .save()

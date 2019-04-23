@@ -30,6 +30,7 @@ module.exports = {
         enforceInMethodNames: true,
       },
     ],
+    radix: 'off',
     'comma-dangle': 2,
     'react/no-array-index-key': 'off',
     'no-param-reassign': 'off',

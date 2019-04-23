@@ -1,13 +1,15 @@
 import { connect } from 'react-redux';
-import { Icon, Label, Textarea, Button } from 'native-base';
-import { ImagePicker } from 'expo';
-import { View, Text, Image, TouchableWithoutFeedback } from 'react-native';
+import { Icon, Label, Textarea } from 'native-base';
+// import { Button } from 'native-base';
+// import { ImagePicker } from 'expo';
+import { View, Text, TouchableWithoutFeedback } from 'react-native';
+// import { Image } from 'react-native';
 import CheckBox from 'react-native-check-box';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import { dimensions, colors } from '../../../assets/styles/base';
-import * as AuthActions from '../../../store/actions/authActions';
+// import * as AuthActions from '../../../store/actions/authActions';
 import * as ProfileActions from '../../../store/actions/profileActions';
 import * as ServiceActions from '../../../store/actions/serviceActions';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
@@ -43,7 +45,7 @@ class AddServiceScreen extends React.Component {
     free: false,
     moneyPoints: 0,
     givantkPoints: 0,
-    optionalPicture: null,
+    // optionalPicture: null,
     isAnonymous: false,
   };
 
@@ -70,13 +72,13 @@ class AddServiceScreen extends React.Component {
   };
 
   onChangeValue = (name, value) => {
-    if (name === 'nature' && value.label === 'Paid') {
+    if (name === 'nature' && value.value === 'paid') {
       this.setState({
         [name]: value,
         paid: true,
         free: false,
       });
-    } else if (name === 'nature' && value.label === 'Free') {
+    } else if (name === 'nature' && value.value === 'free') {
       this.setState({
         [name]: value,
         free: true,
@@ -138,7 +140,7 @@ class AddServiceScreen extends React.Component {
       currency,
       paid,
       free,
-      optionalPicture,
+      // optionalPicture,
       isAnonymous,
     } = this.state;
     const {

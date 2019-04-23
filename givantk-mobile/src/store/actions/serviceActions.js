@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import http, { serviceAPI} from '../../assets/utils/httpService';
+import http, { serviceAPI } from '../../assets/utils/httpService';
 import { serverErrorMessage } from '../../assets/constants/index';
 
 export const getAllServices = (callbackOnSuccess, callbackOnFail) => (
@@ -241,10 +241,7 @@ export const addReview = (review, callback) => (dispatch) => {
   });
 
   http
-    .post(
-      `${serviceAPI}/review/${review.serviceId}`,
-      review,
-    )
+    .post(`${serviceAPI}/review/${review.serviceId}`, review)
     .then(() => {
       dispatch({
         type: actionTypes.ADD_REVIEW_FINISH,
@@ -260,19 +257,15 @@ export const addReview = (review, callback) => (dispatch) => {
         type: actionTypes.ADD_REVIEW_FINISH,
       });
     });
-
 };
 
-export const addComment = (comment,serviceId,callback) => (dispatch) => {
+export const addComment = (comment, serviceId, callback) => (dispatch) => {
   dispatch({
     type: actionTypes.ADD_COMMENT_START,
   });
 
   http
-    .post(
-      `${serviceAPI}/comment/${serviceId}`,
-      comment,
-    )
+    .post(`${serviceAPI}/comment/${serviceId}`, comment)
     .then(() => {
       dispatch({
         type: actionTypes.ADD_COMMENT_FINISH,
@@ -288,5 +281,4 @@ export const addComment = (comment,serviceId,callback) => (dispatch) => {
         type: actionTypes.ADD_COMMENT_FINISH,
       });
     });
-
 };

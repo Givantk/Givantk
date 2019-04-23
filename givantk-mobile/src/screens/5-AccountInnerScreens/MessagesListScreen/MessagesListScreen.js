@@ -56,34 +56,26 @@ class MessagesListScreen extends Component {
   };
 
   render() {
-    const { chats } = this.props;
-    const chatsLists =
-      chats.length === 0 ? (
-        <Loading />
-      ) : (
-        chats.map((chat, i) => {
-          if (chat.serviceID === '5cb60701ca91990016d3ee48') {
-            console.log(chat);
+    const { chats, loadUserChatsLoading } = this.props;
+    const chatsLists = loadUserChatsLoading ? (
+      <Loading />
+    ) : chats.length === 0 ? (
+      <Text style={styles.noMessagesText}>No Messages Yet</Text>
+    ) : (
+      chats.map((chat, i) => (
+        <TouchableOpacity
+          key={i}
+          style={styles.customBtn}
+          onPress={() =>
+            this.chatNavigatorHandle(chat.socketID, chat.title, chat.serviceID)
           }
-          return (
-            <TouchableOpacity
-              key={i}
-              style={styles.customBtn}
-              onPress={() =>
-                this.chatNavigatorHandle(
-                  chat.socketID,
-                  chat.title,
-                  chat.serviceID,
-                )
-              }
-            >
-              <View style={styles.customView}>
-                <Text style={styles.customText}>{chat.title}</Text>
-              </View>
-            </TouchableOpacity>
-          );
-        })
-      );
+        >
+          <View style={styles.customView}>
+            <Text style={styles.customText}>{chat.title}</Text>
+          </View>
+        </TouchableOpacity>
+      ))
+    );
 
     return <View style={styles.wrapper}>{chatsLists}</View>;
   }

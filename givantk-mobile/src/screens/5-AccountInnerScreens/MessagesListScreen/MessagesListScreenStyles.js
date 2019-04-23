@@ -1,28 +1,35 @@
 import { StyleSheet } from 'react-native';
 
-import { colors } from '../../../assets/styles/base';
+import { colors, fontSizes, gaps } from '../../../assets/styles/base';
 
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     backgroundColor: colors.white,
+    alignItems: 'center',
+  },
+  noMessagesText: {
+    fontWeight: 'bold',
+    marginTop: gaps.xl,
+    fontSize: fontSizes.lg,
+    color: colors.primaryLight,
   },
   customBtn: {
     marginTop: 5,
   },
   customText: {
-    color: '#f5f6fa',
+    color: colors.white,
     fontSize: 18,
     fontWeight: 'bold',
   },
   customView: {
-    backgroundColor: '#74b9ff',
+    backgroundColor: colors.disclaimer,
     paddingTop: 15,
     paddingBottom: 15,
     paddingLeft: 10,
     paddingRight: 10,
     borderWidth: 2,
-    borderColor: '#008388',
+    borderColor: colors.primary,
   },
 });
 
