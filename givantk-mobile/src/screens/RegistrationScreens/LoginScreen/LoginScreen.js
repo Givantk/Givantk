@@ -42,8 +42,6 @@ class LoginScreen extends React.Component {
 
     if (currentUser.passedIntro) navigation.replace('Tab');
     else {
-      console.log('I am here');
-      console.log(currentUser)
       navigation.navigate('IntroScreen',{
         currentUser,
       });

@@ -31,11 +31,16 @@ const styles = StyleSheet.create({
 
 
 class IntroScreen extends React.Component {
+
+  static navigationOptions = () => ({
+    headerTitle: 'Welcome to Givantk',
+   
+  });
   
  slides = [
   {
     key: 'Givantk',
-    title: 'What is Givantk?',
+    title: 'Welcome to Givantk',
     text:
       'Givantk is a services app, where you can ask for services or help others in services, the beta version of the app currently supports free services only. ',
     icon: 'google',
