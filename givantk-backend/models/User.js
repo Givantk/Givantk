@@ -2,14 +2,11 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-//include Service model
-const Service = require('./Service');
-
 // Create User model
 const UserSchema = new Schema({
   first_name: {
     type: String,
-    required: true,
+    required: true
   },
   last_name: String,
   email: String,
@@ -18,18 +15,21 @@ const UserSchema = new Schema({
   avatar: String,
   date: {
     type: Date,
-    default: Date.now,
+    default: Date.now
   },
   login_credentials: {
     facebook: {
       id: String,
       has_password: {
-        type: Boolean,
-      },
-    },
+        type: Boolean
+      }
+    }
   },
   pushNotificationToken: String,
-  passedIntro:Boolean,
+  passedIntro: {
+    type: Boolean,
+    default: false
+  }
 });
 
 module.exports = User = mongoose.model('user', UserSchema);

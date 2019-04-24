@@ -11,7 +11,7 @@ module.exports = passIntro = (req, res) => {
       user.passedIntro = true;
       user.save().then(() => {
         return res.json({
-          success: true,
+          success: true
         });
       });
     })

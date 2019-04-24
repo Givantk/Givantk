@@ -1,13 +1,13 @@
 import * as actionTypes from './actionTypes';
 import http, { IntroAPI } from '../../assets/utils/httpService';
 
-export const passIntro = (currentUser,callback) => (dispatch) => {
+export const passIntro = (currentUser, callback) => (dispatch) => {
   dispatch({
     type: actionTypes.PASS_INTRO_START,
   });
 
   http
-    .post(`${IntroAPI}`,currentUser)
+    .post(`${IntroAPI}`, currentUser)
     .then((res) => {
       dispatch({
         type: actionTypes.PASS_INTRO_FINISH,

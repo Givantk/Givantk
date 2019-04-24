@@ -14,7 +14,6 @@ import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKey
 import DefaultButton from '../../../components/commons/UI/DefaultButton/DefaultButton';
 import DefaultTextInput from '../../../components/commons/UI/DefaultTextInput/DefaultTextInput';
 import Header from '../../../components/RegistrationsScreensComponents/SignupScreenComponents/Header/Header';
-import { userAPI } from '../../../assets/utils/httpService';
 
 class LoginScreen extends React.Component {
   static navigationOptions = () => ({
@@ -37,12 +36,16 @@ class LoginScreen extends React.Component {
   }
 
   callbackAfterLogin = () => {
-    const { navigation, getAllServices, getCurrentUserProfile,currentUser } = this.props;
-
+    const {
+      navigation,
+      getAllServices,
+      getCurrentUserProfile,
+      currentUser,
+    } = this.props;
 
     if (currentUser.passedIntro) navigation.replace('Tab');
     else {
-      navigation.navigate('IntroScreen',{
+      navigation.replace('IntroScreen', {
         currentUser,
       });
     }
@@ -187,5 +190,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(LoginScreen);
