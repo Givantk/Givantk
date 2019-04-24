@@ -29,7 +29,7 @@ const UserSchema = new Schema({
     },
   },
   pushNotificationToken: String,
-  passedIntro: { type: Boolean, default: false },
+  passedIntro:Boolean,
 });
 
 module.exports = User = mongoose.model('user', UserSchema);

@@ -30,7 +30,8 @@ module.exports = loginUser = (req, res) => {
           last_name: user.last_name,
           email: user.email,
           location: user.location,
-          avatar: user.avatar
+          avatar: user.avatar,
+          passedIntro:user.passedIntro
         };
 
         // Make JWT

@@ -5,11 +5,11 @@ const user = mongoose.model('user');
 
 module.exports = passIntro = (req, res) => {
   const errors = {};
-  user.findOne({ user: req.currentUser._id })
-
+  user
+    .findById(req.user._id)
     .then((user) => {
-      user.passedIntro=true
-      profile.save().then(() => {
+      user.passedIntro = true;
+      user.save().then(() => {
         return res.json({
           success: true,
         });
