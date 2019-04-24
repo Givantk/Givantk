@@ -1,33 +1,12 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { View, Text } from 'react-native';
 import { LinearGradient } from 'expo';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import { connect } from 'react-redux';
 import * as IntroActions from '../../../store/actions/introActions';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import styles from './IntroScreenStyles';
 
-const styles = StyleSheet.create({
-  mainContent: {
-    flex: 1,
-  },
-  image: {
-    width: 320,
-    height: 320,
-  },
-  text: {
-    color: 'rgba(255, 255, 255, 0.8)',
-    backgroundColor: 'transparent',
-    textAlign: 'center',
-    paddingHorizontal: 18,
-  },
-  title: {
-    fontSize: 22,
-    color: 'white',
-    backgroundColor: 'transparent',
-    textAlign: 'center',
-    marginBottom: 16,
-  },
-});
 
 
 class IntroScreen extends React.Component {
