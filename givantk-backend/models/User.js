@@ -2,9 +2,6 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-//include Service model
-const Service = require('./Service');
-
 // Create User model
 const UserSchema = new Schema({
   first_name: {
@@ -28,7 +25,11 @@ const UserSchema = new Schema({
       }
     }
   },
-  pushNotificationToken: String
+  pushNotificationToken: String,
+  passedIntro: {
+    type: Boolean,
+    default: false
+  }
 });
 
 module.exports = User = mongoose.model('user', UserSchema);

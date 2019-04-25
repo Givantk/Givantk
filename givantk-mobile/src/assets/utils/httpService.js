@@ -22,10 +22,11 @@ export const removeAuthToken = () => {
   delete axios.defaults.headers.common.Authorization;
 };
 
-export const serverPath = 'http://192.168.1.8:5000';
+export const serverPath = 'http://192.168.56.1:5000';
 export const userAPI = `${serverPath}/api/user`;
 export const serviceAPI = `${serverPath}/api/service`;
 export const profileAPI = `${serverPath}/api/profile`;
 export const paymentAPI = `${serverPath}/api/payment`;
 export const pointsAPI = `${serverPath}/api/points`;
 export const chatAPI = `${serverPath}/api/chat`;
+export const IntroAPI = `${serverPath}/api/intro`;
