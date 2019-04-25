@@ -15,9 +15,7 @@ export const passIntro = (currentUser, callback) => (dispatch) => {
         JSON.stringify({ passedIntro: true })
       ).then(
         AsyncStorage.getItem('passedIntro').then((value) => {
-          console.log(JSON.parse(value));
-          console.log('I am ');
-          console.log(JSON.parse(value).passedIntro);
+         
           dispatch({
             type: actionTypes.PASS_INTRO_FINISH,
             payload: JSON.parse(value).passedIntro,
