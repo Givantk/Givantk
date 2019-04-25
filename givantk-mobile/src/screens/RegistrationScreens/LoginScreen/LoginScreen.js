@@ -43,7 +43,7 @@ class LoginScreen extends React.Component {
 
     if (currentUser.passedIntro||passedIntro) navigation.replace('Tab');
     else {
-      navigation.navigate('IntroScreen',{
+      navigation.replace('IntroScreen', {
         currentUser,
       });
     }
@@ -190,5 +190,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(LoginScreen);
