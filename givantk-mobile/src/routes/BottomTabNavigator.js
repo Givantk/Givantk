@@ -34,7 +34,7 @@ const BottomTabNavigator = createMaterialTopTabNavigator(
         borderTopColor: colors.secondary,
       },
       labelStyle: {
-        fontSize: fontSizes.xs,
+        fontSize: fontSizes.xxs,
         fontFamily: fontTypes.mainBold,
         width: '100%',
       },

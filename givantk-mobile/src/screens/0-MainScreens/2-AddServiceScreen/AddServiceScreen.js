@@ -1,13 +1,15 @@
 import { connect } from 'react-redux';
-import { Icon, Label, Textarea, Button } from 'native-base';
-import { ImagePicker } from 'expo';
-import { View, Text, Image } from 'react-native';
+import { Icon, Label, Textarea } from 'native-base';
+// import { Button } from 'native-base';
+// import { ImagePicker } from 'expo';
+import { View, Text, TouchableWithoutFeedback } from 'react-native';
+// import { Image } from 'react-native';
 import CheckBox from 'react-native-check-box';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import { dimensions, colors } from '../../../assets/styles/base';
-import * as AuthActions from '../../../store/actions/authActions';
+// import * as AuthActions from '../../../store/actions/authActions';
 import * as ProfileActions from '../../../store/actions/profileActions';
 import * as ServiceActions from '../../../store/actions/serviceActions';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
@@ -24,7 +26,7 @@ import TextInput from '../../../components/commons/UI/TextInput/TextInput';
 
 class AddServiceScreen extends React.Component {
   static navigationOptions = () => ({
-    tabBarLabel: 'Add Service',
+    tabBarLabel: 'Request Service',
     tabBarIcon: ({ tintColor }) => (
       <Icon
         type="Ionicons"
@@ -43,30 +45,40 @@ class AddServiceScreen extends React.Component {
     free: false,
     moneyPoints: 0,
     givantkPoints: 0,
-    optionalPicture: null,
+    // optionalPicture: null,
     isAnonymous: false,
   };
 
-  pickImage = async () => {
-    const result = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: true,
-    });
+  // pickImage = async () => {
+  //   const result = await ImagePicker.launchImageLibraryAsync({
+  //     allowsEditing: true,
+  //   });
 
-    const { uri } = result;
+  //   const { uri } = result;
 
-    if (!result.cancelled) {
-      this.setState({ optionalPicture: uri });
-    }
+  //   if (!result.cancelled) {
+  //     this.setState({ optionalPicture: uri });
+  //   }
+  // };
+
+  onPressServiceTypeInfo = () => {
+    const { navigation } = this.props;
+    navigation.navigate('ServiceTypeInfo');
+  };
+
+  onPressServiceNatureInfo = () => {
+    const { navigation } = this.props;
+    navigation.navigate('ServiceNatureInfo');
   };
 
   onChangeValue = (name, value) => {
-    if (name === 'nature' && value.label === 'Paid') {
+    if (name === 'nature' && value.value === 'paid') {
       this.setState({
         [name]: value,
         paid: true,
         free: false,
       });
-    } else if (name === 'nature' && value.label === 'Free') {
+    } else if (name === 'nature' && value.value === 'free') {
       this.setState({
         [name]: value,
         free: true,
@@ -128,7 +140,7 @@ class AddServiceScreen extends React.Component {
       currency,
       paid,
       free,
-      optionalPicture,
+      // optionalPicture,
       isAnonymous,
     } = this.state;
     const {
@@ -168,6 +180,14 @@ class AddServiceScreen extends React.Component {
               error={errors.type}
             />
 
+            <TouchableWithoutFeedback onPress={this.onPressServiceTypeInfo}>
+              <Icon
+                type="FontAwesome"
+                name="question-circle"
+                style={styles.questionIcon}
+              />
+            </TouchableWithoutFeedback>
+
             <Picker
               title="Service Nature"
               placeholder="Pick a nature"
@@ -178,6 +198,15 @@ class AddServiceScreen extends React.Component {
               value={nature}
               error={errors.nature}
             />
+
+            <TouchableWithoutFeedback onPress={this.onPressServiceNatureInfo}>
+              <Icon
+                type="FontAwesome"
+                name="question-circle"
+                style={styles.questionIcon}
+              />
+            </TouchableWithoutFeedback>
+
             {paid && (
               <View>
                 <Picker
@@ -216,7 +245,7 @@ class AddServiceScreen extends React.Component {
             )}
           </View>
 
-          <Text style={styles.label}>Add photo (optional)</Text>
+          {/* <Text style={styles.label}>Add photo (optional)</Text>
           <Button style={styles.uploadButton} onPress={() => AuthActions.ensureCameraRollPermission(this.pickImage)}>
             <Text style={styles.uploadButtonText}>Pick from gallery </Text>
           </Button>
@@ -235,7 +264,7 @@ class AddServiceScreen extends React.Component {
             {optionalPicture && (
               <Image style={styles.image} source={{ uri: optionalPicture }} />
             )}
-          </View>
+          </View> */}
 
           <View style={styles.left}>
             <Label style={styles.text}>Description </Label>

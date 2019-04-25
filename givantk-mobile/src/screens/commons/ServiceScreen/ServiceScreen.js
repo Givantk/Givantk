@@ -103,9 +103,11 @@ class ServiceScreen extends Component {
     }));
   };
 
-  onPressOnAsker = () => {
+  onPressAskerAvatar = () => {
     const { navigation } = this.props;
     const { service } = this.state;
+    if (!service.reveal_asker) return;
+
     navigation.navigate('Profile', {
       userId: service.asker._id,
     });
@@ -142,7 +144,7 @@ class ServiceScreen extends Component {
     );
   };
 
-  onPressMaskServiceAsDone = () => {
+  onPressMarkServiceAsDone = () => {
     const { markServiceAsDone, getAllServices } = this.props;
     const { service } = this.state;
 
@@ -209,8 +211,8 @@ class ServiceScreen extends Component {
               Add Review
             </MainButton>
           ) : (
-              <Loading />
-            )}
+            <Loading />
+          )}
         </View>
       </View>
     );
@@ -266,7 +268,7 @@ class ServiceScreen extends Component {
 
     const {
       acceptServiceProposalLoading,
-      currentUser,
+      // currentUser,
       navigation,
     } = this.props;
 
@@ -276,7 +278,12 @@ class ServiceScreen extends Component {
     const serviceIsDone = service.state === 'done';
 
     return (
-      <AvoidKeyboard keyboardVerticalOffset={85} flex persistTaps bottomPadding={30}>
+      <AvoidKeyboard
+        keyboardVerticalOffset={85}
+        flex
+        persistTaps
+        bottomPadding={30}
+      >
         <ScrollView keyboardShouldPersistTaps="always">
           <View
             style={[
@@ -286,11 +293,7 @@ class ServiceScreen extends Component {
               },
             ]}
           >
-            <TouchableWithoutFeedback
-              onPress={
-                service.reveal_asker === false ? null : this.onPressAskerAvatar
-              }
-            >
+            <TouchableWithoutFeedback onPress={this.onPressAskerAvatar}>
               <View style={styles.header}>
                 <Image
                   source={{
@@ -309,8 +312,8 @@ class ServiceScreen extends Component {
                     {service.reveal_asker === false
                       ? 'Anonymous'
                       : `${service.asker.first_name} ${
-                      service.asker.last_name
-                      }`}
+                          service.asker.last_name
+                        }`}
                   </Text>
                 </View>
               </View>
@@ -375,7 +378,7 @@ class ServiceScreen extends Component {
                   <MainButton
                     backgroundColor={colors.gray01}
                     small
-                    onPress={this.onPressMaskServiceAsDone}
+                    onPress={this.onPressMarkServiceAsDone}
                   >
                     Mark Service as finished
                   </MainButton>
@@ -430,10 +433,10 @@ class ServiceScreen extends Component {
                         Unaccepted Proposals:
                       </Text>
                     ) : (
-                        <Text style={styles.proposalsHeadingText}>
-                          Proposals:
+                      <Text style={styles.proposalsHeadingText}>
+                        Proposals:
                       </Text>
-                      )}
+                    )}
                   </View>
 
                   <Proposal
@@ -459,12 +462,11 @@ class ServiceScreen extends Component {
                   ? this.afterRatingComponents()
                   : this.beforeRatingComponents()
                 : loggedInUser.serviceHelper
-                  ? service.rated_by_helper
-                    ? this.afterRatingComponents()
-                    : this.beforeRatingComponents()
-                  : null
+                ? service.rated_by_helper
+                  ? this.afterRatingComponents()
+                  : this.beforeRatingComponents()
+                : null
               : null}
-
 
             {/* disabling comments temporarily */}
 
@@ -496,7 +498,7 @@ ServiceScreen.propTypes = {
   getAllServices: PropTypes.func,
 
   addReview: PropTypes.func,
-  addComment: PropTypes.func,
+  // addComment: PropTypes.func,
   acceptServiceProposalLoading: PropTypes.bool,
   addReviewLoading: PropTypes.bool,
 };

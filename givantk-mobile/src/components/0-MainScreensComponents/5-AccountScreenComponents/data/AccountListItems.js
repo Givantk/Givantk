@@ -35,12 +35,12 @@ const accountListItems = (navigation, userId, currentUserProfile) => [
         currentUserProfile,
       }),
   },
-  {
-    title: 'Charge my Money score',
-    iconName: 'money',
-    iconType: 'FontAwesome',
-    onPress: () => navigation.navigate('ChargeMoneyScore'),
-  },
+  // {
+  //   title: 'Charge my Money score',
+  //   iconName: 'money',
+  //   iconType: 'FontAwesome',
+  //   onPress: () => navigation.navigate('ChargeMoneyScore'),
+  // },
   {
     title: 'I ran out of Givantk points',
     iconName: 'emoji-sad',

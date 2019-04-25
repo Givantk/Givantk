@@ -5,8 +5,8 @@ import React, { Component } from 'react';
 
 import { colors } from '../../../assets/styles/base';
 import * as ChatActions from '../../../store/actions/chatActions';
-import styles from './MessagesListScreenStyles';
 import Loading from '../../../components/commons/UI/Loading/Loading';
+import styles from './MessagesListScreenStyles';
 
 class MessagesListScreen extends Component {
   static navigationOptions = () => ({
@@ -24,8 +24,7 @@ class MessagesListScreen extends Component {
     loadUserChats(currentUser._id);
   }
 
-
-  chatNavigatorHandle = (chatID, chatTitle,serviceId) => {
+  chatNavigatorHandle = (chatID, chatTitle, serviceId) => {
     const { navigation, currentUser } = this.props;
 
     // we are going to pass the second user to the chat screen
@@ -38,8 +37,7 @@ class MessagesListScreen extends Component {
     const user2 = {
       id: '',
       name: '',
-    }
-
+    };
 
     if (users[0] != `${currentUser.first_name} ${currentUser.last_name}`) {
       user2.name = users[0];
@@ -53,30 +51,42 @@ class MessagesListScreen extends Component {
       user2.id = IDs[1];
     }
 
-    navigation.navigate('MessagesChat', { user2,serviceId}); // send user2 to MessagesChatScreen
-    // console.log(user2);
+    navigation.navigate('MessagesChat', { user2, serviceId }); // send user2 to MessagesChatScreen
   };
 
   render() {
-    const { chats } = this.props;
-    const chatsLists = chats.length === 0 ? <Loading /> :
+    const { chats, loadUserChatsLoading } = this.props;
+
+    chats.sort((chat1, chat2) => {
+      const lastDateInChat1 = chat1.message[chat1.message.length - 1].date;
+      const lastDateInChat2 = chat2.message[chat2.message.length - 1].date;
+      const jsDate1 = new Date(lastDateInChat1);
+      const jsDate2 = new Date(lastDateInChat2);
+
+      return jsDate2 - jsDate1;
+    });
+
+    const chatsLists = loadUserChatsLoading ? (
+      <Loading />
+    ) : chats.length === 0 ? (
+      <Text style={styles.noMessagesText}>No Messages Yet</Text>
+    ) : (
       chats.map((chat, i) => (
         <TouchableOpacity
           key={i}
           style={styles.customBtn}
-          onPress={() => this.chatNavigatorHandle(chat.socketID, chat.title,chat.serviceID)}
+          onPress={() =>
+            this.chatNavigatorHandle(chat.socketID, chat.title, chat.serviceID)
+          }
         >
           <View style={styles.customView}>
             <Text style={styles.customText}>{chat.title}</Text>
           </View>
         </TouchableOpacity>
-      ));
-
-    return (
-      <View style={styles.wrapper}>
-        {chatsLists}
-      </View>
+      ))
     );
+
+    return <View style={styles.wrapper}>{chatsLists}</View>;
   }
 }
 
@@ -91,11 +101,13 @@ const mapStateToProps = (state) => ({
   errors: state.errors,
   chats: state.chat.chats,
   loadUserChatsLoading: state.chat.loadUserChatsLoading,
-
 });
 
 const mapDispatchToProps = {
   loadUserChats: ChatActions.loadUserChats,
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(MessagesListScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(MessagesListScreen);

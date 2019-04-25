@@ -17,14 +17,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   label: {
-    color: 'gray',
+    color: colors.gray01,
     marginTop: 10,
   },
   checkBoxlabel: {
-    color: 'gray',
+    color: colors.gray01,
     marginTop: 10,
   },
-
+  questionIcon: {
+    alignSelf: 'flex-end',
+    marginTop: -20,
+  },
   topInputsContainer: { marginTop: 10 },
   text: {
     fontWeight: 'bold',

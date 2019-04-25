@@ -4,6 +4,7 @@ import { LinearGradient } from 'expo';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import { connect } from 'react-redux';
 import * as IntroActions from '../../../store/actions/introActions';
+import * as AuthActions from '../../../store/actions/authActions';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import styles from './IntroScreenStyles';
 
@@ -52,7 +53,7 @@ class IntroScreen extends React.Component {
 ];
 
   onDone = () => {
-    const { navigation, passIntro } = this.props;
+    const { navigation, passIntro,editSavedPassedIntroValue } = this.props;
     if (navigation.state.params) {
       const { currentUser } = navigation.state.params;
       //send to backend
@@ -111,7 +112,12 @@ class IntroScreen extends React.Component {
 
 const mapDispatchToProps = {
   passIntro: IntroActions.passIntro,
+
 };
+
+const mapStateToProps =(state)=> ({
+  passedIntro:state.Intro.passedIntro,
+})
 
 export default connect(
   null,
