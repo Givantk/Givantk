@@ -26,6 +26,8 @@ import AnnouncementScreen from './4-NotificationsInnerScreens/AnnouncementScreen
 import GivantkPointsScreen from './5-AccountInnerScreens/GivantkPointsScreen/GivantkPointsScreen';
 import PayWithStripeScreen from './5-AccountInnerScreens/ChargeMoneyScoreScreens/PayWithStripeScreen';
 import MessagesChatScreen from './5-AccountInnerScreens/MessagesChatScreen/MessagesChatScreen';
+import IntroScreen from './commons/IntroScreen/IntroScreen';
+
 
 const screens = {
   AccountScreen,
@@ -54,6 +56,7 @@ const screens = {
   SignupScreen,
   VerifyIdentityScreen,
   MessagesChatScreen,
+  IntroScreen
 };
 
 export default screens;

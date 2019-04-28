@@ -78,6 +78,7 @@ export const loginUser = (userData, callback) => (dispatch) => {
     });
 };
 
+
 export const logoutUser = () => (dispatch) => {
   dispatch({
     type: actionTypes.LOGIN_USER_START,

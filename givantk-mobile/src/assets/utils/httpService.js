@@ -29,3 +29,4 @@ export const profileAPI = `${serverPath}/api/profile`;
 export const paymentAPI = `${serverPath}/api/payment`;
 export const pointsAPI = `${serverPath}/api/points`;
 export const chatAPI = `${serverPath}/api/chat`;
+export const IntroAPI = `${serverPath}/api/intro`;

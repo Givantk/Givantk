@@ -10,6 +10,10 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
+
+
+
+
     case actionTypes.LOGIN_USER_START:
       return {
         ...state,

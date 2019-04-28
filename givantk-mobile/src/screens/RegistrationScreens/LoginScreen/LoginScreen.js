@@ -10,6 +10,7 @@ import { styles } from './LoginScreenStyles';
 import * as AuthActions from '../../../store/actions/authActions';
 import * as ProfileActions from '../../../store/actions/profileActions';
 import * as ServiceActions from '../../../store/actions/serviceActions';
+import * as IntroActions from '../../../store/actions/introActions';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
 import DefaultButton from '../../../components/commons/UI/DefaultButton/DefaultButton';
 import DefaultTextInput from '../../../components/commons/UI/DefaultTextInput/DefaultTextInput';
@@ -29,28 +30,35 @@ class LoginScreen extends React.Component {
   };
 
   componentDidMount() {
-    const { checkSavedUserThenLogin } = this.props;
+    const { checkSavedUserThenLogin,getSavedPassedIntro} = this.props;
+
+    getSavedPassedIntro();
 
     // Check if user has previously signed in
     checkSavedUserThenLogin(this.callbackAfterLogin);
   }
 
   callbackAfterLogin = () => {
-    const { navigation, getAllServices, getCurrentUserProfile } = this.props;
+    const { navigation, getAllServices, getCurrentUserProfile,currentUser,passedIntro, } = this.props;
 
-    navigation.replace('Tab');
+    if (currentUser.passedIntro||passedIntro) navigation.replace('Tab');
+    else {
+      navigation.replace('IntroScreen', {
+        currentUser,
+      });
+    }
     getAllServices();
     getCurrentUserProfile();
 
     AuthActions.getPushNotificationToken();
     this._notificationSubscription = Notifications.addListener((n) => {
       if (n.origin === 'selected') {
-        if (n.data && n.data.type === 'message') navigation.navigate('MessagesList')
+        if (n.data && n.data.type === 'message')
+          navigation.navigate('MessagesList');
         else navigation.navigate('Notifications');
       } else {
         navigation.navigate('Tab');
       }
-
     });
   };
 
@@ -167,6 +175,8 @@ const mapStateToProps = (state) => ({
   errors: state.errors,
   setCurrentUserLoading: state.auth.setCurrentUserLoading,
   loginWithFacebookLoading: state.auth.loginWithFacebookLoading,
+  currentUser: state.auth.user,
+  passedIntro:state.intro.passedIntro,
 });
 
 const mapDispatchToProps = {
@@ -175,6 +185,7 @@ const mapDispatchToProps = {
   checkSavedUserThenLogin: AuthActions.checkSavedUserThenLogin,
   getAllServices: ServiceActions.getAllServices,
   getCurrentUserProfile: ProfileActions.getCurrentUserProfile,
+  getSavedPassedIntro:IntroActions.getSavedPassedIntro,
 };
 
 export default connect(
