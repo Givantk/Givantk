@@ -1,10 +1,10 @@
-import React from 'react';
-import { View, Text } from 'react-native';
-import { LinearGradient } from 'expo';
-import AppIntroSlider from 'react-native-app-intro-slider';
 import { connect } from 'react-redux';
-import * as IntroActions from '../../../store/actions/introActions';
+import { LinearGradient } from 'expo';
+import { View, Text } from 'react-native';
+import AppIntroSlider from 'react-native-app-intro-slider';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import React from 'react';
+
 import * as IntroActions from '../../../store/actions/introActions';
 import styles from './IntroScreenStyles';
 
@@ -51,7 +51,7 @@ class IntroScreen extends React.Component {
   ];
 
   onDone = () => {
-    const { navigation, passIntro,editSavedPassedIntroValue } = this.props;
+    const { navigation, passIntro, editSavedPassedIntroValue } = this.props;
     if (navigation.state.params) {
       const { currentUser } = navigation.state.params;
       // send to backend
@@ -109,12 +109,11 @@ class IntroScreen extends React.Component {
 
 const mapDispatchToProps = {
   passIntro: IntroActions.passIntro,
-
 };
 
-const mapStateToProps =(state)=> ({
-  passedIntro:state.Intro.passedIntro,
-})
+const mapStateToProps = (state) => ({
+  passedIntro: state.Intro.passedIntro,
+});
 
 export default connect(
   null,
