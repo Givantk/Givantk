@@ -21,7 +21,7 @@ import * as ServiceActions from '../../../store/actions/serviceActions';
 import QuickNotification from '../../../components/commons/UI/QuickNotification/QuickNotification';
 import Announcement from '../../../components/commons/UI/Announcement/Announcement';
 import getUserImage from '../../../assets/utils/getUserImage';
-import { colors, fontTypes, dimensions } from '../../../assets/styles/base';
+import { colors, dimensions } from '../../../assets/styles/base';
 import MainButton from '../../../components/commons/UI/MainButton/MainButton';
 import quickModal from '../../../components/commons/UI/QuickModal/QuickModal';
 // import CommentsList from '../../../components/commons/Comments-Related-Components/CommentsList';
@@ -277,6 +277,11 @@ class ServiceScreen extends Component {
     const serviceIsArchived = service.state === 'archived';
     const serviceIsDone = service.state === 'done';
 
+    const jsDate = service.date ? new Date(service.date) : new Date();
+    const readableHourDate = `${jsDate.getHours()}:${jsDate.getMinutes()}`;
+    const readableYearDate = ` (${jsDate.getDate()}-${jsDate.getMonth() +
+      1}-${jsDate.getFullYear()})`;
+
     return (
       <AvoidKeyboard
         keyboardVerticalOffset={85}
@@ -344,16 +349,16 @@ class ServiceScreen extends Component {
                 {service.brief_description || service.description}
               </Text>
             </View>
-            <Text
-              style={{
-                color: colors.gray03,
-                fontSize: 10,
-                fontFamily: fontTypes.mainBold,
-                marginLeft: 10,
-              }}
-            >
-              Service State: {service.state}
-            </Text>
+            <View style={styles.serviceStateWrapper}>
+              <Text style={styles.serviceStateText}>
+                Service State: {service.state}
+              </Text>
+              <Text style={styles.dateText}>
+                <Text style={styles.hourDateText}>{readableHourDate}</Text>
+                <Text>{readableYearDate}</Text>
+              </Text>
+            </View>
+
             {loggedInUser.ownService &&
               !service.helper &&
               (service.state === 'new' ||

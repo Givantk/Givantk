@@ -5,6 +5,7 @@ import {
   dimensions,
   fontTypes,
   fontSizes,
+  gaps,
 } from '../../../assets/styles/base';
 
 const styles = StyleSheet.create({
@@ -66,6 +67,25 @@ const styles = StyleSheet.create({
     color: colors.black,
     padding: 10,
     fontFamily: fontTypes.main,
+  },
+  serviceStateWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  serviceStateText: {
+    color: colors.gray03,
+    fontSize: 10,
+    fontFamily: fontTypes.mainBold,
+    marginLeft: 10,
+  },
+  dateText: {
+    marginRight: gaps.msm,
+    color: colors.primary,
+    fontFamily: fontTypes.main,
+    fontSize: fontSizes.sm,
+  },
+  hourDateText: {
+    fontFamily: fontTypes.mainBold,
   },
   disclaimer: {
     textAlign: 'center',

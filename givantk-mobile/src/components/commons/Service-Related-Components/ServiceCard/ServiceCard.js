@@ -80,7 +80,8 @@ class ServiceCard extends React.PureComponent {
       : null;
 
     const jsDate = service.date ? new Date(service.date) : new Date();
-    const readableDate = `${jsDate.getHours()}:${jsDate.getMinutes()} (${jsDate.getDate()}-${jsDate.getMonth() +
+    const readableHourDate = `${jsDate.getHours()}:${jsDate.getMinutes()}`;
+    const readableYearDate = ` (${jsDate.getDate()}-${jsDate.getMonth() +
       1}-${jsDate.getFullYear()})`;
 
     return (
@@ -128,7 +129,10 @@ class ServiceCard extends React.PureComponent {
           <View style={styles.content}>
             <Text style={styles.descriptionText}>{serviceDescription}</Text>
           </View>
-          <Text style={styles.dateText}>{readableDate}</Text>
+          <Text style={styles.dateText}>
+            <Text style={styles.hourDateText}>{readableHourDate}</Text>
+            <Text>{readableYearDate}</Text>
+          </Text>
 
           <View style={styles.footer}>
             {/* <Text style={styles.cost}>{service.cost}</Text> */}
