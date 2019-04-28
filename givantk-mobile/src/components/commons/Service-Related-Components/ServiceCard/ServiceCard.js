@@ -1,13 +1,13 @@
+import { connect } from 'react-redux';
 import { Icon } from 'native-base';
 import { View, Text, Image, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { connect } from 'react-redux';
 
 import getUserImage from '../../../../assets/utils/getUserImage';
-import styles from './ServiceCardStyles';
 import Loading from '../../UI/Loading/Loading';
 import QuickNotification from '../../UI/QuickNotification/QuickNotification';
+import styles from './ServiceCardStyles';
 
 class ServiceCard extends React.PureComponent {
   state = {
@@ -70,14 +70,18 @@ class ServiceCard extends React.PureComponent {
     }
 
     const serviceDescription = service.brief_description
-      ? service.brief_description.length > 200
-        ? `${service.brief_description.slice(0, 210)}...`
+      ? service.brief_description.length > 150
+        ? `${service.brief_description.slice(0, 160)}...`
         : service.brief_description
       : service.description
-      ? service.description.length > 200
-        ? `${service.description.slice(0, 210)}...`
+      ? service.description.length > 150
+        ? `${service.description.slice(0, 160)}...`
         : service.description
       : null;
+
+    const jsDate = service.date ? new Date(service.date) : new Date();
+    const readableDate = `${jsDate.getHours()}:${jsDate.getMinutes()} (${jsDate.getDate()}-${jsDate.getMonth() +
+      1}-${jsDate.getFullYear()})`;
 
     return (
       <TouchableWithoutFeedback onPress={this.onPressCard}>
@@ -124,6 +128,7 @@ class ServiceCard extends React.PureComponent {
           <View style={styles.content}>
             <Text style={styles.descriptionText}>{serviceDescription}</Text>
           </View>
+          <Text style={styles.dateText}>{readableDate}</Text>
 
           <View style={styles.footer}>
             {/* <Text style={styles.cost}>{service.cost}</Text> */}

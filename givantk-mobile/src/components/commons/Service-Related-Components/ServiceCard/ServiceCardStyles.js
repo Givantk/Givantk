@@ -1,6 +1,12 @@
 import { StyleSheet } from 'react-native';
 
-import { colors, dimensions, fontTypes } from '../../../../assets/styles/base';
+import {
+  colors,
+  dimensions,
+  fontTypes,
+  gaps,
+  fontSizes,
+} from '../../../../assets/styles/base';
 
 const styles = StyleSheet.create({
   serviceCard: {
@@ -9,7 +15,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderColor: colors.primary,
     width: dimensions.fullWidth * 0.88,
-    minHeight: 220,
+    minHeight: 180,
     maxHeight: 250,
     flexDirection: 'column',
     justifyContent: 'space-between',
@@ -44,7 +50,7 @@ const styles = StyleSheet.create({
   },
   content: {
     backgroundColor: colors.white,
-    minHeight: '30%',
+    // minHeight: '30%',
     padding: 5,
     width: '98%',
     alignSelf: 'center',
@@ -54,6 +60,13 @@ const styles = StyleSheet.create({
     color: colors.black,
     padding: 10,
     fontFamily: fontTypes.main,
+  },
+  dateText: {
+    alignSelf: 'flex-end',
+    marginRight: gaps.msm,
+    color: colors.primary,
+    fontFamily: fontTypes.main,
+    fontSize: fontSizes.sm,
   },
   footer: {
     flexDirection: 'row',
