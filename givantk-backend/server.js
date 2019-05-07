@@ -41,10 +41,10 @@ app.use('/api/chat', require('./routes/chat'));
 app.use('/api/admin', require('./routes/admin'));
 app.use('/api/payment', require('./routes/payment'));
 app.use('/api/points', require('./routes/points'));
-app.use('/api/intro',require('./routes/intro'));
+app.use('/api/intro', require('./routes/intro'));
 app.use('/assets/images', express.static('assets/images'));
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 4800;
 
 const server = app.listen(port, () =>
   console.log(`Server started on port ${port}`)
@@ -58,7 +58,7 @@ io.use((socket, next) => {
   service
     .findById(socket.handshake.query.serviceId.toString())
     .then((service) => {
-      // accept the user data given from this.socket = io('http://192.168.1.8:5000', {query: users_data}); in front-end
+      // accept the user data given from this.socket = io('http://192.168.1.8:4800', {query: users_data}); in front-end
       socket.id =
         socket.handshake.query.id1 +
         '+' +
