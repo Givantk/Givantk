@@ -408,6 +408,18 @@ class ServiceScreen extends Component {
               </View>
             )}
 
+            {service.applications.length !== 0 && (
+              <View style={styles.proposalsHeadingContainer}>
+                {service.state !== 'pending' ? (
+                  <Text style={styles.proposalsHeadingText}>
+                    Old Proposals:
+                  </Text>
+                ) : (
+                  <Text style={styles.proposalsHeadingText}>Proposals:</Text>
+                )}
+              </View>
+            )}
+
             {service.applications.map((application) =>
               application.chosen ? (
                 <Proposal
@@ -429,18 +441,6 @@ class ServiceScreen extends Component {
             {service.applications.map((application) =>
               !application.chosen ? (
                 <View key={application._id}>
-                  <View style={styles.proposalsHeadingContainer}>
-                    {service.state !== 'pending' ? (
-                      <Text style={styles.proposalsHeadingText}>
-                        Unaccepted Proposals:
-                      </Text>
-                    ) : (
-                      <Text style={styles.proposalsHeadingText}>
-                        Proposals:
-                      </Text>
-                    )}
-                  </View>
-
                   <Proposal
                     application={application}
                     onPressApplicant={this.onPressApplicant}
