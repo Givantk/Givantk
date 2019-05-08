@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Givantk",
-    "description": "This project is really great.",
+    "description": "This is app help you post a service you want to make, or apply for a service you want to make for someone.",
     "slug": "givantk",
     "privacy": "public",
     "platforms": ["ios", "android"],
