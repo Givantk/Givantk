@@ -1,6 +1,11 @@
 import { StyleSheet } from 'react-native';
 
-import { colors, fontTypes, fontSizes } from '../../../../assets/styles/base';
+import {
+  colors,
+  fontTypes,
+  fontSizes,
+  gaps,
+} from '../../../../assets/styles/base';
 
 const styles = StyleSheet.create({
   proposalsHeadingContainer: {
@@ -43,6 +48,10 @@ const styles = StyleSheet.create({
     color: colors.black,
     fontSize: fontSizes.sm,
     fontWeight: 'bold',
+  },
+  proposalDate: {
+    marginTop: gaps.xsm,
+    color: colors.primary,
   },
   proposalTextContainer: {
     marginVertical: 20,

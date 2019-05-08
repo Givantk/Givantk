@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import { colors } from '../../../../assets/styles/base';
+import getReadableDate from '../../../../assets/utils/getReadableDate';
 import getUserImage from '../../../../assets/utils/getUserImage';
 import MainButton from '../../../../components/commons/UI/MainButton/MainButton';
 import styles from './ProposalStyles';
@@ -20,7 +21,11 @@ const Proposal = ({
   navigation,
   service,
   ProposalIsChosen,
-}) => (
+}) => {
+  const readableProposalDate = application.date
+    ? getReadableDate(new Date(application.date))
+    : getReadableDate(new Date());
+  return (
     <View
       style={[
         styles.proposalsContainer,
@@ -47,7 +52,6 @@ const Proposal = ({
         onPress={() => onPressApplicant(application.user._id)}
       >
         <View style={styles.proposalHeader}>
-
           <View style={styles.helperIdentityContainer}>
             <Image
               source={{
@@ -62,7 +66,9 @@ const Proposal = ({
             </View>
           </View>
 
-
+          <View>
+            <Text style={styles.proposalDate}>{readableProposalDate}</Text>
+          </View>
         </View>
       </TouchableWithoutFeedback>
       <View style={styles.proposalTextContainer}>
@@ -75,40 +81,42 @@ const Proposal = ({
           onPress={() =>
             ownService
               ? navigation.navigate('Chat', {
-                serviceId: service._id,
-                secondUser: application.user,
-              })
+                  serviceId: service._id,
+                  secondUser: application.user,
+                })
               : navigation.navigate('Chat', {
-                serviceId: service._id,
-                secondUser: service.asker,
-              })
+                  serviceId: service._id,
+                  secondUser: service.asker,
+                })
           }
         >
           <View>
             {ownService &&
-              ProposalIsChosen &&
+            ProposalIsChosen &&
+            service.state !== 'done' &&
+            service.state !== 'archived' ? (
+              <View style={styles.sendMessageContainer}>
+                <Text style={styles.sendMessageText}>
+                  Chat with your helper
+                </Text>
+                <Icon
+                  type="FontAwesome"
+                  name="envelope"
+                  style={styles.sendMessageIcon}
+                />
+              </View>
+            ) : ProposalIsChosen &&
               service.state !== 'done' &&
               service.state !== 'archived' ? (
-                <View style={styles.sendMessageContainer}>
-                  <Text style={styles.sendMessageText}>Chat with your helper</Text>
-                  <Icon
-                    type="FontAwesome"
-                    name="envelope"
-                    style={styles.sendMessageIcon}
-                  />
-                </View>
-              ) : ProposalIsChosen &&
-                service.state !== 'done' &&
-                service.state !== 'archived' ? (
-                  <View style={styles.sendMessageContainer}>
-                    <Text style={styles.sendMessageText}>Chat with your asker</Text>
-                    <Icon
-                      type="FontAwesome"
-                      name="envelope"
-                      style={styles.sendMessageIcon}
-                    />
-                  </View>
-                ) : null}
+              <View style={styles.sendMessageContainer}>
+                <Text style={styles.sendMessageText}>Chat with your asker</Text>
+                <Icon
+                  type="FontAwesome"
+                  name="envelope"
+                  style={styles.sendMessageIcon}
+                />
+              </View>
+            ) : null}
           </View>
         </TouchableWithoutFeedback>
       ) : null}
@@ -125,7 +133,7 @@ const Proposal = ({
           disabled={disabled}
         >
           Accept
-      </MainButton>
+        </MainButton>
         <MainButton
           onPress={() =>
             navigation.navigate('Chat', {
@@ -137,10 +145,11 @@ const Proposal = ({
           disabled={disabled}
         >
           Interview
-      </MainButton>
+        </MainButton>
       </View>
     </View>
   );
+};
 
 Proposal.propTypes = {
   application: PropTypes.shape({}),

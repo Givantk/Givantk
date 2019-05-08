@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
     fontFamily: fontTypes.main,
     color: colors.disclaimer,
     fontWeight: 'bold',
+    marginTop: gaps.md,
   },
   footer: {
     flexDirection: 'row',
@@ -110,6 +111,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     fontFamily: fontTypes.main,
     fontSize: 13,
+    marginTop: gaps.md,
   },
   proposalsHeadingContainer: {
     marginHorizontal: 30,
