@@ -24,6 +24,7 @@ import getUserImage from '../../../assets/utils/getUserImage';
 import { colors, dimensions } from '../../../assets/styles/base';
 import MainButton from '../../../components/commons/UI/MainButton/MainButton';
 import quickModal from '../../../components/commons/UI/QuickModal/QuickModal';
+import getReadableDate from '../../../assets/utils/getReadableDate';
 // import CommentsList from '../../../components/commons/Comments-Related-Components/CommentsList';
 
 class ServiceScreen extends Component {
@@ -277,10 +278,9 @@ class ServiceScreen extends Component {
     const serviceIsArchived = service.state === 'archived';
     const serviceIsDone = service.state === 'done';
 
-    const jsDate = service.date ? new Date(service.date) : new Date();
-    const readableHourDate = `${jsDate.getHours()}:${jsDate.getMinutes()}`;
-    const readableYearDate = ` (${jsDate.getDate()}-${jsDate.getMonth() +
-      1}-${jsDate.getFullYear()})`;
+    const readableServiceDate = service.date
+      ? getReadableDate(new Date(service.date))
+      : getReadableDate(new Date());
 
     return (
       <AvoidKeyboard
@@ -353,10 +353,7 @@ class ServiceScreen extends Component {
               <Text style={styles.serviceStateText}>
                 Service State: {service.state}
               </Text>
-              <Text style={styles.dateText}>
-                <Text style={styles.hourDateText}>{readableHourDate}</Text>
-                <Text>{readableYearDate}</Text>
-              </Text>
+              <Text style={styles.dateText}>{readableServiceDate}</Text>
             </View>
 
             {loggedInUser.ownService &&

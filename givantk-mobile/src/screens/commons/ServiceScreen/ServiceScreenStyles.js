@@ -84,9 +84,6 @@ const styles = StyleSheet.create({
     fontFamily: fontTypes.main,
     fontSize: fontSizes.sm,
   },
-  hourDateText: {
-    fontFamily: fontTypes.mainBold,
-  },
   disclaimer: {
     textAlign: 'center',
     fontFamily: fontTypes.main,

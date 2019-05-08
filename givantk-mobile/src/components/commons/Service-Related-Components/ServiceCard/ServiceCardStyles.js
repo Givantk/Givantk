@@ -68,9 +68,6 @@ const styles = StyleSheet.create({
     fontFamily: fontTypes.main,
     fontSize: fontSizes.sm,
   },
-  hourDateText: {
-    fontFamily: fontTypes.mainBold,
-  },
   footer: {
     flexDirection: 'row',
     paddingHorizontal: 20,

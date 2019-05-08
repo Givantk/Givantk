@@ -8,6 +8,7 @@ import getUserImage from '../../../../assets/utils/getUserImage';
 import Loading from '../../UI/Loading/Loading';
 import QuickNotification from '../../UI/QuickNotification/QuickNotification';
 import styles from './ServiceCardStyles';
+import getReadableDate from '../../../../assets/utils/getReadableDate';
 
 class ServiceCard extends React.PureComponent {
   state = {
@@ -79,10 +80,9 @@ class ServiceCard extends React.PureComponent {
         : service.description
       : null;
 
-    const jsDate = service.date ? new Date(service.date) : new Date();
-    const readableHourDate = `${jsDate.getHours()}:${jsDate.getMinutes()}`;
-    const readableYearDate = ` (${jsDate.getDate()}-${jsDate.getMonth() +
-      1}-${jsDate.getFullYear()})`;
+    const readableServiceDate = service.date
+      ? getReadableDate(new Date(service.date))
+      : getReadableDate(new Date());
 
     return (
       <TouchableWithoutFeedback onPress={this.onPressCard}>
@@ -129,10 +129,7 @@ class ServiceCard extends React.PureComponent {
           <View style={styles.content}>
             <Text style={styles.descriptionText}>{serviceDescription}</Text>
           </View>
-          <Text style={styles.dateText}>
-            <Text style={styles.hourDateText}>{readableHourDate}</Text>
-            <Text>{readableYearDate}</Text>
-          </Text>
+          <Text style={styles.dateText}>{readableServiceDate}</Text>
 
           <View style={styles.footer}>
             {/* <Text style={styles.cost}>{service.cost}</Text> */}
