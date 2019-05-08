@@ -6,7 +6,8 @@ import React, { Component } from 'react';
 import io from 'socket.io-client';
 
 import { colors } from '../../../assets/styles/base';
-import { serverPath } from '../../../assets/utils/httpService';
+import { chatServerPath } from '../../../assets/utils/httpService';
+
 // import ChatInputText from '../../../components/commons/ChatComponents/chatInputText';
 import ChatInputItem from '../../../components/commons/ChatComponents/chatInputItem';
 import ChatMessage from '../../../components/commons/ChatComponents/chatMessage';
@@ -56,8 +57,8 @@ class MessagesChatScreen extends Component {
       name2: this.state.user2.name,
       serviceId: this.props.navigation.state.params.serviceId,
     };
-    // local server is replace with serverPath from heroku
-    this.socket = io(serverPath, { query: users_data });
+
+    this.socket = io(chatServerPath, { query: users_data });
 
     this.socket.on('history', (docs) => {
       this.setState({ chatHistory: docs });

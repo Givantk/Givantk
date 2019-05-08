@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 import io from 'socket.io-client';
 
 import { colors } from '../../../assets/styles/base';
-import { serverPath } from '../../../assets/utils/httpService';
+import { chatServerPath } from '../../../assets/utils/httpService';
 import * as ProfileActions from '../../../store/actions/profileActions';
 import * as ServiceActions from '../../../store/actions/serviceActions';
 import ChatMessage from '../../../components/commons/ChatComponents/chatMessage';
@@ -15,7 +15,7 @@ import ChatInputItem from '../../../components/commons/ChatComponents/chatInputI
 import styles from './ChatScreenStyles';
 
 class ChatScreen extends Component {
-  static navigationOptions = ({ navigation }) => ({
+  static navigationOptions = () => ({
     headerTitle: 'Chat Messages',
     headerStyle: {
       backgroundColor: colors.primary,
@@ -33,14 +33,13 @@ class ChatScreen extends Component {
     this.state = {
       user1: {
         id: this.props.currentUser._id,
-        name:
-          this.props.currentUser.first_name +
-          ' ' +
-          this.props.currentUser.last_name,
+        name: `${this.props.currentUser.first_name} ${
+          this.props.currentUser.last_name
+        }`,
       },
       user2: {
         id: secondUser._id,
-        name: secondUser.first_name + ' ' + secondUser.last_name,
+        name: `${secondUser.first_name} ${secondUser.last_name}`,
       },
       serviceId,
       chatMessage: '',
@@ -60,8 +59,8 @@ class ChatScreen extends Component {
       name2: this.state.user2.name,
       serviceId: this.state.serviceId,
     };
-    // local server is replace with serverPath from heroku
-    this.socket = io(serverPath, { query: users_data });
+
+    this.socket = io(chatServerPath, { query: users_data });
 
     this.socket.on('history', (docs) => {
       this.setState({ chatHistory: docs });
@@ -77,14 +76,14 @@ class ChatScreen extends Component {
       'chat message',
       this.state.chatMessage,
       this.state.user1.id,
-      this.state.user1.name
+      this.state.user1.name,
     );
     this.setState({ chatMessage: '' });
   }
 
   render() {
     const chatHistory = this.state.chatHistory.map((msg, i) => {
-      let customMsg = {
+      const customMsg = {
         msgDir: '',
         msgColor: '',
       };
@@ -104,12 +103,12 @@ class ChatScreen extends Component {
       );
     });
     const chatMessages = this.state.chatMessages.map((msg, i) => {
-      let customMsg = {
+      const customMsg = {
         msgDir: 'flex-end',
         msgColor: '#7BE16B',
       };
 
-      // edtiting displaying name for anonymous services 
+      // edtiting displaying name for anonymous services
 
       return this.props.service.reveal_asker !== false ||
         (this.props.service.asker.toString() !==
@@ -171,5 +170,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(ChatScreen);
