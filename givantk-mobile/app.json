@@ -33,7 +33,8 @@
     },
     "android": {
       "package": "com.team.givantk",
-      "googleServicesFile": "./google-services.ignore.json"
+      "googleServicesFile": "./google-services.ignore.json",
+      "versionCode": 3
     }
   }
 }
