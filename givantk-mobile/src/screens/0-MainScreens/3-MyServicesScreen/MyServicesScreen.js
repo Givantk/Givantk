@@ -51,7 +51,12 @@ class MyServicesScreen extends React.Component {
   };
 
   render() {
-    const { navigation, currentUserProfile, getCurrentProfileLoading, currentUserHasProfile } = this.props;
+    const {
+      navigation,
+      currentUserProfile,
+      getCurrentProfileLoading,
+      currentUserHasProfile,
+    } = this.props;
 
     if (!currentUserProfile && getCurrentProfileLoading) return <Loading />;
 

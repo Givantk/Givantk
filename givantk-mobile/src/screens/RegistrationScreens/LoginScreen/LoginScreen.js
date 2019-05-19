@@ -30,7 +30,7 @@ class LoginScreen extends React.Component {
   };
 
   componentDidMount() {
-    const { checkSavedUserThenLogin,getSavedPassedIntro} = this.props;
+    const { checkSavedUserThenLogin, getSavedPassedIntro } = this.props;
 
     getSavedPassedIntro();
 
@@ -39,9 +39,15 @@ class LoginScreen extends React.Component {
   }
 
   callbackAfterLogin = () => {
-    const { navigation, getAllServices, getCurrentUserProfile,currentUser,passedIntro, } = this.props;
+    const {
+      navigation,
+      getAllServices,
+      getCurrentUserProfile,
+      currentUser,
+      passedIntro,
+    } = this.props;
 
-    if (currentUser.passedIntro||passedIntro) navigation.replace('Tab');
+    if (currentUser.passedIntro || passedIntro) navigation.replace('Tab');
     else {
       navigation.replace('IntroScreen', {
         currentUser,
@@ -176,7 +182,7 @@ const mapStateToProps = (state) => ({
   setCurrentUserLoading: state.auth.setCurrentUserLoading,
   loginWithFacebookLoading: state.auth.loginWithFacebookLoading,
   currentUser: state.auth.user,
-  passedIntro:state.intro.passedIntro,
+  passedIntro: state.intro.passedIntro,
 });
 
 const mapDispatchToProps = {
@@ -185,7 +191,7 @@ const mapDispatchToProps = {
   checkSavedUserThenLogin: AuthActions.checkSavedUserThenLogin,
   getAllServices: ServiceActions.getAllServices,
   getCurrentUserProfile: ProfileActions.getCurrentUserProfile,
-  getSavedPassedIntro:IntroActions.getSavedPassedIntro,
+  getSavedPassedIntro: IntroActions.getSavedPassedIntro,
 };
 
 export default connect(

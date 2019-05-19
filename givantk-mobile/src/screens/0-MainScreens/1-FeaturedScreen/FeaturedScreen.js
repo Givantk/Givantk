@@ -49,7 +49,7 @@ class FeaturedScreen extends React.Component {
   };
 
   render() {
-    const { navigation, getAllServicesLoading,passedIntro } = this.props;
+    const { navigation, getAllServicesLoading } = this.props;
     let { allServices } = this.props;
     const { getAllServices } = this.props;
 
@@ -96,8 +96,7 @@ const mapStateToProps = (state) => ({
   errors: state.errors,
   allServices: state.service.allServices,
   getAllServicesLoading: state.service.getAllServicesLoading,
-  passedIntro:state.intro.passedIntro,
-
+  passedIntro: state.intro.passedIntro,
 });
 
 const mapDispatchToProps = {
