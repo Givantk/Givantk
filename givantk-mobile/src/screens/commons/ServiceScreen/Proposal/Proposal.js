@@ -1,4 +1,4 @@
-import { Badge, Icon } from 'native-base';
+import { Icon } from 'native-base';
 import { View, Text, TouchableWithoutFeedback, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -151,7 +151,12 @@ const Proposal = ({
 };
 
 Proposal.propTypes = {
+  navigation: PropTypes.shape({}),
+
+  service: PropTypes.shape({}),
   application: PropTypes.shape({}),
+  ProposalIsChosen: PropTypes.bool,
+  serviceHelper: PropTypes.bool,
   onPressApplicant: PropTypes.func,
   onPressAcceptProposal: PropTypes.func,
   ownService: PropTypes.bool,
