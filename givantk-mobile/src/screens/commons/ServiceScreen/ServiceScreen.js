@@ -410,13 +410,7 @@ class ServiceScreen extends Component {
 
             {service.applications.length !== 0 && (
               <View style={styles.proposalsHeadingContainer}>
-                {service.state !== 'pending' ? (
-                  <Text style={styles.proposalsHeadingText}>
-                    Old Proposals:
-                  </Text>
-                ) : (
-                  <Text style={styles.proposalsHeadingText}>Proposals:</Text>
-                )}
+                <Text style={styles.proposalsHeadingText}>Proposals:</Text>
               </View>
             )}
 

@@ -130,7 +130,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   proposalHeader: {
-    flexDirection: 'row',
     justifyContent: 'flex-start',
   },
   proposalUserImage: {

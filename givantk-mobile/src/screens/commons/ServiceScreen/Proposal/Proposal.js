@@ -65,15 +65,14 @@ const Proposal = ({
               </Text>
             </View>
           </View>
-
-          <View>
-            <Text style={styles.proposalDate}>{readableProposalDate}</Text>
-          </View>
         </View>
       </TouchableWithoutFeedback>
       <View style={styles.proposalTextContainer}>
         <Text style={styles.proposalText}>{application.proposal}</Text>
       </View>
+
+      <Text style={styles.proposalDate}>{readableProposalDate}</Text>
+
       {/* Interview or chat with helpers */}
 
       {ownService || serviceHelper ? (

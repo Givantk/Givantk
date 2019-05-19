@@ -52,6 +52,9 @@ const styles = StyleSheet.create({
   proposalDate: {
     marginTop: gaps.xsm,
     color: colors.primary,
+    alignSelf: 'flex-end',
+    fontFamily: fontTypes.main,
+    fontSize: fontSizes.sm,
   },
   proposalTextContainer: {
     marginVertical: 20,
