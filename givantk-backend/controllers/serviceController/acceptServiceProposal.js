@@ -19,6 +19,11 @@ module.exports = proposeToService = (req, res) => {
         return res.status(401).json(errors);
       }
 
+      if (service.state !== 'new' || service.state !== 'pending') {
+        errors.unauthorized = "You can't accept proposal due to service state";
+        return res.status(401).json(errors);
+      }
+
       const application = service.applications.find(
         (item) => item._id.toString() === proposalId
       );
