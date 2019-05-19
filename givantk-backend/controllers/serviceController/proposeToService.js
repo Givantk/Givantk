@@ -23,6 +23,11 @@ module.exports = proposeToService = (req, res) => {
         res.status(401).json(errors);
       }
 
+      if (service.state !== 'new' || service.state !== 'pending') {
+        errors.unauthorized = "You can't propose to this service";
+        return res.status(401).json(errors);
+      }
+
       if (
         service.applications.filter(
           (item) => item.user.toString() === req.user._id.toString()
