@@ -21,7 +21,7 @@ router.post('/login', adminController.loginAdmin);
 // @body
 router.get(
   '/personal-info',
-  passport.authenticate('jwt', { session: false }),
+  // passport.authenticate('jwt', { session: false }),
   adminController.personalInfo
 );
 
@@ -34,7 +34,7 @@ router.get(
 router.get(
   '/user-services',
   passport.authenticate('jwt', { session: false }),
-  (adminController.userServices)
+  adminController.userServices
 );
 
 // @route  GET api/admin/services-helped-in
@@ -46,7 +46,7 @@ router.get(
 router.get(
   '/services-helped-in',
   passport.authenticate('jwt', { session: false }),
-  (adminController.servicesHelpedIn)
+  adminController.servicesHelpedIn
 );
 
 // @route  GET api/admin/services-asked-for
@@ -84,7 +84,6 @@ router.get(
   passport.authenticate('jwt', { session: false }),
   adminController.servicesInfo
 );
-
 
 // @route  POST api/admin/announcement
 // @desc   Post a new announcement

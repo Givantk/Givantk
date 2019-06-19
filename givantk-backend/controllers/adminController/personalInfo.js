@@ -6,10 +6,10 @@ const Profile = mongoose.model('profile');
 module.exports = personalInfo = (req, res) => {
   const errors = {};
 
-  if (req.user !== 'admin') {
-    errors.unauthorized = 'Unauthorized';
-    return res.status(401).json(errors);
-  }
+  // if (req.user !== 'admin') {
+  //   errors.unauthorized = 'Unauthorized';
+  //   return res.status(401).json(errors);
+  // }
 
   const personalInfoArray = [];
 

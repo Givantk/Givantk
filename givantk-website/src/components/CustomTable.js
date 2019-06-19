@@ -10,16 +10,16 @@ class CustomTable extends Component {
   state = {
     data: {
       columns: [],
-      rows: [],
+      rows: []
     },
     toggle: false,
     showModal: false,
-    buttonIndex: [],
+    buttonIndex: []
   };
 
   data = {
     columns: [],
-    rows: [],
+    rows: []
   };
 
   // this variable is passed to buttonActionConfirmed function which shows the
@@ -45,7 +45,7 @@ class CustomTable extends Component {
     if (this.props.alterable) {
       this.setState(
         {
-          toggle: !this.state.toggle,
+          toggle: !this.state.toggle
         },
         () => {
           // replace the old button with a new button here we acccess index i in rows
@@ -76,7 +76,7 @@ class CustomTable extends Component {
         from ban to unban, this case is applicable only in navigation and deleting
         so the code considered alterable buttons as delete button if navigation
         prop sent with the table is false
-        */,
+        */
       );
     } else if (!this.props.navigable) {
       /*A connection to the backend should be me made to delete component from the
@@ -89,7 +89,7 @@ class CustomTable extends Component {
 
       this.data = {
         columns: [],
-        rows: [],
+        rows: []
       };
 
       //Filling the tables again after deleting
@@ -109,14 +109,13 @@ class CustomTable extends Component {
   };
 
   fillData = (values, headers, titles) => {
-    titles.map((title) => {
+    titles.map((title, i) => {
       this.data.columns.push({ label: title, field: title, sort: 'asc' });
       return true;
     });
 
     values.map((dataObj, i) => {
       //loop over the keys of the object
-
       for (let key in dataObj) {
         if (Array.isArray(dataObj[key])) {
           if (typeof dataObj[key][0] === 'string')
@@ -155,13 +154,20 @@ class CustomTable extends Component {
 
         dataObj = {
           ...dataObj,
-          ...ButtonElement,
+          ...ButtonElement
         };
 
         /* from the recieved data only pick the ones in the headers in order to choose
                 some properties only of the object*/
 
-        const filteredObj = pick(dataObj, headers);
+        if (!dataObj.email) {
+          dataObj.email = '_';
+        }
+        if (!dataObj.location) {
+          dataObj.location = '_';
+        }
+
+        let filteredObj = pick(dataObj, headers);
 
         //push the filtered object to the rows array in the data obj
         this.data.rows.push(filteredObj);
@@ -169,6 +175,12 @@ class CustomTable extends Component {
       } else {
         //The case where there is no special row
 
+        if (!dataObj.email) {
+          dataObj.email = '_';
+        }
+        if (!dataObj.location) {
+          dataObj.location = '_';
+        }
         const filteredObj = pick(dataObj, headers);
 
         this.data.rows.push(filteredObj);
@@ -211,7 +223,7 @@ class CustomTable extends Component {
             style={{
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center',
+              justifyContent: 'center'
             }}
           >
             <Loader type="Ball-Triangle" color="red" height="100" width="100" />
