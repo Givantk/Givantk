@@ -11,8 +11,6 @@ const currencies = [
     label: 'Saudi Arabia Riyal',
     value: 'AED',
   },
-  
-
 ];
 
 export default currencies;

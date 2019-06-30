@@ -133,13 +133,14 @@ class ServiceCard extends React.PureComponent {
 
           <View style={styles.footer}>
             {/* <Text style={styles.cost}>{service.cost}</Text> */}
-            {service.money_points ? (
+            {!service.givantk_points ? (
               <Text style={styles.points}>
-                Money score: {service.money_points} EGP
+                Paid -{' '}
+                {service.paymentType === 'cash' ? 'Cash' : 'Vodafone Cash'}
               </Text>
             ) : (
               <Text style={styles.points}>
-                Givantk points: {service.givantk_points}{' '}
+                Free - Givantk points: {service.givantk_points}{' '}
               </Text>
             )}
             {canBookmark ? (

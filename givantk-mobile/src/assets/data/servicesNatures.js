@@ -4,9 +4,9 @@ const servicesNatures = [
     value: 'free',
   },
   {
-    label: 'Paid (money points - currently unavailable)',
+    label: 'Paid',
     value: 'paid',
-    disabled: true,
+    // disabled: true,
   },
 ];
 

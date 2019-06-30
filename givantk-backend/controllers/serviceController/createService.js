@@ -28,6 +28,7 @@ module.exports = createService = (req, res) => {
       nature: req.body.nature,
       givantk_points: req.body.givantkPoints,
       money_points: rules.AppShareEquation(req.body.moneyPoints),
+      paymentType: req.body.paymentType,
       type: req.body.type,
       reveal_asker: !req.body.isAnonymous,
       state: 'new'
@@ -61,7 +62,7 @@ module.exports = createService = (req, res) => {
           profile.services_asked_for.unshift(service._id);
           //check if the service is paid, if it's then subtract its points from user's money points
           if (req.body.paid) {
-            profile.money_points = profile.money_points - req.body.moneyPoints;
+            // profile.money_points = profile.money_points - req.body.moneyPoints;
           } else if (req.body.free) {
             profile.givantk_points =
               profile.givantk_points - req.body.givantkPoints;

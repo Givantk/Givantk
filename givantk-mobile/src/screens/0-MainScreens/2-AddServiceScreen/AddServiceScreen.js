@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { Icon, Label, Textarea } from 'native-base';
+
 // import { Button } from 'native-base';
 // import { ImagePicker } from 'expo';
 import { View, Text, TouchableWithoutFeedback } from 'react-native';
@@ -13,7 +14,8 @@ import { dimensions, colors } from '../../../assets/styles/base';
 import * as ProfileActions from '../../../store/actions/profileActions';
 import * as ServiceActions from '../../../store/actions/serviceActions';
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
-import currencies from '../../../assets/data/Currencies';
+// import currencies from '../../../assets/data/Currencies';
+import paymentTypes from '../../../assets/data/paymentTypes';
 import Loading from '../../../components/commons/UI/Loading/Loading';
 import MainButton from '../../../components/commons/UI/MainButton/MainButton';
 import NoProfileDisclaimer from '../../../components/commons/NoProfileDisclaimer/NoProfileDisclaimer';
@@ -45,6 +47,10 @@ class AddServiceScreen extends React.Component {
     free: false,
     moneyPoints: 0,
     givantkPoints: 0,
+    paymentType: {
+      value: 'cash',
+      label: 'Cash',
+    },
     // optionalPicture: null,
     isAnonymous: false,
   };
@@ -108,6 +114,7 @@ class AddServiceScreen extends React.Component {
       nature,
       description,
       moneyPoints,
+      paymentType,
       paid,
       free,
       givantkPoints,
@@ -120,10 +127,12 @@ class AddServiceScreen extends React.Component {
       nature: nature.value,
       moneyPoints,
       givantkPoints,
+      paymentType: paymentType.value,
       paid,
       free,
       isAnonymous,
     };
+    // console.log(service);
     const callback = () => {
       QuickNotification('Service posted successfully');
       getAllServices();
@@ -137,10 +146,10 @@ class AddServiceScreen extends React.Component {
     const {
       type,
       nature,
-      currency,
       paid,
       free,
       // optionalPicture,
+      paymentType,
       isAnonymous,
     } = this.state;
     const {
@@ -209,7 +218,7 @@ class AddServiceScreen extends React.Component {
 
             {paid && (
               <View>
-                <Picker
+                {/* <Picker
                   title="Pick Currency"
                   placeholder="Pick Currency"
                   style={styles.picker}
@@ -226,7 +235,16 @@ class AddServiceScreen extends React.Component {
                   name="moneyPoints"
                   onChange={this.onChangeValue}
                 />
-                <Text style={styles.error}>{errors.money}</Text>
+                <Text style={styles.error}>{errors.money}</Text> */}
+                <Picker
+                  title="Pick Payment type"
+                  placeholder="Cash / Vodafone Cash"
+                  style={styles.picker}
+                  name="paymentType"
+                  onChange={this.onChangeValue}
+                  options={paymentTypes}
+                  value={paymentType}
+                />
               </View>
             )}
 

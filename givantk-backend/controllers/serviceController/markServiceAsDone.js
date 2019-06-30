@@ -36,20 +36,26 @@ module.exports = markServiceAsDone = (req, res) => {
               // Updating helper profile
               helperProfile.services_helped_in_finished.unshift(service._id);
               helperProfile.notifications.unshift({
-                title: `${service.reveal_asker === false ? 'Anonymous' : askerProfile.first_name} marked the service \"${
-                  service.name
-                  }\" as done`,
+                title: `${
+                  service.reveal_asker === false
+                    ? 'Anonymous'
+                    : askerProfile.first_name
+                } marked the service \"${service.name}\" as done`,
                 navigateTo: {
                   kind: 'service',
                   service: service._id
                 },
                 is_user_associated: true,
-                user_associated: service.reveal_asker === false ? null : askerProfile.user,
-                user_profile_associated: service.reveal_asker === false ? null : askerProfile._id
+                user_associated:
+                  service.reveal_asker === false ? null : askerProfile.user,
+                user_profile_associated:
+                  service.reveal_asker === false ? null : askerProfile._id
               });
-              service.nature === 'free'
-                ? (helperProfile.givantk_points += service.givantk_points)
-                : (helperProfile.money_points += service.money_points);
+              if (service.nature === 'free') {
+                helperProfile.givantk_points += service.givantk_points;
+              } else {
+                // helperProfile.money_points += service.money_points
+              }
 
               helperProfile.save();
 
@@ -58,9 +64,11 @@ module.exports = markServiceAsDone = (req, res) => {
                   {
                     to: helperProfile.user.pushNotificationToken,
                     title: 'Service Marked As Done',
-                    body: `${service.reveal_asker === false ? 'Anonymous' : askerProfile.first_name} marked the service \"${
-                      service.name
-                      }\" as done`,
+                    body: `${
+                      service.reveal_asker === false
+                        ? 'Anonymous'
+                        : askerProfile.first_name
+                    } marked the service \"${service.name}\" as done`,
                     sound: 'default'
                   }
                 ]);

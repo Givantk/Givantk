@@ -11,6 +11,7 @@ const cairoDistricts = [
   'Imbaba',
   'Kerdasa',
   'Madinaty',
+  'Madinet Nasr',
   'Manshiyat Naser',
   'Mit Okba',
   'Mohandessin',

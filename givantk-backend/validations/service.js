@@ -63,23 +63,23 @@ module.exports = async function validateService(data, id) {
   //Money validation
 
   if (data.paid) {
-    try {
-      errors.money = await validatePoints(data.moneyPoints, 'paid', id);
-      //deleting errors.money if it's an empty string which means there is no error in it
-      if (errors.money === '') {
-        const { money, ...rest } = errors;
-        errors = rest;
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    // try {
+    //   errors.money = await validatePoints(data.moneyPoints, 'paid', id);
+    //   //deleting errors.money if it's an empty string which means there is no error in it
+    //   if (errors.money === '') {
+    //     const { money, ...rest } = errors;
+    //     errors = rest;
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    // }
   } //if the service is free
   else {
     try {
       errors.givantkPoints = await validatePoints(
         data.givantkPoints,
         'free',
-        id,
+        id
       );
       //deleting errors.givantkPoints if it's an empty string which means there is no error in it
       if (errors.givantkPoints === '') {
@@ -93,6 +93,6 @@ module.exports = async function validateService(data, id) {
 
   return {
     errors,
-    isValid: isEmpty(errors),
+    isValid: isEmpty(errors)
   };
 };

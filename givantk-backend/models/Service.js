@@ -23,6 +23,7 @@ const ServiceSchema = new Schema({
   }, // 'free' or 'paid'
   givantk_points: Number, // Free points
   money_points: Number,
+  paymentType: String,
   applicant_requirment: {
     location: Boolean,
     helped_before: Boolean
