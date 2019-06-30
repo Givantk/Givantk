@@ -53,6 +53,10 @@ class AddServiceScreen extends React.Component {
     },
     // optionalPicture: null,
     isAnonymous: false,
+    hasSuggestedHelperCriteria: false,
+    job: [],
+    location: [],
+    skills: [],
   };
 
   // pickImage = async () => {
@@ -119,6 +123,9 @@ class AddServiceScreen extends React.Component {
       free,
       givantkPoints,
       isAnonymous,
+      job,
+      location,
+      skills,
     } = this.state;
     const service = {
       name,
@@ -131,6 +138,9 @@ class AddServiceScreen extends React.Component {
       paid,
       free,
       isAnonymous,
+      job,
+      location,
+      skills,
     };
     // console.log(service);
     const callback = () => {
@@ -151,6 +161,7 @@ class AddServiceScreen extends React.Component {
       // optionalPicture,
       paymentType,
       isAnonymous,
+      hasSuggestedHelperCriteria,
     } = this.state;
     const {
       errors,
@@ -166,6 +177,7 @@ class AddServiceScreen extends React.Component {
     if (!currentUserHasProfile)
       return <NoProfileDisclaimer navigation={navigation} />;
 
+    const { state } = this;
     return (
       <View style={styles.container}>
         <AvoidKeyboard bottomPadding={80}>
@@ -313,6 +325,38 @@ class AddServiceScreen extends React.Component {
               checkedCheckBoxColor={colors.primary.toString()}
             />
           )}
+
+          <View style={styles.suggestCriteriaTextWrapper}>
+            <Text
+              style={styles.suggestCriteriaText}
+              onPress={() =>
+                navigation.navigate('SuggestHelperCriteria', {
+                  onDone: (job, location, skills) => {
+                    this.setState({
+                      job,
+                      location,
+                      skills,
+                      hasSuggestedHelperCriteria: true,
+                    });
+                  },
+                  values: {
+                    job: state.job,
+                    location: state.location,
+                    skills: state.skills,
+                  },
+                })
+              }
+            >
+              Suggest a criteria for the helper
+            </Text>
+            {hasSuggestedHelperCriteria && (
+              <Icon
+                type="AntDesign"
+                name="checkcircle"
+                style={styles.suggestCriteriaIcon}
+              />
+            )}
+          </View>
 
           <View style={styles.row}>
             <MainButton

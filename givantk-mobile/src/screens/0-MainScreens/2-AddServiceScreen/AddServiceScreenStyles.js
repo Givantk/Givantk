@@ -110,12 +110,24 @@ const styles = StyleSheet.create({
     color: colors.trueWhite,
     fontSize: 15,
   },
-
   image: {
     marginLeft: 9,
     alignSelf: 'center',
     width: 40,
     height: 40,
+  },
+  suggestCriteriaTextWrapper: {
+    flexDirection: 'row',
+  },
+  suggestCriteriaText: {
+    fontWeight: 'bold',
+    textDecorationLine: 'underline',
+    color: colors.primary,
+    marginRight: 10,
+  },
+  suggestCriteriaIcon: {
+    fontSize: 20,
+    color: colors.primary,
   },
 });
 

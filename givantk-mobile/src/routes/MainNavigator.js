@@ -7,9 +7,9 @@ import * as actionTypes from '../store/actions/actionTypes';
 import BottomTabNavigator from './BottomTabNavigator';
 import NotificationsIndicator from '../components/0-MainScreensComponents/4-NotificationsScreenComponents/NotificationsIndicator';
 import screens from '../screens';
-import store from '../store/createStore';
-import ServiceTypeInfoScreen from '../screens/commons/InfoScreens/ServiceTypeInfoScreen';
 import ServiceNatureInfoScreen from '../screens/commons/InfoScreens/ServiceNatureInfoScreen';
+import ServiceTypeInfoScreen from '../screens/commons/InfoScreens/ServiceTypeInfoScreen';
+import store from '../store/createStore';
 
 const MainNavigator = createStackNavigator(
   {
@@ -38,6 +38,7 @@ const MainNavigator = createStackNavigator(
     IntroScreen: screens.IntroScreen,
     ServiceTypeInfo: ServiceTypeInfoScreen,
     ServiceNatureInfo: ServiceNatureInfoScreen,
+    SuggestHelperCriteria: screens.SuggestHelperCriteriaScreen,
   },
   {
     initialRouteName: 'Login',
@@ -112,7 +113,7 @@ const MainNavigator = createStackNavigator(
       // return this if not tab screen
       return { headerStyle, headerTitleStyle, headerTintColor };
     }, // end of navigationOptions
-  }
+  },
 );
 
 export default MainNavigator;
