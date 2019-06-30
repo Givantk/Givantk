@@ -23,6 +23,9 @@ class ServicesList extends Component {
       currentUserHasProfile,
       bookmarkService,
       unbookmarkService,
+      canBookmark,
+      showUnbookmark,
+      handleUnbookmark,
     } = this.props;
 
     let bookmarked = false;
@@ -41,6 +44,7 @@ class ServicesList extends Component {
     const unbookmarkCallback = () => {
       getCurrentUserProfile();
       QuickNotification('Service unbookmarked');
+      if (handleUnbookmark) handleUnbookmark();
     };
 
     const onBookmarkService = (id) => {
@@ -66,6 +70,8 @@ class ServicesList extends Component {
         bookmarked={bookmarked}
         onBookmark={(id) => onBookmarkService(id)}
         onUnbookmark={(id) => onUnbookmarkService(id)}
+        canBookmark={canBookmark}
+        showUnbookmark={showUnbookmark}
       />
     );
   };
@@ -130,6 +136,10 @@ ServicesList.propTypes = {
   unbookmarkService: PropTypes.func,
   getCurrentUserProfile: PropTypes.func,
   currentUserHasProfile: PropTypes.bool,
+
+  canBookmark: PropTypes.bool,
+  showUnbookmark: PropTypes.bool,
+  handleUnbookmark: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({

@@ -63,7 +63,7 @@ class ServiceCard extends React.PureComponent {
   };
 
   render() {
-    const { service } = this.props;
+    const { service, canBookmark, showUnbookmark } = this.props;
     const { bookmarked } = this.state;
 
     if (!service) {
@@ -142,15 +142,28 @@ class ServiceCard extends React.PureComponent {
                 Givantk points: {service.givantk_points}{' '}
               </Text>
             )}
-            <View style={styles.footerLeft}>
-              <TouchableWithoutFeedback onPress={this.onPressStar}>
-                <Icon
-                  type="AntDesign"
-                  name={bookmarked ? 'star' : 'staro'}
-                  style={styles.favoriteIcon}
-                />
-              </TouchableWithoutFeedback>
-            </View>
+            {canBookmark ? (
+              <View style={styles.footerLeft}>
+                <TouchableWithoutFeedback onPress={this.onPressStar}>
+                  <Icon
+                    type="AntDesign"
+                    name={bookmarked ? 'star' : 'staro'}
+                    style={styles.favoriteIcon}
+                  />
+                </TouchableWithoutFeedback>
+              </View>
+            ) : showUnbookmark ? (
+              <View>
+                <Text
+                  onPress={() => {
+                    this.onPressStar();
+                  }}
+                  style={{ fontWeight: 'bold' }}
+                >
+                  Unbookmark
+                </Text>
+              </View>
+            ) : null}
           </View>
         </View>
       </TouchableWithoutFeedback>
@@ -175,6 +188,8 @@ ServiceCard.propTypes = {
   onBookmark: PropTypes.func,
   onUnbookmark: PropTypes.func,
   bookmarked: PropTypes.bool,
+  canBookmark: PropTypes.bool,
+  showUnbookmark: PropTypes.bool,
   currentUserHasProfile: PropTypes.bool,
 };
 

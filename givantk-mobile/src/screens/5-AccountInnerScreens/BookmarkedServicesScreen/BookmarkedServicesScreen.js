@@ -30,6 +30,8 @@ class BookmarkedServicesScreen extends Component {
         <ServicesList
           services={currentUserProfile.services_bookmarked}
           navigation={navigation}
+          handleUnbookmark={() => navigation.goBack()}
+          showUnbookmark
         />
       </View>
     );

@@ -76,6 +76,7 @@ class FeaturedScreen extends React.Component {
             loading={getAllServicesLoading}
             navigation={navigation}
             onRefresh={getAllServices}
+            canBookmark
           />
         )}
       </View>
