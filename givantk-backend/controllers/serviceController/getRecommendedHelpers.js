@@ -7,11 +7,20 @@ const serviceModel = mongoose.model('service');
 const profileModel = mongoose.model('profile');
 
 const CalculateScore = (profile, service) => {
-  let { skills:recommendedSkills, jobs:recommendedJobs, locations:recommendedLocations } = service.recommenderInfo;
+  let {
+    skills: recommendedSkills,
+    jobs: recommendedJobs,
+    locations: recommendedLocations,
+  } = service.recommenderInfo;
+  let {
+    skills: profileSkills,
+    job: profileJob,
+    location: profileLocation,
+  } = profile.recommenderInfo;
 
   //Match common skills and assign score
   matchedSkills = recommendedSkills.filter((skill) =>
-    profile.skills.includes(skill)
+    profileSkills.includes(skill)
   );
 
   profile.matchedSkills = matchedSkills;
@@ -20,7 +29,7 @@ const CalculateScore = (profile, service) => {
   //Match common job and assign score
 
   for (job of recommendedJobs) {
-    if (job === profile.job) {
+    if (job === profileJob) {
       profile.score += 1;
       break;
     }
@@ -28,7 +37,7 @@ const CalculateScore = (profile, service) => {
 
   //Match common location and assign score
   for (location of recommendedLocations) {
-    if (location === profile.location) {
+    if (location === profileLocation) {
       profile.score += 1;
       break;
     }

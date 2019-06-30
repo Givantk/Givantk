@@ -11,10 +11,11 @@ const errors = {};
 
 const CalculateScore = (service, profile) => {
   let { skills:recommendedSkills, jobs:recommendedJobs, locations:recommendedLocations } = service.recommenderInfo;
+  let { skills:profileSkills, job:profileJob, location:profileLocation } = profile.recommenderInfo;
 
   //Match common skills and assign score
   matchedSkills = recommendedSkills.filter((skill) =>
-    profile.recommenderInfo.skills.includes(skill)
+  profileSkills.skills.includes(skill)
   );
 
   service.score = matchedSkills.length;
@@ -22,7 +23,7 @@ const CalculateScore = (service, profile) => {
   //Match common job and assign score
 
   for (job of recommendedJobs) {
-    if (job === profile.recommenderInfo.job) {
+    if (job === profileJob) {
       service.score += 1;
       break;
     }
@@ -30,7 +31,7 @@ const CalculateScore = (service, profile) => {
 
   //Match common location and assign score
   for (location of recommendedLocations) {
-    if (location === profile.recommenderInfo.location) {
+    if (location === profileLocation) {
       service.score += 1;
       break;
     }
