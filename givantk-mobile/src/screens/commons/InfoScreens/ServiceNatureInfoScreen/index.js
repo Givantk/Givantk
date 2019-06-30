@@ -26,8 +26,9 @@ export default class ServiceNatureInfoScreen extends Component {
             <Text style={[styles.content, { fontWeight: 'bold' }]}>
               paid 💰
             </Text>
-            , our app currently supports free services, and will support paid
-            services soon.
+            , our app currently mainly supports free services, paid services are
+            supported (using either Cash or Vodafone Cash), however, payment is
+            done and agreed on between users
           </Text>
           <Text style={styles.content}>
             When you choose the service nature to be free,{' '}

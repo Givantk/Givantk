@@ -72,6 +72,11 @@ const ServiceSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
+  },
+  recommenderInfo: {
+    skills: [{ type: String }],
+    job: [{ type: String }],
+    location: [{ type: String }]
   }
 });
 

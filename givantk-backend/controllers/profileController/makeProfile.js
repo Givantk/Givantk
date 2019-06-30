@@ -27,8 +27,9 @@ module.exports = makeProfile = (req, res) => {
         last_name: req.user.last_name,
         gender: req.body.gender,
         phone_number: req.body.phone_number,
+        // job: req.body.job,
         date_of_birth: req.body.date_of_birth,
-        skills: JSON.parse(req.body.skills),
+        // skills: JSON.parse(req.body.skills),
         description: req.body.description,
         givantk_points: rules.numberOfGivantkPointsOnSignup,
         money_points: rules.numberOfMoneyPointsOnSignup,
@@ -51,6 +52,13 @@ module.exports = makeProfile = (req, res) => {
         } else {
           newProfile.avatar = user.avatar;
         }
+
+        newProfile.recommenderInfo = {
+          skills: JSON.parse(req.body.skills),
+          job: req.body.job,
+          location: user.location
+        };
+
         user.save().then(() => {
           new Profile(newProfile)
             .save()

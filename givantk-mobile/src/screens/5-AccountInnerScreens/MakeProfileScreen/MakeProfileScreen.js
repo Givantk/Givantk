@@ -31,6 +31,7 @@ class MakeProfileScreen extends Component {
     gender: '',
     description: '',
     phone_number: '',
+    job: '',
     date_of_birth: '',
     skills: '',
     avatar: null,
@@ -45,7 +46,8 @@ class MakeProfileScreen extends Component {
 
     if (!result.cancelled) {
       this.getFileSize(uri).then((size) => {
-        if (size > 5000000) this.setState({ avatar: null, noAvatar: false, sizeAlert: true });
+        if (size > 5000000)
+          this.setState({ avatar: null, noAvatar: false, sizeAlert: true });
         else {
           this.setState({ avatar: uri, noAvatar: false, sizeAlert: false });
         }
@@ -71,6 +73,7 @@ class MakeProfileScreen extends Component {
       avatar,
       description,
       phone_number,
+      job,
       date_of_birth,
     } = this.state;
 
@@ -110,6 +113,7 @@ class MakeProfileScreen extends Component {
       );
       newProfile.append('description', description);
       newProfile.append('phone_number', phone_number);
+      newProfile.append('job', job);
       newProfile.append('date_Of_birth', date_of_birth);
 
       const callback = () => {
@@ -124,13 +128,20 @@ class MakeProfileScreen extends Component {
 
   render() {
     const { gender, avatar, noAvatar, sizeAlert } = this.state;
-    const { errors, makeProfileLoading } = this.props;
+    const { errors, makeProfileLoading, currentUser } = this.props;
 
     return (
       <AvoidKeyboard bottomPadding={0}>
         <View style={styles.container}>
-          <Text style={styles.label}>Profile picture</Text>
-          <Button style={styles.uploadButton} onPress={() => AuthActions.ensureCameraRollPermission(this.pickImage)}>
+          <Text style={styles.label}>
+            Profile picture{currentUser.avatar ? '' : '*'}
+          </Text>
+          <Button
+            style={styles.uploadButton}
+            onPress={() =>
+              AuthActions.ensureCameraRollPermission(this.pickImage)
+            }
+          >
             <Text style={styles.uploadButtonText}>Pick from gallery </Text>
           </Button>
           <View style={styles.imageView}>
@@ -143,11 +154,10 @@ class MakeProfileScreen extends Component {
                 Image is bigger than 5 MB, please choose another image
               </Text>
             )}
-
           </View>
 
           <Picker
-            title="Gender"
+            title="Gender*"
             placeholder="Male / Female"
             style={styles.picker}
             name="gender"
@@ -157,7 +167,7 @@ class MakeProfileScreen extends Component {
           />
 
           <TextInput
-            title="Phone Number"
+            title="Phone Number*"
             placeholder="Example: 01003947562"
             style={styles.input}
             keyboardType="numeric"
@@ -166,15 +176,23 @@ class MakeProfileScreen extends Component {
           />
           <Text style={styles.error}>{errors.phone_number}</Text>
 
-          <Text style={styles.label}>Skills</Text>
+          <TextInput
+            title="Job"
+            placeholder="What's your job? (if you have one)"
+            style={styles.input}
+            name="job"
+            onChange={this.onChangeValue}
+          />
+
+          <Text style={styles.label}>Skills* - separated by a comma (,)</Text>
           <Textarea
-            placeholder="Type what you can do, separated by a comma. For example: I can buy anything for you within Madinet Nast area, I can read Chinese... etc"
+            placeholder="Type what you can do, separated by a comma. For example: I can buy anything for you within Madinet Nast area, I know everything about Egypt, I can read Chinese... etc"
             style={[styles.textarea1]}
             onChangeText={(v) => this.onChangeValue('skills', v)}
           />
           <Text style={styles.error}>{errors.skills}</Text>
 
-          <Text style={styles.label}>Description</Text>
+          <Text style={styles.label}>Description*</Text>
           <Textarea
             placeholder="Describe yourself. What's your job? What's your major? What are your hobbies? 😃"
             style={[styles.textarea2]}
@@ -186,10 +204,10 @@ class MakeProfileScreen extends Component {
             {makeProfileLoading ? (
               <Loading />
             ) : (
-                <Button style={styles.submitButton} onPress={this.onSubmit}>
-                  <Text style={styles.submitButtonText}>Save</Text>
-                </Button>
-              )}
+              <Button style={styles.submitButton} onPress={this.onSubmit}>
+                <Text style={styles.submitButtonText}>Save</Text>
+              </Button>
+            )}
           </View>
         </View>
       </AvoidKeyboard>

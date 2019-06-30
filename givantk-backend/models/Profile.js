@@ -10,7 +10,7 @@ const Service = require('./Service');
 const ProfileSchema = new Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'user',
+    ref: 'user'
   },
   first_name: String,
   last_name: String,
@@ -20,88 +20,89 @@ const ProfileSchema = new Schema({
   phone_number: Number,
   date_of_birth: Date,
   verified: Boolean,
-  skills: {
-    type: [String],
-    required: true,
+  recommenderInfo: {
+    skills: [{ type: String }],
+    job: String,
+    location: String
   },
   notifications: {
     type: [
       {
         title: {
           type: String,
-          required: true,
+          required: true
         },
         content: String,
         seen: {
           type: Boolean,
-          default: false,
+          default: false
         },
         navigateTo: {
           kind: String, // service or profile or announcement
           service: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'service',
+            ref: 'service'
           },
           profile: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'profile',
-          },
+            ref: 'profile'
+          }
         },
         is_user_associated: {
           type: Boolean,
-          default: false,
+          default: false
         },
         user_associated: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: 'user',
+          ref: 'user'
         },
         user_profile_associated: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: 'profile',
-        },
-      },
-    ],
+          ref: 'profile'
+        }
+      }
+    ]
   },
   givantk_points: Number,
   money_points: Number,
   services_asked_for: [
-    { type: mongoose.Schema.Types.ObjectId, ref: 'service' },
+    { type: mongoose.Schema.Types.ObjectId, ref: 'service' }
   ],
   services_helped_in: [
-    { type: mongoose.Schema.Types.ObjectId, ref: 'service' },
+    { type: mongoose.Schema.Types.ObjectId, ref: 'service' }
   ],
   services_bookmarked: [
-    { type: mongoose.Schema.Types.ObjectId, ref: 'service' },
+    { type: mongoose.Schema.Types.ObjectId, ref: 'service' }
   ],
   services_proposed_for: [
-    { type: mongoose.Schema.Types.ObjectId, ref: 'service' },
+    { type: mongoose.Schema.Types.ObjectId, ref: 'service' }
   ],
   services_asked_for_finished: [
-    { type: mongoose.Schema.Types.ObjectId, ref: 'service' },
+    { type: mongoose.Schema.Types.ObjectId, ref: 'service' }
   ],
   services_helped_in_finished: [
-    { type: mongoose.Schema.Types.ObjectId, ref: 'service' },
+    { type: mongoose.Schema.Types.ObjectId, ref: 'service' }
   ],
   services_archived: [{ type: mongoose.Schema.Types.ObjectId, ref: 'service' }],
 
   average_services_rating: {
     type: Number,
-    default: 0,
+    default: 0
   },
 
   sum_of_ratings: {
     type: Number,
-    default: 0,
+    default: 0
   },
   number_of_ratings: {
     type: Number,
-    default: 0,
+    default: 0
   },
 
   date: {
     type: Date,
-    default: Date.now,
-  },
+    default: Date.now
+  }
 });
 
 module.exports = Profile = mongoose.model('profile', ProfileSchema);

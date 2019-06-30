@@ -31,7 +31,12 @@ module.exports = createService = (req, res) => {
       paymentType: req.body.paymentType,
       type: req.body.type,
       reveal_asker: !req.body.isAnonymous,
-      state: 'new'
+      state: 'new',
+      recommenderInfo: {
+        skills: req.body.skills,
+        job: req.body.job,
+        location: req.body.location
+      }
     };
 
     if (typeof req.body.start_time === 'string') {
