@@ -7,7 +7,7 @@ const serviceModel = mongoose.model('service');
 const profileModel = mongoose.model('profile');
 
 const CalculateScore = (profile, service) => {
-  let { recommendedSkills, recommendedJobs, recommendedLocations } = service;
+  let { skills:recommendedSkills, jobs:recommendedJobs, locations:recommendedLocations } = service.recommenderInfo;
 
   //Match common skills and assign score
   matchedSkills = recommendedSkills.filter((skill) =>
