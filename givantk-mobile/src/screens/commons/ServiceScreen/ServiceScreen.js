@@ -264,10 +264,14 @@ class ServiceScreen extends Component {
   //   addComment(Comment, service._id, callback);
   // };
 
-  onGetRecommendedHelpers=()=>{
-
+  onGetRecommendedHelpers = () => {
+    const { navigation } = this.props;
+    const { service } = this.state;
     
-  }
+    navigation.navigate('RecommendedHelpers', {
+      serviceId: service._id,
+    });
+  };
 
   render() {
     const { service, loggedInUser } = this.state;
@@ -388,7 +392,7 @@ class ServiceScreen extends Component {
                     small
                     onPress={this.onGetRecommendedHelpers}
                   >
-                    Get Recommended Helpers
+                    Invite Recommended Helpers
                   </MainButton>
                 </View>
               )}

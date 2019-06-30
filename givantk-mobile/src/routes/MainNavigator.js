@@ -10,6 +10,7 @@ import screens from '../screens';
 import store from '../store/createStore';
 import ServiceTypeInfoScreen from '../screens/commons/InfoScreens/ServiceTypeInfoScreen';
 import ServiceNatureInfoScreen from '../screens/commons/InfoScreens/ServiceNatureInfoScreen';
+ 
 
 const MainNavigator = createStackNavigator(
   {
@@ -36,6 +37,7 @@ const MainNavigator = createStackNavigator(
     MakeProfile: screens.MakeProfileScreen,
     MessagesChat: screens.MessagesChatScreen,
     IntroScreen: screens.IntroScreen,
+    RecommendedHelpers:screens.RecommendedHelpersScreen, 
     ServiceTypeInfo: ServiceTypeInfoScreen,
     ServiceNatureInfo: ServiceNatureInfoScreen,
   },

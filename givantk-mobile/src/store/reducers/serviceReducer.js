@@ -15,6 +15,8 @@ const INITIAL_STATE = {
   archiveServiceLoading: false,
   addReviewLoading: false,
   addCommentLoading: false,
+  getRecommendedHelpersLoading: false,
+  recommendedHelpers: [],
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -134,7 +136,7 @@ export default (state = INITIAL_STATE, action) => {
         addReviewLoading: false,
       };
 
-      case actionTypes.ADD_COMMENT_START:
+    case actionTypes.ADD_COMMENT_START:
       return {
         ...state,
         addCommentLoading: true,
@@ -144,6 +146,21 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         addCommentLoading: false,
+      };
+
+    case actionTypes.GET_RECOMMENDED_HELPERS_START:
+      return {
+        ...state,
+        getRecommendedUsersLoading: true,
+      };
+
+    case actionTypes.GET_RECOMMENDED_HELPERS_FINISH:
+      return {
+        ...state,
+        getRecommendedHelpersLoading: false,
+        recommendedHelpers: action.payload
+          ? action.payload
+          : [...state.recommendedHelpers],
       };
 
     default:

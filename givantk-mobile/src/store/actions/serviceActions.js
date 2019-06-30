@@ -3,7 +3,7 @@ import http, { serviceAPI } from '../../assets/utils/httpService';
 import { serverErrorMessage } from '../../assets/constants/index';
 
 export const getAllServices = (callbackOnSuccess, callbackOnFail) => (
-  dispatch,
+  dispatch
 ) => {
   dispatch({
     type: actionTypes.GET_ALL_SERVICES_START,
@@ -30,7 +30,7 @@ export const getAllServices = (callbackOnSuccess, callbackOnFail) => (
 };
 
 export const getSearchedServices = (searchedKeyword, callback) => (
-  dispatch,
+  dispatch
 ) => {
   dispatch({
     type: actionTypes.GET_SEARCHED_SERVICES_START,
@@ -81,7 +81,7 @@ export const createService = (service, callback) => (dispatch) => {
 };
 
 export const proposeToService = (serviceId, proposal, callback) => (
-  dispatch,
+  dispatch
 ) => {
   dispatch({
     type: actionTypes.PROPOSE_TO_SERVICE_START,
@@ -133,7 +133,7 @@ export const getServiceById = (serviceId, callback) => (dispatch) => {
 };
 
 export const acceptServiceProposal = (serviceId, proposalId, callback) => (
-  dispatch,
+  dispatch
 ) => {
   dispatch({
     type: actionTypes.ACCEPT_SERVICE_PROPOSAL_START,
@@ -279,6 +279,29 @@ export const addComment = (comment, serviceId, callback) => (dispatch) => {
       });
       dispatch({
         type: actionTypes.ADD_COMMENT_FINISH,
+      });
+    });
+};
+
+export const getRecommendedHelpers = (serviceId, callback) => (dispatch) => {
+  dispatch({
+    type: actionTypes.GET_RECOMMENDED_HELPERS_START,
+  });
+  http
+    .get(`${serviceAPI}/recommendedHelpers/${serviceId}`)
+    .then(() => {
+      dispatch({
+        type: actionTypes.GET_RECOMMENDED_HELPERS_FINISH,
+      });
+      if (callback) callback();
+    })
+    .catch((err) => {
+      dispatch({
+        type: actionTypes.SET_ERRORS,
+        payload: err.response ? err.response.data : serverErrorMessage,
+      });
+      dispatch({
+        type: actionTypes.GET_RECOMMENDED_HELPERS_FINISH,
       });
     });
 };
