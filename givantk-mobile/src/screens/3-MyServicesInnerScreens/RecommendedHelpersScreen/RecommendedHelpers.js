@@ -16,24 +16,26 @@ class RecommendedHelpers extends Component {
     if (navigation.state.params) {
       const { serviceId } = navigation.state.params;
       getRecommendedHelpers(serviceId);
-
+    } else {
+      console.log('params not sent ');
     }
-    else{
-        console.log('params not sent ')
-    }
-    
   }
 
   render() {
-    const { getRecommendedHelpersLoading, recommendedHelpers,errors } = this.props;
+    const {
+      getRecommendedHelpersLoading,
+      recommendedHelpers,
+      errors,
+    } = this.props;
 
     return (
       <View>
-        {getRecommendedHelpersLoading||errors ? (
+        {/* {getRecommendedHelpersLoading||errors ? (
           <Text>Loading</Text>
         ) : (
           <Text>{recommendedHelpers}</Text>
-        )}
+        )} */}
+    
       </View>
     );
   }

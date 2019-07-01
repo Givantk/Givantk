@@ -10,12 +10,20 @@ const errors = {};
 //Method to calculate score to each service
 
 const CalculateScore = (service, profile) => {
-  let { skills:recommendedSkills, jobs:recommendedJobs, locations:recommendedLocations } = service.recommenderInfo;
-  let { skills:profileSkills, job:profileJob, location:profileLocation } = profile.recommenderInfo;
+  let {
+    skills: recommendedSkills,
+    jobs: recommendedJobs,
+    locations: recommendedLocations,
+  } = service.recommenderInfo;
+  let {
+    skills: profileSkills,
+    job: profileJob,
+    location: profileLocation,
+  } = profile.recommenderInfo;
 
   //Match common skills and assign score
   matchedSkills = recommendedSkills.filter((skill) =>
-  profileSkills.skills.includes(skill)
+    profileSkills.skills.includes(skill)
   );
 
   service.score = matchedSkills.length;

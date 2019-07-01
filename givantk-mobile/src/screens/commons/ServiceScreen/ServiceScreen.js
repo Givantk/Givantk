@@ -267,7 +267,7 @@ class ServiceScreen extends Component {
   onGetRecommendedHelpers = () => {
     const { navigation } = this.props;
     const { service } = this.state;
-    
+
     navigation.navigate('RecommendedHelpers', {
       serviceId: service._id,
     });
