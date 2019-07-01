@@ -155,8 +155,6 @@ export default (state = INITIAL_STATE, action) => {
       };
 
     case actionTypes.GET_RECOMMENDED_HELPERS_FINISH:
-      console.log('I am here')
-      console.log(action)
       return {
         ...state,
         getRecommendedHelpersLoading: false,
