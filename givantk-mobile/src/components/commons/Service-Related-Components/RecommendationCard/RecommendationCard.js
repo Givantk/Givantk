@@ -26,7 +26,7 @@ class RecommendationCard extends React.PureComponent {
               <View>
                 <Image
                   source={{
-                    uri: getUserImage(null),
+                    uri: getUserImage(profile.avatar),
                   }}
                   style={styles.userImage}
                 />

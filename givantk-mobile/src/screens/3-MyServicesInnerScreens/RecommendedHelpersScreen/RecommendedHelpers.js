@@ -31,11 +31,12 @@ class RecommendedHelpers extends Component {
     } = this.props;
 
     return (
-      <View style={{flex:1}}> 
-       {getRecommendedHelpersLoading?<Loading/>:
-        <RecommendationList profiles={recommendedHelpers} />
-       }
-
+      <View style={{ flex: 1 }}>
+        {getRecommendedHelpersLoading ? (
+          <Loading />
+        ) : (
+          <RecommendationList profiles={recommendedHelpers} />
+        )}
       </View>
     );
   }
