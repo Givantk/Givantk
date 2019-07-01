@@ -9,13 +9,13 @@ const profileModel = mongoose.model('profile');
 const CalculateScore = (profile, service) => {
   let {
     skills: recommendedSkills,
-    jobs: recommendedJobs,
-    locations: recommendedLocations,
+    job: recommendedJobs,
+    location: recommendedLocations
   } = service.recommenderInfo;
   let {
     skills: profileSkills,
     job: profileJob,
-    location: profileLocation,
+    location: profileLocation
   } = profile.recommenderInfo;
 
   //Match common skills and assign score
