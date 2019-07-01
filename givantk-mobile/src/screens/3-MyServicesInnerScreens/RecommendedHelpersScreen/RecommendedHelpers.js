@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as ServiceActions from '../../../store/actions/serviceActions';
-import RecommendationCard from '../../../components/commons/Service-Related-Components/RecommendationCard/RecommendationCard';
+import RecommendationList from '../../../components/commons/Service-Related-Components/RecommendationList/RecommendationList';
 
 class RecommendedHelpers extends Component {
   static navigationOptions = () => ({
@@ -36,12 +36,8 @@ class RecommendedHelpers extends Component {
         ) : (
           <Text>{recommendedHelpers}</Text>
         )} */}
-
-        <RecommendationCard />
-        <RecommendationCard />
-        <RecommendationCard />
-        <RecommendationCard />
-        <RecommendationCard />
+        <RecommendationList profiles={recommendedHelpers} />
+    
 
       </View>
     );

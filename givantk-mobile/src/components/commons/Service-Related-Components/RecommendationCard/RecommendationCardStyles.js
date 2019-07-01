@@ -49,6 +49,8 @@ const styles = StyleSheet.create({
     width: '98%',
     alignSelf: 'center',
     alignItems: 'center',
+    justifyContent:'center',
+    textAlign:'center',
     paddingBottom: 15,
   },
   writtenReview:{

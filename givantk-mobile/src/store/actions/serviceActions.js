@@ -289,9 +289,10 @@ export const getRecommendedHelpers = (serviceId, callback) => (dispatch) => {
   });
   http
     .get(`${serviceAPI}/recommendedHelpers/${serviceId}`)
-    .then(() => {
+    .then((res) => {
       dispatch({
         type: actionTypes.GET_RECOMMENDED_HELPERS_FINISH,
+        payload: res.data,
       });
       if (callback) callback();
     })
