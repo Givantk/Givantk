@@ -155,4 +155,26 @@ router.get(
   serviceController.getSearchedServices
 );
 
+// @route  GET api/service/recommendedHelpers/:service_id
+// @desc   Search for recommended helpers 
+// @access Private
+// @errors nohelperserror error
+
+router.get(
+  '/recommendedHelpers/:service_id',
+  passport.authenticate('jwt', { session: false }),
+  serviceController.getRecommendedHelpers
+);
+
+// @route  GET api/service/recommendedServices
+// @desc   Search for recommended services 
+// @access Private
+// @errors noservices error
+
+router.get(
+  '/recommendedServices',
+  passport.authenticate('jwt', { session: false }),
+  serviceController.getRecommendedServices
+);
+
 module.exports = router;

@@ -60,7 +60,7 @@ class ServiceScreen extends Component {
 
     // Updating service in local state through allServices passed through Redux store
     const currentService = nextProps.allServices.find(
-      (s) => s._id === prevState.service._id,
+      (s) => s._id === prevState.service._id
     );
 
     const ownService = currentUser._id === currentService.asker._id;
@@ -69,7 +69,7 @@ class ServiceScreen extends Component {
     const appliedBefore =
       currentService.applications.filter(
         (applicant) =>
-          (applicant.user._id || applicant.user) !== currentUser._id,
+          (applicant.user._id || applicant.user) !== currentUser._id
       ).length < currentService.applications.length;
 
     return {
@@ -91,7 +91,7 @@ class ServiceScreen extends Component {
     const appliedBefore =
       service.applications.filter(
         (applicant) =>
-          (applicant.user._id || applicant.user) !== currentUser._id,
+          (applicant.user._id || applicant.user) !== currentUser._id
       ).length < service.applications.length;
 
     this.setState(() => ({
@@ -141,7 +141,7 @@ class ServiceScreen extends Component {
     };
 
     quickModal('This helper will be assigned to your Service', () =>
-      acceptServiceProposal(service._id, proposalId, callback),
+      acceptServiceProposal(service._id, proposalId, callback)
     );
   };
 
@@ -155,7 +155,7 @@ class ServiceScreen extends Component {
     };
 
     quickModal('You will martk this service as finished', () =>
-      markServiceAsDone(service._id, callback),
+      markServiceAsDone(service._id, callback)
     );
   };
 
@@ -169,7 +169,7 @@ class ServiceScreen extends Component {
     };
 
     quickModal('You will archive this service', () =>
-      archiveService(service._id, callback),
+      archiveService(service._id, callback)
     );
   };
 
@@ -264,6 +264,15 @@ class ServiceScreen extends Component {
   //   addComment(Comment, service._id, callback);
   // };
 
+  onGetRecommendedHelpers = () => {
+    const { navigation } = this.props;
+    const { service } = this.state;
+
+    navigation.navigate('RecommendedHelpers', {
+      serviceId: service._id,
+    });
+  };
+
   render() {
     const { service, loggedInUser } = this.state;
 
@@ -307,7 +316,7 @@ class ServiceScreen extends Component {
                       getUserImage(
                         service.reveal_asker === false
                           ? null
-                          : service.asker.avatar,
+                          : service.asker.avatar
                       ),
                   }}
                   style={styles.userImage}
@@ -371,6 +380,23 @@ class ServiceScreen extends Component {
                   </MainButton>
                 </View>
               )}
+
+            {loggedInUser.ownService &&
+              !service.helper &&
+              (service.state === 'new' ||
+                service.state === 'progressing' ||
+                service.state === 'pending') && (
+                <View style={{ alignSelf: 'flex-end' }}>
+                  <MainButton
+                    backgroundColor={colors.secondary}
+                    small
+                    onPress={this.onGetRecommendedHelpers}
+                  >
+                    Invite Recommended Helpers
+                  </MainButton>
+                </View>
+              )}
+
             {loggedInUser.ownService &&
               service.helper &&
               (service.state === 'new' ||
@@ -430,7 +456,7 @@ class ServiceScreen extends Component {
                   service={service}
                   ProposalIsChosen
                 />
-              ) : null,
+              ) : null
             )}
             {service.applications.map((application) =>
               !application.chosen ? (
@@ -448,7 +474,7 @@ class ServiceScreen extends Component {
                     service={service}
                   />
                 </View>
-              ) : null,
+              ) : null
             )}
             {/* diplaying rating stars and text for asker and helper if service is finished */}
 
@@ -521,5 +547,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(ServiceScreen);

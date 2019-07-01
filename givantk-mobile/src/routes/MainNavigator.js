@@ -36,6 +36,7 @@ const MainNavigator = createStackNavigator(
     MakeProfile: screens.MakeProfileScreen,
     MessagesChat: screens.MessagesChatScreen,
     IntroScreen: screens.IntroScreen,
+    RecommendedHelpers: screens.RecommendedHelpersScreen,
     ServiceTypeInfo: ServiceTypeInfoScreen,
     ServiceNatureInfo: ServiceNatureInfoScreen,
     SuggestHelperCriteria: screens.SuggestHelperCriteriaScreen,

@@ -28,6 +28,8 @@ import PayWithStripeScreen from './5-AccountInnerScreens/ChargeMoneyScoreScreens
 import MessagesChatScreen from './5-AccountInnerScreens/MessagesChatScreen/MessagesChatScreen';
 import IntroScreen from './commons/IntroScreen/IntroScreen';
 import SuggestHelperCriteriaScreen from './2-AddServiceInnerScreens/SuggestHelperCriteriaScreen';
+import RecommendedHelpersScreen from './3-MyServicesInnerScreens/RecommendedHelpersScreen/RecommendedHelpers';
+
 
 const screens = {
   AccountScreen,
@@ -58,6 +60,7 @@ const screens = {
   MessagesChatScreen,
   IntroScreen,
   SuggestHelperCriteriaScreen,
+  RecommendedHelpersScreen,
 };
 
 export default screens;
