@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as ServiceActions from '../../../store/actions/serviceActions';
 import RecommendationList from '../../../components/commons/Service-Related-Components/RecommendationList/RecommendationList';
+import Loading from '../../../components/commons/UI/Loading/Loading';
 
 class RecommendedHelpers extends Component {
   static navigationOptions = () => ({
@@ -30,14 +31,10 @@ class RecommendedHelpers extends Component {
     } = this.props;
 
     return (
-      <View>
-        {/* {getRecommendedHelpersLoading||errors ? (
-          <Text>Loading</Text>
-        ) : (
-          <Text>{recommendedHelpers}</Text>
-        )} */}
+      <View style={{flex:1}}> 
+       {getRecommendedHelpersLoading?<Loading/>:
         <RecommendationList profiles={recommendedHelpers} />
-    
+       }
 
       </View>
     );

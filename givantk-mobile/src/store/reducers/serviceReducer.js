@@ -151,7 +151,7 @@ export default (state = INITIAL_STATE, action) => {
     case actionTypes.GET_RECOMMENDED_HELPERS_START:
       return {
         ...state,
-        getRecommendedUsersLoading: true,
+        getRecommendedHelpersLoading: true,
       };
 
     case actionTypes.GET_RECOMMENDED_HELPERS_FINISH:
