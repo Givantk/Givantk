@@ -381,7 +381,7 @@ class ServiceScreen extends Component {
                 </View>
               )}
 
-            {/* {loggedInUser.ownService &&
+            {loggedInUser.ownService &&
               !service.helper &&
               (service.state === 'new' ||
                 service.state === 'progressing' ||
@@ -395,7 +395,7 @@ class ServiceScreen extends Component {
                     Invite Recommended Helpers
                   </MainButton>
                 </View>
-              )} */}
+              )}
 
             {loggedInUser.ownService &&
               service.helper &&

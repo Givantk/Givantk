@@ -3,17 +3,27 @@ import { StyleSheet } from 'react-native';
 import { colors, dimensions, fontTypes } from '../../../../assets/styles/base';
 
 const styles = StyleSheet.create({
-  serviceCard: {
+  recommenationCard: {
     borderWidth: 3,
     borderRadius: 10,
     alignSelf: 'center',
     borderColor: colors.primary,
-    width: dimensions.fullWidth * 0.88,
+    width: dimensions.fullWidth * 0.78,
     flexDirection: 'column',
     justifyContent: 'space-between',
     backgroundColor: colors.tertiary,
     paddingVertical: 10,
     marginVertical: 20,
+  },
+  userName: {
+    paddingTop:5,  
+    color: colors.black,
+    fontWeight: 'bold',
+  },
+  criteria: {
+    color: colors.primary,
+    fontWeight: 'normal',
+
   },
   header: {
     flexDirection: 'row',
@@ -32,19 +42,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  reviewHeader: {
-    marginTop: -7,
-    color: colors.black,
-    textAlign: 'center',
-    marginBottom: 15,
-    fontWeight:'500'
-  },
-  reviewer: {
-    color: colors.primary,
-    paddingLeft: 10,
-    paddingTop: 7,
-  },
   content: {
+    marginTop:10,
+    marginBottom:10,  
     backgroundColor: colors.white,
     width: '98%',
     alignSelf: 'center',
@@ -55,7 +55,12 @@ const styles = StyleSheet.create({
     marginTop:10,
     fontStyle:'italic'
   },
-
+  headerRight: {
+    flexDirection: 'column',
+    marginLeft: 10,
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+  },
 });
 
 export default styles;
