@@ -9,7 +9,6 @@ import * as ServiceActions from '../../../store/actions/serviceActions';
 import DefaultTextInput from '../../../components/commons/UI/DefaultTextInput/DefaultTextInput';
 import ServicesList from '../../../components/commons/Service-Related-Components/ServicesList/ServicesList';
 import styles from './FeaturedScreenStyles';
-import snakeNavigator from '../../../components/commons/UI/SnakeNavigator/SnakeNavigator';
 
 class FeaturedScreen extends React.Component {
   static navigationOptions = () => ({
