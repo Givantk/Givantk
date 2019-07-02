@@ -16,6 +16,10 @@ const styles = StyleSheet.create({
     fontSize: 200,
     textAlign: 'center',
   },
+  multiPicker: {
+    width: '100%',
+    marginBottom: 10,
+  },
   saveButtonContainer: {
     alignItems: 'center',
   },

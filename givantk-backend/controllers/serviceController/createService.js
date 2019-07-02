@@ -33,9 +33,9 @@ module.exports = createService = (req, res) => {
       reveal_asker: !req.body.isAnonymous,
       state: 'new',
       recommenderInfo: {
-        skills: req.body.skills,
-        job: req.body.job,
-        location: req.body.location
+        skills: JSON.parse(req.body.skills),
+        job: JSON.parse(req.body.job),
+        location: JSON.parse(req.body.location)
       }
     };
 

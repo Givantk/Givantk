@@ -20,6 +20,7 @@
     "react-native-app-intro-slider": "^2.0.1",
     "react-native-check-box": "^2.1.7",
     "react-native-input-scroll-view": "^1.9.1",
+    "react-native-multiple-select": "^0.5.2",
     "react-native-ratings": "^6.3.0",
     "react-native-textinput-effects": "^0.5.1",
     "react-native-ui-lib": "^3.16.4",

@@ -4,9 +4,12 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 import AvoidKeyboard from '../../../components/commons/UI/AvoidKeyboard/AvoidKeyboard';
+import cairoDistricts from '../../../assets/data/cairoDistricts';
+import jobsList from '../../../assets/data/jobs';
 import MainButton from '../../../components/commons/UI/MainButton/MainButton';
+import MultiPicker from '../../../components/commons/UI/MultiPicker';
+import skillsList from '../../../assets/data/skills';
 import styles from './style';
-import TextInput from '../../../components/commons/UI/TextInput/TextInput';
 
 export default class SuggestHelperCriteriaScreen extends Component {
   state = {
@@ -26,17 +29,18 @@ export default class SuggestHelperCriteriaScreen extends Component {
   }
 
   onChangeValue = (name, value) => {
+    value = Array.from(value);
     if (value)
       this.setState({
-        [name]: value.split(',').map((s) => s.trim()),
+        [name]: value,
       });
   };
 
   onSave = () => {
-    const { job, skills, location } = this.state;
+    const { job, location, skills } = this.state;
     const { navigation } = this.props;
     const { onDone } = navigation.state.params;
-    onDone(job, skills, location);
+    onDone(job, location, skills);
     navigation.goBack();
   };
 
@@ -51,29 +55,34 @@ export default class SuggestHelperCriteriaScreen extends Component {
           </Text>
           <Icon type="Ionicons" name="md-person" style={styles.personIcon} />
           <View style={{ flexDirection: 'column' }}>
-            <TextInput
-              title="Job(s) - separated by a comma (,)"
-              placeholder="Example: doctor, service worker"
+            <MultiPicker
+              options={jobsList.map((d) => ({ label: d, value: d }))}
+              title="Job(s)"
               name="job"
               onChange={this.onChangeValue}
-              value={values.job.join(', ')}
+              searchPlaceholderText="Select preferable jobs"
+              style={styles.multiPicker}
+              initiallySelectedItems={values.job}
             />
 
-            <TextInput
-              title="Skill(s) - separated by a comma (,)"
-              placeholder="Example: read chinese, know about psychology"
-              style={styles.input}
+            <MultiPicker
+              options={skillsList.map((d) => ({ label: d, value: d }))}
+              title="Skill(s)"
               name="skills"
               onChange={this.onChangeValue}
-              value={values.skills.join(', ')}
+              searchPlaceholderText="Select preferable skills"
+              style={styles.multiPicker}
+              initiallySelectedItems={values.skills}
             />
 
-            <TextInput
-              title="Location(s) - separated by a comma (,)"
-              placeholder="Example: Dokki, Madinet Nasr"
+            <MultiPicker
+              options={cairoDistricts.map((d) => ({ label: d, value: d }))}
+              title="Location(s)"
               name="location"
               onChange={this.onChangeValue}
-              value={values.location.join(', ')}
+              searchPlaceholderText="Select preferable locations"
+              style={styles.multiPicker}
+              initiallySelectedItems={values.location}
             />
             <View style={styles.saveButtonContainer}>
               <MainButton
