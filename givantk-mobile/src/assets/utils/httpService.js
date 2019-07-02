@@ -23,7 +23,7 @@ export const removeAuthToken = () => {
 };
 
 // export const serverPath = 'http://46.101.170.117/givantk';
- export const serverPath = 'http://192.168.56.1:4800';
+export const serverPath = 'http://192.168.56.1:4800';
 export const chatServerPath = 'https://givantk-backend.herokuapp.com';
 
 export const userAPI = `${serverPath}/api/user`;

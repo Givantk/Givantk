@@ -10,6 +10,7 @@ import Loading from '../../UI/Loading/Loading';
 class RecommendationCard extends React.PureComponent {
   state = {
     invited: false,
+    invitedBefore: false,
   };
 
   componentDidMount = () => {
@@ -19,10 +20,19 @@ class RecommendationCard extends React.PureComponent {
       if (profile.invitedIn[serviceId] === true) {
         this.setState({
           invited: true,
+          invitedBefore: true,
         });
       }
     }
   };
+
+  componentDidUpdate() {
+    const {invited}=this.state;
+    const {invitationLoading}=this.props;
+    if (invited&&invitationLoading!==true) {
+      this.setState({ invitedBefore: true });
+    }
+  }
 
   onPressHelper = (id) => {
     this.props.navigation.navigate('Profile', {
@@ -32,7 +42,7 @@ class RecommendationCard extends React.PureComponent {
 
   render() {
     const { profile, onInvite, invitationLoading } = this.props;
-    const { invited } = this.state;
+    const { invited, invitedBefore } = this.state;
     return (
       <TouchableWithoutFeedback
         onPress={() => this.onPressHelper(profile.user)}
@@ -91,7 +101,7 @@ class RecommendationCard extends React.PureComponent {
           </View>
 
           <View style={{ alignItems: 'center' }}>
-            {invitationLoading && invited ? (
+            {invitationLoading && invited && !invitedBefore ? (
               <Loading />
             ) : invited ? (
               <Text style={styles.invitedText}>
