@@ -5,10 +5,23 @@ import MainButton from '../../../commons/UI/MainButton/MainButton';
 import getUserImage from '../../../../assets/utils/getUserImage';
 import styles from './RecommendationCardStyles';
 import PropTypes from 'prop-types';
+import Loading from '../../UI/Loading/Loading';
 
 class RecommendationCard extends React.PureComponent {
   state = {
     invited: false,
+  };
+
+  componentDidMount = () => {
+    const { profile, navigation } = this.props;
+    const { serviceId } = navigation.state.params;
+    if (profile.invitedIn) {
+      if (profile.invitedIn[serviceId] === true) {
+        this.setState({
+          invited: true,
+        });
+      }
+    }
   };
 
   onPressHelper = (id) => {
@@ -18,12 +31,17 @@ class RecommendationCard extends React.PureComponent {
   };
 
   render() {
-    const { profile,onInvite } = this.props;
+    const { profile, onInvite, invitationLoading } = this.props;
+    const { invited } = this.state;
     return (
-      <TouchableWithoutFeedback onPress={() => this.onPressHelper(profile.user)}>
+      <TouchableWithoutFeedback
+        onPress={() => this.onPressHelper(profile.user)}
+      >
         <View style={styles.recommenationCard}>
           <View style={styles.header}>
-            <TouchableWithoutFeedback onPress={() => this.onPressHelper(profile.user)}>
+            <TouchableWithoutFeedback
+              onPress={() => this.onPressHelper(profile.user)}
+            >
               <View>
                 <Image
                   source={{
@@ -34,7 +52,9 @@ class RecommendationCard extends React.PureComponent {
               </View>
             </TouchableWithoutFeedback>
             <View style={styles.headerRight}>
-              <TouchableWithoutFeedback onPress={() => this.onPressHelper(profile.user)}>
+              <TouchableWithoutFeedback
+                onPress={() => this.onPressHelper(profile.user)}
+              >
                 <View>
                   <Text style={styles.userName}>
                     {`${profile.first_name} ${profile.last_name}`}
@@ -71,7 +91,22 @@ class RecommendationCard extends React.PureComponent {
           </View>
 
           <View style={{ alignItems: 'center' }}>
-            <MainButton onPress={()=>onInvite(profile._id)}>Invite</MainButton>
+            {invitationLoading && invited ? (
+              <Loading />
+            ) : invited ? (
+              <Text style={styles.invitedText}>
+                User is invited successfully
+              </Text>
+            ) : (
+              <MainButton
+                onPress={() => {
+                  this.setState({ invited: true });
+                  onInvite(profile._id);
+                }}
+              >
+                Invite
+              </MainButton>
+            )}
           </View>
         </View>
       </TouchableWithoutFeedback>
@@ -85,6 +120,8 @@ RecommendationCard.propTypes = {
   onInvite: PropTypes.func,
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  invitationLoading: state.service.invitationLoading,
+});
 
 export default connect(mapStateToProps)(RecommendationCard);

@@ -313,10 +313,10 @@ export const inviteHelper = (profileId, serviceId, callback) => (dispatch) => {
   });
   http
     .post(`${serviceAPI}/invite/${profileId}`, {
-      profileId,
       serviceId,
     })
     .then(() => {
+      console.log('success')
       dispatch({
         type: actionTypes.INVITE_HELPER_FINISH,
       });

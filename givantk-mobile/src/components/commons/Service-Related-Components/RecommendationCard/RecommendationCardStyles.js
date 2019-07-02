@@ -16,14 +16,13 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   userName: {
-    paddingTop:5,  
+    paddingTop: 5,
     color: colors.black,
     fontWeight: 'bold',
   },
   criteria: {
     color: colors.primary,
     fontWeight: 'normal',
-
   },
   header: {
     flexDirection: 'row',
@@ -43,25 +42,29 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   content: {
-    marginTop:10,
-    marginBottom:10,  
+    marginTop: 10,
+    marginBottom: 10,
     backgroundColor: colors.white,
     width: '98%',
     alignSelf: 'center',
     alignItems: 'center',
-    justifyContent:'center',
-    textAlign:'center',
+    justifyContent: 'center',
+    textAlign: 'center',
     paddingBottom: 15,
   },
-  writtenReview:{
-    marginTop:10,
-    fontStyle:'italic'
+  writtenReview: {
+    marginTop: 10,
+    fontStyle: 'italic',
   },
   headerRight: {
     flexDirection: 'column',
     marginLeft: 10,
     justifyContent: 'center',
     alignItems: 'flex-start',
+  },
+  invitedText: {
+    fontWeight: 'bold',
+    color: colors.primary,
   },
 });
 

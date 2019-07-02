@@ -36,7 +36,10 @@ class RecommendedHelpers extends Component {
         {getRecommendedHelpersLoading ? (
           <Loading />
         ) : (
-          <RecommendationList profiles={recommendedHelpers} navigation={navigation} />
+          <RecommendationList
+            profiles={recommendedHelpers}
+            navigation={navigation}
+          />
         )}
       </View>
     );

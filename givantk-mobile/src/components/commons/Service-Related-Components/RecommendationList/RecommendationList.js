@@ -9,12 +9,12 @@ import { connect } from 'react-redux';
 import * as ServiceActions from '../../../../store/actions/serviceActions';
 
 const RecommendationList = (props) => {
-  const { navigation, loading, profiles,inviteHelper,} = props;
+  const { navigation, loading, profiles, inviteHelper } = props;
 
   const renderItem = (profile) => {
-    const {serviceId}=navigation.state.params;
+    const { serviceId } = navigation.state.params;
     const onInviteHelper = (profileId) => {
-      inviteHelper(profileId,serviceId,invitationCallback);
+      inviteHelper(profileId, serviceId, invitationCallback);
     };
 
     const invitationCallback = () => {
@@ -48,8 +48,6 @@ RecommendationList.propTypes = {
   profiles: PropTypes.arrayOf(PropTypes.shape({})),
   loading: PropTypes.bool,
 };
-
-
 
 const mapDispatchToProps = {
   inviteHelper: ServiceActions.inviteHelper,
