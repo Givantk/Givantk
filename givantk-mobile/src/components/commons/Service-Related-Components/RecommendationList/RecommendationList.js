@@ -12,8 +12,9 @@ const RecommendationList = (props) => {
   const { navigation, loading, profiles,inviteHelper,} = props;
 
   const renderItem = (profile) => {
-    const onInviteHelper = (id) => {
-      inviteHelper(id, invitationCallback);
+    const {serviceId}=navigation.state.params;
+    const onInviteHelper = (profileId) => {
+      inviteHelper(profileId,serviceId,invitationCallback);
     };
 
     const invitationCallback = () => {

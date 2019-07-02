@@ -307,18 +307,14 @@ export const getRecommendedHelpers = (serviceId, callback) => (dispatch) => {
     });
 };
 
-export const inviteHelper = (
-  profileId,
-  currentUser,
-  currentUserProfile,
-  callback
-) => (dispatch) => {
+export const inviteHelper = (profileId, serviceId, callback) => (dispatch) => {
   dispatch({
     type: actionTypes.INVITE_HELPER_START,
   });
   http
     .post(`${serviceAPI}/invite/${profileId}`, {
       profileId,
+      serviceId,
     })
     .then(() => {
       dispatch({
