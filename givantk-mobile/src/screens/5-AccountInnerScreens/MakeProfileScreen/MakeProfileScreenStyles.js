@@ -36,6 +36,11 @@ const styles = StyleSheet.create({
   picker: {
     color: colors.gray01,
   },
+  multiPicker: {
+    width: '100%',
+    marginTop: 10,
+    marginBottom: 10,
+  },
   textarea1: {
     backgroundColor: colors.trueWhite,
     borderRadius: 10,
@@ -68,10 +73,9 @@ const styles = StyleSheet.create({
 
   sizeError: {
     color: colors.red.lighten(0.5),
-    marginTop: -10,
     fontSize: 14,
     marginBottom: 10,
-    marginTop:3
+    marginTop: 3,
   },
 
   submitButton: {

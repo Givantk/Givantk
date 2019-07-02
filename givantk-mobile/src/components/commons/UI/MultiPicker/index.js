@@ -64,6 +64,7 @@ class MultiPicker extends React.Component {
 MultiPicker.defaultProps = {
   onChange: () => null,
   options: [],
+  initiallySelectedItems: [],
   title: 'Select items',
   submitButtonText: 'Save',
   searchPlaceholderText: 'Search...',

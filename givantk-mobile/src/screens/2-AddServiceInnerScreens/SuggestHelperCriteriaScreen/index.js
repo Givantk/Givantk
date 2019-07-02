@@ -55,13 +55,6 @@ export default class SuggestHelperCriteriaScreen extends Component {
           </Text>
           <Icon type="Ionicons" name="md-person" style={styles.personIcon} />
           <View style={{ flexDirection: 'column' }}>
-            {/* <TextInput
-              title="Job(s) - separated by a comma (,)"
-              placeholder="Example: doctor, service worker"
-              name="job"
-              onChange={this.onChangeValue}
-              value={values.job.join(', ')}
-            /> */}
             <MultiPicker
               options={jobsList.map((d) => ({ label: d, value: d }))}
               title="Job(s)"
@@ -72,14 +65,6 @@ export default class SuggestHelperCriteriaScreen extends Component {
               initiallySelectedItems={values.job}
             />
 
-            {/* <TextInput
-              title="Skill(s) - separated by a comma (,)"
-              placeholder="Example: read chinese, know about psychology"
-              style={styles.input}
-              name="skills"
-              onChange={this.onChangeValue}
-              value={values.skills.join(', ')}
-            /> */}
             <MultiPicker
               options={skillsList.map((d) => ({ label: d, value: d }))}
               title="Skill(s)"
@@ -90,13 +75,6 @@ export default class SuggestHelperCriteriaScreen extends Component {
               initiallySelectedItems={values.skills}
             />
 
-            {/* <TextInput
-              title="Location(s) - separated by a comma (,)"
-              placeholder="Example: Dokki, Madinet Nasr"
-              name="location"
-              onChange={this.onChangeValue}
-              value={values.location.join(', ')}
-            /> */}
             <MultiPicker
               options={cairoDistricts.map((d) => ({ label: d, value: d }))}
               title="Location(s)"

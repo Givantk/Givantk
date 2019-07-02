@@ -15,6 +15,9 @@ import Picker from '../../../components/commons/UI/Picker/Picker';
 import QuickNotification from '../../../components/commons/UI/QuickNotification/QuickNotification';
 import styles from './MakeProfileScreenStyles';
 import TextInput from '../../../components/commons/UI/TextInput/TextInput';
+import MultiPicker from '../../../components/commons/UI/MultiPicker';
+import skillsList from '../../../assets/data/skills';
+import jobsList from '../../../assets/data/jobs';
 
 class MakeProfileScreen extends Component {
   static navigationOptions = () => ({
@@ -107,13 +110,10 @@ class MakeProfileScreen extends Component {
       // appending keys and value in the new profile form data
 
       newProfile.append('gender', gender.value);
-      newProfile.append(
-        'skills',
-        JSON.stringify(skills.split(',').map((s) => s.trim())),
-      );
+      newProfile.append('skills', JSON.stringify(skills));
       newProfile.append('description', description);
       newProfile.append('phone_number', phone_number);
-      newProfile.append('job', job);
+      newProfile.append('job', job.value);
       newProfile.append('date_Of_birth', date_of_birth);
 
       const callback = () => {
@@ -127,7 +127,7 @@ class MakeProfileScreen extends Component {
   };
 
   render() {
-    const { gender, avatar, noAvatar, sizeAlert } = this.state;
+    const { gender, job, avatar, noAvatar, sizeAlert } = this.state;
     const { errors, makeProfileLoading, currentUser } = this.props;
 
     return (
@@ -157,7 +157,7 @@ class MakeProfileScreen extends Component {
           </View>
 
           <Picker
-            title="Gender*"
+            title="Gender"
             placeholder="Male / Female"
             style={styles.picker}
             name="gender"
@@ -176,19 +176,25 @@ class MakeProfileScreen extends Component {
           />
           <Text style={styles.error}>{errors.phone_number}</Text>
 
-          <TextInput
+          <Picker
             title="Job"
-            placeholder="What's your job? (if you have one)"
-            style={styles.input}
+            placeholder="Select your job"
+            style={styles.picker}
             name="job"
             onChange={this.onChangeValue}
+            options={jobsList
+              .map((j) => ({ label: j, value: j }))
+              .concat({ label: 'Other', value: 'Other' })}
+            value={job}
           />
 
-          <Text style={styles.label}>Skills* - separated by a comma (,)</Text>
-          <Textarea
-            placeholder="Type what you can do, separated by a comma. For example: I can buy anything for you within Madinet Nast area, I know everything about Egypt, I can read Chinese... etc"
-            style={[styles.textarea1]}
-            onChangeText={(v) => this.onChangeValue('skills', v)}
+          <MultiPicker
+            options={skillsList.map((d) => ({ label: d, value: d }))}
+            title="Skills*"
+            name="skills"
+            onChange={this.onChangeValue}
+            searchPlaceholderText="Select your skills"
+            style={styles.multiPicker}
           />
           <Text style={styles.error}>{errors.skills}</Text>
 

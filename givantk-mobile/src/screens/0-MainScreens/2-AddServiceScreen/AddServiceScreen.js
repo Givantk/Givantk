@@ -142,8 +142,6 @@ class AddServiceScreen extends React.Component {
       location: JSON.stringify(location),
       skills: JSON.stringify(skills),
     };
-    console.log(location);
-    // console.log(service);
     const callback = () => {
       QuickNotification('Service posted successfully');
       getAllServices();
