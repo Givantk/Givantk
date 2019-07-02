@@ -9,7 +9,9 @@ import Loading from '../../UI/Loading/Loading';
 
 class RecommendationCard extends React.PureComponent {
   state = {
+    //invited means invited now
     invited: false,
+    //invitedbefore means invited from a previous time
     invitedBefore: false,
   };
 
