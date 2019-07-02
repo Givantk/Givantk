@@ -14,6 +14,19 @@ router.get('/all', serviceController.getAllServices);
 // @desc   Create new service for logged in user
 // @access Private
 // @errors noprofile name description nature state asker start_time end_time error
+
+// @route  GET api/service/recommendedServices
+// @desc   Search for recommended services 
+// @access Private
+// @errors noservices error
+
+router.get(
+  '/recommendedServices',
+  passport.authenticate('jwt', { session: false }),
+  serviceController.getRecommendedServices
+);
+
+
 router.post(
   '/',
   passport.authenticate('jwt', { session: false }),
@@ -166,16 +179,6 @@ router.get(
   serviceController.getRecommendedHelpers
 );
 
-// @route  GET api/service/recommendedServices
-// @desc   Search for recommended services 
-// @access Private
-// @errors noservices error
-
-router.get(
-  '/recommendedServices',
-  passport.authenticate('jwt', { session: false }),
-  serviceController.getRecommendedServices
-);
 
 // @route  GET api/service/recommendedServices
 // @desc   Search for recommended services 

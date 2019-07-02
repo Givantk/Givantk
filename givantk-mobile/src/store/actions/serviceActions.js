@@ -29,6 +29,34 @@ export const getAllServices = (callbackOnSuccess, callbackOnFail) => (
     });
 };
 
+export const getRecommendedServices = (callbackOnSuccess, callbackOnFail) => (
+  dispatch
+) => {
+  dispatch({
+    type: actionTypes.GET_RECOMMENDED_SERVICES_START,
+  });
+  http
+    .get(`${serviceAPI}/recommendedServices`)
+    .then((res) => {
+      dispatch({
+        type: actionTypes.GET_RECOMMENDED_SERVICES_FINISH,
+        payload: res.data,
+      });
+      if (callbackOnSuccess) callbackOnSuccess();
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: actionTypes.SET_ERRORS,
+        payload: err.response.data,
+      });
+      dispatch({
+        type: actionTypes.GET_RECOMMENDED_SERVICES_FINISH,
+      });
+      if (callbackOnFail) callbackOnFail();
+    });
+};
+
 export const getSearchedServices = (searchedKeyword, callback) => (
   dispatch
 ) => {
@@ -316,7 +344,6 @@ export const inviteHelper = (profileId, serviceId, callback) => (dispatch) => {
       serviceId,
     })
     .then(() => {
-      console.log('success')
       dispatch({
         type: actionTypes.INVITE_HELPER_FINISH,
       });

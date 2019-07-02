@@ -41,7 +41,7 @@ class LoginScreen extends React.Component {
   callbackAfterLogin = () => {
     const {
       navigation,
-      getAllServices,
+      getRecommendedServices,
       getCurrentUserProfile,
       currentUser,
       passedIntro,
@@ -53,7 +53,7 @@ class LoginScreen extends React.Component {
         currentUser,
       });
     }
-    getAllServices();
+    getRecommendedServices();
     getCurrentUserProfile();
 
     AuthActions.getPushNotificationToken();
@@ -169,7 +169,7 @@ LoginScreen.propTypes = {
   loginUser: PropTypes.func,
   loginUserWithFacebook: PropTypes.func,
   checkSavedUserThenLogin: PropTypes.func,
-  getAllServices: PropTypes.func,
+  getRecommendedServices: PropTypes.func,
   getCurrentUserProfile: PropTypes.func,
 
   errors: PropTypes.shape({}),
@@ -189,7 +189,7 @@ const mapDispatchToProps = {
   loginUser: AuthActions.loginUser,
   loginUserWithFacebook: AuthActions.loginUserWithFacebook,
   checkSavedUserThenLogin: AuthActions.checkSavedUserThenLogin,
-  getAllServices: ServiceActions.getAllServices,
+  getRecommendedServices: ServiceActions.getRecommendedServices,
   getCurrentUserProfile: ProfileActions.getCurrentUserProfile,
   getSavedPassedIntro: IntroActions.getSavedPassedIntro,
 };

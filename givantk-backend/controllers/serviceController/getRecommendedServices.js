@@ -12,8 +12,8 @@ const errors = {};
 const CalculateScore = (service, profile) => {
   let {
     skills: recommendedSkills,
-    jobs: recommendedJobs,
-    locations: recommendedLocations,
+    job: recommendedJobs,
+    location: recommendedLocations,
   } = service.recommenderInfo;
   let {
     skills: profileSkills,
@@ -23,7 +23,7 @@ const CalculateScore = (service, profile) => {
 
   //Match common skills and assign score
   matchedSkills = recommendedSkills.filter((skill) =>
-    profileSkills.skills.includes(skill)
+    profileSkills.includes(skill)
   );
 
   service.score = matchedSkills.length;
@@ -50,9 +50,14 @@ module.exports = getRecommendedServices = (req, res) => {
   profileModel.findOne({ user: req.user._id }).then((profile) => {
     serviceModel
       .find()
+      .populate('asker')
+      .populate('applications.user')
+      .populate('comments.user')
+      .sort({ date: -1 })
       .then((services) => {
         services.forEach((service) => CalculateScore(service, profile));
         services.sort((a, b) => b.score - a.score);
+
         res.json(services);
       })
       .catch((err) => {

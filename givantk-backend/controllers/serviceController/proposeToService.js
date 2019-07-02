@@ -23,7 +23,12 @@ module.exports = proposeToService = (req, res) => {
         res.status(401).json(errors);
       }
 
-      if (service.state !== 'new' || service.state !== 'pending') {
+
+      if (
+        service.state === 'progressing' ||
+        service.state === 'done' ||
+        service.state === 'archived'
+      ) {
         errors.unauthorized = "You can't propose to this service";
         return res.status(401).json(errors);
       }
@@ -46,7 +51,7 @@ module.exports = proposeToService = (req, res) => {
         // Updating service
         service.applications.unshift({
           user: req.user._id,
-          proposal: req.body.proposal
+          proposal: req.body.proposal,
         });
         service.state = 'pending';
 
@@ -64,11 +69,11 @@ module.exports = proposeToService = (req, res) => {
                   } proposed to your service \"${service.name}\"`,
                   navigateTo: {
                     kind: 'service',
-                    service: service._id
+                    service: service._id,
                   },
                   is_user_associated: true,
                   user_associated: applicantProfile.user,
-                  user_profile_associated: applicantProfile._id
+                  user_profile_associated: applicantProfile._id,
                 });
                 askerProfile.save();
 
@@ -80,8 +85,8 @@ module.exports = proposeToService = (req, res) => {
                       body: `${
                         applicantProfile.first_name
                       } proposed to your service \"${service.name}\"`,
-                      sound: 'default'
-                    }
+                      sound: 'default',
+                    },
                   ]);
                 }
               });
