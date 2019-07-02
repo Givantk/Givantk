@@ -138,9 +138,9 @@ class AddServiceScreen extends React.Component {
       paid,
       free,
       isAnonymous,
-      job,
-      location,
-      skills,
+      job: JSON.stringify(job),
+      location: JSON.stringify(location),
+      skills: JSON.stringify(skills),
     };
     console.log(location);
     // console.log(service);
