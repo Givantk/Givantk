@@ -3,7 +3,6 @@ import { View, Text, Image, TouchableWithoutFeedback } from 'react-native';
 import React from 'react';
 import MainButton from '../../../commons/UI/MainButton/MainButton';
 import getUserImage from '../../../../assets/utils/getUserImage';
-import Loading from '../../UI/Loading/Loading';
 import styles from './RecommendationCardStyles';
 import PropTypes from 'prop-types';
 
@@ -12,17 +11,19 @@ class RecommendationCard extends React.PureComponent {
     invited: false,
   };
 
-  onPressCard = () => {};
-
-  onPressHelperAvatar = () => {};
+  onPressHelper = (id) => {
+    this.props.navigation.navigate('Profile', {
+      userId: id,
+    });
+  };
 
   render() {
     const { profile } = this.props;
     return (
-      <TouchableWithoutFeedback onPress={this.onPressCard}>
+      <TouchableWithoutFeedback onPress={() => this.onPressHelper(profile.user)}>
         <View style={styles.recommenationCard}>
           <View style={styles.header}>
-            <TouchableWithoutFeedback onPress={this.onPressAskerAvatar}>
+            <TouchableWithoutFeedback onPress={() => this.onPressHelper(profile.user)}>
               <View>
                 <Image
                   source={{
@@ -33,7 +34,7 @@ class RecommendationCard extends React.PureComponent {
               </View>
             </TouchableWithoutFeedback>
             <View style={styles.headerRight}>
-              <TouchableWithoutFeedback onPress={this.onPressHelperAvatar}>
+              <TouchableWithoutFeedback onPress={() => this.onPressHelper(profile.user)}>
                 <View>
                   <Text style={styles.userName}>
                     {`${profile.first_name} ${profile.last_name}`}
@@ -64,7 +65,9 @@ class RecommendationCard extends React.PureComponent {
           </View>
           <View style={{ marginLeft: 20, marginTop: 10 }} />
           <View style={styles.content}>
-            <Text style={{textAlign:"center",textAlignVertical:'center'}}>{profile.description}</Text>
+            <Text style={{ textAlign: 'center', textAlignVertical: 'center' }}>
+              {profile.description}
+            </Text>
           </View>
 
           <View style={{ alignItems: 'center' }}>
@@ -79,6 +82,7 @@ class RecommendationCard extends React.PureComponent {
 RecommendationCard.propTypes = {
   navigation: PropTypes.shape({}),
   profile: PropTypes.shape({}),
+  onInvite: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({});

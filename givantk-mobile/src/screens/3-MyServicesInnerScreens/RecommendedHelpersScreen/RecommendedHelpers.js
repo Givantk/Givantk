@@ -28,6 +28,7 @@ class RecommendedHelpers extends Component {
       getRecommendedHelpersLoading,
       recommendedHelpers,
       errors,
+      navigation,
     } = this.props;
 
     return (
@@ -35,7 +36,7 @@ class RecommendedHelpers extends Component {
         {getRecommendedHelpersLoading ? (
           <Loading />
         ) : (
-          <RecommendationList profiles={recommendedHelpers} />
+          <RecommendationList profiles={recommendedHelpers} navigation={navigation} />
         )}
       </View>
     );
