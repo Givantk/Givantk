@@ -177,4 +177,15 @@ router.get(
   serviceController.getRecommendedServices
 );
 
+// @route  GET api/service/recommendedServices
+// @desc   Search for recommended services 
+// @access Private
+// @errors noservices error
+
+router.post(
+  '/invite/:profile_id',
+  passport.authenticate('jwt', { session: false }),
+  serviceController.inviteHelper,
+);
+
 module.exports = router;

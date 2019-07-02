@@ -5,13 +5,15 @@ import QuickNotification from '../../UI/QuickNotification/QuickNotification';
 import Announcement from '../../UI/Announcement/Announcement';
 import Loading from '../../UI/Loading/Loading';
 import RecommendationCard from '../RecommendationCard/RecommendationCard';
+import { connect } from 'react-redux';
+import * as ServiceActions from '../../../../store/actions/serviceActions';
 
 const RecommendationList = (props) => {
-  const { navigation, loading, profiles } = props;
+  const { navigation, loading, profiles,inviteHelper,} = props;
 
   const renderItem = (profile) => {
     const onInviteHelper = (id) => {
-      InviteHelper(id, invitationCallback);
+      inviteHelper(id, invitationCallback);
     };
 
     const invitationCallback = () => {
@@ -46,4 +48,13 @@ RecommendationList.propTypes = {
   loading: PropTypes.bool,
 };
 
-export default RecommendationList;
+
+
+const mapDispatchToProps = {
+  inviteHelper: ServiceActions.inviteHelper,
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(RecommendationList);

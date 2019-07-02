@@ -306,3 +306,32 @@ export const getRecommendedHelpers = (serviceId, callback) => (dispatch) => {
       });
     });
 };
+
+export const inviteHelper = (
+  profileId,
+  currentUser,
+  currentUserProfile,
+  callback
+) => (dispatch) => {
+  dispatch({
+    type: actionTypes.INVITE_HELPER_START,
+  });
+  http
+    .post(`${serviceAPI}/invite/${profileId}`, {
+      profileId,
+    })
+    .then(() => {
+      dispatch({
+        type: actionTypes.INVITE_HELPER_FINISH,
+      });
+      if (callback) callback();
+    })
+    .catch((err) => {
+      dispatch({
+        type: actionTypes.SET_ERRORS,
+      });
+      dispatch({
+        type: actionTypes.INVITE_HELPER_FINISH,
+      });
+    });
+};

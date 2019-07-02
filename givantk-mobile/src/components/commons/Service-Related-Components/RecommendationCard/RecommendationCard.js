@@ -18,7 +18,7 @@ class RecommendationCard extends React.PureComponent {
   };
 
   render() {
-    const { profile } = this.props;
+    const { profile,onInvite } = this.props;
     return (
       <TouchableWithoutFeedback onPress={() => this.onPressHelper(profile.user)}>
         <View style={styles.recommenationCard}>
@@ -71,7 +71,7 @@ class RecommendationCard extends React.PureComponent {
           </View>
 
           <View style={{ alignItems: 'center' }}>
-            <MainButton>Invite</MainButton>
+            <MainButton onPress={()=>onInvite(profile._id)}>Invite</MainButton>
           </View>
         </View>
       </TouchableWithoutFeedback>

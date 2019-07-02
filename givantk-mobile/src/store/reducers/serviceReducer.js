@@ -17,6 +17,7 @@ const INITIAL_STATE = {
   addCommentLoading: false,
   getRecommendedHelpersLoading: false,
   recommendedHelpers: [],
+  invitationLoading: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -161,6 +162,17 @@ export default (state = INITIAL_STATE, action) => {
         recommendedHelpers: action.payload
           ? action.payload
           : [...state.recommendedHelpers],
+      };
+
+    case actionTypes.INVITE_HELPER_START:
+      return {
+        ...state,
+        invitationLoading: true,
+      };
+    case actionTypes.INVITE_HELPER_FINISH:
+      return {
+        ...state,
+        invitationLoading: false,
       };
 
     default:
