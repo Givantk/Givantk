@@ -61,8 +61,19 @@ module.exports = getRecommendedServices = (req, res) => {
         res.json(services);
       })
       .catch((err) => {
-        errors.error = 'Error getting recommended services';
-        res.status(500).json({ ...errors, ...err });
+        serviceModel
+          .find()
+          .populate('asker')
+          .populate('applications.user')
+          .populate('comments.user')
+          .sort({ date: -1 })
+          .then((services) => {
+            res.json(services);
+          })
+          .catch((err) => {
+            errors.error = 'Error getting recommended services';
+            res.status(500).json({ ...errors, ...err });
+          });
       });
   });
 };
