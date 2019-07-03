@@ -11,7 +11,7 @@ const errors = {};
 
 const CalculateScore = (service, profile) => {
   if(service.state==='progressing'||service.state==='done'||service.state==='archived'){
-    profile.score=0;
+    service.score=0;
     return;
   }
   let {
