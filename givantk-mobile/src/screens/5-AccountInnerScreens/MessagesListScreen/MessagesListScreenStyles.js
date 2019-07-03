@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     marginTop: gaps.xl,
     fontSize: fontSizes.lg,
     color: colors.primaryLight,
+    textAlign: 'center',
   },
   customBtn: {
     marginTop: 5,
@@ -21,7 +22,7 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontSize: 18,
     fontWeight: 'bold',
-    textAlign:'center'    
+    textAlign: 'center',
   },
   customView: {
     backgroundColor: colors.disclaimer,
