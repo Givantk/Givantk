@@ -160,7 +160,7 @@ class ServiceScreen extends Component {
   };
 
   onPressArchiveService = () => {
-    const { archiveService, getAllServices } = this.props;
+    const { archiveService, getRecommendedServices } = this.props;
     const { service } = this.state;
 
     const callback = () => {
