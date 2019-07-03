@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as ServiceActions from '../../../store/actions/serviceActions';
+import RecommendationList from '../../../components/commons/Service-Related-Components/RecommendationList/RecommendationList';
+import Loading from '../../../components/commons/UI/Loading/Loading';
 
 class RecommendedHelpers extends Component {
   static navigationOptions = () => ({
@@ -26,16 +28,19 @@ class RecommendedHelpers extends Component {
       getRecommendedHelpersLoading,
       recommendedHelpers,
       errors,
+      navigation,
     } = this.props;
 
     return (
-      <View>
-        {/* {getRecommendedHelpersLoading||errors ? (
-          <Text>Loading</Text>
+      <View style={{ flex: 1 }}>
+        {getRecommendedHelpersLoading ? (
+          <Loading />
         ) : (
-          <Text>{recommendedHelpers}</Text>
-        )} */}
-    
+          <RecommendationList
+            profiles={recommendedHelpers}
+            navigation={navigation}
+          />
+        )}
       </View>
     );
   }

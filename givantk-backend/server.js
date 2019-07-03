@@ -123,14 +123,14 @@ io.use((socket, next) => {
         let message = {
           userid: '',
           username: '',
-          content: ''
+          content: '',
         };
         let chat = new Chat({
           socketID: socketID,
           serviceID: serviceId,
           title: title,
           date: new Date(),
-          $push: { message: message }
+          $push: { message: message },
         });
         console.log(chat);
         chat.save((error) => {
@@ -149,6 +149,7 @@ io.use((socket, next) => {
 
         // accept the msg entered in the TextInput field from the first user then send it to the other user
         socket.on('chat message', (msg, userid, username) => {
+          console.log('there is a message here');
           if (
             userid === service.asker._id.toString() &&
             service.reveal_asker === false
@@ -172,9 +173,9 @@ io.use((socket, next) => {
                   body: `${username} sent you a message`,
                   sound: 'default',
                   data: {
-                    type: 'message'
-                  }
-                }
+                    type: 'message',
+                  },
+                },
               ]);
             }
           });
@@ -189,9 +190,9 @@ io.use((socket, next) => {
                 message: {
                   userid: userid,
                   username: username,
-                  content: msg
-                }
-              }
+                  content: msg,
+                },
+              },
             },
             (error) => {
               if (error) console.log(error);

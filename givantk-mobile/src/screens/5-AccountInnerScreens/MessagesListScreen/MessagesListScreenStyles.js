@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     backgroundColor: colors.white,
-    alignItems: 'center',
+    alignItems: 'stretch',
   },
   noMessagesText: {
     fontWeight: 'bold',
@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontSize: 18,
     fontWeight: 'bold',
+    textAlign:'center'    
   },
   customView: {
     backgroundColor: colors.disclaimer,

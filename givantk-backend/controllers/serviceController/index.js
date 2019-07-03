@@ -17,6 +17,7 @@ const addReview = require('./addReview');
 const addComment = require('./addComment');
 const getRecommendedHelpers = require('./getRecommendedHelpers');
 const getRecommendedServices=require('./getRecommendedServices');
+const inviteHelper=require('./inviteHelper');
 
 module.exports = {
   getAllServices,
@@ -38,4 +39,5 @@ module.exports = {
   addComment,
   getRecommendedHelpers,
   getRecommendedServices,
+  inviteHelper
 };

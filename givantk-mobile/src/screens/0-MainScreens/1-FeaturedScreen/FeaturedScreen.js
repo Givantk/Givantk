@@ -29,6 +29,11 @@ class FeaturedScreen extends React.Component {
     };
   }
 
+
+  componentDidMount=()=>{
+    const {getRecommendedServices}=this.props;
+    getRecommendedServices();
+  }
   onChangeText = (name, value) => {
     // can't update the state
     this.setState(
@@ -49,11 +54,11 @@ class FeaturedScreen extends React.Component {
   };
 
   render() {
-    const { navigation, getAllServicesLoading } = this.props;
-    let { allServices } = this.props;
-    const { getAllServices } = this.props;
+    const { navigation, getRecommendedServicesLoading } = this.props;
+    let { recommendedServices } = this.props;
+    const { getRecommendedServices } = this.props;
 
-    allServices = allServices.filter((s) => s.state !== 'archived');
+    recommendedServices = recommendedServices.filter((s) => s.state !== 'archived');
 
     return (
       <View style={styles.container}>
@@ -70,12 +75,12 @@ class FeaturedScreen extends React.Component {
           </TouchableWithoutFeedback>
         </View>
 
-        {allServices && (
+        {recommendedServices && (
           <ServicesList
-            services={allServices}
-            loading={getAllServicesLoading}
+            services={recommendedServices}
+            loading={getRecommendedServicesLoading}
             navigation={navigation}
-            onRefresh={getAllServices}
+            onRefresh={getRecommendedServices}
             canBookmark
           />
         )}
@@ -86,22 +91,22 @@ class FeaturedScreen extends React.Component {
 
 FeaturedScreen.propTypes = {
   navigation: PropTypes.shape({}),
-  allServices: PropTypes.arrayOf(PropTypes.shape({})),
-  getAllServicesLoading: PropTypes.bool,
-  getAllServices: PropTypes.func,
+  recommendedServices: PropTypes.arrayOf(PropTypes.shape({})),
+  getRecommendedServicesLoading: PropTypes.bool,
+  getRecommendedServices: PropTypes.func,
   getSearchedServices: PropTypes.func,
   errors: PropTypes.shape({}),
 };
 
 const mapStateToProps = (state) => ({
   errors: state.errors,
-  allServices: state.service.allServices,
-  getAllServicesLoading: state.service.getAllServicesLoading,
+  recommendedServices: state.service.recommendedServices,
+  getRecommendedServicesLoading: state.service.getRecommendedServicesLoading,
   passedIntro: state.intro.passedIntro,
 });
 
 const mapDispatchToProps = {
-  getAllServices: ServiceActions.getAllServices,
+  getRecommendedServices: ServiceActions.getRecommendedServices,
   getSearchedServices: ServiceActions.getSearchedServices,
 };
 

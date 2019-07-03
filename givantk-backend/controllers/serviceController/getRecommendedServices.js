@@ -10,10 +10,14 @@ const errors = {};
 //Method to calculate score to each service
 
 const CalculateScore = (service, profile) => {
+  if(service.state==='progressing'||service.state==='done'||service.state==='archived'){
+    service.score=0;
+    return;
+  }
   let {
     skills: recommendedSkills,
-    jobs: recommendedJobs,
-    locations: recommendedLocations,
+    job: recommendedJobs,
+    location: recommendedLocations,
   } = service.recommenderInfo;
   let {
     skills: profileSkills,
@@ -23,7 +27,7 @@ const CalculateScore = (service, profile) => {
 
   //Match common skills and assign score
   matchedSkills = recommendedSkills.filter((skill) =>
-    profileSkills.skills.includes(skill)
+    profileSkills.includes(skill)
   );
 
   service.score = matchedSkills.length;
@@ -50,14 +54,30 @@ module.exports = getRecommendedServices = (req, res) => {
   profileModel.findOne({ user: req.user._id }).then((profile) => {
     serviceModel
       .find()
+      .populate('asker')
+      .populate('applications.user')
+      .populate('comments.user')
+      .sort({ date: -1 })
       .then((services) => {
         services.forEach((service) => CalculateScore(service, profile));
         services.sort((a, b) => b.score - a.score);
+
         res.json(services);
       })
       .catch((err) => {
-        errors.error = 'Error getting recommended services';
-        res.status(500).json({ ...errors, ...err });
+        serviceModel
+          .find()
+          .populate('asker')
+          .populate('applications.user')
+          .populate('comments.user')
+          .sort({ date: -1 })
+          .then((services) => {
+            res.json(services);
+          })
+          .catch((err) => {
+            errors.error = 'Error getting recommended services';
+            res.status(500).json({ ...errors, ...err });
+          });
       });
   });
 };

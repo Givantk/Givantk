@@ -2,10 +2,12 @@ import * as actionTypes from '../actions/actionTypes';
 
 const INITIAL_STATE = {
   allServices: [],
+  recommendedServices:[],
   searchedServices: [],
   selectedService: [],
 
   getAllServicesLoading: false,
+  getRecommendedServicesLoading:false,
   getSearchedServicesLoading: false,
   createServiceLoading: false,
   proposeToServiceLoading: false,
@@ -17,6 +19,7 @@ const INITIAL_STATE = {
   addCommentLoading: false,
   getRecommendedHelpersLoading: false,
   recommendedHelpers: [],
+  invitationLoading: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -32,6 +35,21 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         getAllServicesLoading: false,
         allServices: action.payload ? action.payload : [...state.allServices],
+      };
+    // ----------------------------------------------------------------------------------
+
+    case actionTypes.GET_RECOMMENDED_SERVICES_START:
+      return {
+        ...state,
+        getRecommendedServicesLoading: true,
+      };
+
+    case actionTypes.GET_RECOMMENDED_SERVICES_FINISH:
+      return {
+        ...state,
+        getRecommendedServicesLoading: false,
+        recommendedServices: action.payload ? action.payload : [...state.recommendedServices],
+
       };
     // ----------------------------------------------------------------------------------
     case actionTypes.GET_SEARCHED_SERVICES_START:
@@ -151,7 +169,7 @@ export default (state = INITIAL_STATE, action) => {
     case actionTypes.GET_RECOMMENDED_HELPERS_START:
       return {
         ...state,
-        getRecommendedUsersLoading: true,
+        getRecommendedHelpersLoading: true,
       };
 
     case actionTypes.GET_RECOMMENDED_HELPERS_FINISH:
@@ -161,6 +179,17 @@ export default (state = INITIAL_STATE, action) => {
         recommendedHelpers: action.payload
           ? action.payload
           : [...state.recommendedHelpers],
+      };
+
+    case actionTypes.INVITE_HELPER_START:
+      return {
+        ...state,
+        invitationLoading: true,
+      };
+    case actionTypes.INVITE_HELPER_FINISH:
+      return {
+        ...state,
+        invitationLoading: false,
       };
 
     default:

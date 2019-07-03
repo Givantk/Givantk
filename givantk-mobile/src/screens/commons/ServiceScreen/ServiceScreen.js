@@ -53,13 +53,13 @@ class ServiceScreen extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (!nextProps.allServices || !prevState.service || !nextProps.currentUser)
+    if (!nextProps.recommendedServices || !prevState.service || !nextProps.currentUser)
       return {};
 
     const { currentUser } = nextProps;
 
     // Updating service in local state through allServices passed through Redux store
-    const currentService = nextProps.allServices.find(
+    const currentService = nextProps.recommendedServices.find(
       (s) => s._id === prevState.service._id,
     );
 
@@ -132,11 +132,11 @@ class ServiceScreen extends Component {
   };
 
   onPressAcceptProposal = (proposalId) => {
-    const { acceptServiceProposal, getAllServices } = this.props;
+    const { acceptServiceProposal, getRecommendedServices } = this.props;
     const { service } = this.state;
 
     const callback = () => {
-      getAllServices();
+      getRecommendedServices();
       QuickNotification('Successfully assigned helper');
     };
 
@@ -146,25 +146,25 @@ class ServiceScreen extends Component {
   };
 
   onPressMarkServiceAsDone = () => {
-    const { markServiceAsDone, getAllServices } = this.props;
+    const { markServiceAsDone, getRecommendedServices } = this.props;
     const { service } = this.state;
 
     const callback = () => {
-      getAllServices();
+      getRecommendedServices();
       QuickNotification('Service successfully marked as done');
     };
 
-    quickModal('You will martk this service as finished', () =>
+    quickModal('You will mark this service as finished', () =>
       markServiceAsDone(service._id, callback),
     );
   };
 
   onPressArchiveService = () => {
-    const { archiveService, getAllServices } = this.props;
+    const { archiveService, getRecommendedServices } = this.props;
     const { service } = this.state;
 
     const callback = () => {
-      getAllServices();
+      getRecommendedServices();
       QuickNotification('Service successfully archived');
     };
 
@@ -239,7 +239,7 @@ class ServiceScreen extends Component {
   };
 
   onRating = (userToBeRated) => {
-    const { addReview, getAllServices } = this.props;
+    const { addReview, getRecommendedServices } = this.props;
     const { chosenRating, service, writtenReview } = this.state;
     const rating = {
       userToBeRated,
@@ -248,7 +248,7 @@ class ServiceScreen extends Component {
       serviceId: service._id,
     };
     const callback = () => {
-      getAllServices();
+      getRecommendedServices();
     };
     addReview(rating, callback);
   };
@@ -381,7 +381,7 @@ class ServiceScreen extends Component {
                 </View>
               )}
 
-            {/* {loggedInUser.ownService &&
+            {loggedInUser.ownService &&
               !service.helper &&
               (service.state === 'new' ||
                 service.state === 'progressing' ||
@@ -395,7 +395,7 @@ class ServiceScreen extends Component {
                     Invite Recommended Helpers
                   </MainButton>
                 </View>
-              )} */}
+              )}
 
             {loggedInUser.ownService &&
               service.helper &&
@@ -517,7 +517,7 @@ ServiceScreen.propTypes = {
   acceptServiceProposal: PropTypes.func,
   markServiceAsDone: PropTypes.func,
   archiveService: PropTypes.func,
-  getAllServices: PropTypes.func,
+  getRecommendedServices: PropTypes.func,
 
   addReview: PropTypes.func,
   // addComment: PropTypes.func,
@@ -527,7 +527,7 @@ ServiceScreen.propTypes = {
 
 const mapStateToProps = (state) => ({
   currentUser: state.auth.user,
-  allServices: state.service.allServices,
+  recommendedServices: state.service.recommendedServices,
   acceptServiceProposalLoading: state.service.acceptServiceProposalLoading,
   markServiceAsDoneLoading: state.service.markServiceAsDoneLoading,
   archiveServiceLoading: state.service.archiveServiceLoading,
@@ -540,7 +540,7 @@ const mapDispatchToProps = {
   acceptServiceProposal: ServiceActions.acceptServiceProposal,
   markServiceAsDone: ServiceActions.markServiceAsDone,
   archiveService: ServiceActions.archiveService,
-  getAllServices: ServiceActions.getAllServices,
+  getRecommendedServices: ServiceActions.getRecommendedServices,
   addReview: ServiceActions.addReview,
   addComment: ServiceActions.addComment,
 };

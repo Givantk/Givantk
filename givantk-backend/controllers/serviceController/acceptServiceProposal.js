@@ -8,7 +8,6 @@ const Service = mongoose.model('service');
 
 module.exports = proposeToService = (req, res) => {
   const errors = {};
-
   const serviceId = req.params.service_id;
   const proposalId = req.params.proposal_id;
 
@@ -19,7 +18,11 @@ module.exports = proposeToService = (req, res) => {
         return res.status(401).json(errors);
       }
 
-      if (service.state !== 'new' || service.state !== 'pending') {
+      if (
+        service.state === 'progressing' ||
+        service.state === 'done' ||
+        service.state === 'archived'
+      ) {
         errors.unauthorized = "You can't accept proposal due to service state";
         return res.status(401).json(errors);
       }
@@ -68,13 +71,13 @@ module.exports = proposeToService = (req, res) => {
                   } accepted your proposal to the service \"${service.name}\"`,
                   navigateTo: {
                     kind: 'service',
-                    service: service._id
+                    service: service._id,
                   },
                   is_user_associated: true,
                   user_associated:
                     service.reveal_asker === false ? null : askerProfile.user,
                   user_profile_associated:
-                    service.reveal_asker === false ? null : askerProfile._id
+                    service.reveal_asker === false ? null : askerProfile._id,
                 });
                 applicantProfile.save();
 
@@ -90,8 +93,8 @@ module.exports = proposeToService = (req, res) => {
                       } accepted your proposal to the service \"${
                         service.name
                       }\"`,
-                      sound: 'default'
-                    }
+                      sound: 'default',
+                    },
                   ]);
                 }
               });
