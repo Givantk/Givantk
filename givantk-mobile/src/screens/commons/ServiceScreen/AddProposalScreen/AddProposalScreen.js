@@ -113,7 +113,7 @@ AddProposalScreen.propTypes = {
 
 const mapStateToProps = (state) => ({
   errors: state.errors,
-  allServices: state.service.allServices,
+  allServices: state.service.recommendedServices,
   proposeToServiceLoading: state.service.proposeToServiceLoading,
   getCurrentProfileLoading: state.profile.getCurrentProfileLoading,
   currentUserHasProfile: state.profile.currentUserHasProfile,
@@ -121,7 +121,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   proposeToService: ServiceActions.proposeToService,
-  getAllServices: ServiceActions.getAllServices,
+  getAllServices: ServiceActions.getRecommendedServices,
   getCurrentUserProfile: ProfileActions.getCurrentUserProfile,
 };
 
