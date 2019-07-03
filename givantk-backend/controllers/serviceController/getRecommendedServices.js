@@ -10,6 +10,10 @@ const errors = {};
 //Method to calculate score to each service
 
 const CalculateScore = (service, profile) => {
+  if(service.state==='progressing'||service.state==='done'||service.state==='archived'){
+    profile.score=0;
+    return;
+  }
   let {
     skills: recommendedSkills,
     job: recommendedJobs,
