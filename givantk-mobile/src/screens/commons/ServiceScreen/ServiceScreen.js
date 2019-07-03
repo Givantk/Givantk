@@ -63,7 +63,6 @@ class ServiceScreen extends Component {
       (s) => s._id === prevState.service._id,
     );
 
-    console.log(currentService)
     const ownService = currentUser._id === currentService.asker._id;
     const serviceHelper = currentUser._id === currentService.helper;
 
@@ -155,7 +154,7 @@ class ServiceScreen extends Component {
       QuickNotification('Service successfully marked as done');
     };
 
-    quickModal('You will martk this service as finished', () =>
+    quickModal('You will mark this service as finished', () =>
       markServiceAsDone(service._id, callback),
     );
   };

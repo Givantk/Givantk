@@ -152,7 +152,6 @@ const Proposal = ({
 
 Proposal.propTypes = {
   navigation: PropTypes.shape({}),
-
   service: PropTypes.shape({}),
   application: PropTypes.shape({}),
   ProposalIsChosen: PropTypes.bool,
