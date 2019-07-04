@@ -5,8 +5,8 @@
     "slug": "givantk",
     "privacy": "public",
     "platforms": ["ios", "android"],
-    "version": "1.0.0",
-    "icon": "./assets/icons/icon200x200_transparent.png",
+    "version": "1.0.1",
+    "icon": "./assets/icons/icon200x200.png",
     "sdkVersion": "32.0.0",
     "facebookScheme": "fb2132958976794441",
     "facebookAppId": "2132958976794441",
@@ -34,7 +34,10 @@
     "android": {
       "package": "com.team.givantk",
       "googleServicesFile": "./google-services.ignore.json",
-      "versionCode": 3
+      "versionCode": 4
+    },
+    "config": {
+      "usesNonExemptEncryption": false
     }
   }
 }
