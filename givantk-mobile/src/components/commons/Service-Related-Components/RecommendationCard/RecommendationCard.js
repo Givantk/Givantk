@@ -16,10 +16,14 @@ class RecommendationCard extends React.PureComponent {
   };
 
   componentDidMount = () => {
+    
     const { profile, navigation } = this.props;
     const { serviceId } = navigation.state.params;
+    console.log(serviceId);
     if (profile.invitedIn) {
-      if (profile.invitedIn[serviceId] === true) {
+      console.log(profile.invitedIn[serviceId]);
+
+      if (profile.invitedIn.includes(serviceId)) {
         this.setState({
           invited: true,
           invitedBefore: true,
@@ -73,7 +77,7 @@ class RecommendationCard extends React.PureComponent {
                   </Text>
                 </View>
               </TouchableWithoutFeedback>
-              <View style={{ marginTop: 10 }}>
+              <View style={{ marginTop: 10, }}>
                 <Text style={styles.userName}>
                   Skills:{' '}
                   <Text style={styles.criteria}>
