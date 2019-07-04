@@ -25,7 +25,7 @@ const ProfileSchema = new Schema({
     job: String,
     location: String
   },
-  invitedIn:Object,
+  invitedIn:[],
   notifications: {
     type: [
       {

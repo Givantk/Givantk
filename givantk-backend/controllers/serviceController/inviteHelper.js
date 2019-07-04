@@ -31,11 +31,12 @@ module.exports = inviteHelper = (req, res) => {
             user_profile_associated:
               service.reveal_asker === false ? null : askerProfile._id,
           });
-          if (invitedProfile.invitedIn) {
-            invitedProfile.invitedIn[serviceId] = true;
+          if (invitedProfile.invitedIn&&Array.isArray(invitedProfile.invitedIn)) {
+            invitedProfile.invitedIn.unshift(serviceId);
+            console.log(invitedProfile.invitedIn)
           } else {
-            invitedProfile.invitedIn = {};
-            invitedProfile.invitedIn[serviceId] = true;
+            invitedProfile.invitedIn = [];
+            invitedProfile.invitedIn.unShift(serviceId);
           }
           invitedProfile.save();
 
