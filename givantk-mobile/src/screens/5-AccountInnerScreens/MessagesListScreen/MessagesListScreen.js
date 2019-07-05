@@ -58,12 +58,14 @@ class MessagesListScreen extends Component {
     const { chats, loadUserChatsLoading } = this.props;
 
     chats.sort((chat1, chat2) => {
+      
+      if(chat1.message.length!==0&&chat2.message.length!==0){
       const lastDateInChat1 = chat1.message[chat1.message.length - 1].date;
       const lastDateInChat2 = chat2.message[chat2.message.length - 1].date;
       const jsDate1 = new Date(lastDateInChat1);
       const jsDate2 = new Date(lastDateInChat2);
 
-      return jsDate2 - jsDate1;
+      return jsDate2 - jsDate1;}
     });
 
     const chatsLists = loadUserChatsLoading ? (
