@@ -66,7 +66,7 @@ class ProfileScreen extends React.Component {
 
     return [
       {
-        name: 'Asked for',
+        name: 'سألت عن',
         component: () => (
           <ServicesList
             services={profile.services_asked_for.filter((service)=>service.reveal_asker!==false)}
@@ -76,7 +76,7 @@ class ProfileScreen extends React.Component {
         ),
       },
       {
-        name: 'Helped in',
+        name: 'ساعدت فى',
         component: () => (
           <ServicesList
             services={profile.services_helped_in}
@@ -86,7 +86,7 @@ class ProfileScreen extends React.Component {
         ),
       },
       {
-        name: 'Reviews',
+        name: 'التقييمات',
         component: () => (
           <RatingList
             services={RatedServicesArray}

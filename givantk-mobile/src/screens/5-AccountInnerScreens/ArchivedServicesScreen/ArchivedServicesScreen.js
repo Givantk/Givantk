@@ -9,7 +9,7 @@ import ServicesList from '../../../components/commons/Service-Related-Components
 
 class ArchivedServicesScreen extends Component {
   static navigationOptions = () => ({
-    headerTitle: 'You archived',
+    headerTitle: 'لقد أرشفت',
   });
 
   render() {

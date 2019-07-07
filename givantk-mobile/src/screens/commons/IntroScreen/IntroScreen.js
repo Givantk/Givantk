@@ -10,7 +10,7 @@ import styles from './IntroScreenStyles';
 
 class IntroScreen extends React.Component {
   static navigationOptions = () => ({
-    headerTitle: 'Welcome to Givantk',
+    headerTitle: 'مرحبا',
   });
 
   slides = [

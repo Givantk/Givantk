@@ -75,12 +75,12 @@ class GivantkPointsScreen extends Component {
     return (
       <ScrollView>
         <View style={styles.wrapper}>
-          <Text style={styles.title}>Get Free Givantk Points</Text>
+          <Text style={styles.title}>احصل على نقاط جيفانتك المجانية</Text>
           <Image style={styles.image} source={{ uri: givantkPointsLogo }} />
           {!addPointsLoading ? (
             <View style={{ alignItems: 'center' }}>
               <MainButton onPress={onButtonClicked}>
-                Get Random Number of Points
+               احصل على رقم عشوائى من النقاط
               </MainButton>
               <Text style={styles.text}>{text}</Text>
               <Text>{errors.serverErrorMessage}</Text>

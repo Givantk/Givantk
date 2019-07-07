@@ -1,10 +1,10 @@
 const servicesNatures = [
   {
-    label: 'Free (givantk points)',
+    label: 'مجانية',
     value: 'free',
   },
   {
-    label: 'Paid',
+    label: 'مدفوعة',
     value: 'paid',
     // disabled: true,
   },

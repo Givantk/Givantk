@@ -51,36 +51,36 @@ export default class SuggestHelperCriteriaScreen extends Component {
       <AvoidKeyboard bottomPadding={100}>
         <View style={styles.container}>
           <Text style={styles.header}>
-            Suggest a Criteria for your service helper
+            اقترح صفات ملبى الخدمة 
           </Text>
           <Icon type="Ionicons" name="md-person" style={styles.personIcon} />
           <View style={{ flexDirection: 'column' }}>
             <MultiPicker
               options={jobsList.map((d) => ({ label: d, value: d }))}
-              title="Job(s)"
+              title="المهن المفضلة"
               name="job"
               onChange={this.onChangeValue}
-              searchPlaceholderText="Select preferable jobs"
+              searchPlaceholderText="اختر المهن المفضلة"
               style={styles.multiPicker}
               initiallySelectedItems={values.job}
             />
 
             <MultiPicker
               options={skillsList.map((d) => ({ label: d, value: d }))}
-              title="Skill(s)"
+              title="المهارات"
               name="skills"
               onChange={this.onChangeValue}
-              searchPlaceholderText="Select preferable skills"
+              searchPlaceholderText="اختر المهارات المفضلة"
               style={styles.multiPicker}
               initiallySelectedItems={values.skills}
             />
 
             <MultiPicker
               options={cairoDistricts.map((d) => ({ label: d, value: d }))}
-              title="Location(s)"
+              title="الاماكن"
               name="location"
               onChange={this.onChangeValue}
-              searchPlaceholderText="Select preferable locations"
+              searchPlaceholderText="اختر الاماكن المفضلة"
               style={styles.multiPicker}
               initiallySelectedItems={values.location}
             />
@@ -90,13 +90,12 @@ export default class SuggestHelperCriteriaScreen extends Component {
                 disabled={Object.values(this.state).some((s) => s.length === 0)}
                 onPress={this.onSave}
               >
-                Save
+                حفظ
               </MainButton>
             </View>
           </View>
           <Text>
-            Hint: These suggestions are not mandatory, they just help our
-            algorithm suggest the most suitable helpers for you
+            اختيارك لهذه الصفات ليس إجبارياً، ولكنه يساعدنا على إيجاد ملبى مناسب للخدمة الخاصة بك
           </Text>
         </View>
       </AvoidKeyboard>

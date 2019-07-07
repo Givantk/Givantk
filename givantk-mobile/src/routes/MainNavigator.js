@@ -60,6 +60,7 @@ const MainNavigator = createStackNavigator(
       const headerStyle = {
         backgroundColor: colors.primary,
         height: headerHeight,
+        alignContent: 'right',
       };
 
       const headerTitleStyle = {
@@ -83,19 +84,19 @@ const MainNavigator = createStackNavigator(
         // Navigation options for each tab screen with respect to stack navigation
         switch (tabScreen) {
           case 'Featured':
-            headerTitle = 'Featured';
+            headerTitle = 'المفضلة';
             break;
 
           case 'AddService':
-            headerTitle = 'Request Service';
+            headerTitle = 'اطلب خدمة';
             break;
 
           case 'MyServices':
-            headerTitle = 'My Services';
+            headerTitle = 'خدماتى';
             break;
 
           case 'Account':
-            headerTitle = 'Account';
+            headerTitle = 'حسابى';
             break;
 
           default:

@@ -36,7 +36,7 @@ const Proposal = ({
       {application.chosen && (
         <View style={{ alignSelf: 'center' }}>
           <Text style={{ color: colors.primary, marginBottom: 10 }}>
-            Helper{' '}
+            ملبى الخدمة{' '}
             <Icon
               name="star"
               style={{
@@ -131,7 +131,7 @@ const Proposal = ({
           loading={acceptServiceProposalLoading}
           disabled={disabled}
         >
-          Accept
+          القبول
         </MainButton>
         <MainButton
           onPress={() =>
@@ -143,7 +143,7 @@ const Proposal = ({
           backgroundColor={colors.primaryLight}
           disabled={disabled}
         >
-          Interview
+          اجراء مقابلة
         </MainButton>
       </View>
     </View>

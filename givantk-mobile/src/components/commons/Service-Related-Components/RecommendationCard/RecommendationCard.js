@@ -111,7 +111,7 @@ class RecommendationCard extends React.PureComponent {
               <Loading />
             ) : invited ? (
               <Text style={styles.invitedText}>
-                User is invited successfully
+                تم دعوة العضو بنجاح
               </Text>
             ) : (
               <MainButton
@@ -120,7 +120,7 @@ class RecommendationCard extends React.PureComponent {
                   onInvite(profile._id);
                 }}
               >
-                Invite
+                دعوة العضو
               </MainButton>
             )}
           </View>

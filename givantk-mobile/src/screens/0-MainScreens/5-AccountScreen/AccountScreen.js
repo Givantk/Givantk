@@ -12,7 +12,7 @@ import styles from './AccountScreenStyles';
 
 class AccountScreen extends React.Component {
   static navigationOptions = () => ({
-    tabBarLabel: 'Account',
+    tabBarLabel: 'حسابى',
     tabBarIcon: ({ tintColor }) => (
       <Icon
         type="Ionicons"
@@ -43,7 +43,7 @@ class AccountScreen extends React.Component {
         <View style={styles.upperRow}>
           <TouchableWithoutFeedback onPress={this.onPressSignOut}>
             <View>
-              <Text style={styles.upperRowText}>Sign out</Text>
+              <Text style={styles.upperRowText}>الخروج</Text>
             </View>
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback
@@ -80,12 +80,12 @@ class AccountScreen extends React.Component {
             </Text>
 
             <Text style={styles.points}>
-              Money Score:{' '}
+              رصيد المال:{' '}
               {currentUserProfile ? currentUserProfile.money_points : '0'}
             </Text>
 
             <Text style={styles.points}>
-              Givantk Points:{' '}
+              نقاط مجانية:{' '}
               {currentUserProfile ? currentUserProfile.givantk_points : '0'}
             </Text>
           </View>

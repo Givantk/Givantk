@@ -13,7 +13,7 @@ import styles from './MyServicesScreenStyles';
 
 class MyServicesScreen extends React.Component {
   static navigationOptions = () => ({
-    tabBarLabel: 'My Services',
+    tabBarLabel: 'خدماتى',
     tabBarIcon: ({ tintColor }) => (
       <Icon
         type="Entypo"
@@ -27,21 +27,22 @@ class MyServicesScreen extends React.Component {
     const { profile, getAllServicesLoading, navigation } = this.props;
 
     return [
+     
       {
-        name: 'I asked for',
+        name: 'ساعدت فى',
         component: () => (
           <ServicesList
-            services={profile.services_asked_for}
+            services={profile.services_helped_in}
             loading={getAllServicesLoading}
             navigation={navigation}
           />
         ),
       },
       {
-        name: 'I helped in',
+        name: 'سألت عن',
         component: () => (
           <ServicesList
-            services={profile.services_helped_in}
+            services={profile.services_asked_for}
             loading={getAllServicesLoading}
             navigation={navigation}
           />

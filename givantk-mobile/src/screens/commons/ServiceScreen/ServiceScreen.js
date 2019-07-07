@@ -137,10 +137,10 @@ class ServiceScreen extends Component {
 
     const callback = () => {
       getRecommendedServices();
-      QuickNotification('Successfully assigned helper');
+      QuickNotification('لقد قمت بأختيار ملبى الخدمة بنجاح');
     };
 
-    quickModal('This helper will be assigned to your Service', () =>
+    quickModal('ستقوم بتعيين ملبى للخدمة', () =>
       acceptServiceProposal(service._id, proposalId, callback),
     );
   };
@@ -151,10 +151,10 @@ class ServiceScreen extends Component {
 
     const callback = () => {
       getRecommendedServices();
-      QuickNotification('Service successfully marked as done');
+      QuickNotification('لقد تم إنهاء هذه الخدمة بنجاح');
     };
 
-    quickModal('You will mark this service as finished', () =>
+    quickModal('سوف تقوم بانهاء هذه الخدمة', () =>
       markServiceAsDone(service._id, callback),
     );
   };
@@ -165,10 +165,10 @@ class ServiceScreen extends Component {
 
     const callback = () => {
       getRecommendedServices();
-      QuickNotification('Service successfully archived');
+      QuickNotification('لقد تمت أرشفة هذه الخدمة بنجاح');
     };
 
-    quickModal('You will archive this service', () =>
+    quickModal('سوف تقوم بأرشفة هذه الخدمة', () =>
       archiveService(service._id, callback),
     );
   };
@@ -179,7 +179,7 @@ class ServiceScreen extends Component {
     return (
       <View>
         <View style={{ alignItems: 'center' }}>
-          <Text style={styles.callToActionText}>Tap To Rate</Text>
+          <Text style={styles.callToActionText}>اضغط للتقييم</Text>
           <AirbnbRating
             isDisabled={false}
             size={30}
@@ -191,7 +191,7 @@ class ServiceScreen extends Component {
           />
           <View style={{ width: dimensions.fullWidth * 0.88 }}>
             <Textarea
-              placeholder="Please add a review (written review is optional)"
+              placeholder="من فضلك ضف مراجعة (التقييم المكتوب إختيارى)"
               style={styles.textarea}
               onChangeText={(v) =>
                 this.setState({
@@ -209,7 +209,7 @@ class ServiceScreen extends Component {
                   : this.onRating(service.asker._id)
               }
             >
-              Add Review
+              ضف مراجعة
             </MainButton>
           ) : (
             <Loading />
@@ -230,7 +230,7 @@ class ServiceScreen extends Component {
         <AirbnbRating isDisabled size={30} defaultRating={rating} />
         <View style={{ alignItems: 'center' }}>
           <Text style={styles.ratingText}>
-            Your review helped us creating a better community {'\n \n'} Thanks
+            تقييمك ساعدنا فى خلق مجتمع أفضل {'\n \n'} شكراً
             :D
           </Text>
         </View>
@@ -350,7 +350,7 @@ class ServiceScreen extends Component {
               service.state === 'archived' ||
               service.state === 'progressing' || (
                 <View style={styles.addProposalButton}>
-                  <Button title="Offer help" onPress={this.onPressOfferHelp} />
+                  <Button title="تقدم" onPress={this.onPressOfferHelp} />
                 </View>
               )}
             <View style={styles.content}>
@@ -360,7 +360,7 @@ class ServiceScreen extends Component {
             </View>
             <View style={styles.serviceStateWrapper}>
               <Text style={styles.serviceStateText}>
-                Service State: {service.state}
+                حالة الخدمة: {service.state}
               </Text>
               <Text style={styles.dateText}>{readableServiceDate}</Text>
             </View>
@@ -376,7 +376,7 @@ class ServiceScreen extends Component {
                     small
                     onPress={this.onPressArchiveService}
                   >
-                    Archive Service
+                    أرشفة الخدمة
                   </MainButton>
                 </View>
               )}
@@ -392,7 +392,7 @@ class ServiceScreen extends Component {
                     small
                     onPress={this.onGetRecommendedHelpers}
                   >
-                    Invite Recommended Helpers
+                    ادع الآخرين لكى يلبوا الخدمة
                   </MainButton>
                 </View>
               )}
@@ -408,26 +408,26 @@ class ServiceScreen extends Component {
                     small
                     onPress={this.onPressMarkServiceAsDone}
                   >
-                    Mark Service as finished
+                    انهى الخدمة
                   </MainButton>
                 </View>
               )}
             {loggedInUser.appliedBefore && (
               <Text style={styles.disclaimer}>
-                {'You successfully applied for this service 💪🏻'}
+                {' 💪🏻لقد قمت بالتقدم لهذه الخدمة بنجاح '}
               </Text>
             )}
             {service.applications.length === 0 && (
               <View>
                 <View>
-                  <Announcement text="No Proposals Yet" />
+                  <Announcement text="لم يتقدم أحد بعد" />
                 </View>
                 <View>
                   {!loggedInUser.ownService &&
                     !service.state === 'done' &&
                     !service.state === 'archived' && (
                       <Text style={styles.noProposalsDisclaimer}>
-                        Be the first one to apply {'💪'}
+                         {'💪'} كن أول من يتقدم لهذه الخدمة
                       </Text>
                     )}
                 </View>
@@ -436,7 +436,7 @@ class ServiceScreen extends Component {
 
             {service.applications.length !== 0 && (
               <View style={styles.proposalsHeadingContainer}>
-                <Text style={styles.proposalsHeadingText}>Proposals:</Text>
+                <Text style={styles.proposalsHeadingText}>المتقدمون للخدمة:</Text>
               </View>
             )}
 

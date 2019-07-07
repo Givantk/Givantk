@@ -27,7 +27,7 @@ const RatingList = (props) => {
   );
 
   if (loading) return <Loading />;
-  if (services.length === 0) return <Announcement text="Not reviewed yet" />;
+  if (services.length === 0) return <Announcement text="لا توجد تقييمات بعد" />;
 
   return (
     <FlatList

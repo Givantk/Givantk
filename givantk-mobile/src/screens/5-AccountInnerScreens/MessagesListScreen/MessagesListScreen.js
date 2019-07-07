@@ -10,7 +10,7 @@ import styles from './MessagesListScreenStyles';
 
 class MessagesListScreen extends Component {
   static navigationOptions = () => ({
-    headerTitle: 'My Messages ✉️',
+    headerTitle: "رسائلى ✉️",
     headerStyle: {
       backgroundColor: colors.primary,
     },
@@ -71,7 +71,7 @@ class MessagesListScreen extends Component {
     const chatsLists = loadUserChatsLoading ? (
       <Loading />
     ) : chats.length === 0 ? (
-      <Text style={styles.noMessagesText}>No Messages Yet</Text>
+      <Text style={styles.noMessagesText}>لا توجد رسائل بعد</Text>
     ) : (
       chats.map((chat, i) => (
         <TouchableOpacity

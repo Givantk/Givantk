@@ -9,7 +9,7 @@ import ServicesList from '../../../components/commons/Service-Related-Components
 
 class BookmarkedServicesScreen extends Component {
   static navigationOptions = () => ({
-    headerTitle: 'You bookmarked',
+    headerTitle: 'خدماتك المفضلة',
   });
 
   render() {

@@ -1,6 +1,6 @@
 const accountListItems = (navigation, userId, currentUserProfile) => [
   {
-    title: 'View Profile',
+    title: 'الملف الشخصى',
     iconName: 'ios-happy',
     iconType: 'Ionicons',
     onPress: () =>
@@ -9,7 +9,7 @@ const accountListItems = (navigation, userId, currentUserProfile) => [
       }),
   },
   {
-    title: 'Services you bookmarked',
+    title: 'الخدمات المفضلة',
     iconName: 'md-star',
     iconType: 'Ionicons',
     onPress: () =>
@@ -18,7 +18,7 @@ const accountListItems = (navigation, userId, currentUserProfile) => [
       }),
   },
   {
-    title: 'Services you proposed for',
+    title: 'الخدمات التى تقدمت إليها',
     iconName: 'account-card-details',
     iconType: 'MaterialCommunityIcons',
     onPress: () =>
@@ -27,7 +27,7 @@ const accountListItems = (navigation, userId, currentUserProfile) => [
       }),
   },
   {
-    title: 'Services you archived',
+    title: 'الخدمات المؤرشفة',
     iconName: 'file-archive-o',
     iconType: 'FontAwesome',
     onPress: () =>
@@ -42,7 +42,7 @@ const accountListItems = (navigation, userId, currentUserProfile) => [
   //   onPress: () => navigation.navigate('ChargeMoneyScore'),
   // },
   {
-    title: 'I ran out of Givantk points',
+    title: 'ليس معى نقاط مجانية',
     iconName: 'emoji-sad',
     iconType: 'Entypo',
     onPress: () => navigation.navigate('GivantkPoints'),

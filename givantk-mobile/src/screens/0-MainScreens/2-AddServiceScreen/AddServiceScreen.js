@@ -28,7 +28,7 @@ import TextInput from '../../../components/commons/UI/TextInput/TextInput';
 
 class AddServiceScreen extends React.Component {
   static navigationOptions = () => ({
-    tabBarLabel: 'Request Service',
+    tabBarLabel: 'اطلب خدمة',
     tabBarIcon: ({ tintColor }) => (
       <Icon
         type="Ionicons"
@@ -182,16 +182,16 @@ class AddServiceScreen extends React.Component {
         <AvoidKeyboard bottomPadding={80}>
           <View style={styles.topInputsContainer}>
             <TextInput
-              title="Service Name"
-              placeholder="Type the service name"
+              title="اسم الخدمة"
+              placeholder="اكتب اسم الخدمة"
               error={errors.name}
               name="name"
               onChange={this.onChangeValue}
             />
 
             <Picker
-              title="Service Type"
-              placeholder="Pick a type"
+              title="نوع الخدمة"
+              placeholder="اختر نوع"
               style={styles.picker}
               name="type"
               onChange={this.onChangeValue}
@@ -209,8 +209,8 @@ class AddServiceScreen extends React.Component {
             </TouchableWithoutFeedback>
 
             <Picker
-              title="Service Nature"
-              placeholder="Pick a nature"
+              title="طبيعة الخدمة"
+              placeholder="اختر طبيعة"
               style={styles.picker}
               name="nature"
               onChange={this.onChangeValue}
@@ -248,7 +248,7 @@ class AddServiceScreen extends React.Component {
                 />
                 <Text style={styles.error}>{errors.money}</Text> */}
                 <Picker
-                  title="Pick Payment type"
+                  title="اختر نوع الدفع"
                   placeholder="Cash / Vodafone Cash"
                   style={styles.picker}
                   name="paymentType"
@@ -262,10 +262,10 @@ class AddServiceScreen extends React.Component {
             {free && (
               <View>
                 <TextInput
-                  title="Points you want to give"
+                  title="النقاط التى تودأن تعطيها"
                   keyboardType="numeric"
                   maxLength={10}
-                  placeholder="Amount in numbers"
+                  placeholder="المقدار بالأرقام"
                   name="givantkPoints"
                   onChange={this.onChangeValue}
                 />
@@ -296,11 +296,11 @@ class AddServiceScreen extends React.Component {
           </View> */}
 
           <View style={styles.left}>
-            <Label style={styles.text}>Description </Label>
+            <Label style={styles.text}>الوصف </Label>
           </View>
           <View style={{ width: dimensions.fullWidth * 0.88 }}>
             <Textarea
-              placeholder="Service Description"
+              placeholder="وضف الخدمة"
               style={[
                 styles.textarea,
                 errors.description ? styles.warningInput : {},
@@ -346,7 +346,7 @@ class AddServiceScreen extends React.Component {
                 })
               }
             >
-              Suggest a criteria for the helper
+              اقترح خصائص معينة فى من يساعدك
             </Text>
             {hasSuggestedHelperCriteria && (
               <Icon
@@ -363,7 +363,7 @@ class AddServiceScreen extends React.Component {
               loading={createServiceLoading}
               big
             >
-              ADD
+              ضف
             </MainButton>
           </View>
         </AvoidKeyboard>

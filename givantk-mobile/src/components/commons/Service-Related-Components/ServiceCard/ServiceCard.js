@@ -135,12 +135,12 @@ class ServiceCard extends React.PureComponent {
             {/* <Text style={styles.cost}>{service.cost}</Text> */}
             {!service.givantk_points ? (
               <Text style={styles.points}>
-                Paid -{' '}
-                {service.paymentType === 'cash' ? 'Cash' : 'Vodafone Cash'}
+                {' '}مدفوعة-
+                {service.paymentType === 'cash' ? 'كاش' : 'فودافون كاش'}
               </Text>
             ) : (
               <Text style={styles.points}>
-                Free - Givantk points: {service.givantk_points}{' '}
+               مجانية-نقاط جيفانتك :{service.givantk_points}
               </Text>
             )}
             {canBookmark ? (

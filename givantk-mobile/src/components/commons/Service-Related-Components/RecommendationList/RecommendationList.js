@@ -18,7 +18,7 @@ const RecommendationList = (props) => {
     };
 
     const invitationCallback = () => {
-      QuickNotification('Successfully invited helper');
+      QuickNotification('تم دعوة العضو بنجاح');
     };
 
     return (
@@ -31,7 +31,7 @@ const RecommendationList = (props) => {
   };
   if (loading) return <Loading />;
   if (profiles.length === 0)
-    return <Announcement text="No recommendations found " />;
+    return <Announcement text="لا توجد اقتراحات بعد" />;
 
   return (
     <FlatList

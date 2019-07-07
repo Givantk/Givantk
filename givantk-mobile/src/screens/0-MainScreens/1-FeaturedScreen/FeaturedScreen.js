@@ -12,7 +12,7 @@ import styles from './FeaturedScreenStyles';
 
 class FeaturedScreen extends React.Component {
   static navigationOptions = () => ({
-    tabBarLabel: 'Featured',
+    tabBarLabel: 'المفضلة',
     tabBarIcon: ({ tintColor }) => (
       <Icon
         type="Ionicons"
@@ -64,7 +64,7 @@ class FeaturedScreen extends React.Component {
       <View style={styles.container}>
         <View style={styles.searchContainer}>
           <DefaultTextInput
-            placeholder="Find a service"
+            placeholder="ابحث عن خدمة"
             placeholderTextColor={colors.gray02}
             style={styles.searchInput}
             name="searchWord"

@@ -98,7 +98,7 @@ class ServicesList extends Component {
     const { refreshing } = this.state;
 
     if (loading) return <Loading />;
-    if (services.length === 0) return <Announcement text="No services yet" />;
+    if (services.length === 0) return <Announcement text="لا توجد خدمات بعد" />;
 
     return (
       <FlatList

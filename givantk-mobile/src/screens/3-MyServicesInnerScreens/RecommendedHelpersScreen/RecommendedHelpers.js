@@ -8,7 +8,7 @@ import Loading from '../../../components/commons/UI/Loading/Loading';
 
 class RecommendedHelpers extends Component {
   static navigationOptions = () => ({
-    headerTitle: 'Recommended Helpers',
+    headerTitle: 'المساعدون المقترحون',
   });
 
   state = {};

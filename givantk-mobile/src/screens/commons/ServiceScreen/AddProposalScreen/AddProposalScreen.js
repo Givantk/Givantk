@@ -15,7 +15,7 @@ import AvoidKeyboard from '../../../../components/commons/UI/AvoidKeyboard/Avoid
 
 class AddProposalScreen extends Component {
   static navigationOptions = () => ({
-    headerTitle: 'Add Proposal',
+    headerTitle: 'تقديم العرض',
   });
 
   state = {
@@ -75,7 +75,7 @@ class AddProposalScreen extends Component {
       <AvoidKeyboard bottomPadding={20}>
         <View style={styles.wrapper}>
           <Text style={styles.serviceName}>{service.name}</Text>
-          <Text style={styles.header}>My Proposal:</Text>
+          <Text style={styles.header}>تقديم العرض</Text>
           <View style={{ width: dimensions.fullWidth * 0.88 }}>
             <Textarea
               onChangeText={(t) => this.setState(() => ({ proposal: t }))}
@@ -91,7 +91,7 @@ class AddProposalScreen extends Component {
           <View style={styles.submitContainer}>
             {proposeToServiceLoading && <Loading />}
             {proposeToServiceLoading || (
-              <Button title="Submit Proposal" onPress={this.onSubmitProposal} />
+              <Button title="التقدم بالعرض" onPress={this.onSubmitProposal} />
             )}
           </View>
         </View>

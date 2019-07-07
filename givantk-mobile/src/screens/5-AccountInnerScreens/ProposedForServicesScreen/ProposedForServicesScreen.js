@@ -9,7 +9,7 @@ import ServicesList from '../../../components/commons/Service-Related-Components
 
 class ProposedForServicesScreen extends Component {
   static navigationOptions = () => ({
-    headerTitle: 'You proposed for',
+    headerTitle: 'لقد تقدمت إلى',
   });
 
   render() {
