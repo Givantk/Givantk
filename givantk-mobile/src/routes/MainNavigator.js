@@ -60,7 +60,7 @@ const MainNavigator = createStackNavigator(
       const headerStyle = {
         backgroundColor: colors.primary,
         height: headerHeight,
-        alignContent: 'right',
+
       };
 
       const headerTitleStyle = {
