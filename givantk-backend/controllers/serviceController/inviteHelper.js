@@ -20,7 +20,8 @@ module.exports = inviteHelper = (req, res) => {
               service.reveal_asker === false
                 ? 'Anonymous'
                 : req.user.first_name + req.user.last_name
-            } invited you to the service \"${service.name}\"`,
+            }
+            دعاك للخدمة \"${service.name}\"  `,
             navigateTo: {
               kind: 'service',
               service: service._id,
@@ -44,12 +45,12 @@ module.exports = inviteHelper = (req, res) => {
             sendNotifications([
               {
                 to: invitedProfile.user.pushNotificationToken,
-                title: 'You are invited to a service!',
-                body: `${
+                title: 'أنت مدعو لخدمة',
+                body: ` ${
                   service.reveal_asker === false
-                    ? 'Anonymous'
-                    : askerProfile.first_name + askerProfile.last_name
-                } invited you to the service \"${service.name}\"`,
+                    ? 'Anonymous'+'\n'
+                    : askerProfile.first_name + askerProfile.last_name+'\n'
+                } دعاك للخدمة \"${service.name}\" `,
                 sound: 'default',
               },
             ]);

@@ -14,7 +14,7 @@ module.exports = proposeToService = (req, res) => {
   Service.findById(serviceId)
     .then((service) => {
       if (service.asker.toString() !== req.user._id.toString()) {
-        errors.unauthorized = "You haven't initiated this service";
+        errors.unauthorized = 'لم تقم بإنشاءالخدمة';
         return res.status(401).json(errors);
       }
 
@@ -23,7 +23,7 @@ module.exports = proposeToService = (req, res) => {
         service.state === 'done' ||
         service.state === 'archived'
       ) {
-        errors.unauthorized = "You can't accept proposal due to service state";
+        errors.unauthorized = 'لا يمكن قبول طلب التقدم نتيجة لحالة الخدمة';
         return res.status(401).json(errors);
       }
 
@@ -32,12 +32,12 @@ module.exports = proposeToService = (req, res) => {
       );
 
       if (!application) {
-        errors.noproposal = 'Proposal not found';
+        errors.noproposal = 'لم يتم إيجاد طلب التقدم للخدمة';
         return res.status(404).json(errors);
       }
 
       if (service.helper) {
-        errors.alreadyhashelper = 'This service already has a helper';
+        errors.alreadyhashelper = 'هذه الخدمة لديها ملبى بالفعل';
         return res.status(400).json(errors);
       }
 
@@ -68,7 +68,7 @@ module.exports = proposeToService = (req, res) => {
                     service.reveal_asker === false
                       ? 'Anonymous'
                       : askerProfile.first_name
-                  } accepted your proposal to the service \"${service.name}\"`,
+                  }  قبل طلبك للتقدم للخدمة \"${service.name}\"  `,
                   navigateTo: {
                     kind: 'service',
                     service: service._id,
@@ -85,14 +85,12 @@ module.exports = proposeToService = (req, res) => {
                   sendNotifications([
                     {
                       to: applicantProfile.user.pushNotificationToken,
-                      title: 'Your Proposal is Accepted!',
-                      body: `${
+                      title: 'تم قبول طلب تقدمك لخدمة',
+                      body: ` ${
                         service.reveal_asker === false
                           ? 'Anonymous'
                           : askerProfile.first_name
-                      } accepted your proposal to the service \"${
-                        service.name
-                      }\"`,
+                      }  وافق على طلب تقدمك للخدمة \"${service.name}\" `,
                       sound: 'default',
                     },
                   ]);

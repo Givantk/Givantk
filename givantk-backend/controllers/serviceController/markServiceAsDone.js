@@ -14,13 +14,13 @@ module.exports = markServiceAsDone = (req, res) => {
   Service.findById(serviceId)
     .then((service) => {
       if (service.asker.toString() !== req.user._id.toString()) {
-        errors.unauthorized = "You haven't initiated this service";
+        errors.unauthorized = "لم تقم بانشاء هذه الخدمة";
         return res.status(401).json(errors);
       }
 
       if (!service.helper) {
         errors.nohelper =
-          "This service has no helper, it can't be marked as done";
+          "هذه الخدمة ليست لها ملبى،لذا لا يمكن انهاءها";
         return res.status(400).json(errors);
       }
 
@@ -36,11 +36,11 @@ module.exports = markServiceAsDone = (req, res) => {
               // Updating helper profile
               helperProfile.services_helped_in_finished.unshift(service._id);
               helperProfile.notifications.unshift({
-                title: `${
+                title: ` ${
                   service.reveal_asker === false
                     ? 'Anonymous'
                     : askerProfile.first_name
-                } marked the service \"${service.name}\" as done`,
+                }  قام بانهاء الخدمة ${service.name} `,
                 navigateTo: {
                   kind: 'service',
                   service: service._id
@@ -63,12 +63,12 @@ module.exports = markServiceAsDone = (req, res) => {
                 sendNotifications([
                   {
                     to: helperProfile.user.pushNotificationToken,
-                    title: 'Service Marked As Done',
-                    body: `${
+                    title: 'تم إنهاء الخدمة',
+                    body: `  ${
                       service.reveal_asker === false
                         ? 'Anonymous'
                         : askerProfile.first_name
-                    } marked the service \"${service.name}\" as done`,
+                    } قام بإنهاء الخدمة \"${service.name}\" `,
                     sound: 'default'
                   }
                 ]);

@@ -79,19 +79,19 @@ class RecommendationCard extends React.PureComponent {
               </TouchableWithoutFeedback>
               <View style={{ marginTop: 10, }}>
                 <Text style={styles.userName}>
-                  Skills:{' '}
+                  المهارات: {' '}
                   <Text style={styles.criteria}>
                     {profile.recommenderInfo.skills.join(', ')}
                   </Text>
                 </Text>
                 <Text style={styles.userName}>
-                  Location:{' '}
+                  المكان :{' '}
                   <Text style={styles.criteria}>
                     {profile.recommenderInfo.location}
                   </Text>
                 </Text>
                 <Text style={styles.userName}>
-                  Job:{' '}
+                  المهنة :{' '}
                   <Text style={styles.criteria}>
                     {profile.recommenderInfo.job}
                   </Text>

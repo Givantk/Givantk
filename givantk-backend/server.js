@@ -169,8 +169,8 @@ io.use((socket, next) => {
               sendNotifications([
                 {
                   to: receiver.pushNotificationToken,
-                  title: 'New Message',
-                  body: `${username} sent you a message`,
+                  title: 'رسالة جديدة',
+                  body: `${username} بعث لك رسالة`,
                   sound: 'default',
                   data: {
                     type: 'message',

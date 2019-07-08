@@ -11,7 +11,7 @@ module.exports = unbookmarkService = (req, res) => {
     .then((service) => {
       Profile.findOne({ user: req.user._id }).then((profile) => {
         if (!profile) {
-          errors.noprofile = 'No profile yet';
+          errors.noprofile = 'ليس لديك ملف شخصى بعد';
           return res.status(400).json(errors);
         }
 
@@ -20,7 +20,7 @@ module.exports = unbookmarkService = (req, res) => {
             (item) => item.toString() === service._id.toString()
           ).length === 0
         ) {
-          errors.notbookmarked = "You haven't yet bookmarked this service";
+          errors.notbookmarked = "لم تقم بإضاقة الخدمة إلى مفضلتك بعد";
           return res.status(400).json(errors);
         }
 

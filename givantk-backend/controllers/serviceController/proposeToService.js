@@ -19,7 +19,7 @@ module.exports = proposeToService = (req, res) => {
   Service.findById(req.params.id)
     .then((service) => {
       if (service.asker.toString() === req.user._id.toString()) {
-        errors.unauthorized = "You can't propose to your own service";
+        errors.unauthorized = "لا تستطيع التقدم لخدمة قمت بصنعها";
         res.status(401).json(errors);
       }
 
@@ -29,7 +29,7 @@ module.exports = proposeToService = (req, res) => {
         service.state === 'done' ||
         service.state === 'archived'
       ) {
-        errors.unauthorized = "You can't propose to this service";
+        errors.unauthorized = "عذراً،لا يمكنك التقدم لهذه الخدمة";
         return res.status(401).json(errors);
       }
 
@@ -38,13 +38,13 @@ module.exports = proposeToService = (req, res) => {
           (item) => item.user.toString() === req.user._id.toString()
         ).length > 0
       ) {
-        errors.alreadyproposed = 'You have already proposed to this service';
+        errors.alreadyproposed = 'لقد قمت بالتقدم لهذه الخدمة بالفعل';
         return res.status(400).json(errors);
       }
 
       Profile.findOne({ user: req.user._id }).then((applicantProfile) => {
         if (!applicantProfile) {
-          errors.noprofile = 'No profile yet';
+          errors.noprofile = 'لم تنشىء ملف شخصى بعد';
           return res.status(400).json(errors);
         }
 
@@ -66,7 +66,7 @@ module.exports = proposeToService = (req, res) => {
                 askerProfile.notifications.unshift({
                   title: `${
                     applicantProfile.first_name
-                  } proposed to your service \"${service.name}\"`,
+                  } تقدم لخدمتك \"${service.name}\"`,
                   navigateTo: {
                     kind: 'service',
                     service: service._id,
@@ -81,10 +81,10 @@ module.exports = proposeToService = (req, res) => {
                   sendNotifications([
                     {
                       to: askerProfile.user.pushNotificationToken,
-                      title: 'New Service Proposal!',
+                      title: 'متقدم جديد للخدمة',
                       body: `${
                         applicantProfile.first_name
-                      } proposed to your service \"${service.name}\"`,
+                      } تقدم لخدمتك \"${service.name}\"`,
                       sound: 'default',
                     },
                   ]);
