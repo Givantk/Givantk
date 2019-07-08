@@ -27,17 +27,6 @@ class MyServicesScreen extends React.Component {
     const { profile, getAllServicesLoading, navigation } = this.props;
 
     return [
-     
-      {
-        name: 'ساعدت فى',
-        component: () => (
-          <ServicesList
-            services={profile.services_helped_in}
-            loading={getAllServicesLoading}
-            navigation={navigation}
-          />
-        ),
-      },
       {
         name: 'سألت عن',
         component: () => (
@@ -48,6 +37,17 @@ class MyServicesScreen extends React.Component {
           />
         ),
       },
+      {
+        name: 'ساعدت فى',
+        component: () => (
+          <ServicesList
+            services={profile.services_helped_in}
+            loading={getAllServicesLoading}
+            navigation={navigation}
+          />
+        ),
+      },
+      
     ];
   };
 

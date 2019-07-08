@@ -107,7 +107,7 @@ class LoginScreen extends React.Component {
 
           <View style={styles.inputContainer}>
             <DefaultTextInput
-              placeholder="Email Address"
+              placeholder="البريد الالكترونى"
               style={styles.textInput}
               onChangeText={this.onChangeTextValue}
               name="email"
@@ -116,7 +116,7 @@ class LoginScreen extends React.Component {
             />
             <DefaultTextInput
               password
-              placeholder="Password"
+              placeholder="كلمة السر"
               style={styles.textInput}
               onChangeText={this.onChangeTextValue}
               name="password"
@@ -128,14 +128,14 @@ class LoginScreen extends React.Component {
               onPress={this.handleLogin}
               loading={setCurrentUserLoading}
             >
-              Sign In
+              الدخول
             </DefaultButton>
 
             <DefaultButton
               onPress={this.handleSignInWithFacebook}
               loading={loginWithFacebookLoading}
             >
-              Sign In With{' '}
+              الدخول بواسطة {' '}
               <Icon
                 type="FontAwesome"
                 name="facebook-square"
@@ -146,14 +146,14 @@ class LoginScreen extends React.Component {
 
           <View style={styles.signupRedirect}>
             <Text style={styles.signupRedirectText}>
-              Don't have an account?{' '}
+              ليس لديك حساب؟ {' '}
             </Text>
 
             <TouchableWithoutFeedback
               onPress={() => navigation.navigate('Signup')}
             >
               <View>
-                <Text style={styles.signupRedirectButtonText}>Join Now</Text>
+                <Text style={styles.signupRedirectButtonText}>انضم الآن</Text>
               </View>
             </TouchableWithoutFeedback>
           </View>

@@ -63,7 +63,7 @@ export default class SignupInputs extends Component {
         >
           <View style={{ width: '50%' }}>
             <DefaultTextInput
-              placeholder="First Name"
+              placeholder="الاسم"
               style={styles.textInput}
               onChangeText={this.onChangeTextValue}
               name="first_name"
@@ -72,7 +72,7 @@ export default class SignupInputs extends Component {
           </View>
           <View style={{ width: '50%', alignItems: 'center' }}>
             <DefaultTextInput
-              placeholder="Last Name"
+              placeholder="اللقب"
               style={styles.textInput}
               onChangeText={this.onChangeTextValue}
               name="last_name"
@@ -81,7 +81,7 @@ export default class SignupInputs extends Component {
           </View>
         </View>
         <DefaultTextInput
-          placeholder="Email Address"
+          placeholder="البريد الالكترونى"
           style={styles.textInput}
           onChangeText={this.onChangeTextValue}
           name="email"
@@ -90,7 +90,7 @@ export default class SignupInputs extends Component {
         />
         <DefaultTextInput
           password
-          placeholder="Password"
+          placeholder="كلمة السر"
           style={styles.textInput}
           onChangeText={this.onChangeTextValue}
           name="password"
@@ -99,7 +99,7 @@ export default class SignupInputs extends Component {
         />
         <DefaultTextInput
           password
-          placeholder="Confirm Password"
+          placeholder="تأكيد كلمة السر"
           style={styles.textInput}
           onChangeText={this.onChangeTextValue}
           name="password2"
@@ -114,7 +114,7 @@ export default class SignupInputs extends Component {
             selectedValue={location}
             onValueChange={this.onSelectLocation}
           >
-            <Picker.Item label="Select Location" value="" />
+            <Picker.Item label="اختر المنطقة" value="" />
             {cairoDistricts.map((district) => (
               <Picker.Item label={district} value={district} key={district} />
             ))}
@@ -130,13 +130,13 @@ export default class SignupInputs extends Component {
         </Text>
         <View style={styles.buttonsContainer}>
           <DefaultButton onPress={this.onSignup} loading={loading}>
-            Sign Up
+            التسجيل
           </DefaultButton>
           <DefaultButton
             onPress={onSignupWithFacebook}
             loading={signupWithFacebookLoading}
           >
-            Sign Up With{' '}
+            التسجيل بواسطة {' '}
             <Icon
               type="FontAwesome"
               name="facebook-square"

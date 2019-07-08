@@ -19,7 +19,7 @@ class ProfileScreen extends React.Component {
   // navigation params.
 
   static navigationOptions = () => ({
-    headerTitle: 'Profile',
+    headerTitle: 'الملف الشخصى',
     headerStyle: {
       backgroundColor: colors.primary,
     },

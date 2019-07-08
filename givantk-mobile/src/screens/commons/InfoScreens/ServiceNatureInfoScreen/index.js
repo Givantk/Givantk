@@ -6,7 +6,7 @@ import styles from './styles';
 
 export default class ServiceNatureInfoScreen extends Component {
   static navigationOptions = () => ({
-    headerTitle: 'Service Natures',
+    headerTitle: 'طبيعة الخدمات',
   });
 
   render() {

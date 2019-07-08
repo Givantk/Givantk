@@ -12,7 +12,7 @@ import * as ProfileActions from '../../../store/actions/profileActions';
 
 class GivantkPointsScreen extends Component {
   static navigationOptions = () => ({
-    headerTitle: 'Get Givantk Points',
+    headerTitle: 'الحصول على نقاط مجانية',
   });
 
   state = {

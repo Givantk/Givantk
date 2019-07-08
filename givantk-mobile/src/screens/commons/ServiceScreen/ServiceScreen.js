@@ -29,7 +29,7 @@ import getReadableDate from '../../../assets/utils/getReadableDate';
 
 class ServiceScreen extends Component {
   static navigationOptions = () => ({
-    headerTitle: 'Service',
+    headerTitle: 'الخدمة',
   });
 
   state = {

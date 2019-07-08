@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     width: '70%',
     color: colors.white,
     fontWeight: 'bold',
+    textAlign:'right'
   },
   viewInput: {
     borderWidth: 0,
