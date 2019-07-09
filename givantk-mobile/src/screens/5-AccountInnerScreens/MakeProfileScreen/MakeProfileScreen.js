@@ -21,7 +21,7 @@ import jobsList from '../../../assets/data/jobs';
 
 class MakeProfileScreen extends Component {
   static navigationOptions = () => ({
-    headerTitle: 'تكوين الملف الشخصى',
+    headerTitle: 'تكوين الملف الشخصى>',
     headerStyle: {
       backgroundColor: colors.primary,
     },
@@ -119,7 +119,7 @@ class MakeProfileScreen extends Component {
       const callback = () => {
         getCurrentUserProfile();
         navigation.goBack();
-        QuickNotification('Profile Successfully created');
+        QuickNotification('تم إنشاء الملف الشخصى بنجاح');
       };
 
       makeProfile(newProfile, callback);
@@ -134,7 +134,7 @@ class MakeProfileScreen extends Component {
       <AvoidKeyboard bottomPadding={0}>
         <View style={styles.container}>
           <Text style={styles.label}>
-            Profile picture{currentUser.avatar ? '' : '*'}
+           الصورة الشخصية{currentUser.avatar ? '' : '*'}
           </Text>
           <Button
             style={styles.uploadButton}
@@ -142,23 +142,23 @@ class MakeProfileScreen extends Component {
               AuthActions.ensureCameraRollPermission(this.pickImage)
             }
           >
-            <Text style={styles.uploadButtonText}>Pick from gallery </Text>
+            <Text style={styles.uploadButtonText}>ارفع الصورة </Text>
           </Button>
           <View style={styles.imageView}>
             {avatar && <Image style={styles.image} source={{ uri: avatar }} />}
             {noAvatar && (
-              <Text style={styles.error}>Please provide a profile picture</Text>
+              <Text style={styles.error}>من فضلك ضف صورة لحسابك الشخصى</Text>
             )}
             {sizeAlert && (
               <Text style={styles.sizeError}>
-                Image is bigger than 5 MB, please choose another image
+               الصورة اكبر من 5 ميجابايت، من فضلك اختر صورة أخرى
               </Text>
             )}
           </View>
 
           <Picker
-            title="Gender"
-            placeholder="Male / Female"
+            title="النوع"
+            placeholder="ذكر/انثى"
             style={styles.picker}
             name="gender"
             onChange={this.onChangeValue}
@@ -167,7 +167,7 @@ class MakeProfileScreen extends Component {
           />
 
           <TextInput
-            title="Phone Number*"
+            title="رقم الهاتف*"
             placeholder="Example: 01003947562"
             style={styles.input}
             keyboardType="numeric"
@@ -177,8 +177,8 @@ class MakeProfileScreen extends Component {
           <Text style={styles.error}>{errors.phone_number}</Text>
 
           <Picker
-            title="Job"
-            placeholder="Select your job"
+            title="المهنة"
+            placeholder="اختر مهنتك"
             style={styles.picker}
             name="job"
             onChange={this.onChangeValue}
@@ -190,17 +190,17 @@ class MakeProfileScreen extends Component {
 
           <MultiPicker
             options={skillsList.map((d) => ({ label: d, value: d }))}
-            title="Skills*"
+            title="المهارات*"
             name="skills"
             onChange={this.onChangeValue}
-            searchPlaceholderText="Select your skills"
+            searchPlaceholderText="اختر مهاراتك"
             style={styles.multiPicker}
           />
           <Text style={styles.error}>{errors.skills}</Text>
 
-          <Text style={styles.label}>Description*</Text>
+          <Text style={styles.label}>الوصف*</Text>
           <Textarea
-            placeholder="Describe yourself. What's your job? What's your major? What are your hobbies? 😃"
+            placeholder="قم بوصف نفسك، ماهى مهنتك، ما هواياتك، من تكون؟ 😃"
             style={[styles.textarea2]}
             onChangeText={(v) => this.onChangeValue('description', v)}
           />
@@ -211,7 +211,7 @@ class MakeProfileScreen extends Component {
               <Loading />
             ) : (
               <Button style={styles.submitButton} onPress={this.onSubmit}>
-                <Text style={styles.submitButtonText}>Save</Text>
+                <Text style={styles.submitButtonText}>إنشاء الملف</Text>
               </Button>
             )}
           </View>
