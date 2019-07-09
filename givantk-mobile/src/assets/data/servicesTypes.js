@@ -1,18 +1,18 @@
 const servicesTypes = [
   {
-    label: 'Knowledge Exchange',
-    value: 'KE',
-  },
-  {
-    label: 'Everyday Services',
+    label: 'خدمات على أرض الواقع',
     value: 'ES',
   },
   {
-    label: 'Reach the community',
+    label: 'تبادل المعلومات',
+    value: 'KE',
+  },
+    {
+    label: 'تواصل مع الآخرين',
     value: 'RC',
   },
   {
-    label: 'Others',
+    label: 'أخرى',
     value: 'O',
   },
 ];

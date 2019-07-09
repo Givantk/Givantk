@@ -6,44 +6,43 @@ import styles from './styles';
 
 export default class ServiceTypeInfoScreen extends Component {
   static navigationOptions = () => ({
-    headerTitle: 'Service Types',
+    headerTitle: 'أنواع الخدمات',
   });
 
   render() {
     return (
       <ScrollView>
         <View style={styles.wrapper}>
-          <Text style={styles.title}>Givantk Service Types</Text>
-          <Text style={styles.content}>There are four types of services.</Text>
+          <Text style={styles.title}>أنواع الخدمات</Text>
+          <Text style={styles.content}>هناك أربعة أنواع من الخدمات:</Text>
           <Text style={styles.content}>
             <Text style={[styles.content, { fontWeight: 'bold' }]}>
-              1-Knowledge exchange: 🤓 {'\n'}
+              تبادل المعلومات 🤓 {'\n \n'}
             </Text>{' '}
-            When you want to ask about something you want to know from others,
-            you can choose this type of service. You can also ask for this type
-            of services anonymously.
+            عندما تريد أن تسأل عن معلومة تريد معرفتها من الآخرين،ولا تتضمن
+            التعامل معهم على أرض الواقع يمكنك اختيار هذا النوع من الخدمات، وكما
+            يمكنك طلبه وأنت تخفى هويتك
           </Text>
           <Text style={styles.content}>
             <Text style={[styles.content, { fontWeight: 'bold' }]}>
-              2-EveryDay services: 📅 {'\n'}
+              خدمات على أرض الواقع 📅 {'\n \n'}
             </Text>{' '}
-            If you want to interact with someone in real world to help you in
-            services like transporting something or buying something for you.{' '}
+            إذا اردت ان تتواصل مع شخص على أرض الواقع ليساعدك فى خدمات مثل نقل
+            شىء أو شراء شىء لك.{' '}
           </Text>
           <Text style={styles.content}>
             <Text style={[styles.content, { fontWeight: 'bold' }]}>
-              3-Reach the community: 🛰️ {'\n'}
+              تواصل مع المجتمع 🛰️ {'\n \n'}
             </Text>{' '}
-            If you want to reach someone, e.g: you want to make a startup and
-            you want someone with technical knowledge you can choose this
-            option, and write the qualifications of the person you need.
+            لو كنت تريد التواصل مع شخص بعينه، على سبيل المثال تريد إنشاء مشروع
+            جديد، وتحتاج إلى التواصل مع شخص يتمتع بالخبرة التقنية اللازمة،عندها
+            يمكنك اختيار هذا النوع من الخدمات، واختيار مواصفات هذا الشخص
           </Text>
           <Text style={styles.content}>
             <Text style={[styles.content, { fontWeight: 'bold' }]}>
-              4-Others: 🙋‍♂️ {'\n'}
+              أخرى 🙋‍♂️ {'\n'}
             </Text>{' '}
-            If your service is not related to any of the above types, you can
-            choose this option.
+           يمكنك اختيار هذا النوع إذا لم تجد أى نوع من الخدمات يوافق ما تريد
           </Text>
           <Text style={styles.signature}>Givantk Team</Text>
         </View>

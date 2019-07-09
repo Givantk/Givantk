@@ -13,39 +13,37 @@ export default class ServiceNatureInfoScreen extends Component {
     return (
       <ScrollView>
         <View style={styles.wrapper}>
-          <Text style={styles.title}>Givantk Service Nature</Text>
+          <Text style={styles.title}>طبيعة الخدمات</Text>
           <Text style={styles.content}>
             <Text style={[styles.content, { fontWeight: 'bold' }]}>
-              Service Nature
+              طبيعة الخدمة
             </Text>{' '}
-            indicates whether the service is{' '}
+            توضح ما إذا كانت الخدمة{' '}
             <Text style={[styles.content, { fontWeight: 'bold' }]}>
-              free ✨
+              مجانية ✨
             </Text>{' '}
-            or{' '}
+            أو{' '}
             <Text style={[styles.content, { fontWeight: 'bold' }]}>
-              paid 💰
+              مدفوعة 💰
             </Text>
-            , our app currently mainly supports free services, paid services are
-            supported (using either Cash or Vodafone Cash), however, payment is
-            done and agreed on between users
+            تطبيقنا الآن يدعم الخدمات المجانية، اما الخدمات المدفوعة سواء كاش أو
+            باستخدام فودافون كاش فهى يتم الاتفاق عليها ودفعها بواسطة المستخدمين
+            وليس للتطبيق فى الفترة الحالية علاقة باستلامها أو تحويلها.
           </Text>
           <Text style={styles.content}>
-            When you choose the service nature to be free,{' '}
+            لو قمت باختيار طبيعة الخدمة كخدمة مجانية{' '}
             <Text style={[styles.content, { fontWeight: 'bold' }]}>
-              you will deal with something called Givantk Points{' '}
+              سوف تتعامل مع شىء يسمى نقاط جيفانتك المجانية{' '}
             </Text>
-            . When you register in the app you take 100 Givantk Points by
-            default, and use them to ask for services, and they will be taken
-            from you and given to your helper.
+            عندما تقوم بالتسجيل فى التطبيق، سوف تأخذ 100 نقطة، يمكنك أن تطلب بهم
+            خدمات مجانية
           </Text>
           <Text style={styles.content}>
             <Text style={[styles.content, { fontWeight: 'bold' }]}>
-              Givantk Points
+              تلك النقاط
             </Text>{' '}
-            can be exchanged in the future with prizes, and discounts from large
-            stores, so try to collect as much as you can by helping other in
-            free services.
+            يمكنك استبدالها فى المستقبل بجوائز، وخصومات من محلات كبرى، لذا حاول
+            تجميع ما يمكنك منها عن طريق مساعدة الآخرين فى خدماتهم المجانية
           </Text>
           <Text style={styles.signature}>Givantk Team</Text>
         </View>
