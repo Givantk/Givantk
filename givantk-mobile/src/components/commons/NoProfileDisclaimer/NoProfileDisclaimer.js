@@ -17,8 +17,8 @@ const NoProfileDisclaimer = (props) => {
       }}
     >
       <ContentCard
-        body={warningText || 'Please Fill In Your Profile Info First 😄'}
-        submitText="Fill Profile"
+        body={warningText || 'من فضلك ضف معلومات ملفك الشخصى أولا 😄'}
+        submitText="ضف ملفك"
         onSubmit={() => navigation.navigate('MakeProfile')}
       />
     </View>
