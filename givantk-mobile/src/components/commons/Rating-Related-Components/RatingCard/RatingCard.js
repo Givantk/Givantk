@@ -65,11 +65,11 @@ class RatingCard extends React.PureComponent {
               <View>
                 {service.askedByUser ? (
                   <Text style={styles.reviewer}>
-                    {`Helper: ${service.helper.first_name}`}
+                    {` ${' '} ملبى الخدمة ${service.helper.first_name}`}
                   </Text>
                 ) : (
                   <Text style={styles.reviewer}>
-                    {`Asker: ${service.reveal_asker===false?'Anonymous':service.asker.first_name} `}
+                    {` ${' '} طالب الخدمة ${service.reveal_asker===false?'Anonymous':service.asker.first_name} `}
                   </Text>
                 )}
               </View>
@@ -78,13 +78,13 @@ class RatingCard extends React.PureComponent {
 
           <View style={styles.headerCenter}>
             {service.askedByUser ? (
-              <Text style={styles.reviewHeader}>{`\r\n Reviewed ${
+              <Text style={styles.reviewHeader}>{`\r\n قيم ${
                 service.asker.first_name
-              } in the service:\n "${service.name}"`}</Text>
+              } فى الخدمة: \n "${service.name}"`}</Text>
             ) : (
-              <Text style={styles.reviewHeader}>{`\r\n Reviewed ${
+              <Text style={styles.reviewHeader}>{`\r\n قيم ${
                 service.helper.first_name
-              } in the service:\n "${service.name}" `}</Text>
+              } فى الخدمة: \n "${service.name}" `}</Text>
             )}
           </View>
 

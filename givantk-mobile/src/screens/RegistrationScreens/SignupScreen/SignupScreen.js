@@ -46,7 +46,7 @@ class SignupScreen extends React.Component {
     const callback = () => {
       const { navigation, getAllServices, getCurrentUserProfile } = this.props;
 
-      QuickNotification('Login Successful');
+      QuickNotification('تم تسجيل الدخول بنجاح');
       navigation.replace('Tab');
       getAllServices();
       getCurrentUserProfile();

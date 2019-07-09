@@ -74,11 +74,13 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   sendMessageText: {
+    marginTop:13,
     color: colors.primary,
     fontSize: 14,
     fontFamily: fontTypes.mainBold,
   },
   sendMessageIcon: {
+    marginTop:10,
     color: colors.primary,
     fontSize: 25,
     marginLeft: 10,

@@ -96,7 +96,7 @@ const Proposal = ({
             service.state !== 'archived' ? (
               <View style={styles.sendMessageContainer}>
                 <Text style={styles.sendMessageText}>
-                  Chat with your helper
+                  تحدث مع ملبى خدمتك
                 </Text>
                 <Icon
                   type="FontAwesome"
@@ -108,7 +108,7 @@ const Proposal = ({
               service.state !== 'done' &&
               service.state !== 'archived' ? (
               <View style={styles.sendMessageContainer}>
-                <Text style={styles.sendMessageText}>Chat with your asker</Text>
+                <Text style={styles.sendMessageText}>تحدث مع طالب الخدمة</Text>
                 <Icon
                   type="FontAwesome"
                   name="envelope"

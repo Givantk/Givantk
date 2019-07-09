@@ -13,7 +13,7 @@ import styles from './NotificationsScreenStyles';
 
 class NotificationsScreen extends React.Component {
   static navigationOptions = () => ({
-    headerTitle: 'Your Notifications',
+    headerTitle: 'إشعاراتك',
   });
 
   componentDidMount() {
