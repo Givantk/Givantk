@@ -14,7 +14,7 @@ const NotificationsIndicator = ({ currentUserProfile }) => {
       : 0;
 
   return (
-    <View style={{ width: 39 }}>
+    <View style={{ width: 39,marginRight:10 }}>
       <Icon
         type="Ionicons"
         name="md-notifications"
