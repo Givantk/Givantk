@@ -8,7 +8,7 @@ const servicesTypes = [
     value: 'KE',
   },
     {
-    label: 'تواصل مع الآخرين',
+    label: 'تواصل مع المجتمع',
     value: 'RC',
   },
   {
