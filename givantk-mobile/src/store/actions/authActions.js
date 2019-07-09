@@ -46,7 +46,7 @@ export const loginUser = (userData, callback) => (dispatch) => {
     .post(`${userAPI}/login`, userData)
     .then((res) => {
       const { token } = res.data;
-      QuickNotification('تم تسجيل الدخول بنجاح');
+      QuickNotification('تم تسجيل الدخول بنجاحver');
 
       // Save token to storage
       AsyncStorage.setItem(storedJWTname, token).catch(() => {

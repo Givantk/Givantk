@@ -138,15 +138,15 @@ class ProfileScreen extends React.Component {
 
           <View style={styles.userDescriptionContainer}>
             <Text style={styles.points}>
-              Givantk points: {profile.givantk_points}
+              النقاط المجانية: {profile.givantk_points}
             </Text>
           </View>
 
           <View style={styles.userDescriptionContainer}>
             <Text style={styles.points}>
-              Average Rating:
+              متوسط التقييم:
               {profile.average_services_rating === 0
-                ? ' Not Yet'
+                ? ' لا يوجد بعد'
                 : profile.average_services_rating}
             </Text>
           </View>

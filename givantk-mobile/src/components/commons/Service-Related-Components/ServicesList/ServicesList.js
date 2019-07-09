@@ -38,18 +38,18 @@ class ServicesList extends Component {
 
     const bookmarkCallback = () => {
       getCurrentUserProfile();
-      QuickNotification('Successfully bookmarked service');
+      QuickNotification('تم حفظ الخدمة بنجاح');
     };
 
     const unbookmarkCallback = () => {
       getCurrentUserProfile();
-      QuickNotification('Service unbookmarked');
+      QuickNotification('تم إزالة حفظ الخدمة');
       if (handleUnbookmark) handleUnbookmark();
     };
 
     const onBookmarkService = (id) => {
       if (!currentUserHasProfile) {
-        QuickNotification('Please make a profile first');
+        QuickNotification('من فضلك قم بإنشاء ملف شخصى اولاً');
       } else {
         bookmarkService(id, bookmarkCallback);
       }
@@ -57,7 +57,7 @@ class ServicesList extends Component {
 
     const onUnbookmarkService = (id) => {
       if (!currentUserHasProfile) {
-        QuickNotification('Please make a profile first');
+        QuickNotification('من فضلك قم بإنشاء ملف شخصى اولاً');
       } else {
         unbookmarkService(id, unbookmarkCallback);
       }

@@ -17,7 +17,7 @@ class FeaturedScreen extends React.Component {
       <Icon
         type="Ionicons"
         name="ios-home"
-        style={{ color: tintColor, fontSize: 35 }}
+        style={{ color: tintColor, fontSize: 35}}
       />
     ),
   });
