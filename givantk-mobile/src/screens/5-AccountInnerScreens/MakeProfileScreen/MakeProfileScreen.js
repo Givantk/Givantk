@@ -21,7 +21,7 @@ import jobsList from '../../../assets/data/jobs';
 
 class MakeProfileScreen extends Component {
   static navigationOptions = () => ({
-    headerTitle: 'تكوين الملف الشخصى>',
+    headerTitle: 'تكوين الملف الشخصى',
     headerStyle: {
       backgroundColor: colors.primary,
     },
