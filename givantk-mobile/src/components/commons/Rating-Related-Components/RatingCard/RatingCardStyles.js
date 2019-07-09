@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.tertiary,
     paddingVertical: 10,
     marginVertical: 20,
-    paddingHorizontal:10
+    
   },
   header: {
     flexDirection: 'row',
