@@ -84,7 +84,7 @@ const MainNavigator = createStackNavigator(
         // Navigation options for each tab screen with respect to stack navigation
         switch (tabScreen) {
           case 'Featured':
-            headerTitle = 'المفضلة';
+            headerTitle = 'الخدمات المقترحة';
             break;
 
           case 'AddService':

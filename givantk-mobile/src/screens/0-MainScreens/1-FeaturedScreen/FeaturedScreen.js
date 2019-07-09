@@ -12,7 +12,7 @@ import styles from './FeaturedScreenStyles';
 
 class FeaturedScreen extends React.Component {
   static navigationOptions = () => ({
-    tabBarLabel: 'المفضلة',
+    tabBarLabel: 'خدمات مقترحة',
     tabBarIcon: ({ tintColor }) => (
       <Icon
         type="Ionicons"
