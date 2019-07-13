@@ -99,21 +99,21 @@ class CustomNav extends Component {
                                                 to="/statistics">
                                                 <i className='fas fa-chart-line fa-lg mr-3'></i>Statistics</NavLink>
                                         </li>
-                                        <li>
+                                        {/* <li>
                                             <NavLink
                                                 activeClassName='current'
                                                 className='nav-link p-2 mb-2 sidebar-link text-white'
                                                 to="/messages">
                                                 <i className='fas fa-envelope fa-lg mr-3'></i>Messages</NavLink>
-                                        </li>
+                                        </li> */}
 
-                                        <li>
+                                        {/* <li>
                                             <NavLink
                                                 activeClassName='current'
                                                 className='nav-link p-2 mb-2 sidebar-link text-white'
                                                 to="/activities">
                                                 <i className='fas fa-bell  fa-lg mr-3'></i>Activities</NavLink>
-                                        </li>
+                                        </li> */}
 
                                         <li>
                                             <NavLink

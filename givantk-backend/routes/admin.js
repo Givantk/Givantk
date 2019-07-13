@@ -85,6 +85,45 @@ router.get(
   adminController.servicesInfo
 );
 
+// @route  POST api/admin/delete-service
+// @desc   delete service
+// @access Private
+// @errors unauthorized invalid error
+// @params
+// @body   service-id
+
+router.post(
+  '/delete-service',
+  passport.authenticate('jwt', { session: false }),
+  adminController.deleteService
+);
+
+// @route  POST api/admin/delete-service
+// @desc   delete service
+// @access Private
+// @errors unauthorized invalid error
+// @params
+// @body   service-id
+
+// router.post(
+//   '/ban-user',
+//   passport.authenticate('jwt', { session: false }),
+//   adminController.banUser
+// );
+
+// @route  POST api/admin/delete-service
+// @desc   delete service
+// @access Private
+// @errors unauthorized invalid error
+// @params
+// @body   service-id
+
+// router.post(
+//   '/un-ban-user',
+//   passport.authenticate('jwt', { session: false }),
+//   adminController.unBanUser
+// );
+
 // @route  POST api/admin/announcement
 // @desc   Post a new announcement
 // @access Private

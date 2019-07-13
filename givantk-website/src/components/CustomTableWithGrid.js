@@ -12,6 +12,7 @@ class CustomTableWithGrid extends Component {
 
   buttonClicked = (index) => {
     console.log(index);
+    
   };
 
   componentDidMount() {

@@ -29,6 +29,10 @@ const UserSchema = new Schema({
   passedIntro: {
     type: Boolean,
     default: false
+  },
+  banned:{
+    type:String,
+    default:false,
   }
 });
 

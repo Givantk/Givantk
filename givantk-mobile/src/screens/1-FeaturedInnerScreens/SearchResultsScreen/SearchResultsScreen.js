@@ -12,7 +12,7 @@ import ServicesList from '../../../components/commons/Service-Related-Components
 
 class SearchResultsScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
-    headerTitle: 'Search Results',
+    headerTitle: 'نتائج البحث',
     headerStyle: {
       backgroundColor: colors.primary,
     },
