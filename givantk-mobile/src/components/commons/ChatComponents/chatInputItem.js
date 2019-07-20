@@ -6,6 +6,14 @@ import { colors } from '../../../assets/styles/base';
 
 const ChatInputItem = (props) => (
   <View style={styles.inputBar}>
+     <TouchableHighlight onPress={props.onPress}>
+      <Icon
+        type="MaterialIcons"
+        style={styles.sendIcon}
+        name="send"
+        size={30}
+      />
+    </TouchableHighlight>
     <TextInput
       style={styles.textBox}
       multiline
@@ -15,14 +23,7 @@ const ChatInputItem = (props) => (
       value={props.value}
       onChangeText={props.onChangeText}
     />
-    <TouchableHighlight onPress={props.onPress}>
-      <Icon
-        type="MaterialIcons"
-        style={styles.sendIcon}
-        name="send"
-        size={30}
-      />
-    </TouchableHighlight>
+   
   </View>
 );
 
