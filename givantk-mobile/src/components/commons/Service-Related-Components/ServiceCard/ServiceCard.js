@@ -172,7 +172,7 @@ class ServiceCard extends React.PureComponent {
                   }}
                   style={{ fontWeight: 'bold' }}
                 >
-                  الغاء الحفظ
+                  الغاء التفضيل
                 </Text>
               </View>
             ) : null}

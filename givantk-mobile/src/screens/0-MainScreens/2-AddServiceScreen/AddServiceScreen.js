@@ -143,7 +143,7 @@ class AddServiceScreen extends React.Component {
       skills: JSON.stringify(skills),
     };
     const callback = () => {
-      QuickNotification('Service posted successfully');
+      QuickNotification('تم نشر الخدمة بنجاخ');
       getAllServices();
       getCurrentUserProfile();
       navigation.replace('Tab');

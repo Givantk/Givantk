@@ -35,7 +35,7 @@ class GivantkPointsScreen extends Component {
               successfullAddingCallback = () => {
                 const { pointsValue } = this.props;
                 this.setState({
-                  text: `Congratulations \n you successfully added ${pointsValue} points to your account`,
+                  text: `مبروك \n تم اضافة عدد ${pointsValue} نقاط لحسابك`,
                 });
                 getCurrentUserProfile();
               };

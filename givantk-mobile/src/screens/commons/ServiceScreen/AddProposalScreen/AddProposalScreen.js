@@ -45,7 +45,7 @@ class AddProposalScreen extends Component {
     const { service } = navigation.state.params;
 
     const callback = () => {
-      QuickNotification('Successfully proposed to service');
+      QuickNotification('تم التقدم للخدمة بنجاح');
       getAllServices();
       getCurrentUserProfile();
       navigation.goBack();
