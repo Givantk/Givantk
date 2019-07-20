@@ -23,6 +23,12 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     marginVertical: 20,
   },
+  state: {
+    alignSelf: 'flex-end',
+    marginRight: 10,
+    color: colors.primary,
+
+  },
   header: {
     flexDirection: 'row',
     justifyContent: 'flex-start',

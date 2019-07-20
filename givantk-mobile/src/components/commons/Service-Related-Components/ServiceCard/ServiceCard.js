@@ -87,6 +87,16 @@ class ServiceCard extends React.PureComponent {
     return (
       <TouchableWithoutFeedback onPress={this.onPressCard}>
         <View style={styles.serviceCard}>
+          {service.state === 'done' ? (
+            <Text style={styles.state}>خدمة منتهية</Text>
+          ) : service.state === 'new' ? (
+            <Text style={styles.state}>خدمة بلا متقدمين</Text>
+          ) : service.state === 'pending' ? (
+            <Text style={styles.state}>خدمة لها متقدمون</Text>
+          ) : (
+            <Text style={styles.state}>خدمة لها ملبى</Text>
+          )}
+
           <View style={styles.header}>
             <TouchableWithoutFeedback onPress={this.onPressAskerAvatar}>
               <View>
@@ -97,7 +107,7 @@ class ServiceCard extends React.PureComponent {
                       getUserImage(
                         service.reveal_asker === false
                           ? null
-                          : service.asker.avatar,
+                          : service.asker.avatar
                       ),
                   }}
                   style={styles.userImage}
@@ -135,12 +145,13 @@ class ServiceCard extends React.PureComponent {
             {/* <Text style={styles.cost}>{service.cost}</Text> */}
             {!service.givantk_points ? (
               <Text style={styles.points}>
-                {' '}مدفوعة-
+                {' '}
+                مدفوعة-
                 {service.paymentType === 'cash' ? 'كاش' : 'فودافون كاش'}
               </Text>
             ) : (
               <Text style={styles.points}>
-               مجانية-نقاط جيفانتك :{service.givantk_points}
+                مجانية-نقاط جيفانتك :{service.givantk_points}
               </Text>
             )}
             {canBookmark ? (
@@ -161,7 +172,7 @@ class ServiceCard extends React.PureComponent {
                   }}
                   style={{ fontWeight: 'bold' }}
                 >
-                  Unbookmark
+                  الغاء الحفظ
                 </Text>
               </View>
             ) : null}
