@@ -87,7 +87,7 @@ export default class SuggestHelperCriteriaScreen extends Component {
             <View style={styles.saveButtonContainer}>
               <MainButton
                 style={styles.saveButton}
-                disabled={Object.values(this.state).some((s) => s.length === 0)}
+                disabled={Object.values(this.state).every((s) => s.length === 0)}
                 onPress={this.onSave}
               >
                 حفظ
