@@ -44,14 +44,14 @@ class GivantkPointsScreen extends Component {
             },
           )
         : this.setState((prevState) => ({
-            text: `You have already added ${
+            text: `لديك بالفعل ${
               prevState.randomPointsNumber
-            }\n points to your account`,
+            }\n نقاط فى حسابك`,
           }))
       : this.setState({
-          text: `You already have ${
+          text: `لديك بالفعل ${
             currentUserProfile.givantk_points
-          } points in your account.`,
+          } نقاط فى حسابك`,
         });
   };
 
