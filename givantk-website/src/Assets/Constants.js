@@ -1,0 +1,1 @@
+export const serverUrl="https://givantk-backend.herokuapp.com";

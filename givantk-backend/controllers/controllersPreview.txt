@@ -1,0 +1,33 @@
+User:
+Login (POST) (Login page)
+Signup - create user (POST) (Signup page)
+Get all users (GET)
+get logged in user (GET)
+get user by id (GET)
+Delete logged in user (DELETE)
+update logged in user (PATCH)
+
+
+Service:
+Create a service for the logged in user (POST)
+Get all services (GET) (Featured page)
+Get a specific service by id (GET) (when click on service card)
+Update a specific service by id (PATCH)
+Delete a service by id (DELETE)
+Get services asked by by a specific user by user id (GET)
+Get services helped by a specific user by user id (GET)
+Bookmark service by id for logged in user (GET) (when click on service card star)
+Unbookmark service by id for logged in user (GET) (when click on service card star)
+Propose to a service by service id (POST) (when click on 'propose' button)
+Unpropose to a service by service id (POST)
+
+
+Profile:
+Create and update profile for the logged in user (POST)
+Get the profile of the logged in user (GET)
+Get a specific profile by user id (GET) (when go to a user profile)
+Get all profiles (GET)
+
+//////Note:
+We add 'bookmarked services' and 'proposed for services' in the
+list on the account page

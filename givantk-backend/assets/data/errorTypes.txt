@@ -1,0 +1,6 @@
+Error types:
+200 :good request
+400: bad request
+401: unauthorized
+404: not found
+500: server error
