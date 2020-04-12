@@ -1,0 +1,47 @@
+{
+  "expo": {
+    "name": "Givantk",
+    "description": "This is app help you post a service you want to make, or apply for a service you want to make for someone.",
+    "slug": "givantk",
+    "privacy": "public",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "version": "1.0.2",
+    "icon": "./assets/icons/icon200x200.png",
+    "facebookScheme": "fb2132958976794441",
+    "facebookAppId": "2132958976794441",
+    "facebookDisplayName": "Givantk",
+    "notification": {
+      "icon": "./assets/icons/icon144x144.png",
+      "color": "#000000"
+    },
+    "loading": {
+      "icon": "./assets/icons/icon500x500.png"
+    },
+    "splash": {
+      "image": "./assets/icons/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.team.givantk",
+      "config": {
+        "usesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "package": "com.team.givantk",
+      "googleServicesFile": "./google-services.ignore.json",
+      "versionCode": 4
+    }
+  }
+}
