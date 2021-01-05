@@ -8,7 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "babel-plugin-transform-react-jsx-source": "^6.22.0",
     "color": "^3.1.0",
     "expo": "^32.0.0",
