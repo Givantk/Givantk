@@ -53,7 +53,7 @@ export const fontTypes = {
 
 // COLORS
 
-const primaryColor = Color('#008388');
+const primaryColor = Color('#023e8a');
 const secondaryColor = Color('#FFA963');
 const tertiaryColor = Color('#F5F5DC');
 const black = Color('#232323');

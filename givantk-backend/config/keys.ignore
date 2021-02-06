@@ -1,0 +1,10 @@
+module.exports = {
+  mongoURI: 'mongodb+srv://admin:admingivantk@cluster0.g9dxx.mongodb.net/givantk?retryWrites=true&w=majority',
+  secretOrKey: 'givantkisagreatapp',
+  adminEmail: 'admin@givantk.com',
+  adminPassword: 'admingivantk',
+  aws_access_key_id:'AKIAZKLBL5CPP5LWEPEN',
+  aws_secret_access_key:'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',	
+  stripePublishableKey:'pk_test_XPzVOE0qiPQ7Ezq4zwkDlnS7',
+  stripeSecretKey:'sk_test_7dprWdWAApoHU0jzznbOyGvJ'
+};
