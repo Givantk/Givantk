@@ -43,7 +43,6 @@ export const loginUser = (userData, callback) => (dispatch) => {
   dispatch({
     type: actionTypes.LOGIN_USER_START,
   });
-
   http
     .post(`${userAPI}/login`, userData)
     .then((res) => {
@@ -87,8 +86,7 @@ export const logoutUser = () => (dispatch) => {
   });
 
   // Delete pushNotificationToken for this user from backend
-  http.post(`${userAPI}/remove-push-token`).catch((err) => {
-    console.log('Error removing push notification', err);
+  http.post(`${userAPI}/remove-push-token`).catch(() => {
   });
 
   // Remove token from storage
@@ -202,7 +200,6 @@ export const loginUserWithFacebook = (callback) => async (dispatch) => {
             });
         })
         .catch((err) => {
-          console.log(err);
           dispatch({
             type: actionTypes.SET_ERRORS,
             payload: err.response.data,
@@ -240,10 +237,8 @@ export const getPushNotificationToken = async (callback) => {
     .post(`${userAPI}/set-push-token`, { token })
     .then(() => {
       if (callback) callback();
-      console.log('Successfully saved token');
     })
-    .catch((err) => {
-      console.log('Error saving push notification', err);
+    .catch(() => {
     });
 };
 
