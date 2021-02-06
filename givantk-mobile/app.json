@@ -13,6 +13,7 @@
     "facebookScheme": "fb2132958976794441",
     "facebookAppId": "2132958976794441",
     "facebookDisplayName": "Givantk",
+    "facebookAutoInitEnabled": true,
     "notification": {
       "icon": "./assets/icons/icon144x144.png",
       "color": "#000000"
