@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "332523947760",
+    "firebase_url": "https://givantk-96d63.firebaseio.com",
+    "project_id": "givantk-96d63",
+    "storage_bucket": "givantk-96d63.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:332523947760:android:daf56222bd377e2d",
+        "android_client_info": {
+          "package_name": "com.example.muhammad.givantk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "332523947760-btu0udlb7op7vlvu74q244mhs3f831bt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.muhammad.givantk",
+            "certificate_hash": "26b8a295eb5984c66fe3e37f3d5665ad9da29ae5"
+          }
+        },
+        {
+          "client_id": "332523947760-kbpkdoaunccuniqtuv0j3afkducngbop.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdxbyd_3VjyDIzRCqZqqoxKdxjfDFJQuo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "332523947760-kbpkdoaunccuniqtuv0j3afkducngbop.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
