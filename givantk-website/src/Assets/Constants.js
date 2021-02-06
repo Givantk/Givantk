@@ -1,1 +1,1 @@
-export const serverUrl="https://givantk-backend.herokuapp.com";
+export const serverUrl="https://givantk-back-end.herokuapp.com";
