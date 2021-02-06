@@ -45,6 +45,9 @@ const BottomTabNavigator = createMaterialTopTabNavigator(
       },
       indicatorStyle: {
         backgroundColor: colors.secondary,
+        bottom: '22%',
+        width: 60,
+        left: '6%',
       },
     },
   },
