@@ -38,6 +38,7 @@ const BottomTabNavigator = createMaterialTopTabNavigator(
         fontSize: fontSizes.xxs,
         fontFamily: fontTypes.mainBold,
         width: '100%',
+        right:'6%',
       },
       iconStyle: {
         width: 30,
