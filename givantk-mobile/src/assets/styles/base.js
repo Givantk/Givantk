@@ -13,7 +13,7 @@ Dimensions.addEventListener('change', (dims) => {
   dimensions.fullWidth = dims.window.width;
 });
 
-export const bottomTabHeight = 65;
+export const bottomTabHeight = 90;
 export const headerHeight = 60;
 
 // GAPS
@@ -53,9 +53,9 @@ export const fontTypes = {
 
 // COLORS
 
-const primaryColor = Color('#023e8a');
+const primaryColor = Color('#3871C2');
 const secondaryColor = Color('#FFA963');
-const tertiaryColor = Color('#F5F5DC');
+const tertiaryColor = Color('#F3FAFC');
 const black = Color('#232323');
 const white = Color('#EAEEFF');
 const trueWhite = Color('#FFFFFF');
