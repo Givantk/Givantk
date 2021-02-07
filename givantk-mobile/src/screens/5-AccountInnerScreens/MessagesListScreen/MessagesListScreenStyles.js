@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   customView: {
-    backgroundColor: colors.disclaimer,
+    backgroundColor: colors.primaryLight,
     paddingTop: 15,
     paddingBottom: 15,
     paddingLeft: 10,
