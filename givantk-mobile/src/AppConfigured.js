@@ -1,7 +1,6 @@
 import { Provider } from 'react-redux'
 import { Root } from 'native-base'
 import React from 'react'
-import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { createAppContainer } from 'react-navigation'
 import { loadFonts } from './assets/styles/fonts/loadFonts'
 import App from './routes/MainNavigator'
@@ -39,13 +38,11 @@ export default class AppConfigured extends React.Component {
     }
 
     return (
-      <SafeAreaProvider>
         <Provider store={store}>
           <Root>
             <AppContainer />
           </Root>
         </Provider>
-      </SafeAreaProvider>
     )
   }
 }
