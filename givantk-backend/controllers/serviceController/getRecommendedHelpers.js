@@ -7,11 +7,6 @@ const serviceModel = mongoose.model('service')
 const profileModel = mongoose.model('profile')
 
 const CalculateScore = (profile, service) => {
-  if (service.asker._id.toString() === profile.user._id.toString()) {
-    profile.score = 0
-    return
-  }
-
   let {
     skills: recommendedSkills,
     job: recommendedJobs,
@@ -59,6 +54,7 @@ module.exports = getRecommendedHelpers = (req, res) => {
         }
         profiles.forEach(profile => CalculateScore(profile, service))
         profiles.sort((a, b) => b.score - a.score)
+        profiles.filter((p)=> p?.user?._id.toString() !== service?.asker?._id?.toString())
         //send the response containing profiles sorted by recommendation scores for this service
         res.json(profiles)
       })
