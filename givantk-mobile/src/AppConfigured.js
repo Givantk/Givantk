@@ -1,16 +1,14 @@
-import { Provider } from 'react-redux';
-import { Root } from 'native-base';
-import React from 'react';
+import { Provider } from 'react-redux'
+import { Root } from 'native-base'
+import React from 'react'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { createAppContainer } from 'react-navigation'
+import { loadFonts } from './assets/styles/fonts/loadFonts'
+import App from './routes/MainNavigator'
+import LoadingScreen from './screens/commons/LoadingScreen/LoadingScreen'
+import store from './store/createStore'
 
-import { loadFonts } from './assets/styles/fonts/loadFonts';
-import App from './routes/MainNavigator';
-import LoadingScreen from './screens/commons/LoadingScreen/LoadingScreen';
-import store from './store/createStore';
-import {createAppContainer} from 'react-navigation';
-
-
-const   AppContainer=createAppContainer(App);
-
+const AppContainer = createAppContainer(App)
 
 // This is the main app, with these configured:
 // 1- Customized fonts loaded
@@ -19,34 +17,35 @@ const   AppContainer=createAppContainer(App);
 // 4- checking if is user has signed in before
 
 export default class AppConfigured extends React.Component {
-
   state = {
     fontLoaded: false,
-  };
+  }
 
   componentDidMount() {
-    this.loadAssetsAsync();
+    this.loadAssetsAsync()
   }
 
   async loadAssetsAsync() {
-    await Promise.all(loadFonts);
+    await Promise.all(loadFonts)
 
-    this.setState(() => ({ fontLoaded: true }));
+    this.setState(() => ({ fontLoaded: true }))
   }
 
   render() {
-    const { fontLoaded } = this.state;
+    const { fontLoaded } = this.state
 
     if (!fontLoaded) {
-      return <LoadingScreen />;
+      return <LoadingScreen />
     }
 
     return (
-      <Provider store={store}>
-        <Root>
-          <AppContainer />
-        </Root>
-      </Provider>
-    );
+      <SafeAreaProvider>
+        <Provider store={store}>
+          <Root>
+            <AppContainer />
+          </Root>
+        </Provider>
+      </SafeAreaProvider>
+    )
   }
 }

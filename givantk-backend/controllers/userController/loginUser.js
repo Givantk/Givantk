@@ -12,7 +12,6 @@ const validateLoginUser = require('../../validations/loginUser');
 
 module.exports = loginUser = (req, res) => {
   const { isFacebookEntry, facebookId } = req.body;
-
   if (isFacebookEntry) {
     const errors = {};
 

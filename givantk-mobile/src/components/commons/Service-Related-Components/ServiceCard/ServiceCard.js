@@ -15,13 +15,6 @@ class ServiceCard extends React.PureComponent {
     bookmarked: false,
   };
 
-  componentWillReceiveProps(nextProps) {
-    const { bookmarked } = this.props;
-    if (nextProps.bookmarked !== bookmarked) {
-      this.setState({ bookmarked: nextProps.bookmarked });
-    }
-  }
-
   onPressCard = () => {
     const { service } = this.props;
 
@@ -61,6 +54,15 @@ class ServiceCard extends React.PureComponent {
       onBookmark(service._id);
     }
   };
+
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    const { bookmarked } = this.props;
+    if (nextProps.bookmarked !== bookmarked) {
+      this.setState({ bookmarked: nextProps.bookmarked });
+    }
+  }
+
 
   render() {
     const { service, canBookmark, showUnbookmark } = this.props;
