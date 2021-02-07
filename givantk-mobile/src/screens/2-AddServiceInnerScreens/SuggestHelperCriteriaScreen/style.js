@@ -9,8 +9,10 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   header: {
-    fontSize: 25,
+    fontSize: 18,
     textAlign: 'center',
+    marginTop: 10,
+    color: colors.black,
   },
   personIcon: {
     fontSize: 200,
@@ -22,6 +24,8 @@ const styles = StyleSheet.create({
   },
   saveButtonContainer: {
     alignItems: 'center',
+    marginBottom: 20,
+
   },
   saveButton: {
     textAlign: 'center',

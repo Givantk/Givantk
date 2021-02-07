@@ -1,6 +1,7 @@
 import { View, Button, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Alert } from 'react-native';
 
 import { colors } from '../../../../assets/styles/base';
 import Loading from '../Loading/Loading';
@@ -22,10 +23,10 @@ const MainButton = ({
       <Button
         style={[
           styles.button,
-          { backgroundColor: disabled ? colors.gray02 : backgroundColor },
+          { backgroundColor },
           small && styles.buttonSmall,
         ]}
-        onPress={disabled ? () => null : onPress}
+        onPress={disabled ? () => Alert.alert('Please select all the options before submitting') : onPress}
       >
         <Text
           style={[
