@@ -54,9 +54,8 @@ module.exports = getRecommendedHelpers = (req, res) => {
         }
         profiles.forEach(profile => CalculateScore(profile, service))
         profiles.sort((a, b) => b.score - a.score)
-        profiles.filter((p)=> p?.user?._id.toString() !== service?.asker?._id?.toString())
         //send the response containing profiles sorted by recommendation scores for this service
-        res.json(profiles)
+        res.json(profiles.filter((p)=> p?.user?._id.toString() !== service?.asker?._id?.toString()))
       })
       .catch(err => {
         errors.error = 'Error getting recommended users'
