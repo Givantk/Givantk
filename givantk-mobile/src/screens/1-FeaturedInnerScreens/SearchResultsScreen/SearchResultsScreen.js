@@ -6,12 +6,12 @@ import React, { Component } from 'react';
 import { colors } from '../../../assets/styles/base';
 import styles from './SearchResultsScreenStyles';
 
-/*start test */
+/* start test */
 import ServicesList from '../../../components/commons/Service-Related-Components/ServicesList/ServicesList';
-/*end test */
+/* end test */
 
 class SearchResultsScreen extends Component {
-  static navigationOptions = ({ navigation }) => ({
+  static navigationOptions = () => ({
     headerTitle: 'Search Results',
     headerStyle: {
       backgroundColor: colors.primary,
