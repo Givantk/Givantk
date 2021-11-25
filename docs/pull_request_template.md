@@ -1,6 +1,5 @@
-# Pull Request Template
 
-##Related Tickets
+## Related Tickets
 
 Please include the ticket or issue link that is related to this pr.
 
